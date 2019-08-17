@@ -1,0 +1,34 @@
+﻿<table class='table table-hover' NameTbl='tblword'>
+    <tr>
+        <td>انگلیسی</td>
+        <td><input type='text' name='DicEng' id='DicEng' /><span class="SerchWord"></span></td>
+    </tr>
+    <tr>
+        <td>فارسی</td>
+        <td><input type='text' name='DicFar' id='DicFar' /></td>
+    </tr>
+    <tr>
+        <td>فونتیک</td>
+        <td><input type='text' name='DicPho' id='DicPho' /></td>
+    </tr>
+</table>
+<script>
+    $("input[name='DicEng']").change(function () {
+        var Word = $("#MasterModal .table input[name='DicEng']").val()
+       // var Word = "freak";
+        var urll = "/Dictionary/SerchWord?Word="+Word;
+        $.ajax({
+            type: "Get",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: urll,
+            success: function (result) {
+                // var obj = data;
+                //var obj = JSON.parse(data);
+                $(".SerchWord").html(result);
+              //  $("#MasterModal").modal();
+
+            }
+        })
+    });
+</script>

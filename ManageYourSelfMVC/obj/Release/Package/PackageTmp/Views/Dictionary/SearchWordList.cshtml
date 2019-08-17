@@ -1,0 +1,25 @@
+﻿<input type='text' name='DicEng'  />
+<!---------------------------------------------------------------------------------------->
+<div class="row" style="font-family:BNazanin">
+    <div class="col-sm-12 SearchWordList2"></div>
+</div>
+<script>
+    $("input[name='DicEng']").change(function () {
+        var Word = $("#MasterModal input[name='DicEng']").val()
+       // var Word = "freak";
+        var urll = "/Dictionary/SearchWordList2?Word=" + Word;
+        $.ajax({
+            type: "Get",
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: urll,
+            success: function (result) {
+                // var obj = data;
+                //var obj = JSON.parse(data);
+                $(".SearchWordList2").html(result);
+              //  $("#MasterModal").modal();
+
+            }
+        })
+    });
+</script>

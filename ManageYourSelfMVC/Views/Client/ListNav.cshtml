@@ -1,0 +1,689 @@
+﻿@model ManageYourSelfMVC.ViewModels.ListNavVM
+@{
+    ViewBag.Title = "UserRegister";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+<p>@TempData["Error"]</p>
+@*<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
+<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>*@
+<style>
+    .vl {
+        border-left: 1px dotted black;
+        height: 500px;
+        left: 50%;
+        margin-left: -3px;
+        top: 0;
+    }
+</style>
+
+
+<div class="row" style="font-family:BNazanin"></div>
+<br />
+<p id="ShowMessage">@TempData["Message"]</p>
+<br />
+<!--style="font-family:'B Morvarid';-->
+<!-- Nav tabs -->
+<div style="font-size: 12px;">
+    <ul class="nav nav-tabs" role="tablist" style="font-family:'Morvarid';">
+
+        <li class="nav-item">
+            <a class="nav-link" href="/Dictionary/MainDictionary">MainDictionary</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Sport/MainSport">MainSport</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MojoodyBank">موجودی</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu2">هزینه های مهم</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#StoreHoghogh">پرداختی</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu3">نمایش کارکرد</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Category">Category</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#TimeForJob">زمان فعالیت</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu4">لیست وظایف</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menuTiming">زمان بندی</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menuTaskGeneral">وظایف کلی</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menuTaskFuture">وظایف سالانه</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#RoutineJob">وظایف تکراری</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Setting">تنظیمات</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Taradod">تردد</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Rotbeh">رتبه</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MasterData">MasterData</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Sport">Sport</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Gold">Gold</a>
+        </li>
+    </ul>
+</div>
+<!-- Tab panes -->
+<div class="tab-content" style="font-family:BNazanin" ng-app="angularApp">
+
+    <!--موجودی-->
+    <div id="MojoodyBank" class="tab-pane fade">
+        <div class="row"><div class="col-sm-12 ListMojoodyBank"></div></div>
+        <div class="row"><div class="col-sm-12 ListDaramad"></div></div>
+        <div class="row"><div class="col-sm-12 ListTypeHazineh"></div></div>
+        <div class="row"><div class="col-sm-12 Rpt_ListGroupHazine"></div></div>
+    </div>
+    <!--هزینه های مهم-->
+    <div id="menu2" class="tab-pane fade">
+        <br>
+        <input type="button" name="CreateNewTypeHazineMohem" value="ایجاد نوع هزینه" class="btn btn-danger" />
+        <span></span>
+        <input type="button" name="CreateNewHazineMohem" value="هزینه جدید" class="btn btn-danger" />
+        <span></span>
+        <input type="button" name="ListHazineMohem" value="بروز آوری" class="btn btn-danger" />
+        <br />
+        <br>
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <br>
+        <div class="row">
+            <div class="col-sm-5 KharjType"></div>
+
+            <div class="col-sm-7 HazineMohem"></div>
+        </div>
+
+        @*<div id="HazineMohem"></div>*@
+    </div>
+    <!--پرداختی-->
+    <div id="StoreHoghogh" class="tab-pane fade">
+        <div class="row">
+            <div class="col-sm-12 ListStoreHoghogh"></div>
+        </div>
+    </div>
+    <!--نمایش کارکرد-->
+    <div id="menu3" class="tab-pane fade">
+        <br>
+        <a href="/BaseData/BaseData"><span class="fa fa-arrow-right"></span></a>
+    </div>
+    <!--Category-->
+    <div id="Category" class="tab-pane">
+        <br>
+        <input type="button" name="List" value="نمایش" class="btn btn-danger" />
+        <br><br>
+        <input class="form-control SearchInTable" type="text" placeholder="Search..">
+        <br />
+        <div class="row">
+            <div class="col-sm-3 Category"></div>
+            <div class="col-sm-6 Job"></div>
+            <div class="col-sm-3 PercentJob"></div>
+        </div>
+        @*<button onclick="ReportCircle()">CreateReport</button>
+        <button onclick="rpt2()">rpt2</button>
+        <div class="row">
+          
+               
+                <div  class="col-sm-12">
+                    <div  id="chartContainer" style="height: 300px; width: 100%;"></div>
+                </div>
+           
+         
+            <div id="chartContainer" style="width:100%; height:300px;"></div>*@
+          
+
+       @*</div>*@
+    </div>
+    <!--زمان فعالیت-->
+    <div id="TimeForJob" class="tab-pane">
+        <br>
+        <input type="button" name="List" value="نمایش" class="btn btn-danger" />
+        <span></span>
+        <input type="button" name="Create" value="جدید" class="btn btn-danger" />
+        <span></span>
+        <input type="button" name="UploadDataCard" value="آپلود دیتا" class="btn btn-light" />
+        <br><br>
+        <input class="form-control SearchInTable" type="text" placeholder="Search..">
+        <br />
+        @*<div class="row">*@
+        @*<div class="col-sm-3 DivKarkard"></div>*@
+        @*<div class="col-sm-9">*@
+        <div class="row">
+            <div class="col-sm-12 ShowKarkadPivot"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 PercentJob"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 DivKarkard"></div>
+        </div>
+        @*</div>*@
+        @*</div>*@
+    </div>
+    <!--لیست وظایف-->
+    <div id="menu4" class="tab-pane fade">
+        <table>
+            <tr>
+                <td><input type="radio" name="task" value="anjamnashode"> انجام نشده<br></td>
+                <td><input type="radio" name="task" value="anjamshode"> انجام شده<br></td>
+                <td><input type="radio" name="task" value="gheirefal"> غیر فعال</td>
+            </tr>
+        </table>
+        <br />
+        <input type="button" name="new" value="جدید" class="btn btn-danger CreateNewTask" /> |
+        <input type="button" value="انتقال کار به امروز" class="btn btn-info" ng-controller="TaskControllerr" ng-click="TaskToday()" />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-sm-12 ListTask"></div>
+        </div>
+    </div>
+    <!--لیست زمان بندی-->
+    <div id="menuTiming" class="tab-pane">
+        <br />
+        <input type="button" value="انتقال کار به امروز" class="btn btn-info" ng-controller="TaskControllerr" ng-click="TaskToday()" />
+        <div class="row">
+            <div>
+                <span>کارهای فردا</span><input name="chkTomarrow" type="checkbox" value="1" />
+            </div>
+            <div class="col-sm-12 ListTiming">
+
+            </div>
+        </div>
+    </div>
+    <!--وظایف کلی-->
+    <div id="menuTaskGeneral" class="tab-pane">
+        <br />
+        <div class="row">
+            <div class="col-sm-12 ListTaskGeneral"></div>
+        </div>
+    </div>
+    <!--وظایف سالانه-->
+    <div id="menuTaskFuture" class="tab-pane">
+        <br />
+        <div class="row">
+            <div class="col-sm-12 ListTaskFutureChk"></div>
+            <div class="col-sm-12 ListTaskFuture"></div>
+        </div>
+    </div>
+    <!-- وظایف تکراری-->
+    <div id="RoutineJob" class="tab-pane fade">
+        <div class="row">
+            <div class="col-sm-12 ListRoutineJobHa"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 ListRoutineJob"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" id="RoutineJobCreate"></div>
+        </div>
+    </div>
+    <!--Setting-->
+    <div id="Setting" class="tab-pane fade">
+        <div class="row">
+            <div class="col-sm-3 ListHolyDay"></div>
+        </div>
+    </div>
+    <!--تردد-->
+    <div id="Taradod" class="tab-pane fade">
+        <div class="row">
+            <div class="col-sm-5 ListRotbehByDate" style="font-size:12px;"></div>
+            <div class="col-sm-7 ListTaradod"></div>
+        </div>
+        <div class="row" ng-controller="customersCtrl2">
+            <div ng-include="'/PersonnelGsystem/ListTaradod_AngularView'" class="col-sm-12"></div>
+        </div>
+    </div>
+    <!--رتبه-->
+    <div id="Rotbeh" class="tab-pane fade">
+        <div class="row">
+            <div class="col-sm-12 ListRotbeh"></div>
+        </div>
+    </div>
+    <!--MasterData-->
+    <div id="MasterData" class="tab-pane fade">
+        <div class="row">
+            <div class="col-sm-12 ListMasterData"></div>
+        </div>
+    </div>
+    <!--Sport-->
+    <div id="Sport" class="tab-pane fade">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-6 ShowPivotSportOrder"></div>
+                    <div class="col-sm-6 ShowPivotSport"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 ShowPivotGroupingSets"></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-12 ListSport"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @*ShowPivotGroupingSets*@
+            <div class="col-sm-12 ShowPivotGroupingSets"></div>
+        </div>
+    </div>
+    <!--Gold-->
+    <div id="Gold" class="tab-pane fade">
+        <a target="_blank" href="http://estjt.ir">آدرس نمایش قیمت روز 1</a>
+        <br>
+        <a target="_blank" href="http://estjt.ir/price">آدرس نمایش قیمت روز 2</a>
+        @*<div class="row">
+            <div class="col-lg-12">
+                <iframe src="http://estjt.ir" style="width:100%"></iframe>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <iframe src="http://estjt.ir/price" style="width:100%"></iframe>
+            </div>
+
+        </div>*@
+        <div class="row">
+            <div class="col-lg-12">
+               <button class="btn btn-danger" onclick="transferGeramTala()">هر گرم طلا</button>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4 ListGold1" style="background-color:lightgreen">
+                <table>
+                    <tr>
+                        <td><span>قیمت روز طلای  هر گرم 18 عیار</span></td>
+                        <td><input type="number" name="currentPrice" value="427800" onkeyup="CalculatePriceGold1()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>اجرت</span></td>
+                        <td><input type="number" name="ojratPrice" value="25000" onkeyup="CalculatePriceGold1()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>سود</span></td>
+                        <td><input type="number" name="soodPrice" value="5" onkeyup="CalculatePriceGold1()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>مالیات</span> </td>
+                        <td><input type="number" name="maliatPrice" value="0" onkeyup="CalculatePriceGold1()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>وزن طلا</span> </td>
+                        <td><input type="text" name="vazn" value="2" onkeyup="CalculatePriceGold1()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>قیمت</span> </td>
+                        <td><input type="number" name="resultPrice" value="" style="background-color:red"/></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-4 ListGold2" style="background-color:lightblue">
+                <table>
+                    <tr>
+                        <td><span>قیمت روز طلای  هر گرم 18 عیار</span></td>
+                        <td><input type="number" name="currentPrice" value="427800" onkeyup="CalculatePriceGold2()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>اجرت</span></td>
+                        <td><input type="number" name="ojratPrice" value="25000" onkeyup="CalculatePriceGold2()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>سود</span></td>
+                        <td><input type="number" name="soodPrice" value="7" onkeyup="CalculatePriceGold2()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>مالیات</span> </td>
+                        <td><input type="number" name="maliatPrice" value="0" onkeyup="CalculatePriceGold2()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>وزن طلا</span> </td>
+                        <td><input type="text" name="vazn" value="2" onkeyup="CalculatePriceGold2()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>قیمت</span> </td>
+                        <td><input type="number" name="resultPrice" value=""  style="background-color:red"/></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-4 ListGold3" style="background-color:lightcoral">
+                <table>
+                    <tr>
+                        <td><span>قیمت روز طلای  هر گرم 18 عیار</span></td>
+                        <td><input type="number" name="currentPrice" value="427800" onkeyup="CalculatePriceGold3()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>اجرت</span></td>
+                        <td><input type="number" name="ojratPrice" value="25000" onkeyup="CalculatePriceGold3()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>سود</span></td>
+                        <td><input type="number" name="soodPrice" value="7" onkeyup="CalculatePriceGold3()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>مالیات</span> </td>
+                        <td><input type="number" name="maliatPrice" value="9" onkeyup="CalculatePriceGold3()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>وزن طلا</span> </td>
+                        <td><input type="text" name="vazn" value="2" onkeyup="CalculatePriceGold3()" /></td>
+                    </tr>
+                    <tr>
+                        <td><span>قیمت</span> </td>
+                        <td><input type="number" name="resultPrice" value=""  style="background-color:red"/></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Script Ajax Business-->
+<script type="text/javascript">
+    //**********************************
+    $(document).ready(function () {
+        //-------------execute when load client listnav
+        setInterval(function () {
+            ListTaslLevelHigh();
+            var dt = new Date();
+            var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+            console.log("exe ListTaslLevelHigh : "+time);
+        }, 300000);
+        //-------------execute List When Click on Tab
+        $("ul li a[href='#menu2']").on("click", function () {
+            ListHazineMohem();
+        });
+        $("ul li a[href='#StoreHoghogh']").on("click", function () {
+            ShowStoreHoghoghPivot();
+        });
+        $("ul li a[href='#TimeForJob']").on("click", function () {
+            ShowKarkadPivot();
+            ListPercentJob();
+            ListKarkard();
+        });
+        $("ul li a[href='#menu4']").on("click", function () {
+            ListTask("anjamnashode");
+        });
+        $("ul li a[href='#Category']").on("click", function () {
+            ListCategory();
+            ListPercentJob();
+            ListJob();
+        });
+
+        //***********************************************MasterModal*****************************************
+        $('#MasterModal .btnSave').on("click", function () {
+            debugger;
+            var NameTbl = $("#MasterModal .BodyModal table").attr("nametbl")
+            if (NameTbl == "tbltask")
+                CreateTask();
+            if (NameTbl == "tblword")
+                CreateWord();
+            if (NameTbl == "UpdateTask")
+                UpdateTask();
+            //if (NameTbl == "UpdateWord") {
+            //    UpdateWord();
+            //}
+        });
+        //Create Post  Update
+        $("#MasterModal .btnSave").on("click", function () {
+            debugger;
+            //  CreateRoutineJob
+            var NameOperator = $("#MasterModal .BodyModal div").attr("Name");
+            if (NameOperator == "Create")
+                CreateCategoryPost();
+            if (NameOperator == "Update") {
+                UpdateCategory();
+            }
+            if (NameOperator == "CreateJob") {
+                CreateJobPost();
+            }
+            if (NameOperator == "CreateRoutineJob") {
+                CreateRoutineJobPost();
+            }
+            if (NameOperator == "EditJob") {
+                var JobId = $("#MasterModal table").attr("jobid");
+                UpdateJob(JobId);
+            }
+            if (NameOperator == "CreateKarkard") {
+                CreateKarkardPost();
+            }
+            if (NameOperator == "CreatePercentJob") {
+                CreatePercentJobPost();
+            }
+            if (NameOperator == "EditPercentJob") {
+                UpdatePercentJobPost();
+            }
+            if (NameOperator == "CreateMojoodyBank") {
+                CreateMojoodyBankPost();
+            }
+            if (NameOperator == "EditMojoodyBank") {
+                UpdateMojoodyBank();
+            }
+            if (NameOperator == "CreateTypeHazineh") {
+                CreateTypeHazinehPost();
+            }
+            if (NameOperator == "EditTypeHazineh") {
+                UpdateTypeHazineh();
+            }
+            if (NameOperator == "CreateDaramad") {
+                CreateDaramadPost();
+            }
+            if (NameOperator == "EditMojoodyBankBalance") {
+                UpdateMojoodyBankBalance();
+            }
+            if (NameOperator == "Exchange") {
+                UpdateMojoodyBankExchange();
+            }
+            if (NameOperator == "CreateMaterData") {
+                CreateMasterDataPost();
+            }
+            if (NameOperator == "UpdateMaterData") {
+                UpdateMasterDataPost();
+            }
+            if (NameOperator == "UpdateTiming") {
+                TimingPost();
+            }
+            if (NameOperator == "ChangeTodayTask") {
+                ChangeTodayTaskPost();
+            }
+        });
+
+        function ListHazineMohem() {
+            var urll = "/HazineMohem/ListKharj";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+                    $(".HazineMohem").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+      
+       
+       
+
+        
+        //********************
+        function ShowStoreHoghoghPivot() {
+            var urll = "/StoreHoghogh/ShowMazayaStoreHoghogh";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+
+                    $(".ListStoreHoghogh").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+        function UploadDataCard() {
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/PersonnelGsystem/SelectInsertDatacard",
+
+                   data: JSON.stringify({ StartDateCard: "970601" }),
+                   success: function (result) {
+                       if (result == true) {
+                           ListKarkard();
+                           RefreshExecute();
+                       }
+                       else {
+                           alert("خطا در ثبت");
+                       }
+                   }
+               });
+        }
+    });
+</script>
+
+
+
+
+<!--Persian DatePicker-->
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "timeir_next.png"
+               , previousButtonIcon: "timeir_prev.png"
+               , forceFarsiDigits: true
+               , markToday: true
+               , markHolidays: true
+               , highlightSelectedDay: true
+               , sync: true
+        });
+    });
+</script>
+<!--Search-->
+<script>
+    $(document).ready(function () {
+        //----------function ListDictionary()
+        $("#SeachInTblDicList").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $(".ListDictionarySearch tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        //--------------------------
+        $("#myInputDic").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<!--Report-->
+@*<script>
+ function  ReportCircle() {
+
+var options = {
+	title: {
+		text: "فرهاد اسماعیلی"
+	},
+	subtitles: [{
+		text: "As of November, 2017"
+	}],
+	animationEnabled: true,
+	data: [{
+		type: "pie",
+		startAngle: 40,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+			{ y: 48.36, label: "Windows 7" },
+			{ y: 26.85, label: "Windows 10" },
+			{ y: 1.49, label: "Windows 8" },
+			{ y: 6.98, label: "Windows XP" },
+			{ y: 6.53, label: "Windows 8.1" },
+			{ y: 2.45, label: "Linux" },
+			{ y: 3.32, label: "Mac OS X 10.12" },
+			{ y: 4.03, label: "Others" }
+		]
+	}]
+};
+$("#chartContainer").CanvasJSChart(options);
+
+}
+</script>
+<script>
+ function rpt2() {
+
+var options = {
+	animationEnabled: true,
+	title: {
+		text: "GDP Growth Rate - 2016"
+	},
+	axisY: {
+		title: "Growth Rate (in %)",
+		suffix: "%",
+		includeZero: false
+	},
+	axisX: {
+		title: "Countries"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.0#"%"",
+		dataPoints: [
+			{ label: "Iraq", y: 10.09 },
+			{ label: "Turks & Caicos Islands", y: 9.40 },
+			{ label: "Nauru", y: 8.50 },
+			{ label: "Ethiopia", y: 7.96 },
+			{ label: "Uzbekistan", y: 7.80 },
+			{ label: "Nepal", y: 7.56 },
+			{ label: "Iceland", y: 7.20 },
+			{ label: "India", y: 7.1 }
+
+		]
+	}]
+};
+$("#chartContainer").CanvasJSChart(options);
+
+}
+</script>*@
+
+
+
+
+

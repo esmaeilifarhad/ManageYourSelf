@@ -1,0 +1,42 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+<br>
+<div class="table-responsive">
+    <p>ده تا از بیشترین سطح</p>
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>Eng</th>
+                <th>Per</th>
+                <th>DRefresh</th>
+                <th>Level</th>
+                <th>Success</th>
+                <th>UnSuccess</th>
+                <th>Grade</th>
+                <th>Up</th>
+                <th>Down</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.eng</td>
+                    <td>@item.per</td>
+                    <td>@item.date_refresh</td>
+                    <td>@item.level</td>
+                    <td>@item.SuccessCount</td>
+                    <td>@item.UnSuccessCount</td>
+                    <td>@item.Grade</td>
+                    <td><span style='color:red' class='fa fa-sort-up pointer LevelEngUp' data_id="@item.id"></span></td>
+                    <td><span style='color:green' class='fa fa-sort-down pointer LevelEngDown' data_id="@item.id"></span></td>
+                </tr>
+                foreach (var item2 in item.lstExample)
+                {
+                    <tr style="text-align:left">
+                        <td colspan="9" style="white-space: pre"  class="Examplecls" data_id="@item.id">@item2.example</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

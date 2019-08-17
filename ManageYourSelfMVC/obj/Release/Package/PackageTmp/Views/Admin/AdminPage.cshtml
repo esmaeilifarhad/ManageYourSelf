@@ -1,0 +1,224 @@
+﻿@model ManageYourSelfMVC.ViewModels.ListNavVM
+@{
+    ViewBag.Title = "UserRegister";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+@*<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
+<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>*@
+<style>
+    .vl {
+    border-left: 1px dotted black;
+    height: 500px;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+    }
+</style>
+<br />
+<!--style="font-family:'B Morvarid';-->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" style="font-family:'Morvarid';">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#MenuUsers">لیست کاربران</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" style="font-family:BNazanin">
+        <!--لیست کاربران-->
+        <div id="MenuUsers" class="tab-pane active">
+            <br>
+            <input type="button" name="CreateWord" value="جدید" class="btn btn-danger" />
+            <span></span>
+            <input type="button" name="ListDictionary" value="بروز آوری" class="btn btn-danger" />
+            <br><br>
+            <input class="form-control" id="SeachInTblDicList" type="text" placeholder="Search..">
+            <br />
+            <div class="Register"></div>
+            <div id="DivDictionary"></div>
+        </div> 
+    </div>
+
+    <!--Modal Start-->
+    @*<div>
+        <!--  Modal Master -->
+        <div class="modal fade" id="MasterModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="direction:ltr">
+                        <br>
+                        <h4 class="modal-title HeaderModal"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body BodyModal">
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                        <span> </span>
+                        <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ثبت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+
+
+    </div>*@
+
+
+    <!--Script Ajax Save New Word-->
+    <script type="text/javascript">
+        //**********************************
+        $(document).ready(function () {
+            RefreshExecute();
+            function RefreshExecute()
+            {
+                ListRegister();
+            }
+            $('#MasterModal .btnSave').on("click", function () {
+                var NameTbl = $("#MasterModal .BodyModal table").attr("nametbl")
+                if (NameTbl == "UserRole")
+                    TakhsisUserRole();
+                if (NameTbl == "tblword")
+                    CreateWord();
+                if (NameTbl == "UpdateTask")
+                    UpdateTask();
+                if (NameTbl == "UpdateWord")
+                    UpdateWord();
+            });
+            //------------------*************************************-----------------------
+            //UserRole
+            $(".Register").on("click", ".UserRole", function () {
+                var UserId = $(this).attr("data_id");
+                UserRole(UserId);
+            });
+            //Delete
+            $(".Register").on("click", ".fa-remove", function () {
+                var res = confirm("آیا حذف انجام شود؟");
+                if (res == true) {
+                    var UserId = $(this).attr("data_id");
+                    DeleteRegister(UserId);
+                }
+            });
+            function ListRegister() {
+                var urll = "/Register/ListRegister";
+                $.ajax({
+                    type: "Get",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "html",
+                    url: urll,
+                    success: function (data) {
+
+                        $(".Register").html(data);
+                    },
+                    error: function (error) {
+                        alert(error);
+                    }
+                })
+            }
+            function UserRole(UserId) {
+                var urll = "/Register/UserRole?UserId="+UserId;
+                $.ajax({
+                    type: "Get",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "html",
+                    url: urll,
+                    success: function (data) {
+                        $(".BodyModal").html(data);
+                        $("#MasterModal").modal();
+                    },
+                    error: function (error) {
+                        alert(error);
+                    }
+                })
+            }
+            function TakhsisUserRole() {
+            
+                var CollectionRoleId='';
+                $("#MasterModal table[nametbl='UserRole'] tr td input[type='checkbox']:checked").each(function () {
+                    console.log(this.value)
+                    CollectionRoleId+=this.value+",";
+                })
+                var UserId = $("#MasterModal table[nametbl='UserRole']").attr("UserId");
+                console.log(CollectionRoleId);
+
+                $.ajax(
+                   {
+                       type: 'POST',
+                       contentType: "application/json;charset=utf-8",
+                       dataType: "json",
+                       url: "/Register/TakhsisUserRole?UserId="+UserId+"&CollectionRoleId="+CollectionRoleId,
+                      // data: JSON.stringify({ CategoryName: CategoryName }),
+                       success: function (result) {
+                           if (result == true) {
+                               RefreshExecute();
+                           }
+                           else {
+                               alert("خطا در ثبت");
+                           }
+                       }
+                   });
+               
+            }
+            function DeleteRegister(UserId) {
+               
+                $.ajax(
+                   {
+                       type: 'POST',
+                       contentType: "application/json;charset=utf-8",
+                       dataType: "json",
+                       url: "/Register/DeleteRegister?UserId="+UserId,
+                       data: JSON.stringify({ UserId: UserId }),
+                       success: function (result) {
+                     
+                           if (result == true)
+                               RefreshExecute();
+                           else
+                               alert("خطا");
+                       },
+                           error: function (error) {
+                               alert(error);
+                           }
+                   });
+
+            }
+        });
+    </script>
+    <!--Persian DatePicker-->
+    <script>
+        $(document).ready(function () {
+            kamaDatepicker('PersianDatePicker', {
+                nextButtonIcon: "timeir_next.png"
+                   , previousButtonIcon: "timeir_prev.png"
+                   , forceFarsiDigits: true
+                   , markToday: true
+                   , markHolidays: true
+                   , highlightSelectedDay: true
+                   , sync: true
+            });
+        });
+    </script>
+    <!--Search-->
+    <script>
+        $(document).ready(function () {
+            //----------function ListDictionary()
+            $("#SeachInTblDicList").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $(".ListDictionarySearch tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            //--------------------------
+            $("#myInputDic").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+

@@ -1,0 +1,15 @@
+﻿@model ManageYourSelfMVC.Models.DomainModels.PercentJob
+<div class="table-responsive" Name="EditPercentJob">
+    <table class="table">
+
+        <tr>
+            <td style="font-weight:bolder">فعالیت</td>
+            <td>
+               <span JobId="@Model.JobId">@Model.Job.Name</span>
+            </td>
+            <td style="font-weight:bolder">درصد</td>
+            <td><input name="PercentValue" type="text" placeholder="1" value="@Model.PercentValue"></td>
+        </tr>
+    </table>
+</div>
+

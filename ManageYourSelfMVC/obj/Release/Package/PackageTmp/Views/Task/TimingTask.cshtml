@@ -1,0 +1,67 @@
+﻿@model ManageYourSelfMVC.ViewModels.VM_Timing
+<div class="table-responsive" Name="UpdateTiming">
+    <table class="Timing" TaskId="@Model.TaskId" >
+        <tr>
+            <td style="font-weight:bold">عنوان : </td>
+            <td>@Model.Task.Name</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold">زمان : </td>
+            <td>
+                <select class="MYSelect">
+                    @foreach (var items in Model.lstManageTime)
+                    {
+                        //foreach (var t in items.Label)
+                        //{
+                        if (items.Value == Model.CurrentHour)
+                        {
+                            <option selected style="color:red" value="@items.ManageTimeId">@items.Label</option>
+                           // continue;
+                        }
+                        if (items.Value < Model.CurrentHour)
+                        {
+                        <option style="color:red" value="@items.ManageTimeId">@items.Label</option>
+                        }
+                        if (items.Value > Model.CurrentHour)
+                        {
+                            <option value="@items.ManageTimeId">@items.Label</option>
+                        }
+                        //}
+
+                    }
+                </select>
+            </td>
+        </tr>
+
+    </table>
+    </div>
+    @*<link href="~/Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/style/kamadatepicker.css" rel="stylesheet" />
+        <script src="~/Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/src/kamadatepicker.js"></script>*@
+    <script>
+        function CurrentHour()
+        {
+            var d = new Date();
+            var n = d.getHours();
+            return n;
+        }
+        $(document).ready(function () {
+            kamaDatepicker('PersianDatePickerEditTaskS', {
+                nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                   , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                   , forceFarsiDigits: true
+                   , markToday: true
+                   , markHolidays: true
+                   , highlightSelectedDay: true
+                   , sync: true
+            });
+            kamaDatepicker('PersianDatePickerEditTaskE', {
+                nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                   , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                   , forceFarsiDigits: true
+                   , markToday: true
+                   , markHolidays: true
+                   , highlightSelectedDay: true
+                   , sync: true
+            });
+        });
+    </script>

@@ -1,0 +1,23 @@
+﻿@model ManageYourSelfMVC.Models.DomainModels.dic_tbl
+<br>
+<div class="table-responsive">
+    <table class="table" nametbl="UpdateWord" Word_id="@Model.id" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            
+        </thead>
+        <tbody>   
+            <tr Word_id="@Model.id" >
+                <td style="font-weight: bold;">انگلیسی</td>
+                <td><input name="eng" type="text" value="@Model.eng" style="text-align:left"/></td>
+            </tr>
+            <tr>
+                <td  style="font-weight: bold;">فارسی</td>
+                <td colspan="2">
+                    <textarea name="per" rows="4" cols="50" style="text-align:right">@Model.per</textarea>
+                    @*<input type="text" value="@Model.per" />*@
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

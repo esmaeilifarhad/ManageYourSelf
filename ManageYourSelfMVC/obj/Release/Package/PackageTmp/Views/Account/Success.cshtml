@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+@using ManageYourSelfMVC.Security
+<!DOCTYPE html>
+
+<style>
+    div button {
+        font-family: 'Morvarid';
+    }
+
+    .btn-group button {
+        background-color: #4CAF50; /* Green background */
+        border: 1px solid green; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        float: left; /* Float the buttons side by side */
+    }
+
+    /* Clear floats (clearfix hack) */
+    .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .btn-group button:not(:last-child) {
+        border-right: none; /* Prevent double borders */
+    }
+
+    /* Add a background color on hover */
+    .btn-group button:hover {
+        background-color: #3e8e41;
+    }
+    button {
+  cursor:pointer;
+  background-color: green;
+    padding: 10px;
+    border-radius: 13px;
+    }
+</style>
+
+
+<div>
+    <br /><br /><br />
+    @*Welcome @SessionPersister.Username
+        <br />
+        <a href="/Footbal/Team">فوتبال</a>
+        <br />
+        <a href="/Admin/AdminPage">Admin</a>*@
+    <div class="row">
+       
+        <div class="col-sm-12">
+            @*<div class="btn-group" style="width:100%">*@
+                <button  onclick="location.href='@Url.Action("Team", "Footbal")'">فوتبال</button>
+                <button  onclick="location.href='@Url.Action("AdminPage", "Admin")'">مدیریت</button>
+                <button  onclick="location.href='@Url.Action("ListNav", "Client")'">کاربری</button>
+                <button  onclick="location.href='@Url.Action("MainDictionary", "Dictionary")'">دیگشنری</button>
+                <button  onclick="location.href='@Url.Action("MainSport", "Sport")'">ورزش</button>
+            @*</div>*@
+        </div>
+ 
+    </div>
+
+</div>

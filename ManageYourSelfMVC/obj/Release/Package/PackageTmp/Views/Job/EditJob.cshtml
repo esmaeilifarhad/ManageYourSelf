@@ -1,0 +1,59 @@
+﻿@model ManageYourSelfMVC.ViewModels.BaseData.JobVM
+<br>
+<div class="table-responsive" Name="EditJob">
+    <table class="table" JobId="@Model.JobId">
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <td>نوع وظیفه</td>
+                <td>
+                    <select>
+                        @foreach (var item in Model.ListCategory)
+                        {
+                            if (item.CategoryId == Model.CategoryId)
+                            {
+                            <option value="@item.CategoryId" selected>@item.CategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CategoryId">@item.CategoryName</option>
+                            }
+                        }
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td>عنوان</td>
+                <td><input name="JobName" type="text" value="@Model.Name" /></td>
+            </tr>
+            <tr>
+                <td>نمایشی</td>
+                <td>
+                @if (Model.GridShow == true)
+                {
+                    <input type="radio" name="Show" value="True" checked> <span>نمایشی</span><input type = "radio" name = "Show" value = "Fasle" ><span>عدم نمایش</span>
+                }
+                else
+                {
+                    <input type="radio" name="Show" value="True" > <span>نمایشی</span><input type="radio" name="Show" value="Fasle" checked><span>عدم نمایش</span>
+                }
+                 </td >
+            </tr>
+            <tr>
+                <td>محاسباتی</td>
+                <td>
+                    @if (Model.Mohasebe == true)
+                    {
+                        <input type="radio" name="Moh" value="True" checked><span>محاسباتی</span><input type = "radio" name = "Moh" value = "Fasle" ><span>عدم محاسبه</span>
+                    }
+                    else
+                    {
+                        <input type="radio" name="Moh" value="True" ><span>محاسباتی</span><input type="radio" name="Moh" value="Fasle" checked><span>عدم محاسبه</span>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

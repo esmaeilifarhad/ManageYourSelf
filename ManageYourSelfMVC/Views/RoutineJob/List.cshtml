@@ -1,0 +1,116 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.RoutineJob>
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+<br>
+<input type="button" name="CreateRoutineJob" value="جدید" class="btn btn-info" />
+<br><br>
+<div class="table-responsive">
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>عنوان</th>
+                <th>تکرار</th>
+                <th>ذخیره</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Job</td>
+                    <td>
+                        @{
+                            bool Check = false;
+
+
+                            string[] RoozDaily = item.RoozDaily.Split(',');
+                            for (int i = 1; i <= 7; i++)
+                            {
+                                foreach (var R in RoozDaily)
+                                {
+                                    if (R == "")
+                                    {
+                                    }
+                                    else
+                                    {
+                                        if (int.Parse(R) == i)
+                                        {
+                                            Check = true;
+                                        }
+                                    }
+                                }
+                                if (Check == true && i == 1)
+                                {
+                                        <span>شنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="1" checked /></span>
+                                    }
+                                    if (Check == false && i == 1)
+                                    {
+                                        <span>شنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="1" /></span>
+                                    }
+                                    if (Check == true && i == 2)
+                                    {
+                                        <span>یکشنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="2" checked /></span>
+                                    }
+                                    if (Check == false && i == 2)
+                                    {
+                                        <span>یکشنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="2" /></span>
+                                    }
+                                    if (Check == true && i == 3)
+                                    {
+                                        <span>دوشنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="3" checked /></span>
+                                    }
+                                    if (Check == false && i == 3)
+                                    {
+                                        <span>دوشنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="3" /></span>
+                                    }
+                                    if (Check == true && i == 4)
+                                    {
+                                        <span>سه شنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="4" checked /></span>
+                                    }
+                                    if (Check == false && i == 4)
+                                    {
+                                        <span>سه شنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="4" /></span>
+                                    }
+                                    if (Check == true && i == 5)
+                                    {
+                                        <span>چهارشنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="5" checked /></span>
+                                    }
+                                    if (Check == false && i == 5)
+                                    {
+                                        <span>چهارشنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="5" /></span>
+                                    }
+                                    if (Check == true && i == 6)
+                                    {
+                                        <span>پنجشنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="6" checked /></span>
+                                    }
+                                    if (Check == false && i == 6)
+                                    {
+                                        <span>پنجشنبه</span><span><input type="checkbox" name="@item.RoutineJobId" value="6" /></span>
+                                    }
+                                    if (Check == true && i == 7)
+                                    {
+                                        <span>جمعه</span><span><input type="checkbox" name="@item.RoutineJobId" value="7" checked /></span>
+                                    }
+                                    if (Check == false && i == 7)
+                                    {
+                                        <span>جمعه</span><span><input type="checkbox" name="@item.RoutineJobId" value="7" /></span>
+                                    }
+                                    Check = false;
+                                }
+                            
+                        }
+
+                    </td>
+                    <td><span style="color:blue" class='fa fa-save pointer' RoutineJobId="@item.RoutineJobId"></span></td>
+                    <td><span style="color:green" class='fa fa-edit pointer' RoutineJobId="@item.RoutineJobId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' RoutineJobId="@item.RoutineJobId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,28 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+<br>
+<div class="table-responsive">
+    <p>کمترین تعداد مرور</p>
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>انگلیسی</th>
+                <th>فارسی</th>
+                <th>تعداد</th>
+                <th>Up</th>
+                <th>Down</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.eng</td>
+                    <td>@item.per</td>
+                    <td>@item.CountMoroor</td>
+                    <td><span style='color:red' class='fa fa-sort-up pointer LevelEngUp' data_id="@item.id"></span></td>
+                    <td><span style='color:green' class='fa fa-sort-down pointer LevelEngDown' data_id="@item.id"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

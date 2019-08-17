@@ -1,0 +1,127 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+
+<!---------------------------------------------------------------------------------------->
+<div class="table-responsive">
+    @*<input type="checkbox" name="Level1" value="1"> سطح 1 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level2" value="2"> سطح 2 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level3" value="3"> سطح 3 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level4" value="4"> سطح 4 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level5" value="5"> سطح 5 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level6" value="6"> سطح 6 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level7" value="7"> سطح 7 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level8" value="8"> سطح 8 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level9" value="9"> سطح 9 <span />&nbsp;&nbsp;
+        <input type="checkbox" name="Level10" value="10"> سطح 10*@
+
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px;">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>eng</th>
+                <th>per</th>
+                <th>level</th>
+                <th>DateRefresh</th>
+                <th>Success</th>
+                <th>UnSuccess</th>
+                <th>eye</th>
+                <th>NewExa</th>
+                <th>Up</th>
+                <th>Down</th>
+                <th>Edit</th>
+                <th>RemoveExa</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var item in Model)
+            {
+                <tr WordId="@item.id" style="background-color:black;color:white;font-size: 14px;white-space:nowrap">
+                    <td onclick="MakeSound2(this)">@item.eng</td>
+                    <td><span style="display:none;" class="per">@item.per</span></td>
+                    <td class="level">@item.level</td>
+                    <td>@item.date_refresh</td>
+                    <td>@item.SuccessCount</td>
+                    <td>@item.UnSuccessCount</td>
+                    @if (item.HasExample > 0)
+                    {
+                        <td><span class="fa fa-eye ShowExample pointer" style='color:green' data_id="@item.id"></span></td>
+                    }
+                    else
+                    {
+                        <td><span class="fa fa-eye-slash ShowExample pointer" style='color:yellow' data_id="@item.id"></span></td>
+                    }
+                    <td><span style='color:dodgerblue' class='fa fa-list-alt btnExa pointer' data_id="@item.id"></span></td>
+                    @*<td><span style='color:red' class='fa   fa-sort-up pointer LevelEngUp' data_id="@item.id"></span></td>*@
+                    <td><button style='color:green' class='btn btn-danger pointer LevelEngUp' data_id="@item.id"></button></td>
+                    @*<td><span style='color:green' class='fa fa-sort-down pointer LevelEngDown' data_id="@item.id"></span></td>*@
+                    <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
+                    <td><span style='color:purple' class='fa fa-edit pointer EditWord' data_id="@item.id"></span></td>
+                    <td><span style='color:deeppink' class='fa fa-trash pointer' data_id="@item.id"></span></td>
+                    <td><span style='color:mediumvioletred' class='fa fa-remove pointer' data_id="@item.id"></span></td>
+                </tr>
+                foreach (var itemExample in item.lstExample)
+                {
+                    <tr style="background-color:#d6d5c7;color:black;text-align:left">
+                        <td class="Examplecls" colspan="13" style="display:none;direction:ltr" data_id="@item.id" ExampleId="@itemExample.id">
+                            <span>@itemExample.example</span>
+                            <span style='color:yellow' class='fa fa-edit pointer ShowEditExample' ExampleId="@itemExample.id"></span>
+                            <br />
+                            <span style='color:purple' class='fa fa-soundcloud pointer ' onclick="MakeSound(this)" ExampleId="@itemExample.id"></span>
+                            <br />
+                            <span style='color:red' class='fa fa-deafness pointer RemoveExampleEng' ExampleId="@itemExample.id"></span>
+                        </td>
+                        @*<td colspan="1"><span style="color:red" class='fa fa-remove pointer' data_id="@item.id"  ExampleId="@itemExample.id"></span></td>*@
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.95.1/js/materialize.min.js"></script>
+
+    <script>
+
+        $(function () {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.onvoiceschanged = function () {
+                    var $voicelist = $('#voices');
+
+                    if ($voicelist.find('option').length == 0) {
+                        speechSynthesis.getVoices().forEach(function (voice, index) {
+                            var $option = $('<option>')
+                            .val(index)
+                            .html(voice.name + (voice.default ? ' (default)' : ''));
+
+                            $voicelist.append($option);
+                        });
+
+                        $voicelist.material_select();
+                    }
+                }
+
+                $('#speak').click(function () {
+                    var text = $('#message').val();
+                    text = "hello";
+                    var msg = new SpeechSynthesisUtterance();
+                    var voices = window.speechSynthesis.getVoices();
+                    msg.voice = voices[$('#voices').val()];
+                    msg.rate = $('#rate').val() / 10;
+                    msg.pitch = $('#pitch').val();
+                    msg.text = text;
+
+                    msg.onend = function (e) {
+                        console.log('Finished in ' + event.elapsedTime + ' seconds.');
+                    };
+
+                    speechSynthesis.speak(msg);
+                })
+            } else {
+                $('#modal1').openModal();
+            }
+        });
+
+
+
+    </script>
+*@

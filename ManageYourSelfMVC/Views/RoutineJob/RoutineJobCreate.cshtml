@@ -1,0 +1,46 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.VMPublic>
+    
+<table>
+    <tr style="color:black">
+        
+        <td><input type="text" name="Date" class="PersianDatePicker" autocomplete="off" value="@Model.Select(q=>q.Currentdate).FirstOrDefault()" /></td>
+        <td><input type="button" name="Show" value="نمایش" class="btn btn-danger" /></td>
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td colspan="2">
+                    @if (item.Check == true)
+                    {
+                    <span><input type="checkbox" name="@item.Job" value="@item.RoutineJobId" title="@item.Job" checked/></span>
+                    <span>@item.Job</span>
+                    }
+                    else
+                    {
+                        <span><input type="checkbox" name="@item.Job" value="@item.RoutineJobId" title="@item.Job" /></span>
+                        <span>@item.Job</span>
+                    }
+                </td>
+            </tr>
+        }
+    }
+</table>
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                    , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                    , forceFarsiDigits: true
+                    , markToday: true
+                    , markHolidays: true
+                    , highlightSelectedDay: true
+                    , sync: true
+        });
+    });
+</script>
+
+
+
+
+

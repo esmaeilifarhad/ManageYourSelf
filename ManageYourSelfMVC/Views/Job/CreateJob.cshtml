@@ -1,0 +1,38 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.Category>
+<br>
+<div class="table-responsive" Name="CreateJob">
+    <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <td>نوع وظیفه</td>
+                <td>
+                    <select>
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.CategoryId">@item.CategoryName</option>
+                        }
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td>عنوان</td>
+                <td>
+                    <textarea name="JobName" rows="4" cols="50" autocomplete="off" />
+                @*<input name="JobName" type="text" />*@
+                </td>
+            </tr>
+            <tr>
+                <td>نمایشی</td>
+                <td><input type="radio" name="Show" value="True" checked="checked"> نمایشی <input type="radio" name="Show" value="Fasle"> عدم نمایش </td>
+            </tr>
+            <tr>
+                <td>محاسباتی</td>
+                <td><input type="radio" name="Moh" value="True" checked="checked"> محاسبه ای <input type="radio" name="Moh" value="Fasle"> عدم محاسبه </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,1150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ManageYourSelfModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.back_MasterData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="back_MasterData">
+    <Key>
+      <PropertyRef Name="MasterDataId" />
+    </Key>
+    <Property Name="MasterDataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="WeightDate" Type="nvarchar" MaxLength="6" />
+    <Property Name="Personelid" Type="int" />
+    <Property Name="PersonelName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" />
+    <Property Name="Order" Type="nchar" MaxLength="10" />
+    <Property Name="dsc" Type="nvarchar(max)" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Cat">
+    <Key>
+      <PropertyRef Name="CatId" />
+    </Key>
+    <Property Name="CatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="Dsc" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Order" Type="int" />
+  </EntityType>
+  <EntityType Name="ContentTbl">
+    <Key>
+      <PropertyRef Name="ContentId" />
+    </Key>
+    <Property Name="ContentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleId" Type="int" />
+    <Property Name="Content" Type="nvarchar(max)" />
+    <Property Name="order" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_backup_980122' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="example_tbl_backup_980122">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="id_dic_tbl" />
+      <PropertyRef Name="example" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_dic_tbl" Type="int" Nullable="false" />
+    <Property Name="example" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogTBL">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="dsc" Type="nvarchar" MaxLength="250" />
+    <Property Name="date" Type="nvarchar" MaxLength="8" />
+    <Property Name="Time" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ManageTime">
+    <Key>
+      <PropertyRef Name="ManageTimeId" />
+    </Key>
+    <Property Name="ManageTimeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Label" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mazaya">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MazayaId" Type="int" Nullable="false" />
+    <Property Name="MazayaName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsMazaya" Type="int" />
+  </EntityType>
+  <EntityType Name="RoutineJob">
+    <Key>
+      <PropertyRef Name="RoutineJobId" />
+    </Key>
+    <Property Name="RoutineJobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoozDaily" Type="nvarchar" MaxLength="250" />
+    <Property Name="Job" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="RoutineJobHa">
+    <Key>
+      <PropertyRef Name="RoutineJobHa" />
+    </Key>
+    <Property Name="RoutineJobHa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="RoutineJobId" Type="int" Nullable="false" />
+    <Property Name="IsCheck" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sport">
+    <Key>
+      <PropertyRef Name="SportId" />
+    </Key>
+    <Property Name="SportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Tedad" Type="int" Nullable="false" />
+    <Property Name="Set" Type="int" />
+  </EntityType>
+  <EntityType Name="StoreHoghogh">
+    <Key>
+      <PropertyRef Name="StoreHoghoghId" />
+    </Key>
+    <Property Name="StoreHoghoghId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonelId" Type="int" Nullable="false" />
+    <Property Name="SHdate" Type="int" Nullable="false" />
+    <Property Name="MazayaId" Type="int" Nullable="false" />
+    <Property Name="MazRyialMah" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Timing">
+    <Key>
+      <PropertyRef Name="TimingId" />
+    </Key>
+    <Property Name="TimingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="false" />
+    <Property Name="ManageTimeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TitleTbl">
+    <Key>
+      <PropertyRef Name="TitleId" />
+    </Key>
+    <Property Name="BookId" Type="int" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="TitleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="BaseDaramadData">
+    <Key>
+      <PropertyRef Name="BaseDaramadDataId" />
+    </Key>
+    <Property Name="BaseDaramadDataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Daramad">
+    <Key>
+      <PropertyRef Name="DaramadId" />
+    </Key>
+    <Property Name="DaramadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rial" Type="int" Nullable="false" />
+    <Property Name="MojoodyBankId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="TypeHazinehId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Before" Type="int" />
+    <Property Name="After" Type="int" />
+    <Property Name="DaramadORHazineh" Type="bit" />
+  </EntityType>
+  <EntityType Name="DataCard">
+    <Key>
+      <PropertyRef Name="DataCardId" />
+    </Key>
+    <Property Name="DataCardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personelid" Type="int" Nullable="false" />
+    <Property Name="DateCard" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="I" Type="int" Nullable="false" />
+    <Property Name="O" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DaysExercise">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateExercise" Type="nvarchar" MaxLength="10" />
+    <Property Name="WordId" Type="int" />
+    <Property Name="Succ_OR_UnSucc" Type="bit" />
+  </EntityType>
+  <EntityType Name="dic_tbl">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="eng" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="per" Type="nvarchar" MaxLength="255" />
+    <Property Name="Phonetic" Type="nvarchar" MaxLength="70" />
+    <Property Name="level" Type="int" Nullable="false" />
+    <Property Name="date_s" Type="nvarchar" MaxLength="50" />
+    <Property Name="date_refresh" Type="nvarchar" MaxLength="50" />
+    <Property Name="time" Type="nvarchar" MaxLength="50" />
+    <Property Name="timeword" Type="int" />
+    <Property Name="id_month" Type="int" />
+    <Property Name="SuccessCount" Type="int" />
+    <Property Name="UnSuccessCount" Type="int" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreateDateM" Type="date" />
+    <Property Name="DateRefreshM" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view '5069_ManageYourSelf.dbo.dic_tbl_LOG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="dic_tbl_LOG">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="eng" Type="nvarchar" MaxLength="255" />
+    <Property Name="per" Type="nvarchar" MaxLength="255" />
+    <Property Name="level" Type="int" />
+    <Property Name="date_s" Type="nvarchar" MaxLength="50" />
+    <Property Name="date_refresh" Type="nvarchar" MaxLength="50" />
+    <Property Name="time" Type="nvarchar" MaxLength="50" />
+    <Property Name="timeword" Type="int" />
+    <Property Name="id_month" Type="int" />
+    <Property Name="minuteWord" Type="int" />
+    <Property Name="HostName_TrgLog" Type="nvarchar" MaxLength="255" />
+    <Property Name="LoginName_TrgLog" Type="nvarchar" MaxLength="255" />
+    <Property Name="LogStatus_TrgLog" Type="nvarchar" MaxLength="255" />
+    <Property Name="TimeDate_TrgLog" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="example_tbl">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_dic_tbl" Type="int" Nullable="false" />
+    <Property Name="example" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HolyDay">
+    <Key>
+      <PropertyRef Name="HolyDayId" />
+    </Key>
+    <Property Name="HolyDayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HolyDayRooz" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="IODayly">
+    <Key>
+      <PropertyRef Name="IOId" />
+    </Key>
+    <Property Name="IOId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="STime" Type="int" />
+    <Property Name="ETime" Type="int" />
+    <Property Name="IOType" Type="int" />
+    <Property Name="DayDate" Type="nvarchar" MaxLength="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="GridShow" Type="bit" />
+    <Property Name="Mohasebe" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KarKard">
+    <Key>
+      <PropertyRef Name="KarkardId" />
+    </Key>
+    <Property Name="KarkardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobId" Type="int" />
+    <Property Name="DayDate" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="SpendTimeMinute" Type="int" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
+    <Property Name="MiladyDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Kharj">
+    <Key>
+      <PropertyRef Name="KharjId" />
+    </Key>
+    <Property Name="KharjId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Rial" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="DateKharj" Type="nvarchar" MaxLength="6" />
+    <Property Name="KharjTypeId" Type="int" />
+  </EntityType>
+  <EntityType Name="KharjType">
+    <Key>
+      <PropertyRef Name="KharjTypeId" />
+    </Key>
+    <Property Name="KharjTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="MasterData">
+    <Key>
+      <PropertyRef Name="MasterDataId" />
+    </Key>
+    <Property Name="MasterDataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="WeightDate" Type="nvarchar" MaxLength="6" />
+    <Property Name="Personelid" Type="int" />
+    <Property Name="PersonelName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Order" Type="int" />
+    <Property Name="IsCascade" Type="bit" />
+    <Property Name="Url" Type="nvarchar" MaxLength="50" />
+    <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+    <Property Name="Action" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Menuha">
+    <Key>
+      <PropertyRef Name="MenuhaId" />
+    </Key>
+    <Property Name="MenuhaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="Order" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MojoodyBank">
+    <Key>
+      <PropertyRef Name="MojoodyBankId" />
+    </Key>
+    <Property Name="MojoodyBankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MojoodyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Rial" Type="int" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="MVCHomeHeaderThree">
+    <Key>
+      <PropertyRef Name="MVCHomeHeaderThreeId" />
+    </Key>
+    <Property Name="MVCHomeHeaderThreeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Header" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Matn" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Logo" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="PercentJob">
+    <Key>
+      <PropertyRef Name="PercentId" />
+    </Key>
+    <Property Name="PercentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobId" Type="int" Nullable="false" />
+    <Property Name="PercentValue" Type="int" Nullable="false" />
+    <Property Name="Date" Type="varchar" MaxLength="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Players">
+    <Key>
+      <PropertyRef Name="PlayersId" />
+    </Key>
+    <Property Name="PlayersId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsHozoor" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlayerScore">
+    <Key>
+      <PropertyRef Name="PlayerScoreId" />
+    </Key>
+    <Property Name="PlayerScoreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="PlayerId" Type="int" Nullable="false" />
+    <Property Name="Score" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="SettingId" />
+    </Key>
+    <Property Name="SettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Key" Type="nvarchar" MaxLength="50" />
+    <Property Name="Value" Type="nvarchar" MaxLength="250" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="SliderPhoto">
+    <Key>
+      <PropertyRef Name="SliderPhotoId" />
+    </Key>
+    <Property Name="SliderPhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhotoImg" Type="image" Nullable="false" />
+    <Property Name="Header" Type="nvarchar" MaxLength="250" />
+    <Property Name="Matn" Type="nvarchar(max)" />
+    <Property Name="URL" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Taghvim">
+    <Key>
+      <PropertyRef Name="DayDate" />
+    </Key>
+    <Property Name="DayDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IsHolyDay" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="RoozHafte" Type="int" Nullable="false" />
+    <Property Name="ChandShanbeh" Type="nvarchar" MaxLength="15" StoreGeneratedPattern="Computed" />
+    <Property Name="HafteChandom" Type="int" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateStart" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="DateEnd" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsCheck" Type="bit" />
+    <Property Name="DarsadPishraft" Type="int" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Olaviat" Type="int" />
+    <Property Name="CatId" Type="int" />
+  </EntityType>
+  <EntityType Name="TypeHazineh">
+    <Key>
+      <PropertyRef Name="TypeHazinehId" />
+    </Key>
+    <Property Name="TypeHazinehId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DaramadOrKharj" Type="bit" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Name="UserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="250" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowLastPercantageJob' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ShowLastPercantageJob">
+          <Property Name="jobid" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="percentvalue" Type="int" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ShowSumLastPercantage">
+          <Property Name="Percantage" Type="int" />
+        </EntityType>-->
+  <Association Name="FK_Book_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentTbl_TitleTbl">
+    <End Role="TitleTbl" Type="Self.TitleTbl" Multiplicity="0..1" />
+    <End Role="ContentTbl" Type="Self.ContentTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TitleTbl">
+        <PropertyRef Name="TitleId" />
+      </Principal>
+      <Dependent Role="ContentTbl">
+        <PropertyRef Name="TitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Daramad_MojoodyBank">
+    <End Role="MojoodyBank" Type="Self.MojoodyBank" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Daramad" Type="Self.Daramad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MojoodyBank">
+        <PropertyRef Name="MojoodyBankId" />
+      </Principal>
+      <Dependent Role="Daramad">
+        <PropertyRef Name="MojoodyBankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Daramad_TypeHazineh">
+    <End Role="TypeHazineh" Type="Self.TypeHazineh" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Daramad" Type="Self.Daramad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeHazineh">
+        <PropertyRef Name="TypeHazinehId" />
+      </Principal>
+      <Dependent Role="Daramad">
+        <PropertyRef Name="TypeHazinehId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DaysExercise_dic_tbl">
+    <End Role="dic_tbl" Type="Self.dic_tbl" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DaysExercise" Type="Self.DaysExercise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dic_tbl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DaysExercise">
+        <PropertyRef Name="WordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dic_tbl_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="dic_tbl" Type="Self.dic_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="dic_tbl">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_example_tbl_dic_tbl">
+    <End Role="dic_tbl" Type="Self.dic_tbl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="example_tbl" Type="Self.example_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dic_tbl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="example_tbl">
+        <PropertyRef Name="id_dic_tbl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KarKard_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="KarKard" Type="Self.KarKard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="KarKard">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kharj_KharjType">
+    <End Role="KharjType" Type="Self.KharjType" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Kharj" Type="Self.Kharj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KharjType">
+        <PropertyRef Name="KharjTypeId" />
+      </Principal>
+      <Dependent Role="Kharj">
+        <PropertyRef Name="KharjTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KharjType_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="KharjType" Type="Self.KharjType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="KharjType">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PercentJob_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PercentJob" Type="Self.PercentJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="PercentJob">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerScore_Players">
+    <End Role="Players" Type="Self.Players" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PlayerScore" Type="Self.PlayerScore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="PlayersId" />
+      </Principal>
+      <Dependent Role="PlayerScore">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerScore_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PlayerScore" Type="Self.PlayerScore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PlayerScore">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoutineJob_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="RoutineJob" Type="Self.RoutineJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RoutineJob">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoutineJobHa_RoutineJob">
+    <End Role="RoutineJob" Type="Self.RoutineJob" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RoutineJobHa" Type="Self.RoutineJobHa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoutineJob">
+        <PropertyRef Name="RoutineJobId" />
+      </Principal>
+      <Dependent Role="RoutineJobHa">
+        <PropertyRef Name="RoutineJobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sport_Cat">
+    <End Role="Cat" Type="Self.Cat" Multiplicity="1" />
+    <End Role="Sport" Type="Self.Sport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat">
+        <PropertyRef Name="CatId" />
+      </Principal>
+      <Dependent Role="Sport">
+        <PropertyRef Name="CatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Cat">
+    <End Role="Cat" Type="Self.Cat" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat">
+        <PropertyRef Name="CatId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="CatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="Task1" Type="Self.Task" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="Task1">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Timing_ManageTime">
+    <End Role="ManageTime" Type="Self.ManageTime" Multiplicity="1" />
+    <End Role="Timing" Type="Self.Timing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ManageTime">
+        <PropertyRef Name="ManageTimeId" />
+      </Principal>
+      <Dependent Role="Timing">
+        <PropertyRef Name="ManageTimeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Timing_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="Timing" Type="Self.Timing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="Timing">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TitleTbl_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="TitleTbl" Type="Self.TitleTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="TitleTbl">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CreateTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili" />
+  <Function Name="ListGroupHazine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+    <Parameter Name="DaramadOrKharj" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ListVoteToPlayers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili" />
+  <Function Name="PersianToEnglish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_ManageTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
+    <Parameter Name="Date" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="f_M_Kara_ConvertIntToChareForTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_M_Kara_ConvertIntToChareForTime" ReturnType="varchar">
+    <Parameter Name="time" Type="int" Mode="In" />
+  </Function>
+  <Function Name="avg_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="real">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="c" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="eng_word" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="change_ToMinute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="IdWord" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ChangeToDateSlash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Date" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Convert_HHMM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="Secondd" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ConvertTo_HH_MM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+    <Parameter Name="Second" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ConvertToHour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="Second" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ConvertToMinute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="Second" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CreateLogTbl" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="CreateTaghvimShamsy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FirstDayOneToSeven" Type="int" Mode="In" />
+    <Parameter Name="FirstDate" Type="int" Mode="In" />
+    <Parameter Name="LastDate" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DarsadKarkard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Sdate" Type="varchar" Mode="In" />
+    <Parameter Name="Edate" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="fn_3DigitSeperate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Amount" Type="money" Mode="In" />
+  </Function>
+  <Function Name="fn_ChandShanbe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+    <Parameter Name="RoozHafteh" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_CurrentCount_UNReal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="MojoodyBankId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="fn_HolyDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="HolyDayRooz" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fnFormatCurrency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Amount" Type="money" Mode="In" />
+  </Function>
+  <Function Name="InsertExample" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdWord" Type="int" Mode="In" />
+    <Parameter Name="example" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="KarkardHaftegy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="KarkardHaftegyrowwHafteChand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="KarkardHaftegyST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="order_by_CountLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ProgreadReadWordDaily" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ProgreadReadWordDailyRoozBeRooz" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SDate" Type="int" Mode="In" />
+    <Parameter Name="EDate" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Show_Karkard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Show_Karkard961004" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ShowKarkadPivot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Sdate" Type="nvarchar" Mode="In" />
+    <Parameter Name="Edate" Type="nvarchar" Mode="In" />
+    <Parameter Name="RoozHafte" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ShowKarkadPivotDateToDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Sdate" Type="nvarchar" Mode="In" />
+    <Parameter Name="Edate" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ShowKarkadPivotDateToDate970519" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Sdate" Type="nvarchar" Mode="In" />
+    <Parameter Name="Edate" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ShowKarkadPivotDateToDate970618" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Sdate" Type="nvarchar" Mode="In" />
+    <Parameter Name="Edate" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ShowKarkadPivotNotParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="update_add_timeword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="addTime" Type="int" Mode="In" />
+  </Function>
+  <Function Name="update_level" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="level" Type="int" Mode="In" />
+    <Parameter Name="date_refresh" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateExample" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="id_dic_tbl" Type="int" Mode="In" />
+    <Parameter Name="example" Type="text" Mode="In" />
+  </Function>
+  <Function Name="UpdateTaghvimSetHafteChandom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ManageYourSelfModelStoreContainer">
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="Cat" EntityType="Self.Cat" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="ContentTbl" EntityType="Self.ContentTbl" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="LogTBL" EntityType="Self.LogTBL" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="ManageTime" EntityType="Self.ManageTime" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="Mazaya" EntityType="Self.Mazaya" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="RoutineJob" EntityType="Self.RoutineJob" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="RoutineJobHa" EntityType="Self.RoutineJobHa" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="Sport" EntityType="Self.Sport" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="StoreHoghogh" EntityType="Self.StoreHoghogh" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="Timing" EntityType="Self.Timing" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="TitleTbl" EntityType="Self.TitleTbl" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="BaseDaramadData" EntityType="Self.BaseDaramadData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Daramad" EntityType="Self.Daramad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DataCard" EntityType="Self.DataCard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DaysExercise" EntityType="Self.DaysExercise" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dic_tbl" EntityType="Self.dic_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="example_tbl" EntityType="Self.example_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HolyDay" EntityType="Self.HolyDay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IODayly" EntityType="Self.IODayly" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KarKard" EntityType="Self.KarKard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kharj" EntityType="Self.Kharj" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KharjType" EntityType="Self.KharjType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MasterData" EntityType="Self.MasterData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menuha" EntityType="Self.Menuha" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MojoodyBank" EntityType="Self.MojoodyBank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MVCHomeHeaderThree" EntityType="Self.MVCHomeHeaderThree" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PercentJob" EntityType="Self.PercentJob" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlayerScore" EntityType="Self.PlayerScore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SliderPhoto" EntityType="Self.SliderPhoto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Taghvim" EntityType="Self.Taghvim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeHazineh" EntityType="Self.TypeHazineh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="back_MasterData" EntityType="Self.back_MasterData" store:Type="Tables" store:Schema="5069_Esmaeili">
+      <DefiningQuery>SELECT 
+    [back_MasterData].[MasterDataId] AS [MasterDataId], 
+    [back_MasterData].[Weight] AS [Weight], 
+    [back_MasterData].[WeightDate] AS [WeightDate], 
+    [back_MasterData].[Personelid] AS [Personelid], 
+    [back_MasterData].[PersonelName] AS [PersonelName], 
+    [back_MasterData].[Status] AS [Status]
+    FROM [5069_Esmaeili].[back_MasterData] AS [back_MasterData]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="example_tbl_backup_980122" EntityType="Self.example_tbl_backup_980122" store:Type="Tables" store:Schema="5069_Esmaeili">
+      <DefiningQuery>SELECT 
+    [example_tbl_backup_980122].[id] AS [id], 
+    [example_tbl_backup_980122].[id_dic_tbl] AS [id_dic_tbl], 
+    [example_tbl_backup_980122].[example] AS [example]
+    FROM [5069_Esmaeili].[example_tbl_backup_980122] AS [example_tbl_backup_980122]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="dic_tbl_LOG" EntityType="Self.dic_tbl_LOG" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [dic_tbl_LOG].[id] AS [id], 
+    [dic_tbl_LOG].[eng] AS [eng], 
+    [dic_tbl_LOG].[per] AS [per], 
+    [dic_tbl_LOG].[level] AS [level], 
+    [dic_tbl_LOG].[date_s] AS [date_s], 
+    [dic_tbl_LOG].[date_refresh] AS [date_refresh], 
+    [dic_tbl_LOG].[time] AS [time], 
+    [dic_tbl_LOG].[timeword] AS [timeword], 
+    [dic_tbl_LOG].[id_month] AS [id_month], 
+    [dic_tbl_LOG].[minuteWord] AS [minuteWord], 
+    [dic_tbl_LOG].[HostName_TrgLog] AS [HostName_TrgLog], 
+    [dic_tbl_LOG].[LoginName_TrgLog] AS [LoginName_TrgLog], 
+    [dic_tbl_LOG].[LogStatus_TrgLog] AS [LogStatus_TrgLog], 
+    [dic_tbl_LOG].[TimeDate_TrgLog] AS [TimeDate_TrgLog]
+    FROM [dbo].[dic_tbl_LOG] AS [dic_tbl_LOG]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Book_Users" Association="Self.FK_Book_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_Users" Association="Self.FK_Category_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Category" EntitySet="Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentTbl_TitleTbl" Association="Self.FK_ContentTbl_TitleTbl">
+      <End Role="TitleTbl" EntitySet="TitleTbl" />
+      <End Role="ContentTbl" EntitySet="ContentTbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Daramad_MojoodyBank" Association="Self.FK_Daramad_MojoodyBank">
+      <End Role="MojoodyBank" EntitySet="MojoodyBank" />
+      <End Role="Daramad" EntitySet="Daramad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Daramad_TypeHazineh" Association="Self.FK_Daramad_TypeHazineh">
+      <End Role="TypeHazineh" EntitySet="TypeHazineh" />
+      <End Role="Daramad" EntitySet="Daramad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DaysExercise_dic_tbl" Association="Self.FK_DaysExercise_dic_tbl">
+      <End Role="dic_tbl" EntitySet="dic_tbl" />
+      <End Role="DaysExercise" EntitySet="DaysExercise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dic_tbl_Users" Association="Self.FK_dic_tbl_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="dic_tbl" EntitySet="dic_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_example_tbl_dic_tbl" Association="Self.FK_example_tbl_dic_tbl">
+      <End Role="dic_tbl" EntitySet="dic_tbl" />
+      <End Role="example_tbl" EntitySet="example_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Category" Association="Self.FK_Job_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Job" EntitySet="Job" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KarKard_Job" Association="Self.FK_KarKard_Job">
+      <End Role="Job" EntitySet="Job" />
+      <End Role="KarKard" EntitySet="KarKard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kharj_KharjType" Association="Self.FK_Kharj_KharjType">
+      <End Role="KharjType" EntitySet="KharjType" />
+      <End Role="Kharj" EntitySet="Kharj" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KharjType_Users" Association="Self.FK_KharjType_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="KharjType" EntitySet="KharjType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PercentJob_Job" Association="Self.FK_PercentJob_Job">
+      <End Role="Job" EntitySet="Job" />
+      <End Role="PercentJob" EntitySet="PercentJob" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerScore_Players" Association="Self.FK_PlayerScore_Players">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="PlayerScore" EntitySet="PlayerScore" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerScore_Users" Association="Self.FK_PlayerScore_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PlayerScore" EntitySet="PlayerScore" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoutineJob_Users" Association="Self.FK_RoutineJob_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RoutineJob" EntitySet="RoutineJob" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoutineJobHa_RoutineJob" Association="Self.FK_RoutineJobHa_RoutineJob">
+      <End Role="RoutineJob" EntitySet="RoutineJob" />
+      <End Role="RoutineJobHa" EntitySet="RoutineJobHa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sport_Cat" Association="Self.FK_Sport_Cat">
+      <End Role="Cat" EntitySet="Cat" />
+      <End Role="Sport" EntitySet="Sport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Cat" Association="Self.FK_Task_Cat">
+      <End Role="Cat" EntitySet="Cat" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Task" Association="Self.FK_Task_Task">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="Task1" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Users" Association="Self.FK_Task_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Timing_ManageTime" Association="Self.FK_Timing_ManageTime">
+      <End Role="ManageTime" EntitySet="ManageTime" />
+      <End Role="Timing" EntitySet="Timing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Timing_Task" Association="Self.FK_Timing_Task">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="Timing" EntitySet="Timing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TitleTbl_Book" Association="Self.FK_TitleTbl_Book">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="TitleTbl" EntitySet="TitleTbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Users" Association="Self.FK_UserRole_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

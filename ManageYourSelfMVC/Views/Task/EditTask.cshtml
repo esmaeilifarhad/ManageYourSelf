@@ -1,0 +1,95 @@
+﻿@model ManageYourSelfMVC.ViewModels.VM_Public
+<form>
+    <fieldset id="SubmitForm">
+        <table class="Task" TaskId="@Model.Task.TaskId" nametbl="UpdateTask">
+            <tr>
+                <td>نوع</td>
+                <td>
+
+                    <select class="MYSelect">
+                        @foreach (var item in Model.ListCat)
+                        {
+                            //if (item.CatId.ToString() != null)
+
+                            //{
+                            if (item.CatId == Model.Task.CatId)
+                            {
+                                <option value="@item.CatId" selected>@item.Title</option>
+                                }
+                                else
+                                {
+                                <option value="@item.CatId">@item.Title</option>
+                                }
+                            }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>عنوان</td>
+                @*<td><input type="text" style="width: 250px; height:100px;"   name="Name" value="@Model.Task.Name" autocomplete="off"/></td>*@
+                <td><textarea  name="Name"  rows="4" cols="50" autocomplete="off">@Model.Task.Name</textarea></td>
+            </tr>
+            <tr>
+                <td>تاریخ شروع</td>
+                <td><input type="text" name="DateStart" class="PersianDatePickerEditTaskS" value="@Model.Task.DateStart" autocomplete="off"/></td>
+            </tr>
+            <tr>
+                <td>تاریخ پایان</td>
+                <td><input type="text" name="DateEnd" class="PersianDatePickerEditTaskE" value="@Model.Task.DateEnd" autocomplete="off"/></td>
+            </tr>
+            <tr>
+                <td>درصد پیشرفت</td>
+                <td>
+                    <input type="number" name="DarsadPishraft" value="@Model.Task.DarsadPishraft" autocomplete="off">
+                </td>
+            </tr>
+            <tr>
+                <td>اولویت</td>
+                <td>
+                    <input type="number" name="Olaviat" value="@Model.Task.Olaviat" autocomplete="off" max="5" min="1">
+                </td>
+            </tr>
+
+            @if (Model.Task.IsActive == true)
+            {
+                <tr><td>فعال</td><td><input type="checkbox" name="TaskIsActive" value="True" checked></td></tr>
+            }
+            @if (Model.Task.IsActive == false)
+            {
+                <tr><td>فعال</td><td><input type="checkbox" name="TaskIsActive" value="False"></td></tr>
+            }
+            @if (Model.Task.IsCheck == true)
+            {
+                <tr><td>انجام شده</td><td><input type="checkbox" name="TaskIsCheck" value="True" checked></td></tr>
+            }
+            @if (Model.Task.IsCheck == false)
+            {
+                <tr><td>انجام شده</td><td><input type="checkbox" name="TaskIsCheck" value="False"></td></tr>
+            }
+        </table>
+    </fieldset>
+</form>
+@*<link href="~/Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/style/kamadatepicker.css" rel="stylesheet" />
+ <script src="~/Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/src/kamadatepicker.js"></script>*@
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePickerEditTaskS', {               
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+               , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+               , forceFarsiDigits: true
+               , markToday: true
+               , markHolidays: true
+               , highlightSelectedDay: true
+               , sync: true
+        });
+        kamaDatepicker('PersianDatePickerEditTaskE', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+               , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+               , forceFarsiDigits: true
+               , markToday: true
+               , markHolidays: true
+               , highlightSelectedDay: true
+               , sync: true
+        });
+    });
+</script>

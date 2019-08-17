@@ -1,0 +1,40 @@
+﻿<!--نمایش کارکرد-->
+
+<style>
+   .angul table,.angul th,.angul td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+        text-align:center;
+    }
+
+       .angul table tr:nth-child(odd) {
+            background-color: #efd7d7;
+        }
+
+      .angul  table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+</style>
+<div class="table-responsive angul" style="font-family:BNazanin;direction: ltr;">
+    <table>
+        <tr>
+            <th>روز هفته</th>
+            <th>روز</th>
+            <th ng-click="orderByMe('I')">ورود</th>
+            <th ng-click="orderByMe('O')">خروج</th>
+            <th ng-click="orderByMe('diff')">اختلاف</th>
+            <th ng-click="orderByMe('rtb')">رتبه</th>
+            <th ng-click="orderByMe('TedadKol')">تعداد کل</th>
+        </tr>
+        <tr ng-repeat="x in names | orderBy:myOrderBy">
+            <td>{{ x.DateCard }}</td>
+            <td>{{ x.chandshanbeh }}</td>
+            <td>{{ x.I  }}</td>
+            <td>{{ x.O   }}</td>
+            <td>{{ x.diff }}</td>
+            <td>{{ x.rtb| number }}</td>
+            <td>{{ x.TedadKol| number }}</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,33 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.HolyDay>
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+<br>
+<input type="button" name="CreateHolyDay" value="جدید" class="btn btn-info" />
+<br><br>
+<div class="table-responsive">
+    <table class="table HolyDay" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>تاریخ</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Utility.ConvertDateToSlash(item.HolyDayRooz)</td>
+                    <td><span style="color:green" class='fa fa-edit pointer' HolyDayId="@item.HolyDayId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' HolyDayId="@item.HolyDayId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

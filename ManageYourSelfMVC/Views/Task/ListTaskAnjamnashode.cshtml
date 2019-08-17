@@ -1,0 +1,46 @@
+﻿@model  List<ManageYourSelfMVC.ViewModels.TaskVM>
+
+<table class='table table-responsive table-dark table-striped TblTask' 
+       style='direction: rtl; text-align: center;font-size:11px'>
+    <thead>
+        <tr>
+            <th>اولویت</th>
+            <th>بالا</th>
+            <th>پایین</th>
+            <th>نوع</th>
+       
+            <th>عنوان وظیف</th>
+            <th>تاریخ شروع</th>
+            <th>تاریخ پایان</th>
+            <th>پیشرفت</th>
+            <th>گذشته</th>
+            <th>مانده روز</th>
+            <th>زمان</th>
+            <th>زمان بندی</th>
+            <th>ویرایش</th>
+            <th>حذف</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Olaviat</td>
+                <td><span style='color:red' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@item.TaskId"></span></td>
+                <td><span style='color:green' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@item.TaskId"></span></td>
+                <td>@item.Title</td>
+                <td style='text-align: right!important;'>@item.Name</td>
+                <td>@item.DateStart</td>
+                <td>@item.DateEnd</td>
+                <td>@item.DarsadPishraft</td>
+                <td>@item.Gozashteh</td>
+                <td>@item.MandehRooz</td>
+                <td>@item.Label</td>
+ 
+                <td><span class='fa fa-calendar pointer calendarTask' Data_id="@item.TaskId"></span></td>
+                <td><span class='fa fa-edit pointer'     Data_id="@item.TaskId"></span></td>
+                <td><span class='fa fa-remove pointer'   Data_id="@item.TaskId "></span></td>     
+            </tr>
+        }
+    </tbody>
+</table>

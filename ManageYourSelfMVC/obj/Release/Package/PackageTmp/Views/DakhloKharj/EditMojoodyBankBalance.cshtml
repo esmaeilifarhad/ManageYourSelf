@@ -1,0 +1,17 @@
+﻿@model ManageYourSelfMVC.Models.DomainModels.MojoodyBank
+<br>
+<div class="table-responsive" Name="EditMojoodyBankBalance">
+    <table class="table" MojoodyBankId="@Model.MojoodyBankId">
+        <tr>
+            <th>نام بانک</th>
+            <th>موجودی فعلی</th>
+            <th>موجودی درست</th>
+        </tr>
+        <tr>
+            <td><span>@Model.MojoodyName</span></td>
+            <td><input name="FalseRial" type="text" value="@Utility.Rial(Model.Rial.ToString())" readonly/></td>
+            <td><input name="OkRial" type="text" value="@Utility.Rial(Model.Rial.ToString())" /></td>
+        </tr>
+    </table>
+</div>
+

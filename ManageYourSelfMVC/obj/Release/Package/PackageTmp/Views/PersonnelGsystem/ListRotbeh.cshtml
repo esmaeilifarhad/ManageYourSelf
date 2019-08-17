@@ -1,0 +1,49 @@
+﻿@model  ManageYourSelfMVC.ViewModels.VDataCard
+<!--نمایش کارکرد-->
+<div class="table-responsive" style="font-family:BNazanin">
+    <table class="table table-striped" style="direction: ltr; text-align: center;">
+        <thead>
+            <tr>
+
+                @foreach (System.Data.DataColumn column in Model.ShowTaradod.Columns)
+                {
+                    <th>@column.ColumnName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow item in Model.ShowTaradod.Rows)
+            {
+                if (int.Parse(item[0].ToString()) == 997)
+                {
+                    <tr style="background-color:lightsteelblue">
+                        @for (int i = 0; i < Model.ShowTaradod.Columns.Count; i++)
+                        {
+                            // if (int.Parse(item[0].ToString()) == 997)
+                            <td>@item[i].ToString()</td>
+                        }
+                    </tr>
+                }
+                else if(int.Parse(item[0].ToString()) == 973 || int.Parse(item[0].ToString()) == 974 || int.Parse(item[0].ToString()) == 10215)
+                {
+                    <tr style="background-color:orangered">
+                        @for (int i = 0; i < Model.ShowTaradod.Columns.Count; i++)
+                        {
+                            // if (int.Parse(item[0].ToString()) == 997)
+                            <td>@item[i].ToString()</td>
+                        }
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        @for (int i = 0; i < Model.ShowTaradod.Columns.Count; i++)
+                    {
+                            <td>@item[i].ToString()</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

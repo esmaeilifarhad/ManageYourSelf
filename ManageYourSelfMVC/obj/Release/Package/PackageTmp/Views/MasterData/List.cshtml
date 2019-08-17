@@ -1,0 +1,46 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.Cat>
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+<ol>
+    <li><p>ورزش ها باید با کد یک درست شود</p></li>
+    <li><p>وظایف باید با کد 2 درست شود</p></li>
+</ol>
+
+
+<br>
+<input type="button" name="CreateMasterData" value="جدید" class="btn btn-info" />
+<br><br>
+<div class="table-responsive">
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>عنوان</th>
+                <th>کد</th>
+                <th>توضیحات</th>
+                <th>ترتیب</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Code</td>
+                    <td>@item.Dsc</td>
+                    <td>@item.Order</td>
+                    <td><span style="color:green" class='fa fa-edit EditCat pointer' CatId="@item.CatId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' CatId="@item.CatId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+

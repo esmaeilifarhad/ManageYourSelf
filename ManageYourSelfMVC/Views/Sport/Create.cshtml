@@ -1,0 +1,44 @@
+﻿@model ManageYourSelfMVC.ViewModels.VM_Public
+<br>
+<div  Name="CreateSport">
+    <table >
+            <tr>
+                <td>نوع ورزش</td>
+                <td>
+                    <select>
+                        @foreach (var item in Model.ListCat)
+                        {
+                            <option value="@item.CatId">@item.Title</option>
+                        }
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td>تعداد</td>
+                <td><input name="Tedad" type="text" /></td>
+            </tr>
+        <tr>
+            <td>ست</td>
+            <td><input name="Set" type="text" /></td>
+        </tr>
+            <tr>
+                <td>تاریخ</td>
+                <td><input type="text" name="Date" class="PersianDatePicker" autocomplete="off" value="@Model.CurrentDate" /></td>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                    , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                    , forceFarsiDigits: true
+                    , markToday: true
+                    , markHolidays: true
+                    , highlightSelectedDay: true
+                    , sync: true
+        });
+    });
+</script>
+
+

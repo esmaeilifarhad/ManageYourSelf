@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+@using ManageYourSelfMVC.Security
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Work3</title>
+</head>
+<body>
+    <div>
+        Work3
+        <br />
+        Welcome @SessionPersister.Username
+        <br />
+        <a href="@Url.Action("Logout","Account")">Logout</a>
+
+    </div>
+</body>
+</html>

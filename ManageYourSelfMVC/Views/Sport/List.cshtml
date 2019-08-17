@@ -1,0 +1,41 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.VMSport>
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+<br>
+<input type="button" name="CreateSport" value="جدید" class="btn btn-info" />
+<br><br>
+<div class="table-responsive">
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>عنوان</th>
+                <th>ست</th>
+                <th>تعداد</th>
+                <th>تاریخ</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Set</td>
+                    <td>@item.Tedad</td>
+                    <td>@item.Date.ConvertDateToSlash()</td>
+                    <td><span style="color:green" class='fa fa-edit pointer' CatId="@item.SportId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' CatId="@item.SportId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

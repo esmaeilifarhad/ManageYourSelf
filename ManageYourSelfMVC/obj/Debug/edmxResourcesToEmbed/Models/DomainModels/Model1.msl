@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ManageYourSelfModelStoreContainer" CdmEntityContainer="ManageYourSelfEntities">
+    <FunctionImportMapping FunctionImportName="c" FunctionName="ManageYourSelfModel.Store.c" />
+    <FunctionImportMapping FunctionImportName="CreateLogTbl" FunctionName="ManageYourSelfModel.Store.CreateLogTbl" />
+    <FunctionImportMapping FunctionImportName="CreateTaghvimShamsy" FunctionName="ManageYourSelfModel.Store.CreateTaghvimShamsy" />
+    <FunctionImportMapping FunctionImportName="DarsadKarkard" FunctionName="ManageYourSelfModel.Store.DarsadKarkard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.DarsadKarkard_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Timee" ColumnName="Timee" />
+          <ScalarProperty Name="TimeeH" ColumnName="TimeeH" />
+          <ScalarProperty Name="D" ColumnName="D" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertExample" FunctionName="ManageYourSelfModel.Store.InsertExample" />
+    <FunctionImportMapping FunctionImportName="KarkardHaftegy" FunctionName="ManageYourSelfModel.Store.KarkardHaftegy" />
+    <FunctionImportMapping FunctionImportName="KarkardHaftegyrowwHafteChand" FunctionName="ManageYourSelfModel.Store.KarkardHaftegyrowwHafteChand" />
+    <FunctionImportMapping FunctionImportName="KarkardHaftegyST" FunctionName="ManageYourSelfModel.Store.KarkardHaftegyST">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.KarkardHaftegyST_Result">
+          <ScalarProperty Name="HafteChandom" ColumnName="HafteChandom" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SpendTimeMinute" ColumnName="SpendTimeMinute" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="order_by_CountLevel" FunctionName="ManageYourSelfModel.Store.order_by_CountLevel" />
+    <FunctionImportMapping FunctionImportName="ProgreadReadWordDaily" FunctionName="ManageYourSelfModel.Store.ProgreadReadWordDaily" />
+    <FunctionImportMapping FunctionImportName="ProgreadReadWordDailyRoozBeRooz" FunctionName="ManageYourSelfModel.Store.ProgreadReadWordDailyRoozBeRooz" />
+    <FunctionImportMapping FunctionImportName="Show_Karkard" FunctionName="ManageYourSelfModel.Store.Show_Karkard" />
+    <FunctionImportMapping FunctionImportName="Show_Karkard961004" FunctionName="ManageYourSelfModel.Store.Show_Karkard961004" />
+    <FunctionImportMapping FunctionImportName="ShowKarkadPivot" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivot" />
+    <FunctionImportMapping FunctionImportName="ShowKarkadPivotNotParam" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotNotParam" />
+    <FunctionImportMapping FunctionImportName="update_add_timeword" FunctionName="ManageYourSelfModel.Store.update_add_timeword" />
+    <FunctionImportMapping FunctionImportName="update_level" FunctionName="ManageYourSelfModel.Store.update_level" />
+    <FunctionImportMapping FunctionImportName="UpdateExample" FunctionName="ManageYourSelfModel.Store.UpdateExample" />
+    <FunctionImportMapping FunctionImportName="UpdateTaghvimSetHafteChandom" FunctionName="ManageYourSelfModel.Store.UpdateTaghvimSetHafteChandom" />
+    <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ManageYourSelfModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ManageYourSelfModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ManageYourSelfModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ManageYourSelfModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ManageYourSelfModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ManageYourSelfModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ManageYourSelfModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="CreateTeam" FunctionName="ManageYourSelfModel.Store.CreateTeam">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.CreateTeam_Result">
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListVoteToPlayers" FunctionName="ManageYourSelfModel.Store.ListVoteToPlayers" />
+    <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970519" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970519" />
+    <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970618" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970618" />
+    <FunctionImportMapping FunctionImportName="SP_ManageTime" FunctionName="ManageYourSelfModel.Store.SP_ManageTime">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.SP_ManageTime_Result">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Col1" ColumnName="Col1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListGroupHazine" FunctionName="ManageYourSelfModel.Store.ListGroupHazine">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.ListGroupHazine_Result">
+          <ScalarProperty Name="TypeHazinehId" ColumnName="TypeHazinehId" />
+          <ScalarProperty Name="Datee" ColumnName="Datee" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Rial" ColumnName="Rial" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PersianToEnglish" FunctionName="ManageYourSelfModel.Store.PersianToEnglish">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.PersianToEnglish_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="eng" ColumnName="eng" />
+          <ScalarProperty Name="per" ColumnName="per" />
+          <ScalarProperty Name="Phonetic" ColumnName="Phonetic" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="date_s" ColumnName="date_s" />
+          <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="timeword" ColumnName="timeword" />
+          <ScalarProperty Name="id_month" ColumnName="id_month" />
+          <ScalarProperty Name="SuccessCount" ColumnName="SuccessCount" />
+          <ScalarProperty Name="UnSuccessCount" ColumnName="UnSuccessCount" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreateDateM" ColumnName="CreateDateM" />
+          <ScalarProperty Name="DateRefreshM" ColumnName="DateRefreshM" />
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="dsc" ColumnName="dsc" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cats">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Cat">
+        <MappingFragment StoreEntitySet="Cat">
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Dsc" ColumnName="Dsc" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CatId" ColumnName="CatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentTbls">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.ContentTbl">
+        <MappingFragment StoreEntitySet="ContentTbl">
+          <ScalarProperty Name="order" ColumnName="order" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="TitleId" ColumnName="TitleId" />
+          <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogTBLs">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.LogTBL">
+        <MappingFragment StoreEntitySet="LogTBL">
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="dsc" ColumnName="dsc" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManageTimes">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.ManageTime">
+        <MappingFragment StoreEntitySet="ManageTime">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="ManageTimeId" ColumnName="ManageTimeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mazayas">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Mazaya">
+        <MappingFragment StoreEntitySet="Mazaya">
+          <ScalarProperty Name="IsMazaya" ColumnName="IsMazaya" />
+          <ScalarProperty Name="MazayaName" ColumnName="MazayaName" />
+          <ScalarProperty Name="MazayaId" ColumnName="MazayaId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoutineJobs">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.RoutineJob">
+        <MappingFragment StoreEntitySet="RoutineJob">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+          <ScalarProperty Name="RoozDaily" ColumnName="RoozDaily" />
+          <ScalarProperty Name="RoutineJobId" ColumnName="RoutineJobId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoutineJobHas">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.RoutineJobHa">
+        <MappingFragment StoreEntitySet="RoutineJobHa">
+          <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+          <ScalarProperty Name="RoutineJobId" ColumnName="RoutineJobId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="RoutineJobHa1" ColumnName="RoutineJobHa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sports">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Sport">
+        <MappingFragment StoreEntitySet="Sport">
+          <ScalarProperty Name="Set" ColumnName="Set" />
+          <ScalarProperty Name="Tedad" ColumnName="Tedad" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CatId" ColumnName="CatId" />
+          <ScalarProperty Name="SportId" ColumnName="SportId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoreHoghoghs">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.StoreHoghogh">
+        <MappingFragment StoreEntitySet="StoreHoghogh">
+          <ScalarProperty Name="MazRyialMah" ColumnName="MazRyialMah" />
+          <ScalarProperty Name="MazayaId" ColumnName="MazayaId" />
+          <ScalarProperty Name="SHdate" ColumnName="SHdate" />
+          <ScalarProperty Name="PersonelId" ColumnName="PersonelId" />
+          <ScalarProperty Name="StoreHoghoghId" ColumnName="StoreHoghoghId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Timings">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Timing">
+        <MappingFragment StoreEntitySet="Timing">
+          <ScalarProperty Name="ManageTimeId" ColumnName="ManageTimeId" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="TimingId" ColumnName="TimingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TitleTbls">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.TitleTbl">
+        <MappingFragment StoreEntitySet="TitleTbl">
+          <ScalarProperty Name="order" ColumnName="order" />
+          <ScalarProperty Name="TitleId" ColumnName="TitleId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BaseDaramadDatas">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.BaseDaramadData">
+        <MappingFragment StoreEntitySet="BaseDaramadData">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BaseDaramadDataId" ColumnName="BaseDaramadDataId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Daramads">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Daramad">
+        <MappingFragment StoreEntitySet="Daramad">
+          <ScalarProperty Name="DaramadORHazineh" ColumnName="DaramadORHazineh" />
+          <ScalarProperty Name="After" ColumnName="After" />
+          <ScalarProperty Name="Before" ColumnName="Before" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="TypeHazinehId" ColumnName="TypeHazinehId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="MojoodyBankId" ColumnName="MojoodyBankId" />
+          <ScalarProperty Name="Rial" ColumnName="Rial" />
+          <ScalarProperty Name="DaramadId" ColumnName="DaramadId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DataCards">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.DataCard">
+        <MappingFragment StoreEntitySet="DataCard">
+          <ScalarProperty Name="O" ColumnName="O" />
+          <ScalarProperty Name="I" ColumnName="I" />
+          <ScalarProperty Name="DateCard" ColumnName="DateCard" />
+          <ScalarProperty Name="personelid" ColumnName="personelid" />
+          <ScalarProperty Name="DataCardId" ColumnName="DataCardId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DaysExercises">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.DaysExercise">
+        <MappingFragment StoreEntitySet="DaysExercise">
+          <ScalarProperty Name="Succ_OR_UnSucc" ColumnName="Succ_OR_UnSucc" />
+          <ScalarProperty Name="WordId" ColumnName="WordId" />
+          <ScalarProperty Name="DateExercise" ColumnName="DateExercise" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dic_tbl">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.dic_tbl">
+        <MappingFragment StoreEntitySet="dic_tbl">
+          <ScalarProperty Name="DateRefreshM" ColumnName="DateRefreshM" />
+          <ScalarProperty Name="CreateDateM" ColumnName="CreateDateM" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UnSuccessCount" ColumnName="UnSuccessCount" />
+          <ScalarProperty Name="SuccessCount" ColumnName="SuccessCount" />
+          <ScalarProperty Name="id_month" ColumnName="id_month" />
+          <ScalarProperty Name="timeword" ColumnName="timeword" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
+          <ScalarProperty Name="date_s" ColumnName="date_s" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="Phonetic" ColumnName="Phonetic" />
+          <ScalarProperty Name="per" ColumnName="per" />
+          <ScalarProperty Name="eng" ColumnName="eng" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="example_tbl">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.example_tbl">
+        <MappingFragment StoreEntitySet="example_tbl">
+          <ScalarProperty Name="example" ColumnName="example" />
+          <ScalarProperty Name="id_dic_tbl" ColumnName="id_dic_tbl" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HolyDays">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.HolyDay">
+        <MappingFragment StoreEntitySet="HolyDay">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="HolyDayRooz" ColumnName="HolyDayRooz" />
+          <ScalarProperty Name="HolyDayId" ColumnName="HolyDayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IODaylies">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.IODayly">
+        <MappingFragment StoreEntitySet="IODayly">
+          <ScalarProperty Name="DayDate" ColumnName="DayDate" />
+          <ScalarProperty Name="IOType" ColumnName="IOType" />
+          <ScalarProperty Name="ETime" ColumnName="ETime" />
+          <ScalarProperty Name="STime" ColumnName="STime" />
+          <ScalarProperty Name="IOId" ColumnName="IOId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jobs">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Job">
+        <MappingFragment StoreEntitySet="Job">
+          <ScalarProperty Name="Mohasebe" ColumnName="Mohasebe" />
+          <ScalarProperty Name="GridShow" ColumnName="GridShow" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KarKards">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.KarKard">
+        <MappingFragment StoreEntitySet="KarKard">
+          <ScalarProperty Name="MiladyDate" ColumnName="MiladyDate" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="SpendTimeMinute" ColumnName="SpendTimeMinute" />
+          <ScalarProperty Name="DayDate" ColumnName="DayDate" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="KarkardId" ColumnName="KarkardId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kharjs">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Kharj">
+        <MappingFragment StoreEntitySet="Kharj">
+          <ScalarProperty Name="KharjTypeId" ColumnName="KharjTypeId" />
+          <ScalarProperty Name="DateKharj" ColumnName="DateKharj" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Rial" ColumnName="Rial" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="KharjId" ColumnName="KharjId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KharjTypes">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.KharjType">
+        <MappingFragment StoreEntitySet="KharjType">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="KharjTypeId" ColumnName="KharjTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MasterDatas">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.MasterData">
+        <MappingFragment StoreEntitySet="MasterData">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PersonelName" ColumnName="PersonelName" />
+          <ScalarProperty Name="Personelid" ColumnName="Personelid" />
+          <ScalarProperty Name="WeightDate" ColumnName="WeightDate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="IsCascade" ColumnName="IsCascade" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menuhas">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Menuha">
+        <MappingFragment StoreEntitySet="Menuha">
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MenuhaId" ColumnName="MenuhaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MojoodyBanks">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.MojoodyBank">
+        <MappingFragment StoreEntitySet="MojoodyBank">
+          <ScalarProperty Name="Rial" ColumnName="Rial" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="MojoodyName" ColumnName="MojoodyName" />
+          <ScalarProperty Name="MojoodyBankId" ColumnName="MojoodyBankId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MVCHomeHeaderThrees">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.MVCHomeHeaderThree">
+        <MappingFragment StoreEntitySet="MVCHomeHeaderThree">
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Matn" ColumnName="Matn" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="MVCHomeHeaderThreeId" ColumnName="MVCHomeHeaderThreeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PercentJobs">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.PercentJob">
+        <MappingFragment StoreEntitySet="PercentJob">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="PercentValue" ColumnName="PercentValue" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="PercentId" ColumnName="PercentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Player">
+        <MappingFragment StoreEntitySet="Players">
+          <ScalarProperty Name="IsHozoor" ColumnName="IsHozoor" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="PlayersId" ColumnName="PlayersId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlayerScores">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.PlayerScore">
+        <MappingFragment StoreEntitySet="PlayerScore">
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PlayerScoreId" ColumnName="PlayerScoreId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Settings">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Setting">
+        <MappingFragment StoreEntitySet="Setting">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SliderPhotoes">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.SliderPhoto">
+        <MappingFragment StoreEntitySet="SliderPhoto">
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Matn" ColumnName="Matn" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="PhotoImg" ColumnName="PhotoImg" />
+          <ScalarProperty Name="SliderPhotoId" ColumnName="SliderPhotoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taghvims">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Taghvim">
+        <MappingFragment StoreEntitySet="Taghvim">
+          <ScalarProperty Name="HafteChandom" ColumnName="HafteChandom" />
+          <ScalarProperty Name="ChandShanbeh" ColumnName="ChandShanbeh" />
+          <ScalarProperty Name="RoozHafte" ColumnName="RoozHafte" />
+          <ScalarProperty Name="IsHolyDay" ColumnName="IsHolyDay" />
+          <ScalarProperty Name="DayDate" ColumnName="DayDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Task">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="CatId" ColumnName="CatId" />
+          <ScalarProperty Name="Olaviat" ColumnName="Olaviat" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DarsadPishraft" ColumnName="DarsadPishraft" />
+          <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeHazinehs">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.TypeHazineh">
+        <MappingFragment StoreEntitySet="TypeHazineh">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DaramadOrKharj" ColumnName="DaramadOrKharj" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="TypeHazinehId" ColumnName="TypeHazinehId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="back_MasterData">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.back_MasterData">
+        <MappingFragment StoreEntitySet="back_MasterData">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PersonelName" ColumnName="PersonelName" />
+          <ScalarProperty Name="Personelid" ColumnName="Personelid" />
+          <ScalarProperty Name="WeightDate" ColumnName="WeightDate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="example_tbl_backup_980122">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.example_tbl_backup_980122">
+        <MappingFragment StoreEntitySet="example_tbl_backup_980122">
+          <ScalarProperty Name="example" ColumnName="example" />
+          <ScalarProperty Name="id_dic_tbl" ColumnName="id_dic_tbl" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dic_tbl_LOG">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.dic_tbl_LOG">
+        <MappingFragment StoreEntitySet="dic_tbl_LOG">
+          <ScalarProperty Name="TimeDate_TrgLog" ColumnName="TimeDate_TrgLog" />
+          <ScalarProperty Name="LogStatus_TrgLog" ColumnName="LogStatus_TrgLog" />
+          <ScalarProperty Name="LoginName_TrgLog" ColumnName="LoginName_TrgLog" />
+          <ScalarProperty Name="HostName_TrgLog" ColumnName="HostName_TrgLog" />
+          <ScalarProperty Name="minuteWord" ColumnName="minuteWord" />
+          <ScalarProperty Name="id_month" ColumnName="id_month" />
+          <ScalarProperty Name="timeword" ColumnName="timeword" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
+          <ScalarProperty Name="date_s" ColumnName="date_s" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="per" ColumnName="per" />
+          <ScalarProperty Name="eng" ColumnName="eng" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

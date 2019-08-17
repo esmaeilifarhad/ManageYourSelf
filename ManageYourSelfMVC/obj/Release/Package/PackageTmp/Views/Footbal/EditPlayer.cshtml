@@ -1,0 +1,37 @@
+﻿@model ManageYourSelfMVC.Models.DomainModels.Player
+<div class="table-responsive" Name="EditPlayer">
+    <table class="table" nametbl="EditPlayer" data_id="@Model.PlayersId">
+        <tr>
+            <td>تام بازیکن</td>
+            <td>
+                <input type="text" name="name" readonly value="@Model.name" />
+            </td>
+        </tr>
+        <tr>
+            <td>فعال</td>
+            <td>
+                @if (Model.IsActive == true)
+                {
+                    <input type="radio" name="IsActive" value="True" checked="checked"> <span>فعال</span><input type="radio" name="IsActive" value="Fasle"> <span>غیرفعال</span>
+                }
+                else
+                {
+                    <input type="radio" name="IsActive" value="True"> <span>فعال</span><input type="radio" name="IsActive" value="Fasle" checked="checked"> <span>غیرفعال</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>حضور</td>
+            <td>
+                @if (Model.IsHozoor == true)
+                {
+                    <input type="radio" name="IsHozoor" value="True" checked="checked"> <span>حضور</span> <input type="radio" name="IsHozoor" value="Fasle">  <span>غیبت</span>
+                }
+                else
+                {
+                    <input type="radio" name="IsHozoor" value="True" > <span>حضور</span> <input type="radio" name="IsHozoor" value="Fasle" checked="checked">  <span>غیبت</span>
+                }
+        </td>
+    </tr>
+</table>
+</div>

@@ -1,0 +1,30 @@
+﻿@model ManageYourSelfMVC.ViewModels.MenuVm
+
+<nav id="nav-menu-container">
+    <ul class="nav-menu">
+        <li class="menu-active"><a style="cursor: pointer;color:lightblue;font-family:'Morvarid';"  href="#intro">Home</a></li>
+        @foreach (var item in Model.MenuLst)
+        {
+            
+            if (item.IsCascade == false)
+            {
+                <li><a   style="cursor: pointer;color:#e4aaaa;font-family:'Morvarid';"  onclick="location.href='@Url.Action(item.Action,item.Controller)'">@item.MenuName</a></li>
+            }
+            else
+            {
+                <li class="menu-has-children">
+                    <a style="cursor: pointer;color:lightcoral;font-family:'Morvarid';" href="">@item.MenuName</a>
+                    <ul>
+                        @foreach (var item2 in Model.MenuhaLst)
+                        {
+                            if (item.MenuId == item2.MenuId)
+                            {
+                            <li><a style="cursor: pointer;color:lightsalmon;font-family:'Morvarid';" onclick="location.href='@Url.Action(item.Action,item.Controller)'" >@item2.Name</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        }       
+    </ul>
+</nav><!-- #nav-menu-container -->

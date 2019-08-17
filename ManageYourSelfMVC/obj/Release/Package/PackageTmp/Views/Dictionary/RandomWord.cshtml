@@ -1,0 +1,18 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+<!---------------------------------------------------------------------------------------->
+<div>
+    <span style="font-size:20px;" WordId="@Model.Select(q=>q.id).First()">@Model.Select(q=>q.per).First()</span>
+</div>
+<br/>
+<div>
+    <table  style="direction:rtl;font-size:18px;">
+            @foreach (var item in Model)
+            {
+                <tr WordId="@item.id" >
+                    <td><input type="radio" name="rbtn" value="@item.id" style="padding-bottom:5px"></td>
+                    <td><span  class="eng" style="padding-bottom:5px">@item.eng</span></td>
+                </tr>
+            }
+    </table>
+</div>
+<!---------------------------------------------------------------------------------------->

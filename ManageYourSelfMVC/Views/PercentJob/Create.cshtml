@@ -1,0 +1,24 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.Job>
+<div class="table-responsive" Name="CreatePercentJob">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>فعالیت</th>
+                <th>درصد</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>
+                        <select>
+                            @foreach (var item in Model)
+                            {
+                                <option value="@item.JobId">@item.Name</option>
+                            }
+                        </select>
+                    </td>
+                    <td><input name="PercentValue" type="text" placeholder="1"></td>
+                </tr>             
+        </tbody>
+    </table>
+</div>

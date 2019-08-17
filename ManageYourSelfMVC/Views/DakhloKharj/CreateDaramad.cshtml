@@ -1,0 +1,192 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.DaramadVM>
+    @if (Model.Select(q => q.MojoodyBankId).FirstOrDefault() == 0)
+    {
+<div  Name="CreateDaramad">
+    <table>
+        <tr>
+            <td>نام بانک</td>
+            <td>
+                <select class="MYSelect">
+                    @foreach (var items in Model)
+                    {
+                        foreach (var item in items.lstMojoodyBank)
+                        {
+                    <option value="@item.MojoodyBankId">@item.MojoodyName</option>
+                        }
+                    }
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>نوع</td>
+            <td>
+                <span>
+                    <input type="radio" name="rdbTypeHazineh" value="false" title="پرداخت" checked />پرداخت
+                </span>
+                <span>
+                    <input type="radio" name="rdbTypeHazineh" value="true" title="دریافت" />دریافت
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>نوع هزینه</td>
+            <td>
+                <select class="SelectlstTypeHazineh">
+                    @foreach (var items in Model)
+                    {
+                        foreach (var item in items.lstTypeHazineh)
+                        {
+                            if (item.DaramadOrKharj == false)
+                            {
+                                <option MojoodyBankId="@item.TypeHazinehId" value="@item.TypeHazinehId">@item.name</option>
+                            }
+                        }
+                    }
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>ریال</td>
+            <td><input type="text" name="Rial" /></td>
+        </tr>
+        <tr>
+            <td>تاریخ پایان</td>
+            <td><input type="text" name="Date" class="PersianDatePicker" autocomplete="off" value="@Model.Select(q => q.CurrentDate).FirstOrDefault()" /></td>
+        </tr>
+        <tr>
+            <td>توضیحات</td>
+            <td><input type="text" name="Description" /></td>
+        </tr>
+    </table>
+</div>
+    }
+    else
+    {
+        <div Name="CreateDaramad">
+            <table>
+                <tr>
+                    <td>نام بانک</td>
+                    <td>
+                        <select class="MYSelect">
+                            @foreach (var items in Model)
+                            {
+                                foreach (var item in items.lstMojoodyBank.Where(q=>q.MojoodyBankId== Model.Select(x => x.MojoodyBankId).FirstOrDefault()))
+                                {
+                                    <option value="@item.MojoodyBankId">@item.MojoodyName</option>
+                                }
+                            }
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>نوع</td>
+                    <td>
+                        <span>
+                            <input type="radio" name="rdbTypeHazineh" value="false" title="پرداخت" checked />پرداخت
+                        </span>
+                        <span>
+                            <input type="radio" name="rdbTypeHazineh" value="true" title="دریافت" />دریافت
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>نوع هزینه</td>
+                    <td>
+                        <select class="SelectlstTypeHazineh">
+                            @foreach (var items in Model)
+                            {
+                                foreach (var item in items.lstTypeHazineh)
+                                {
+                                    if (item.DaramadOrKharj == false)
+                                    {
+                                        <option MojoodyBankId="@item.TypeHazinehId" value="@item.TypeHazinehId">@item.name</option>
+                                    }
+                                }
+                            }
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ریال</td>
+                    <td><input type="text" name="Rial" /></td>
+                </tr>
+                <tr>
+                    <td>تاریخ پایان</td>
+                    <td><input type="text" name="Date" class="PersianDatePicker" autocomplete="off" value="@Model.Select(q => q.CurrentDate).FirstOrDefault()" /></td>
+                </tr>
+                <tr>
+                    <td>توضیحات</td>
+                    <td><input type="text" name="Description" /></td>
+                </tr>
+            </table>
+        </div>
+    }
+<script>
+    $("#MasterModal").on("click", "div[name='CreateDaramad'] input[name='rdbTypeHazineh']", function () {
+        var resultRdb = $(this).val()
+        if (resultRdb == 'false') {
+            $("div[name='CreateDaramad'] .SelectlstTypeHazineh")
+             .find('option')
+             .remove()
+             .end()
+
+            $.ajax(
+           {
+               type: 'get',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/DakhloKharj/ListTypeHazinehcmb?DaramadOrKLharj=" + resultRdb,
+
+               success: function (data) {
+                   for (var i = 0; i < data.length; i++) {
+                       $("div[name='CreateDaramad'] .SelectlstTypeHazineh").append('<option value="' + data[i].TypeHazinehId + '">' + data[i].name + '</option>')
+                   }
+               },
+               error: function (error) {
+                   alert(error);
+               }
+           });
+
+        }
+        else {
+            $("div[name='CreateDaramad'] .SelectlstTypeHazineh")
+             .find('option')
+             .remove()
+             .end()
+
+            $.ajax(
+           {
+               type: 'get',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/DakhloKharj/ListTypeHazinehcmb?DaramadOrKLharj=" + resultRdb,
+
+               success: function (data) {
+                   for (var i = 0; i < data.length; i++) {
+                       $("div[name='CreateDaramad'] .SelectlstTypeHazineh").append('<option value="' + data[i].TypeHazinehId + '">' + data[i].name + '</option>')
+                   }
+               },
+               error: function (error) {
+                   alert(error);
+               }
+           });
+        }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                    , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                    , forceFarsiDigits: true
+                    , markToday: true
+                    , markHolidays: true
+                    , highlightSelectedDay: true
+                    , sync: true
+        });
+    });
+</script>

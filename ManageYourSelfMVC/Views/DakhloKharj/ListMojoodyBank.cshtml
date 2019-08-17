@@ -1,0 +1,47 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.MojoodyBank>
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+<br>
+<input type="button" name="CreateMojoodyBank" value="جدید" class="btn btn-info" />
+<br><br>
+<div class="table-responsive">
+    <table class="table MojoodyBank" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>بانک</th>
+                <th>ریال</th>
+                <th>تراکنش</th>
+                <th>انتقال</th>
+                <th>بالانس</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int SumRial=0; }
+            @foreach (var item in Model)
+            {
+                SumRial += (int)item.Rial;
+                <tr>
+                    <td>@item.MojoodyName</td>
+                    <td>@Utility.Rial(item.Rial.ToString())</td>
+                    <td><span style="color:green" class='fa fa-plus pointer ' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                    <td><span style="color:orange" class='fa fa-exchange pointer ' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                    <td><span style="color:blue" class='fa fa-balance-scale pointer ' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                    <td><span style="color:green" class='fa fa-edit pointer' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                </tr>
+            }
+            <tr>
+                <td colspan="1" style="background-color:lightgray;font-size:large;font-weight:bold " >مجموع</td>
+                <td colspan="1" style="background-color:lightgray;font-size:large;font-weight:bold ">@Utility.Rial(SumRial.ToString())</td>
+                <td colspan="5" style="background-color:lightgray"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

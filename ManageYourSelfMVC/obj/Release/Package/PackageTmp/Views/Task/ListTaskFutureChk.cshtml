@@ -1,0 +1,68 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.Cat>
+
+<style>
+    .Categories td {
+        border: none;
+        color: black;
+        opacity: 0.8;
+        transition: 0.3s;
+    }
+
+        .Categories td:hover {
+            opacity: 1;
+            color:darkred;
+        }
+</style>
+
+<div class="row">
+
+    <span><input type="checkbox" value="" class="AllCatChecked" /></span><span>انتخاب همه</span>
+
+</div>
+
+@*<div class="row Categories">
+    @foreach (var item in Model)
+    {
+        <span><input type="checkbox" value="@item.CatId" /></span><span CatId="@item.CatId" class="CreateNewTask">@item.Title</span>
+    }
+</div>*@
+
+<div class="row Categories">
+@{
+    //تعداد رکورد در هر ردیف
+    int rowCount = 4;
+    int colCount =( (Model.Count) / rowCount);
+    }
+@for (int k = 0; k <= colCount; k++)
+{
+    if (k == colCount)
+    {
+        <table>
+            @for (int i = (Model.Count / colCount) * k; i<Model.Count; i++)
+            {
+                <tr>
+                    <td><span><input style="cursor:pointer" type="checkbox" value="@Model[i].CatId" /></span><span style="cursor:pointer" CatId="@Model[i].CatId" class="CreateNewTask">@Model[i].Title</span></td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+    <table>
+        @for (int i = (Model.Count / colCount) * k; i < (Model.Count / colCount) * (k + 1); i++)
+        {
+            <tr>
+                <td><span><input style="cursor:pointer" type="checkbox" value="@Model[i].CatId" /></span><span style="cursor:pointer" CatId="@Model[i].CatId" class="CreateNewTask">@Model[i].Title</span></td>
+            </tr>
+        }
+    </table>
+    }
+}
+    <br />
+  
+    </div>
+
+
+
+
+

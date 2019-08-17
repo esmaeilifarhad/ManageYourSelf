@@ -1,0 +1,38 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Karkard.VMKarkard>
+
+<br>
+@*<input type="button" name="Create" value="جدید" class="btn btn-danger" />
+    <span></span>
+    <input type="button" name="List" value="بروز آوری" class="btn btn-danger" />
+    <br><br>*@
+<div class="table-responsive">
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>فعالیت</th>
+                <th>تاریخ</th>
+                <th>شروع</th>
+                <th>پایان</th>
+                <th>زمان</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var DD = item.DayDate;
+                <tr>
+                    <td>@item.JobName</td>
+                    <td>@item.DayDate</td>
+                    <td>@item.StartTime</td>
+                    <td>@item.EndTime</td>
+                    <td>@item.TimePer</td>
+                    <td><span style="color:green" class='fa fa-edit pointer' KarkardId="@item.KarkardId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' KarkardId="@item.KarkardId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

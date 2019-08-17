@@ -1,0 +1,51 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.BaseData.JobVM>
+<style>
+    th {
+    text-align:center;}
+</style>
+<br>
+<input type="button" name="CreateJob" value="جدید" class="btn btn-info" />
+<span></span>
+<input type="button" name="ListJob" value="بروز آوری" class="btn btn-info" />
+<br><br>
+<div class="table-responsive Job">
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>نوع</th>
+                <th>فعالیت</th>
+                <th>نمایشی</th>
+                <th>محاسباتی</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td >@item.NameCategory</td>
+                    <td >@item.Name</td>
+                    @if (item.GridShow == true)
+                    {
+                    <td><span style="color:green" class="fa fa-check"></span></td>
+                    }
+                    else
+                    {
+                        <td><span style="color:red" class="fa fa-times"></span></td>
+                    }
+                    @if (item.Mohasebe == true)
+                    {
+                        <td><span style="color:green" class="fa fa-check"></span></td>
+                    }
+                    else
+                    {
+                        <td><span style="color:red" class="fa fa-times"></span></td>
+                    }
+                    <td><span style="color:green"  class='fa fa-edit pointer' JobId="@item.JobId" CategoryId="@item.CategoryId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer'  JobId="@item.JobId" CategoryId="@item.CategoryId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

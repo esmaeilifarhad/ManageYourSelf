@@ -1,0 +1,43 @@
+﻿
+
+@{
+    Layout = null;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+<!--Angular Start-->
+<script type="text/javascript">
+        var app = angular.module('MyApp', []);
+    app.controller('MyController', function ($scope, $http) {
+        $scope.ButtonClick = function () {
+            $http({
+                url: "/Home/AjaxMethod?name=" + "فرهاد",
+                method: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json"
+
+                //data: '{"name": "' + 'Farhad'  + '"}',
+                // headers: { "Content-Type": "application/json" }
+            }).then(function mySuccess(data) {
+                alert("Hello : " + data.data.Name + " \nCurrent Date :  " + data.data.DateTime);
+                }, function myError (error) {
+                    alert(error.data.Message);
+            });
+        }
+    });
+
+</script>
+
+<br>
+<br>
+<div ng-app="MyApp" ng-controller="MyController">
+    Name:<input type="text" ng-model="name" />
+    <input type="button" value="Submit" ng-click="ButtonClick()" />
+
+</div>
+
+
+
+
+<!--Angular End-->

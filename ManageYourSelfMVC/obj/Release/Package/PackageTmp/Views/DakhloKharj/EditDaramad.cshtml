@@ -1,0 +1,159 @@
+﻿@model ManageYourSelfMVC.ViewModels.DaramadVM
+<div Name="EditDaramad">
+    <table DaramadId="@Model.DaramadId">
+        <tr>
+            <td>نوع بانک</td>
+            <td>
+                <select>
+                    @foreach (var item in Model.lstMojoodyBank)
+                    {
+                        if (item.MojoodyBankId == Model.MojoodyBankId)
+                        {
+                            <option value="@item.MojoodyBankId" selected>@item.MojoodyName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MojoodyBankId">@item.MojoodyName</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>نوع</td>
+            <td>
+                @{var TypeHazineh = Model.lstTypeHazineh.SingleOrDefault(q => q.TypeHazinehId == Model.TypeHazinehId);}
+
+              
+                    @if (Model.DariaftPardakht == false)
+                    {
+                        <span>
+                            <input type="radio" name="rdbTypeHazineh" value="false" title="پرداخت" checked />پرداخت
+                        </span>
+                        <span>
+                            <input type="radio" name="rdbTypeHazineh" value="true" title="دریافت" />دریافت
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            <input type="radio" name="rdbTypeHazineh" value="false" title="پرداخت" />پرداخت
+                        </span>
+                        <span>
+                            <input type="radio" name="rdbTypeHazineh" value="true" title="دریافت" checked />دریافت
+                        </span>
+                    }
+               
+            </td>
+        </tr>
+        <tr>
+            <td>نوع هزینه</td>
+            <td>
+                <select class="SelectlstTypeHazineh">
+                    @foreach (var item in Model.lstTypeHazineh)
+                    {
+                        if (item.TypeHazinehId == Model.TypeHazinehId)
+                        {
+                            <option value="@item.TypeHazinehId" selected>@item.name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.TypeHazinehId">@item.name</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>ریال</td>
+            <td><input type="text" name="Rial" value="@Model.Rial" /></td>
+        </tr>
+        <tr>
+            <td>تاریخ پایان</td>
+            <td><input type="text" name="Date" class="PersianDatePicker" autocomplete="off" value="@Model.Date" /></td>
+        </tr>
+        <tr>
+            <td>توضیحات</td>
+            <td><input type="text" name="Description" value="@Model.Description" /></td>
+        </tr>
+    </table>
+</div>
+<script>
+    $("#MasterModal").on("click", "div[name='EditDaramad'] input[name='rdbTypeHazineh']", function () {
+        var resultRdb = $(this).val()
+        if (resultRdb == 'false') {
+            $("div[name='EditDaramad'] .SelectlstTypeHazineh")
+             .find('option')
+             .remove()
+             .end()
+
+            $.ajax(
+           {
+               type: 'get',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/DakhloKharj/ListTypeHazinehcmb?DaramadOrKLharj=" + resultRdb,
+
+               success: function (data) {
+                   for (var i = 0; i < data.length; i++) {
+                       $("div[name='EditDaramad'] .SelectlstTypeHazineh").append('<option value="' + data[i].TypeHazinehId + '">' + data[i].name + '</option>')
+                   }
+               },
+               error: function (error) {
+                   alert(error);
+               }
+           });
+
+        }
+        else {
+            $("div[name='EditDaramad'] .SelectlstTypeHazineh")
+             .find('option')
+             .remove()
+             .end()
+
+            $.ajax(
+           {
+               type: 'get',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/DakhloKharj/ListTypeHazinehcmb?DaramadOrKLharj=" + resultRdb,
+
+               success: function (data) {
+                   for (var i = 0; i < data.length; i++) {
+                       $("div[name='EditDaramad'] .SelectlstTypeHazineh").append('<option value="' + data[i].TypeHazinehId + '">' + data[i].name + '</option>')
+                   }
+               },
+               error: function (error) {
+                   alert(error);
+               }
+           });
+        }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                    , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                    , forceFarsiDigits: true
+                    , markToday: true
+                    , markHolidays: true
+                    , highlightSelectedDay: true
+                    , sync: true
+        });
+    });
+</script>
+<script>
+    function itpro(Number) {
+        Number += '';
+        Number = Number.replace(',', ''); Number = Number.replace(',', ''); Number = Number.replace(',', '');
+        Number = Number.replace(',', ''); Number = Number.replace(',', ''); Number = Number.replace(',', '');
+        x = Number.split('.');
+        y = x[0];
+        z = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(y))
+            y = y.replace(rgx, '$1' + ',' + '$2');
+        return y + z;
+    }
+</script>

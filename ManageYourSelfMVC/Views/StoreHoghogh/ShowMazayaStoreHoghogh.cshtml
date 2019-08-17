@@ -1,0 +1,36 @@
+﻿@model  ManageYourSelfMVC.ViewModels.VMStoreHoghoghPivot
+<!--نمایش حقوق-->
+<div id="ShowKarkard" class="table-responsive" style="font-family:BNazanin">
+    <table class="table table-dark table-striped" style="direction: ltr; text-align: center;">
+        <thead>
+            <tr>
+
+                @foreach (System.Data.DataColumn column in Model.ShowPivot.Columns)
+                {
+                    <th>@column.ColumnName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow item in Model.ShowPivot.Rows)
+            {
+                <tr>
+                    @for (int i = 0; i < Model.ShowPivot.Columns.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <td>@item[i].ToString()</td>
+                        }
+                        else
+                        {
+                            <td>@Utility.Rial(item[i].ToString())</td>
+                        }
+
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

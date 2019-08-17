@@ -1,0 +1,44 @@
+﻿@model ManageYourSelfMVC.ViewModels.VM_Public
+@*<div class="table-responsive">*@
+<div Name="CreateKarkard">
+    <table style="font-family:BNazanin">
+
+        <tr>
+            <td>فعالیت</td>
+            <td>
+                <select>
+                    @foreach (var item in Model.ListJob)
+                    {
+                        <option JobId="@item.JobId">@item.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>تاریخ</td>
+            <td><input type="text" name="DayDate" class="PersianDatePickerEditTaskE" autocomplete="off" value="@Model.Currentdate" /></td>
+        </tr>
+        <tr>
+            <td>زمان</td>
+            <td><input type="text" name="SpendTimeMinute" /></td>
+        </tr>
+    </table>
+</div>
+@*</div>*@
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePickerEditTaskE', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                    , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                    , forceFarsiDigits: true
+                    , markToday: true
+                    , markHolidays: true
+                    , highlightSelectedDay: true
+                    , sync: true
+        });
+
+    });
+
+</script>
+
+

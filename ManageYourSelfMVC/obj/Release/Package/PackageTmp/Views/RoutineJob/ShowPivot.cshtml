@@ -1,0 +1,45 @@
+﻿@model  ManageYourSelfMVC.ViewModels.VMPivot
+<!--نمایش -->
+
+<div  class="table-responsive" style="font-family:BNazanin;font-size:10px;">
+    <table class="table" style="direction: ltr; text-align: center;">
+        <thead>
+            <tr>
+
+                @foreach (System.Data.DataColumn column in Model.RoutineJob.Columns)
+                {
+                    <th>@column.ColumnName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow item in Model.RoutineJob.Rows)
+            {
+                <tr>
+                    @for (int i = 0; i < Model.RoutineJob.Columns.Count; i++)
+                    {
+
+                        if (i >= 2)
+                        {
+                            if (item[i].ToString() == "1")
+                            {
+                                <td><span style="color:green" class="fa fa-check"></span></td>
+                            }
+                            if (item[i].ToString() == "0")
+                            {
+                                <td><span style="color:red" class="fa fa-times"></span></td>
+                            }
+                        }
+                        else
+                        {
+                            <td>@item[i].ToString()</td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

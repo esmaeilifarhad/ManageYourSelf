@@ -1,0 +1,101 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture>
+
+<style>
+.ListTaskLevelHight1 p {
+  border: none;
+  color: white;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.ListTaskLevelHight1 p:hover {
+    opacity: 1;
+    color:greenyellow
+
+}
+</style>
+
+@{
+
+    string varRuz = string.Empty;
+    int varHaf = 0;
+    int varMah = 0;
+    int varSal = 0;
+    int varCat = 0;
+    List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture> lstRuz = new List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture>();
+    List<int> lstHaf = new List<int>();
+    List<int> lstMah = new List<int>();
+    List<int> lstSal = new List<int>();
+    List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture> lstCategory = new List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture>();
+    foreach (var item in Model)
+    {
+        if (item.DateEnd != varRuz)
+        {
+            ManageYourSelfMVC.ViewModels.Task.ListTaskFuture TF = new ManageYourSelfMVC.ViewModels.Task.ListTaskFuture();
+            TF.DateEnd = item.DateEnd;
+            TF.ChandShanbeh = item.ChandShanbeh;
+            TF.HafteChandom = item.HafteChandom;
+            lstRuz.Add(TF);
+        }
+        if (item.HafteChandom != varHaf)
+        {
+            lstHaf.Add(item.HafteChandom);
+        }
+        if (item.MaheChandom != varMah)
+        {
+            lstMah.Add(item.MaheChandom);
+        }
+        if (item.SaleChandom != varSal)
+        {
+            lstSal.Add(item.SaleChandom);
+        }
+        if (!lstCategory.Exists(q => q.CatId == item.CatId))
+        {
+            ManageYourSelfMVC.ViewModels.Task.ListTaskFuture TF = new ManageYourSelfMVC.ViewModels.Task.ListTaskFuture();
+            TF.CatId = item.CatId;
+            TF.Title = item.Title;
+            lstCategory.Add(TF);
+        }
+        varSal = item.SaleChandom;
+        varMah = item.MaheChandom;
+        varHaf = item.HafteChandom;
+        varRuz = item.DateEnd;
+        varCat = item.CatId;
+    }
+}
+<div class="row ListTaskLevelHight1">
+
+    @foreach (var item in lstRuz)
+    {
+        <div class="col-sm-12" style="font-size: 9px!important;font-family:'BNazanin'">
+        
+            <p style="color:#eac451;font-size:11px">
+                <span>@item.ChandShanbeh </span>
+                <span>@Utility.ConvertDateToSlash(item.DateEnd)</span>
+                <span>هفته</span>
+                <span>@item.HafteChandom</span>
+            </p>
+           
+            @foreach (var item2 in Model)
+                {
+                    if (item.DateEnd == item2.DateEnd)
+                    {
+                    <p CatId="@item2.CatId" style="line-height:12px;margin:0px">
+                       
+                        <span style="color:yellow;cursor:pointer" class="EditCat" CatId="@item2.CatId">@item2.Title</span> -
+                        <span style="cursor:pointer" onclick="EditTask(@item2.TaskId)">@item2.Name</span>
+                    </p>
+                       
+
+                }
+            }
+        </div>
+    }
+
+</div>
+<br />
+
+
+
+
+

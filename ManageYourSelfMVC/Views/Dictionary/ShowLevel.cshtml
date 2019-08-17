@@ -1,0 +1,22 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+<br>
+<div class="table-responsive">
+    <p>سطح بندی</p>
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>سطح</th>
+                <th>تعداد</th>
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NameLevel</td>
+                    <td>@item.CountLevel</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

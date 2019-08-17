@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Sport";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+
+<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
+@*<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>*@
+<br />
+<div class="MyDictionary">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" style="font-family:'Morvarid';">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#MenuSportCrud">ثبت ورزش</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MenuSportArchieve">آرشیو</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" style="font-family:BNazanin">
+        <!--ورزش-->
+        <div id="MenuSportCrud" class="tab-pane">
+            <br />
+            <div class="row">
+                <div class="col-sm-12 ListSportChk"></div>
+                <div class="col-sm-12 ListSportCatId"></div>
+            </div>
+        </div>
+        <!--MenuDicNRecords-->
+        <div id="MenuSportArchieve" class="tab-pane">
+            <br />
+            <div class="row" style="font-family:BNazanin">
+                <div class="col-sm-3" id="ShowLevel"></div>
+            </div>
+           
+        </div>
+    </div>
+
+    <!--Modal Start-->
+    @*<div>
+        <!--  Modal Master -->
+        <div class="modal fade" id="MasterModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="direction:ltr">
+                        <br>
+                        <h4 class="modal-title HeaderModal"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body BodyModal">
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                        <span> </span>
+                        <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ثبت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+   
+</div>
+
+
+<!--************************************Logic Scripts*********************************************-->
+
+@*<script src="~/Scripts/Logic/Sport.js"></script>*@
+
+<!--************************************Dictionary*********************************************-->
+<!--Persian DatePicker-->
+<script>
+    $(document).ready(function () {
+        debugger;
+        intervalSport();
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "timeir_next.png"
+               , previousButtonIcon: "timeir_prev.png"
+               , forceFarsiDigits: true
+               , markToday: true
+               , markHolidays: true
+               , highlightSelectedDay: true
+               , sync: true
+        });
+    });
+</script>

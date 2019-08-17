@@ -1,0 +1,82 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+
+<!---------------------------------------------------------------------------------------->
+<div class="table-responsive">
+
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px;">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>eng</th>
+                <th>per</th>
+                <th>level</th>
+                <th>DateRefresh</th>
+                <th>Success</th>
+                <th>UnSuccess</th>
+                <th>eye</th>
+                <th>NewExa</th>
+                <th>Up</th>
+                <th>Down</th>
+                <th>Edit</th>
+                <th>RemoveExa</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var item in Model)
+            {
+                <tr WordId="@item.id" style="background-color:black;color:white;font-size: 14px;white-space:nowrap">
+                    <td><span style="display:none;" class="per" onclick="MakeSound2(this)">@item.eng</span></td>
+                    <td>@item.per</td>
+                    <td class="level">@item.level</td>
+                    <td>@item.date_refresh</td>
+                    <td>@item.SuccessCount</td>
+                    <td>@item.UnSuccessCount</td>
+                    @if (item.HasExample > 0)
+                    {
+                        <td><span class="fa fa-eye ShowExample pointer" style='color:green' data_id="@item.id"></span></td>
+                    }
+                    else
+                    {
+                        <td><span class="fa fa-eye-slash ShowExample pointer" style='color:yellow' data_id="@item.id"></span></td>
+                    }
+                    <td><span style='color:dodgerblue' class='fa fa-list-alt btnExa pointer' data_id="@item.id"></span></td>
+                    <td><span style='color:red' class='fa fa-sort-up pointer LevelEngUp' data_id="@item.id"></span></td>
+                    <td><span style='color:green' class='fa fa-sort-down pointer LevelEngDown' data_id="@item.id"></span></td>
+                    <td><span style='color:purple' class='fa fa-edit pointer EditWord' data_id="@item.id"></span></td>
+                    <td><span style='color:deeppink' class='fa fa-trash pointer' data_id="@item.id"></span></td>
+                    <td><span style='color:mediumvioletred' class='fa fa-remove pointer' data_id="@item.id"></span></td>
+                </tr>
+                foreach (var itemExample in item.lstExample)
+                {
+                    <tr style="background-color:#d6d5c7;color:black;text-align:left">
+                        <td class="Examplecls" colspan="13" style="display:none;direction:ltr" data_id="@item.id" ExampleId="@itemExample.id">
+                            <span>@itemExample.example</span>
+                            <span style='color:yellow' class='fa fa-edit pointer ShowEditExample' ExampleId="@itemExample.id"></span>
+                            <br />
+                            <span style='color:purple' class='fa fa-soundcloud pointer ' onclick="MakeSound(this)" ExampleId="@itemExample.id"></span>
+                            <br />
+                            <span style='color:red' class='fa fa-deafness pointer RemoveExampleEng' ExampleId="@itemExample.id"></span>
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    /*$(document).ready(function () {
+        var levelval = $('#DicBaMesalPro table tr:nth-child(2) .level').text();
+        //console.log(levelval);
+        $("#DicBaMesalPro input").each(function () {
+            // console.log($(this).val())
+            if (levelval == $(this).val()) {
+                //console.log("hi")
+                // $(this).attr("checked");
+                this.setAttribute("checked", "checked");
+                this.checked = true;
+            }
+        });
+    });*/
+</script>

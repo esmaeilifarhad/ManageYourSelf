@@ -1,0 +1,19 @@
+﻿@model ManageYourSelfMVC.Models.DomainModels.example_tbl
+<br>
+<div class="table-responsive">
+    <table class="table" nametbl="UpdateExample" ExampleId="@Model.id" style="direction:ltr; text-align: center;font-size:11px">
+        <thead>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td >
+                    <textarea name="Example" rows="20" cols="70"   style="text-align:left">
+                        @Model.example
+                    </textarea>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

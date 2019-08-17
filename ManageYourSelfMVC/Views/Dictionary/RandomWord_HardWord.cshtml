@@ -1,0 +1,53 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+
+<!---------------------------------------------------------------------------------------->
+<div>
+    @{
+        int RandomRadif = 1;
+        Random rnd = new Random();
+        RandomRadif=rnd.Next(1, 11);
+        }
+    <span style="font-size:20px;" WordId="@Model.Where(q=>q.Radif==RandomRadif).Select(q=>q.id).First()">@Model.Where(q=>q.Radif==RandomRadif).Select(q=>q.per).First()</span>
+    <ul>
+@foreach (var item in Model)
+            {
+        <li style="padding-bottom:5px;list-style: none;"><span><input type="radio" name="rbtnHW" value="@item.id"></span>&nbsp;<span>@item.eng</span></li>
+            }
+    </ul>
+    <input type="button" name="btnSave" value="ذخیره" class="btn btn-danger" />
+</div>
+<!---------------------------------------------------------------------------------------->
+<script>
+    $(document).ready(function () {
+        $(".DicRandomWord_HardWord input[name='btnSave']").click(function () { 
+        var wordId = $(".DicRandomWord_HardWord span").attr("wordid");
+        var valRdb = $("input[name='rbtnHW']:checked").val();
+        if (wordId == valRdb) {
+            alert("درست");
+            LevelChangeDown(wordId);
+        }
+        else {
+           // alert("غلط");
+            LevelChangeUp(wordId);
+           
+        }
+        RandomWord_HardWord();
+        //ListDictionary();
+        });
+        //----------------------
+        $(".DicRandomWord_HardWord input[name='rbtnHW']").click(function () {
+            var wordId = $(".DicRandomWord_HardWord span").attr("wordid");
+            var valRdb = $("input[name='rbtnHW']:checked").val();
+
+            $(".DicRandomWord_HardWord div ul li").each(function () {
+                var wordid = $(this).find("input").val();
+                if (wordid == wordId) {
+                    $(this).css('color', 'green')
+                }
+                else {
+                    $(this).css('color', 'red')
+                }
+            });
+        });
+    });
+</script>

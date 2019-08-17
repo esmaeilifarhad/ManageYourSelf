@@ -1,0 +1,22 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.example_tbl>
+<br>
+<div class="table-responsive ">
+    <table class="table" nametbl="RemoveExample" Word_id="@Model.FirstOrDefault().id_dic_tbl" style="direction:ltr; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>مثال</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr Example_id="@item.id">
+                    <td style="text-align:left">@item.example</td>
+                    <td><span style='color:orangered;' class='fa fa-eraser pointer' Example_id="@item.id"></span></td>
+                </tr>
+            }
+         
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,43 @@
+﻿@model ManageYourSelfMVC.ViewModels.VM_Public
+<div Name="ChangeTodayTask">
+    <table  CatId="@Model.Cat.CatId">
+        <tr>
+            <td>عنوان</td>
+            <td style="color:red;font-weight:bold">@Model.Cat.Title</td>
+        </tr>
+        <tr>
+            <td>تاریخ</td>
+            <td><input type="text" name="DateEnd" class="PersianDatePickerEditTaskE" value="@Model.CurrentDate" autocomplete="off" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            <span>در صورت تیک زدن همه وظایف فعال به تاریخ انتخاب شده انتقال داده میشوند</span>
+            <span><input type="checkbox" name="chkIsTransfer"/></span>
+            </td>
+        </tr>
+    </table>
+</div>
+@*<link href="~/Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/style/kamadatepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/src/kamadatepicker.js"></script>*@
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePickerEditTaskS', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+               , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+               , forceFarsiDigits: true
+               , markToday: true
+               , markHolidays: true
+               , highlightSelectedDay: true
+               , sync: true
+        });
+        kamaDatepicker('PersianDatePickerEditTaskE', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+               , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+               , forceFarsiDigits: true
+               , markToday: true
+               , markHolidays: true
+               , highlightSelectedDay: true
+               , sync: true
+        });
+    });
+</script>

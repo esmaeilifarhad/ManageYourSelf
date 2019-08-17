@@ -1,0 +1,42 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.RoleVM>
+<div class="table-responsive">
+    <p>تخصیص نقش به کاربر</p>
+    <table UserId="@Model.Select(q=>q.UserId).FirstOrDefault()" nametbl="UserRole" class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>نقش</th>
+                <th>فعال</th>
+                <th>تخصیص</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.RoleName</td>
+                    @if (item.IsActive == true)
+                    {
+                        <td><span style="color:green" class="fa fa-check"></span></td>
+                    }
+                    else
+                    {
+                        <td><span style="color:red" class="fa fa-times"></span></td>
+                    }
+                    @if (item.HasRole == true)
+                    {
+                    <td><input type="checkbox" value="@item.RoleId" checked/></td>
+                    }
+                    else
+                    {
+                    <td><input  type="checkbox" value="@item.RoleId"  /></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

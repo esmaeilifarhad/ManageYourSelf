@@ -1,0 +1,33 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.Category>
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+    <br>
+<input type="button" name="CreateCategory" value="جدید" class="btn btn-info" />
+<span></span>
+<input type="button" name="ListCategory" value="بروز آوری" class="btn btn-info" />
+<br><br>
+<div class="table-responsive">
+    <table class="table Category" style="direction:rtl; text-align: center;font-size:11px"> 
+        <thead>
+            <tr>
+                <th>نوع</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td CategoryId="@item.CategoryId">@item.CategoryName</td>
+                    <td><span style="color:green" class='fa fa-edit pointer' CategoryId="@item.CategoryId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' CategoryId="@item.CategoryId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

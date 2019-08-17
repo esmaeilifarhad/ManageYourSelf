@@ -1,0 +1,9 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.example_tbl>
+    <table class="table table-dark table-hover table-striped">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.example</td>
+        </tr>
+    }
+</table>

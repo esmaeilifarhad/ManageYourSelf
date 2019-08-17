@@ -1,0 +1,150 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture>
+<style>
+    span {
+        margin: 2px;
+    }
+
+    .calendarTask, .ChangeTodayTask, .Ta {
+        cursor: pointer;
+    }
+</style>
+<input type="button" name="new" value="جدید" class="btn btn-danger CreateNewTask" />  |
+<input type="button" name="new" value="حذف زمان بندی ها" class="btn btn-light DeleteTiming" />
+<br />
+<br />
+@{
+
+    string varRuz = string.Empty;
+    int varHaf = 0;
+    int varMah = 0;
+    int varSal = 0;
+    int varCat = 0;
+    List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture> lstRuz = new List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture>();
+    List<int> lstHaf = new List<int>();
+    List<int> lstMah = new List<int>();
+    List<int> lstSal = new List<int>();
+    List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture> lstCategory = new List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture>();
+    foreach (var item in Model)
+    {
+        if (item.DateEnd != varRuz)
+        {
+            ManageYourSelfMVC.ViewModels.Task.ListTaskFuture TF = new ManageYourSelfMVC.ViewModels.Task.ListTaskFuture();
+            TF.DateEnd = item.DateEnd;
+            TF.ChandShanbeh = item.ChandShanbeh;
+            TF.HafteChandom = item.HafteChandom;
+            lstRuz.Add(TF);
+        }
+        if (item.HafteChandom != varHaf)
+        {
+            lstHaf.Add(item.HafteChandom);
+        }
+        if (item.MaheChandom != varMah)
+        {
+            lstMah.Add(item.MaheChandom);
+        }
+        if (item.SaleChandom != varSal)
+        {
+            lstSal.Add(item.SaleChandom);
+        }
+        if (!lstCategory.Exists(q=>q.CatId==item.CatId))
+        {
+            ManageYourSelfMVC.ViewModels.Task.ListTaskFuture TF = new ManageYourSelfMVC.ViewModels.Task.ListTaskFuture();
+            TF.CatId = item.CatId;
+            TF.Title = item.Title;
+            lstCategory.Add(TF);
+        }
+        varSal = item.SaleChandom;
+        varMah = item.MaheChandom;
+        varHaf = item.HafteChandom;
+        varRuz = item.DateEnd;
+        varCat = item.CatId;
+    }
+    }
+<div class="row">
+    @foreach (var item in lstCategory)
+    {
+<span><input type="checkbox" value="@item.CatId" /></span><span>@item.Title</span>
+    }
+</div>
+    <div class="row">
+
+        @foreach (var item in lstRuz)
+        {
+            <div class="col-sm-3" style="border:1px solid black;">
+                <br />
+                <p style="color:darkred;">
+                    <span>@item.ChandShanbeh </span>
+                    <span>@Utility.ConvertDateToSlash(item.DateEnd)</span>
+                    <span>هفته</span>
+                    <span>@item.HafteChandom</span>
+                </p>
+                <br />
+                @foreach (var item2 in Model)
+                {
+                    if (item.DateEnd == item2.DateEnd)
+                    {
+                        <p CatId="@item2.CatId">
+                            <span>@item2.Olaviat</span> -
+                            <span style="color:darkmagenta" class="EditCat" CatId="@item2.CatId">@item2.Title</span> -
+                            <span>@item2.Name</span>
+                            <span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item2.CatId"></span>
+                            <span class="fa fa-edit Ta" data_id=@item2.TaskId></span>
+                            <span class='fa fa-calendar calendarTask' Data_id="@item2.TaskId"></span>
+                            <span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@item2.TaskId"></span>
+                            <span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@item2.TaskId"></span>
+                        </p>
+                        <hr />
+
+                    }
+                }
+            </div>
+        }
+
+    </div>
+
+
+    <!--Second View -->
+    @*<div class="row">
+            <div class="col-sm-12 ">
+                @foreach (var item in Model)
+                {
+                    if (varSal != item.SaleChandom)
+                    {
+                        <p style="color:darkred;"><span>سال </span><span>@item.SaleChandom</span></p><br />
+                        <hr />
+                    }
+                    if (varMah != item.MaheChandom)
+                    {
+                        <p style="color:green;"><span>ماه </span><span>@item.MaheChandom</span></p><br />
+                        <hr />
+                    }
+                    if (varHaf != item.HafteChandom)
+                    {
+                        <p style="color:orchid;"><span>هفته </span><span>@item.HafteChandom</span></p><br />
+                        <hr />
+                    }
+
+
+                    <p CatId="@item.CatId">
+                        <span>@item.Olaviat</span> -
+                        <span class="EditCat" CatId="@item.CatId">@item.Title</span> -
+                        <span>@item.Name</span> -
+                        <span>@item.HafteChandom</span> -
+                        <span>@Utility.ConvertDateToSlash(item.DateEnd)</span> -
+                        <span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item.CatId"></span>
+                        <span class="fa fa-edit Ta" data_id=@item.TaskId></span>
+                    </p>
+                    <hr />
+
+
+
+
+
+                    varSal = item.SaleChandom;
+                    varMah = item.MaheChandom;
+                    varHaf = item.HafteChandom;
+                }
+            </div>
+        </div>*@
+
+

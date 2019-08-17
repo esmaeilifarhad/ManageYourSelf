@@ -1,0 +1,25 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.KharjType>
+<div class="table-responsive">
+    <table class="table table-dark table-hover" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>عنوان</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr KharjId="@item.KharjTypeId">
+                    <td>@item.Name</td>
+                    <td><span style="color:green" class='fa fa-edit pointer'></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer'></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

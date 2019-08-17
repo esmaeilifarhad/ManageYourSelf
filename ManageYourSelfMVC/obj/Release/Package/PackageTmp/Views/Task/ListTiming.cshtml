@@ -1,0 +1,43 @@
+﻿
+@model  ManageYourSelfMVC.ViewModels.VMPivot
+<!--نمایش -->
+<style>
+    span {
+        margin: 2px;
+    }
+
+    .calendarTask, .ChangeTodayTask, .Ta {
+        cursor: pointer;
+    }
+</style>
+<br /><br />
+<input type="button" name="new" value="جدید" class="btn btn-danger CreateNewTask" />  |
+<input type="button" name="new" value="حذف زمان بندی ها" class="btn btn-light DeleteTiming" /> 
+<br /><br />
+<div class="table-responsive" style="font-family:BNazanin;font-size:10px;">
+    <table class="table" style="direction: rtl; text-align: right;">
+        <thead>
+            <tr>
+
+                @foreach (System.Data.DataColumn column in Model.Timing.Columns)
+                {
+                    <th>@column.ColumnName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow item in Model.Timing.Rows)
+            {
+                <tr>
+                    @for (int i = 0; i < Model.Timing.Columns.Count; i++)
+                    {
+                        <td>@Html.Raw(item[i].ToString())</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

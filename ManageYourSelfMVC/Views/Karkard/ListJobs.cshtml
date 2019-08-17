@@ -1,0 +1,8 @@
+﻿@model ManageYourSelfMVC.ViewModels.VM_Public
+<select id="SelectJob">
+    @foreach (var item in Model.ListJob)
+    {
+        <option  JobId="@item.JobId">@item.Name</option>
+    }
+</select>
+

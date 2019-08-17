@@ -1,0 +1,42 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.TypeHazineh>
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+<br>
+<input type="button" name="CreateTypeHazineh" value="جدید" class="btn btn-info" />
+<br><br>
+<div class="table-responsive">
+    <table class="table TypeHazineh" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>نوع هزینه</th>
+                <th>نوع</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.name</td>
+                    @if (item.DaramadOrKharj == false)
+                    {
+                        <td style="color:red">پرداخت</td>
+                    }
+                    @if (item.DaramadOrKharj == true)
+                    {
+                        <td style="color:green">دریافت</td>
+                    }
+                    <td><span style="color:green" class='fa fa-edit pointer' TypeHazinehId="@item.TypeHazinehId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' TypeHazinehId="@item.TypeHazinehId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

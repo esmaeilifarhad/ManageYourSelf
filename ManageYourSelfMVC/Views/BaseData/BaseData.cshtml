@@ -1,0 +1,383 @@
+﻿@{
+    ViewBag.Title = "BaseData";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+
+<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
+<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>
+
+<br>
+<br>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">فعالیت ها</a></li>
+        <li><a data-toggle="tab" href="#menu1">نوع</a></li>
+        <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+        <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="row">
+                <br>
+                <a href="/Client/listnav"><span class="fa fa-arrow-left"></span></a>
+                <div class="col-sm-4 Karkard"></div>
+                <div class="col-sm-8 hj"></div>
+            </div>
+         
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div class="row">
+                <div class="col-sm-4 Category"></div>
+                <div class="col-sm-8 Job"></div>
+            </div>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <h3>Menu 3</h3>
+            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        </div>
+    </div>
+
+
+
+
+<!--  Modal Master -->
+<div class="modal fade" id="MasterModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header" style="direction:ltr">
+                <br>
+                <h4 class="modal-title HeaderModal"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body BodyModal">
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                <span> </span>
+                <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ثبت</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        ListCategory();
+        ListJob();
+        ListKarkard();
+        //Create Get
+        $("div .Category").on("click", "input[name='CreateCategory']", function () {
+            CreateCategoryGet();
+        });
+        //Create Post  Update
+        $("#MasterModal .btnSave").on("click", function () {
+            var NameOperator = $("#MasterModal .BodyModal div").attr("Name");
+            if (NameOperator == "Create")
+                CreateCategoryPost();
+            if (NameOperator == "Update") {
+                UpdateCategory();
+            }
+            if (NameOperator == "CreateJob") {
+                CreateJobPost();
+            }
+            if (NameOperator == "EditJob") {
+
+                var JobId = $("#MasterModal table").attr("jobid");
+                UpdateJob(JobId);
+            }
+        });
+        //Delete
+        $("div .Category").on("click", ".fa-remove", function () {
+            var res = confirm("آیا حذف انجام شود؟");
+            if (res == true) {
+                var CategoryId = $(this).attr("CategoryId");
+                DeleteCategory(CategoryId);
+            }
+        });
+        //Edit
+        $("div .Category").on("click", ".fa-edit", function () {
+            var CategoryId = $(this).attr("CategoryId");
+            EditCategory(CategoryId);
+        });
+        function ListCategory() {
+            var urll = "/Category/ListCategory";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+
+                    $(".Category").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+        function CreateCategoryPost() {
+            var CategoryName = $("#MasterModal textarea").val();
+       
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/Category/CreateCategory",
+                   data: JSON.stringify({ CategoryName: CategoryName }),
+                   success: function (result) {
+                       if (result == true) {
+                           //alert("ثبت شد");
+                           ListCategory();
+                           ListJob();
+                       }
+                       else {
+                           alert("خطا در ثبت");
+                       }
+                   }
+               });
+        }
+        function CreateCategoryGet() {
+            $.ajax(
+               {
+                   type: 'get',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "html",
+                   url: "/Category/CreateCategory",
+                   success: function (result) {
+                       $(".BodyModal").html(result);
+                       $("#MasterModal").modal();
+                   },
+                   error: function (error) {
+                       alert(error);
+                   }
+
+               }
+               );
+        }
+        function EditCategory(CategoryId) {
+            $.ajax(
+               {
+                   type: 'get',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "html",
+                   url: "/Category/EditCategory?CategoryId=" + CategoryId,
+
+                   success: function (result) {
+                       $(".BodyModal").html(result);
+                       $("#MasterModal").modal();
+
+                   },
+                   error: function (error) {
+                       alert(error);
+                   }
+               });
+        }
+        function UpdateCategory() {
+            var CategoryName = $("#MasterModal textarea").val();
+            var CategoryId = $("#MasterModal div textarea").attr("CategoryId");
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/Category/UpdateCategory",
+                   data: JSON.stringify({ CategoryName: CategoryName, CategoryId: CategoryId }),
+                   success: function (result) {
+                       if (result == true) {
+                           ListCategory();
+                           ListJob();
+                       }
+                       else {
+
+                       }
+                   }
+               });
+        }
+        function DeleteCategory(CategoryId) {
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/Category/DeleteCategory",
+
+                   data: JSON.stringify({ CategoryId: CategoryId }),
+                   success: function (result) {
+                       if (result == true) {
+                           //  alert("حذف انجام شد");
+                           ListCategory();
+                           ListJob();
+                       }
+                       else {
+                           alert("خطا در ثبت");
+                       }
+                   }
+               });
+        }
+        //---------------****************Job****************--------------
+        //Create Get
+        $("div .Job").on("click", "input[name='CreateJob']", function () {
+            CreateJobGet();
+        });
+        //Delete
+        $("div .Job").on("click", ".fa-remove", function () {
+            var res = confirm("آیا حذف انجام شود؟");
+            if (res == true) {
+                var JobId = $(this).attr("JobId");
+                DeleteJob(JobId);
+            }
+        });
+        //Edit
+        $("div .Job").on("click", ".fa-edit", function () {
+            var JobId = $(this).attr("JobId");
+            EditJob(JobId);
+        });
+        function ListJob() {
+            var urll = "/Job/ListJob";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+
+                    $(".Job").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+        function CreateJobGet() {
+            $.ajax(
+               {
+                   type: 'get',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "html",
+                   url: "/Job/CreateJob",
+                   success: function (result) {
+                       $(".BodyModal").html(result);
+                       $("#MasterModal").modal();
+                   },
+                   error: function (error) {
+                       alert(error);
+                   }
+
+               }
+               );
+        }
+        function CreateJobPost() {
+          
+            var JobName = $("#MasterModal input[name='JobName'").val();
+            var CategoryId = $("#MasterModal option:selected").val();
+            var Mohasebe = $("#MasterModal input[name=Moh]:checked").val();
+            var Show = $("#MasterModal input[name=Show]:checked").val();
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/Job/CreateJob",
+                   data: JSON.stringify({ Name:JobName,Mohasebe:Mohasebe,GridShow:Show,CategoryId:CategoryId }),
+                   success: function (result) {
+                       if (result == true) {
+       
+                           ListCategory();
+                           ListJob();
+                       }
+                       else {
+                           alert("خطا در ثبت");
+                       }
+                   }
+               });
+        }
+        function DeleteJob(JobId) {
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/Job/DeleteJob",
+
+                   data: JSON.stringify({ JobId: JobId }),
+                   success: function (result) {
+                       if (result == true) {
+                           //  alert("حذف انجام شد");
+                           ListCategory();
+                           ListJob();
+                       }
+                       else {
+                           alert("خطا در ثبت");
+                       }
+                   }
+               });
+        }
+        function EditJob(JobId) {
+            $.ajax(
+               {
+                   type: 'get',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "html",
+                   url: "/Job/EditJob?JobId=" + JobId,
+                   success: function (result) {
+                       $(".BodyModal").html(result);
+                       $("#MasterModal").modal();
+
+                   },
+                   error: function (error) {
+                       alert(error);
+                   }
+               });
+        }
+        function UpdateJob(JobId) {
+      
+            var JobName = $("#MasterModal input[name='JobName'").val();
+            var CategoryId = $("#MasterModal option:selected").val();
+            var Mohasebe = $("#MasterModal input[name=Moh]:checked").val();
+            var Show = $("#MasterModal input[name=Show]:checked").val();
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/Job/UpdateJob",
+                   data: JSON.stringify({ Name: JobName, Mohasebe: Mohasebe, GridShow: Show, CategoryId: CategoryId, JobId: JobId }),
+                   success: function (result) {
+                       if (result == true) {
+                           ListCategory();
+                           ListJob();
+                       }
+                       else {
+                           alert("خطا در ثبت");
+                       }
+                   }
+               });
+        }
+        //-------------*************Karkard**********-----------------------
+        function ListKarkard() {
+            var urll = "/Karkard/List";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+
+                    $(".Karkard").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+    });
+</script>

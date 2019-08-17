@@ -1,0 +1,29 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.PlayerScoreVM>
+
+<div class="table-responsive">
+    <p>امتیاز بازیکنان</p>
+    <br><br>
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>نام</th>
+                <th>امتیاز</th>
+                <th>میانگین امتیاز</th>
+                <th>تعداد رای</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr PlayersId="@item.PlayerId">
+                    <td>@item.PlayerName</td>
+                    <td>@item.SumScore</td>
+                    <td>@item.AVGScore</td>
+                    <td>@item.CountVote</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

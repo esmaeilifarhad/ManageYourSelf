@@ -1,0 +1,42 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.VMPublic>
+<style>
+   .tblRoutineHob1 td {
+        border: none;
+        color: white;
+        opacity: 0.9;
+        transition: 0.6s;
+    }
+
+      .tblRoutineHob1  td:hover {
+            opacity: 1;
+            color:red;
+        }
+</style>
+<table class="tblRoutineHob1">
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td colspan="2">
+                    @if (item.Check == true)
+                    {
+                        <span><input type="checkbox" onclick="SaveCheckedRoutineJobHa(@item.RoutineJobId,this)" readonly name="@item.Job" value="@item.RoutineJobId" title="@item.Job" checked /></span>
+                        <span>@item.Job</span>
+                    }
+                    else
+                    {
+                        <span><input type="checkbox" onclick="SaveCheckedRoutineJobHa(@item.RoutineJobId,this)" readonly name="@item.Job" value="@item.RoutineJobId" title="@item.Job" /></span>
+                        <span>@item.Job</span>
+                    }
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+
+
+
+
+
+

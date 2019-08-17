@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "UserRegister";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+
+
+
+<p id="ShowMessage">@ViewBag.Farhad</p>
+@*<div class="container">*@
+    <div class="row">
+        <div class="col4"></div>
+        <div class="col4">
+            <p style="color:@TempData["Color"]">@TempData["Message"]</p>
+            <form action="~/admin/UserCreate" method="post">
+                <fieldset>ثبت نام کاربر</fieldset>   
+                <table class="table table-bordered" >
+                    <tr>
+                        <td>UserName</td>
+                        <td><input type="text" name="InpUser" id="InpUser" value=" " placeholder="UserName" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="InpPass" id="InpPass"  value="" placeholder="Password" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="button" name="name" id="BtnSave" value="ثبت نام" class="btn btn-danger" />ثبت نام</td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col4"></div>
+    </div>
+@*</div>*@
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>*@ 
+<script>
+
+    $(document).ready(function () {
+        $("#BtnSave").click(function () {
+            $.ajax(
+            {
+                type: "POST", //HTTP POST Method
+                url: "UserRegister", // Controller/View
+                data: { //Passing data
+                    UserName: $("#InpUser").val(), //Reading text box values using Jquery
+                    Password: $("#InpPass").val()
+                },
+                success: function (result) {
+                    if (result == true)
+                    {
+                        $("#ShowMessage").text('ثبت شد');
+                    }
+               
+                //window.location.href = "/Home/index";
+                //$("#MyModal").modal("hide");
+            }
+
+        
+            });
+
+        });
+    });
+    </script>
+

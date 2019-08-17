@@ -1,0 +1,503 @@
+﻿@{
+    ViewBag.Title = "Dictionary";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+<style>
+    #ListWordExampleFalse span {
+        padding: 5px;
+        margin: 3px;
+    }
+
+    #ListWordExampleFalse div {
+        padding: 5px;
+    }
+</style>
+@*<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />*@
+@*<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>*@
+<br />
+<div class="MyDictionary" ng-app="MyApp" style="font-size: 12px;">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" style="font-family:'Morvarid';">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#home">دیگشنری</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MenuDicNRecords">ده تا</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MenuDicBaMesal">دیگشنری با مثال</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MenuDicBaMesalPro">دیگشنری با مثال پیشرفته</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MenuDicPersianToEnglish">دیگشنری فارسی به انگلیسی</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MenuDicBaMesalProUnSuccess">اشتباه جواب داده شده</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MenuWordExampleFalse">دیگشنری با مثال غلط</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#MenuDicRandomWord">تست لغات</a>
+        </li>
+        <li class="nav-item">
+            <a href="/Client/ListNav">کاربردی</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" style="font-family:BNazanin">
+        <!--دیگشنری-->
+        <div id="home" class="tab-pane active">
+            <br>
+            <input type="button" name="CreateWord" value="جدید" class="btn btn-danger" />
+            <span></span>
+            <input type="button" name="ListDictionary" value="بروز آوری" class="btn btn-danger" />
+            <br><br>
+            <input class="form-control" id="SeachInTblDicList" type="text" placeholder="Search..">
+            <br />
+            <div id="DivCountLevel"></div>
+            <div id="DivDictionary"></div>
+        </div>
+        <!--MenuDicNRecords-->
+        <div id="MenuDicNRecords" class="tab-pane">
+            <br />
+            <div class="row" style="font-family:BNazanin">
+                <div class="col-sm-3" id="ShowLevel"></div>
+                <div class="col-sm-5" id="BadGheleghtarinWord"></div>
+                <div class="col-sm-4" id="LessMoroor"></div>
+            </div>
+            <div class="row" style="font-family:BNazanin">
+                <div class="col-sm-12" id="Top10LastMoroor"></div>
+            </div>
+            <div class="row" style="font-family:BNazanin">
+                <div class="col-sm-12" id="Top10MaxGroupBy"></div>
+            </div>
+        </div>
+        <!-- دیگشنری با مثال-->
+        <div id="MenuDicBaMesal" class="tab-pane">
+            <br />
+            <div id="DicBaMesal"></div>
+        </div>
+        <!--پیشرفته دیگشنری با مثال-->
+        <div id="MenuDicBaMesalPro" class="tab-pane">
+            <br>
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" name="CreateWord" value="جدید" class="btn btn-danger" />
+                    <span></span><span></span>
+                    <input type="button" name="SerchWordList" value="جستجو" class="btn btn-info" />
+                    <span></span><span></span>
+                    <input type="number" max="10" min="0" value="10" name="SpeedSpeach" placeholder="10" class="btn btn-success" />
+                    <span></span><span></span>
+                    <input type="number" max="10" min="0" value="10" name="SoundSpeach" placeholder="10" class="btn btn-primary" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <br>
+                    <input class="form-control" id="SeachInDB" type="text" placeholder="Search in Database..">
+                    <br>
+                </div>
+                <div class="col-sm-3">
+                    <br>
+                    <input class="form-control" id="SeachInExample" type="text" placeholder="Search in Examples..">
+                    <br>
+                </div>
+                <div class="col-sm-3">
+                    <br>
+                    <input class="form-control" id="myInputDic" type="text" placeholder="Search..">
+                    <br>
+                </div>
+                <div class="col-sm-3">
+                    <br>
+                    <input class="form-control" id="SpeechText" type="text" placeholder="Speech Text..">
+                    <br>
+                </div>
+            </div>
+            @*<div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="SeachInExample" type="text" placeholder="Search in Examples..">
+                    <br>
+                </div>
+            </div>*@
+            @*<div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="myInputDic" type="text" placeholder="Search..">
+                    <br>
+                </div>
+            </div>*@
+            @*<div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="SpeechText" type="text" placeholder="Speech Text..">
+                    <br>
+                </div>
+            </div>*@
+            <div class="row chkLevel" style="font-size:10px;">
+
+                <div class="col-sm-12">
+                    <input type="checkbox" name="Level1" value="1"> سطح 1 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level2" value="2"> سطح 2 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level3" value="3"> سطح 3 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level4" value="4"> سطح 4 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level5" value="5"> سطح 5 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level6" value="6"> سطح 6 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level7" value="7"> سطح 7 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level8" value="8"> سطح 8 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level9" value="9"> سطح 9 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level10" value="10"> سطح 10
+                </div>
+            </div>
+            <div id="DicBaMesalPro"></div>
+        </div>
+        <!--اشتباه جواب داده شده-->
+        <div id="MenuDicBaMesalProUnSuccess" class="tab-pane">
+            <br>
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" name="CreateWord" value="جدید" class="btn btn-danger" />
+                    <span></span><span></span>
+                    <input type="button" name="SerchWordList" value="جستجو" class="btn btn-info" />
+                    <span></span><span></span>
+                    <input type="number" max="10" min="0" value="10" name="SpeedSpeach" placeholder="10" class="btn btn-success" />
+                    <span></span><span></span>
+                    <input type="number" max="10" min="0" value="10" name="SoundSpeach" placeholder="10" class="btn btn-primary" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="SeachInDB" type="text" placeholder="Search in Database..">
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="myInputDic" type="text" placeholder="Search..">
+                    <br>
+                </div>
+            </div>
+            <div id="DicBaMesalProUnSuccess"></div>
+        </div>
+        <!--فارسی به انگلیسی-->
+        <div id="MenuDicPersianToEnglish" class="tab-pane">
+            <br>
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" name="CreateWord" value="جدید" class="btn btn-danger" />
+                    <span></span><span></span>
+                    <input type="button" name="SerchWordList" value="جستجو" class="btn btn-info" />
+                    <span></span><span></span>
+                    <input type="number" max="10" min="0" value="10" name="SpeedSpeach" placeholder="10" class="btn btn-success" />
+                    <span></span><span></span>
+                    <input type="number" max="10" min="0" value="10" name="SoundSpeach" placeholder="10" class="btn btn-primary" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="SeachInDB" type="text" placeholder="Search in Database..">
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="myInputDic" type="text" placeholder="Search..">
+                    <br>
+                </div>
+            </div>
+            <div id="DicPersianToEnglish"></div>
+        </div>
+        <!--پیشرفته دیگشنری  غلط-->
+        <div id="MenuWordExampleFalse" class="tab-pane">
+            <br>
+           
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" name="CreateWord" value="جدید" class="btn btn-danger" />
+                    <span></span><span></span>
+                    <input type="button" name="SerchWordList" value="جستجو" class="btn btn-info" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="SeachInDB" type="text" placeholder="Search in Database..">
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <input class="form-control" id="myInputDic" type="text" placeholder="Search..">
+                    <br>
+                </div>
+            </div>
+    
+            <div class="row chkLevel">
+
+                <div class="col-sm-12">
+                    <input type="checkbox" name="Level1" value="1"> سطح 1 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level2" value="2"> سطح 2 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level3" value="3"> سطح 3 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level4" value="4"> سطح 4 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level5" value="5"> سطح 5 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level6" value="6"> سطح 6 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level7" value="7"> سطح 7 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level8" value="8"> سطح 8 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level9" value="9"> سطح 9 <span />&nbsp;&nbsp;
+                    <input type="checkbox" name="Level10" value="10"> سطح 10
+                </div>
+            </div>
+
+            <div id="ListWordExampleFalse" ng-controller="MyController">
+                <br />
+                <input type="button" name="btnNewWord" value="لغت جدید Angular"  ng-click="ShowModal()" class="btn btn-info" />
+                <br />
+                <div ng-repeat="x in names | orderBy:myOrderBy">
+                    <div ng-if="$odd" style="background-color:#f1f1f1;direction:rtl">
+                    <span ng-show="e{{x.id}}">{{ x.eng }}</span>|
+                    <span data-id="{{x.id}}"    ng-show="p{{x.id}}">{{ x.per }}</span>|
+                    <span>{{x.level}}</span>|
+                    <span>{{x.date_refresh}}</span>|
+                    <span>{{x.date_s}}</span>|
+                    <span>{{x.SuccessCount}}</span>|
+                    <span>{{x.UnSuccessCount}}</span>|
+                    <span class="fa fa-android" ng-click="myFunc()"></span>|
+                    <span class="fa fa-bandcamp" ng-click="Showper(x.id)"></span>|
+                    <span class="fa fa-child" ng-click="Showeng(x.id)"></span>
+                    </div>
+                    <div ng-if="$even" style="background-color:burlywood;direction:rtl">
+                    <span ng-show="e{{x.id}}">{{ x.eng }}</span>|
+                    <span data-id="{{x.id}}" ng-show="p{{x.id}}">{{ x.per }}</span>|
+                        <span>{{x.level}}</span>|
+                        <span>{{x.date_refresh}}</span>|
+                        <span>{{x.date_s}}</span>|
+                        <span>{{x.SuccessCount}}</span>|
+                        <span>{{x.UnSuccessCount}}</span>|
+                    <span class="fa fa-android" ng-click="myFunc()"></span>|
+                    <span class="fa fa-bandcamp" ng-click="Showper(x.id)"></span>|
+                    <span class="fa fa-child" ng-click="Showeng(x.id)"></span>
+                    </div>
+                    <div ng-show="showMe" ng-repeat="y in x.lstExample">
+                        <div ng-if="$odd" style="background-color:lightblue;text-align: left;direction:ltr;white-space: pre;"><span>{{y.example}}</span></div>
+                        <div ng-if="$even" style="background-color:#e4cad3;text-align: left;direction:ltr;white-space: pre;"><span>{{y.example}}</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--#MenuDicRandomWord-->
+        <div id="MenuDicRandomWord" class="tab-pane">
+            <br />
+            <input type="button" name="RandomWord" value="لغت بعدی" class="btn btn-danger btnNextRandomWord" />
+            <br /><br />
+            <div class="row">
+                <div class="col-sm-6 DicRandomWord"></div>
+                <div class="vl"></div>
+                <div class="col-sm-6 DicRandomWord_HardWord"></div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12 DicRandomWord_HardWordExample"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Modal Start-->
+    @*<div>
+        <!--  Modal Master -->
+        <div class="modal fade" id="MasterModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="direction:ltr">
+                        <br>
+                        <h4 class="modal-title HeaderModal"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body BodyModal">
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                        <span> </span>
+                        <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ثبت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Modal Show Example -->
+        <div class="modal fade" id="myModalExa">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="direction:ltr">
+                        <br>
+                        <h4 class="modal-title" id="HeaderExample"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body" id="EditHolder">
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">بستن</button>
+                        <span></span><span></span>
+                        <button type="button" class="btn btn-success NewExample">مثال جدید</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--New Example-->
+        <div class="modal fade" id="ModalNewExample">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="direction:ltr">
+                        <br>
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                        <span></span>
+                        <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ذخیره</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Modal For Angular -->
+        <div class="modal fade" id="ModalAngular" >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="direction:ltr">
+                        <br>
+                        <h4 class="modal-title HeaderModal"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body BodyModal" >
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer FooterModal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+   
+</div>
+
+<!--Script Ajax Business-->
+<script type="text/javascript">
+    //**********************************
+    $(document).ready(function () {
+        //***********************************************MasterModal*****************************************
+        $('#MasterModal .btnSave').on("click", function () {
+            var NameTbl = $("#MasterModal .BodyModal table").attr("nametbl")
+            if (NameTbl == "tbltask")
+                CreateTask();
+            if (NameTbl == "tblword")
+                CreateWord();
+            if (NameTbl == "UpdateTask")
+                UpdateTask();
+            if (NameTbl == "UpdateWord")
+                UpdateWord();
+            if (NameTbl == "UpdateExample") {
+                UpdateExample();
+            }
+        });
+        //Create Post  Update
+        $("#MasterModal .btnSave").on("click", function () {
+            //  CreateRoutineJob
+            var NameOperator = $("#MasterModal .BodyModal div").attr("Name");
+            if (NameOperator == "Create")
+                CreateCategoryPost();
+            if (NameOperator == "Update") {
+                UpdateCategory();
+            }
+            if (NameOperator == "CreateJob") {
+                CreateJobPost();
+            }
+            if (NameOperator == "CreateRoutineJob") {
+                CreateRoutineJobPost();
+            }
+            if (NameOperator == "EditJob") {
+                var JobId = $("#MasterModal table").attr("jobid");
+                UpdateJob(JobId);
+            }
+            if (NameOperator == "CreateKarkard") {
+                CreateKarkardPost();
+            }
+            if (NameOperator == "CreatePercentJob") {
+                CreatePercentJobPost();
+            }
+            if (NameOperator == "CreateMojoodyBank") {
+                CreateMojoodyBankPost();
+            }
+            if (NameOperator == "EditMojoodyBank") {
+                UpdateMojoodyBank();
+            }
+            if (NameOperator == "CreateTypeHazineh") {
+                CreateTypeHazinehPost();
+            }
+            if (NameOperator == "EditTypeHazineh") {
+                UpdateTypeHazineh();
+            }
+            if (NameOperator == "CreateDaramad") {
+                CreateDaramadPost();
+            }
+            if (NameOperator == "EditMojoodyBankBalance") {
+                UpdateMojoodyBankBalance();
+            }
+            if (NameOperator == "Exchange") {
+                UpdateMojoodyBankExchange();
+            }
+            if (NameOperator == "CreateMaterData") {
+                CreateMasterDataPost();
+            }
+            if (NameOperator == "UpdateMaterData") {
+                UpdateMasterDataPost();
+            }
+        });
+    });
+</script>
+<!--************************************Logic Scripts*********************************************-->
+@*<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>*@
+<script src="~/Scripts/Logic/MainAngular.js"></script>
+@*<script src="~/Scripts/Logic/Dictionary.js"></script>*@
+<script src="~/Scripts/Logic/Angular.js"></script>
+<!--************************************Dictionary*********************************************-->
+<!--Persian DatePicker-->
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "timeir_next.png"
+               , previousButtonIcon: "timeir_prev.png"
+               , forceFarsiDigits: true
+               , markToday: true
+               , markHolidays: true
+               , highlightSelectedDay: true
+               , sync: true
+        });
+    });
+</script>

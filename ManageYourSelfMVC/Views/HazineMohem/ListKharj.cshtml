@@ -1,0 +1,40 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.HazineMohem.VMHazineMohem>
+<div class="table-responsive">
+    <table class="table table-dark table-hover" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>نوع</th>
+                <th>عنوان</th>
+                <th>ریال</th>
+                <th>تاریخ</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody id="myTableHazineMohem">
+            @foreach (var item in Model)
+            {
+                <tr KharjId="@item.KharjId">
+                    <td>@item.KharjTypeName</td>
+                    <td>@item.Name</td>
+                    <td>@Utility.Rial(item.Rial.ToString())</td>
+                    <td>@Utility.ConvertDateToSlash(item.DateKharj)</td>
+                    <td><span style="color:green" class='fa fa-edit pointer'></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer'></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTableHazineMohem tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

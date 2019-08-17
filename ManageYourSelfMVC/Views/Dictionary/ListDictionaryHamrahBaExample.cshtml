@@ -1,0 +1,101 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+
+<div class="table-responsive">
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>Up</th>
+                <th>Down</th>
+                <th>DateRefresh</th>
+                <th>level</th>
+                <th>فارسی</th>
+                <th>انگلیسی</th>
+                <th>مثال</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr WordId="@item.id" style="background-color:black;color:white;font-size: 14px;white-space:nowrap">
+                    <td><span style='color:red' class='fa fa-sort-up LevelEngUp' data_id="@item.id"></span></td>
+                    <td><span style='color:green' class='fa fa-sort-down LevelEngDown' data_id="@item.id"></span></td>
+                    <td>@item.date_refresh</td>
+                    <td>@item.level</td>
+                    <td >@item.per</td>
+                    <td >@item.eng</td>
+                    @if (item.HasExample > 0)
+                    {
+                        <td><span class="fa fa-eye-slash ShowExample" style='color:green' data_id="@item.id"></span></td>
+                    }
+                    else
+                    {
+                        <td><span class="fa fa-eye-slash ShowExample" style='color:yellow' data_id="@item.id"></span></td>
+                    }
+                </tr>
+                foreach (var itemExample in item.lstExample)
+                {
+                    <tr style="background-color:white;color:black;">
+                        <td colspan="7" style="text-align:left" ExampleId="@itemExample.id">@itemExample.example</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<!--Create Paging-->
+
+
+
+@{
+            ManageYourSelfMVC.Models.MyData.MyDataTransfer T = new ManageYourSelfMVC.Models.MyData.MyDataTransfer();
+            int takeCount = ManageYourSelfMVC.Models.Help.Setting.takeCount;
+            int CountOfWords = T.CountWord();
+            int CountTab = (CountOfWords / takeCount);
+            if ((CountOfWords % takeCount) > 0)
+            {
+                CountTab = CountTab + 1;
+            }
+}
+<!--Pagination -->
+<div class="PaginationDiv"></div>
+@*<div class="table-responsive">
+    <table>
+        <tr>
+            <td class="pointer" style="border:1px solid black;padding-left:6px;padding-right:6px;background-color:mediumslateblue;color:white;text-align:center;">Prev</td>
+            @for (int i = 1; i <= CountTab; i++)
+            {
+                <td PageNumber="@i" class="pointer" style="border:1px solid black;padding-left:6px;padding-right:6px;background-color:darkred;color:white;text-align:center;"><a>@i</a></td>
+            }
+            <td class="pointer" style="border:1px solid black;padding-left:6px;padding-right:6px;background-color:mediumslateblue;color:white;text-align:center;">Next</td>
+        </tr>
+    </table>
+</div>*@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        CreatePagination(1, 10);
+        $(".PaginationDiv").on("click", ".Next", function () {
+            var ValLastTd = $(".PaginationDiv td:nth-last-child(2)").attr('PageNumber');
+            var j = parseInt(ValLastTd)
+            CreatePagination(j+1, j+10);
+        });
+        function CreatePagination(fisrt,Last)
+        {
+            var html="<div class='table-responsive'>\
+    <table>\
+        <tr>\
+            <td class='pointer Prev' style='border:1px solid black;padding-left:6px;padding-right:6px;background-color:mediumslateblue;color:white;text-align:center;'>Prev</td>"
+            for (var i = fisrt; i <= Last; i++)
+            {
+                html+="<td PageNumber="+i+" class='pointer PageNumberi' style='border:1px solid black;padding-left:6px;padding-right:6px;background-color:darkred;color:white;text-align:center;'><a>"+i+"</a></td>"
+            }
+            html += "<td class='pointer Next' style='border:1px solid black;padding-left:6px;padding-right:6px;background-color:mediumslateblue;color:white;text-align:center;'>Next</td>\
+        </tr>\
+    </table>\
+</div>"
+            $(".PaginationDiv").html(html);
+        }
+    });
+</script>
+<!--Arrow right-->
+<!--/Pagination -->

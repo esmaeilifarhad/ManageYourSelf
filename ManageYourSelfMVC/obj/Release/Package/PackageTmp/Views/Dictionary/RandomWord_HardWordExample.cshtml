@@ -1,0 +1,103 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+<!---------------------------------------------------------------------------------------->
+
+<div>
+    @{
+        int RandomRadif = 1;
+        Random rnd = new Random();
+        RandomRadif = rnd.Next(1,7);
+    }
+    <div class="row" style="direction: ltr;">
+        <div class="col-sm-9">
+            <div style="text-align: left;direction: ltr;white-space: pre;">
+                @foreach (var item in Model)
+                {
+                    if (item.Radif == RandomRadif)
+                    {
+                        foreach (var item2 in item.lstExample)
+                        {
+                            <span WordId="@item.id">@item2.example</span>
+                        }
+                    }
+
+                }
+            </div>
+
+        </div>
+        <div class="col-sm-3">
+            <div style="direction:rtl">
+                <table class="tblWordExTest">
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td><span  WordId="@item.id">@item.per</span></td>
+                            <td><span><input type="radio" name="rdbHWEx" value="@item.id"></span></td>
+                            <td class="WordEng" style="display:none"><span WordId="@item.id">@item.eng</span></td>
+                        </tr>
+                        }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center">
+        <input type="button" name="btnSave" value="ذخیره" class="btn btn-danger" />
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------->
+<script>
+    $(document).ready(function () {
+        $(".DicRandomWord_HardWord input[name='btnSave']").click(function () { 
+        var wordId = $(".DicRandomWord_HardWord span").attr("wordid");
+        var valRdb = $("input[name='rbtnHW']:checked").val();
+        if (wordId == valRdb) {
+            alert("درست");
+            LevelChangeDown(wordId);
+        }
+        else {
+            alert("غلط");
+            LevelChangeUp(wordId);
+           
+        }
+        RandomWord_HardWord();
+        ListDictionary();
+        });
+        //----------------------
+        $(".DicRandomWord_HardWordExample input[name='rdbHWEx']").click(function () {
+            var wordId = $(".DicRandomWord_HardWordExample span").attr("wordid");
+            var valRdb = $("input[name='rdbHWEx']:checked").val();
+            if (wordId == valRdb) {
+                $('.WordEng').css('display', 'inline-block');
+            }
+            else {
+                $('.WordEng').css('display', 'inline-block');
+            }
+            $(".tblWordExTest tr tr span").each(function () {
+
+            });
+            $(".tblWordExTest tr").each(function () {
+                var wordid = $(this).find("span").attr("wordid");
+                if (wordid == wordId) {
+                    $(this).css('color', 'green')
+                }
+                else {
+                    $(this).css('color', 'red')
+                }
+            });
+        });
+       // ----------------------
+        $(".DicRandomWord_HardWordExample input[name='btnSave']").click(function () {
+            var wordId = $(".DicRandomWord_HardWordExample span").attr("wordid");
+            var valRdb = $("input[name='rdbHWEx']:checked").val();
+            if (wordId == valRdb) {
+                alert("درست");
+               LevelChangeDown(wordId);
+            }
+            else {
+                alert("غلط");
+                LevelChangeUp(wordId);
+            }
+            RandomWord_HardWordExample();
+            ListDictionary();
+        });
+    });
+</script>

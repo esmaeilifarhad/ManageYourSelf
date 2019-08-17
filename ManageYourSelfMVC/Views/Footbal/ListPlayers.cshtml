@@ -1,0 +1,46 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.Player>
+
+<div class="table-responsive">
+    <p>اسامی بازیکنان</p>
+    
+    <input type="button" name="CreatePlayer" value="جدید" class="btn btn-danger" />
+    <br><br>
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>نام</th>
+                <th>فعال</th>
+                <th>حضور</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.name</td>
+                    @if (item.IsActive == true)
+                    {
+                        <td><span style="color:green" class="fa fa-check"></span></td>
+                    }
+                    else
+                    {
+                        <td><span style="color:red" class="fa fa-times"></span></td>
+                    }
+                    @if (item.IsHozoor == true)
+                    {
+                        <td><span style="color:green" class="fa fa-check"></span></td>
+                    }
+                    else
+                    {
+                        <td><span style="color:red" class="fa fa-times"></span></td>
+                    }
+                    <td><span style='color:blue' class='fa fa-edit   pointer' data_id="@item.PlayersId"></span></td>
+                    <td><span style='color:red'  class='fa fa-remove pointer' data_id="@item.PlayersId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

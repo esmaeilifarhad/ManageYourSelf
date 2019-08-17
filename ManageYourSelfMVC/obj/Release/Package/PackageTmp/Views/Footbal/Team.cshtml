@@ -1,0 +1,377 @@
+﻿@model ManageYourSelfMVC.ViewModels.ListNavVM
+@{
+    ViewBag.Title = "UserRegister";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
+<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>
+<style>
+    .vl {
+        border-left: 1px dotted black;
+        height: 500px;
+        left: 50%;
+        margin-left: -3px;
+        top: 0;
+    }
+</style>
+<br />
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" style="font-family:'Morvarid';">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#MenuListPlayers">لیست بازیکنان</a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content" style="font-family:BNazanin">
+    <!--لیست بازیکنان-->
+    <div id="MenuListPlayers" class="tab-pane active">
+        <br><br><br>
+        <input class="form-control" id="SeachInTblDicList" type="text" placeholder="Search..">
+        <br />
+        <div class="row" style="font-family:BNazanin">
+            <div class="col-sm-4 ListPlayers"></div>
+            <div class="col-sm-4 CreatePlayerScore"></div>
+            <div class="col-sm-4 ListBestPlayers"></div>
+        </div>
+        <hr />
+        <div class="row" style="font-family:BNazanin">
+            <div class="col-sm-12 CreateTeam"></div>
+        </div>
+        <hr />
+        <div class="row" style="font-family:BNazanin">
+            <div class="col-sm-12 ListVoteToPlayers"></div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Start-->
+<div>
+    <!--  Modal Master -->
+    <div class="modal fade" id="MasterModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header" style="direction:ltr">
+                    <br>
+                    <h4 class="modal-title HeaderModal"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body BodyModal">
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                    <span> </span>
+                    <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ثبت</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<script type="text/javascript">
+    //**********************************
+    $(document).ready(function () {
+        /*گرفتن userId مربوط به session باید قیبل از هر دستوری اجرا شود تا اول مقدار را پر نماید*/
+        var UserId= @HttpContext.Current.Session["UserId"];
+        RefreshExecute();
+  
+        //Create Get
+        $("#MenuListPlayers .ListPlayers").on("click", "input[name='CreatePlayer']", function () {
+            CreatePlayerGet();
+        });
+        //Delete
+        $("#MenuListPlayers .ListPlayers").on("click", ".fa-remove", function () {
+            var res = confirm("آیا حذف انجام شود؟");
+            if (res == true) {
+                var PlayerId = $(this).attr("data_id");
+                DeletePlayer(PlayerId);
+            }
+        });
+        //Edit
+        $("#MenuListPlayers .ListPlayers").on("click", ".fa-edit", function () {
+                var PlayerId = $(this).attr("data_id");
+                EditPlayer(PlayerId);
+        });
+        function ListBestPlayers() {
+          
+            var urll = "/Footbal/ListBestPlayers";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+                    $(".ListBestPlayers").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+        function ListPlayers() {
+            var urll = "/Footbal/ListPlayers";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+                    $(".ListPlayers").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+        function ListVoteToPlayers() {
+            var urll = "/Footbal/ListVoteToPlayers";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+                    $(".ListVoteToPlayers").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+        function ListCreateTeam() {
+            var urll = "/Footbal/CreateTeam";
+            $.ajax({
+                type: "Get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "html",
+                url: urll,
+                success: function (data) {
+                    $(".CreateTeam").html(data);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        }
+        function CreatePlayerGet() {
+            $.ajax(
+               {
+                   type: 'get',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "html",
+                   url: "/Footbal/CreatePlayer",
+                   success: function (result) {
+                       $(".BodyModal").html(result);
+                       $("#MasterModal").modal();
+                   },
+                   error: function (error) {
+                       alert(error);
+                   }
+               }
+               );
+        }
+        function CreatePlayerPost() {
+            var name = $("#MasterModal input[name='name'").val();
+            var IsActive = $("#MasterModal input[name=IsActive]:checked").val();
+            var IsHozoor = $("#MasterModal input[name=IsHozoor]:checked").val();
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/Footbal/CreatePlayer",
+                   data: JSON.stringify({ name: name, IsActive: IsActive, IsHozoor: IsHozoor }),
+                   success: function (result) {
+                       // alert(result);
+                       RefreshExecute();
+                   },
+                   error: function (result) {
+                       alert(result);
+                   }
+               });
+        }
+        function DeletePlayer(PlayerId) {
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/Footbal/DeletePlayer",
+                   data: JSON.stringify({ PlayerId: PlayerId }),
+                   success: function (result) {
+                       RefreshExecute();
+                   },
+                   error: function (result) {
+                       alert(result);
+                   }
+               });
+        }
+        function EditPlayer(PlayerId) {
+            $.ajax(
+               {
+                   type: 'get',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "html",
+                   url: "/Footbal/EditPlayer?PlayerId="+PlayerId,
+                   data: JSON.stringify({ PlayerId: PlayerId }),
+                   success: function (result) {
+                       $(".BodyModal").html(result);
+                       $("#MasterModal").modal();
+                   },
+                   error: function (result) {
+                       alert(result);
+                   }
+               });
+        }
+        function UpdatePlayer() {
+            var PlayersId = $("#MasterModal .BodyModal table[nametbl='EditPlayer']").attr("data_id"); 
+            var name = $("#MasterModal input[name='name'").val();
+            var IsActive = $("#MasterModal input[name=IsActive]:checked").val();
+            var IsHozoor = $("#MasterModal input[name=IsHozoor]:checked").val();
+
+            $.ajax(
+               {
+                   type: 'POST',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "json",
+                   url: "/footbal/UpdatePlayer",
+                   data: JSON.stringify({ name: name, IsActive: IsActive, IsHozoor: IsHozoor,PlayersId:PlayersId}),
+                   success: function (result) {
+                           RefreshExecute();
+                   },
+                       error: function (result) {
+                           alert(result);
+                       }
+               });
+        }
+        function CreatePlayerScoreGet()        {
+         
+            @*var UserId= @HttpContext.Current.Session["UserId"];*@
+            $.ajax(
+               {
+                  
+                   type: 'get',
+                   contentType: "application/json;charset=utf-8",
+                   dataType: "html",
+                   url: "/Footbal/CreatePlayerScore?UserId="+UserId,
+                   success: function (data) {
+                       $(".CreatePlayerScore").html(data);
+                   },
+                   error: function (error) {
+                       alert(error);
+                   }
+               }
+               );
+        }
+        function RefreshExecute() {
+            ListPlayers();
+            CreatePlayerScoreGet();
+            ListBestPlayers();
+            ListCreateTeam();
+            ListVoteToPlayers();
+        }
+        //MasterModal BtnSave
+        $('#MasterModal .btnSave').on("click", function () {
+
+            var NameTbl = $("#MasterModal .BodyModal table").attr("nametbl")
+            if (NameTbl == "CreatePlayer")
+                CreatePlayerPost();
+            if (NameTbl == "EditPlayer")
+                UpdatePlayer();
+        });
+
+        $("#MenuListPlayers .CreatePlayerScore").on("click", "input[name='btnSavePlayerScore']", function () {
+            CreatePlayerScorePost();
+        });
+        function CreatePlayerScorePost(){
+            var lstPlayerScore = [];
+            $(".CreatePlayerScore  table[nametbl='CreatePlayer']  .PlayerScore").each(function(){
+                var playersid= $(this).attr('playersid');
+                var Score =$(this).find("td input[name='Score']").val();
+                var PlayerScoeObj = {UserId:UserId, PlayerId:playersid, Score:Score};
+                lstPlayerScore.push(PlayerScoeObj);
+                //var things[]=JSON.stringify({ 'things': things }),
+                // console.log(list);
+            });
+            $.ajax(
+          {
+              type: 'POST',
+              contentType: "application/json;charset=utf-8",
+              dataType: "json",
+              url: "/Footbal/CreatePlayerScore",
+
+              data: JSON.stringify({ 'lstPlayerScore':lstPlayerScore }),
+              success: function (result) {
+                  alert(result);
+                  RefreshExecute();
+              },
+              error: function (result) {
+                   alert(result);
+              }
+          });
+
+        }
+        $(".CreatePlayerScore").on("change","table[nametbl='CreatePlayer']  .PlayerScore input[name='Score']",function(){
+       
+            var Result=true;
+            $(".CreatePlayerScore  table[nametbl='CreatePlayer']  .PlayerScore").each(function(){
+                // var playersid= $(this).attr('playersid');
+                var Score =$(this).find("td input[name='Score']").val();
+                if(Score>10 || Score<1)
+                {
+                    Result=false;
+                }
+            });
+            if(Result==false)
+            {
+                $("input[name='btnSavePlayerScore']").attr('disabled','disabled');
+            }
+            else
+            {
+                $("input[name='btnSavePlayerScore']").removeAttr('disabled');
+            }
+        });
+    });
+</script>
+
+<!--Persian DatePicker-->
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "timeir_next.png"
+               , previousButtonIcon: "timeir_prev.png"
+               , forceFarsiDigits: true
+               , markToday: true
+               , markHolidays: true
+               , highlightSelectedDay: true
+               , sync: true
+        });
+    });
+</script>
+<!--Search-->
+<script>
+    $(document).ready(function () {
+        //----------function ListDictionary()
+        $("#SeachInTblDicList").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $(".ListDictionarySearch tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        //--------------------------
+        $("#myInputDic").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,55 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.DaramadVM>
+
+<div name="Exchange">
+    <table  style="direction:rtl; text-align: center;font-size:11px">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td MojoodyBankIdSource="@item.MojoodyBankId">مبدا</td>
+                    <td>@item.MojoodyBankName</td>
+                </tr>
+                <tr>
+                    <td>تاریخ</td>
+                    <td><input type="text" name="Date" class="PersianDatePicker" autocomplete="off" value="@Model.Select(q=>q.CurrentDate).FirstOrDefault()" /></td>
+                </tr>
+                <tr>
+                    <th>ریال</th>
+                    <td><input type="text" name="Rial" /></td>
+                </tr>
+                <tr>
+                    <td>مقصد</td>
+                    <td>
+                        <select class="MYSelect">
+                            @foreach (var items in Model)
+                            {
+                                foreach (var t in items.lstMojoodyBank)
+                                {
+                                    <option value="@t.MojoodyBankId">@t.MojoodyName</option>
+                                }
+
+                            }
+                        </select>
+                    </td>
+                </tr>
+            }
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        kamaDatepicker('PersianDatePicker', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                    , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                    , forceFarsiDigits: true
+                    , markToday: true
+                    , markHolidays: true
+                    , highlightSelectedDay: true
+                    , sync: true
+        });
+    });
+</script>
+
+
+
+
+

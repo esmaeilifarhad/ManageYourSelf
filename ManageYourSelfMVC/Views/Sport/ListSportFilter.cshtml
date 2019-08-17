@@ -1,0 +1,54 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.VMSport>
+<style>
+    div span {direction: ltr;}
+    .SportPivot {
+    direction:ltr;
+    /*display:flex;*/
+    }
+    .SportPivot span {
+        /*border: 1px solid black;*/ 
+        /*margin:10px;*/
+        padding: 10px;
+    }
+    /*.SportPivot .Text {
+    order:1;
+    }
+    .SportPivot .Num {
+    order:2;
+    }*/
+</style>
+<div class="SportPivot">
+    @{string oldDate = string.Empty; }
+    @{int sumTedad = 0;
+        int row = 1;
+    }
+    @foreach (var item in Model)
+    {
+        if (oldDate != item.Date && oldDate != string.Empty)
+        {
+            <span class="Num" style="color:red" tabindex="10">@sumTedad</span>
+          
+            sumTedad = 0;
+        }
+        if (oldDate != item.Date)
+        {
+
+            <br />
+   
+            <hr />
+         
+          <span style="color:green" class="Text" tabindex="1">@item.Title</span>
+          <span class="Text" tabindex="3">@item.Date.Substring(0, 4)/@item.Date.Substring(4, 2)/@item.Date.Substring(6, 2)</span>
+          <span class="DeleteSport" tabindex="5" SportId="@item.SportId">@item.Tedad</span>
+            row += 1;
+        }
+        else if (item.Date == oldDate)
+        {
+            <span class="DeleteSport" tabindex="8" SportId="@item.SportId">@item.Tedad</span>
+        }
+       
+        sumTedad += item.Tedad;
+        oldDate = item.Date;
+    }
+    <span class="Num" style="color:red">@sumTedad</span>
+</div>

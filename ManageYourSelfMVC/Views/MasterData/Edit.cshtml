@@ -1,0 +1,22 @@
+﻿@model ManageYourSelfMVC.Models.DomainModels.Cat
+<div Name="UpdateMaterData" >
+    <table CatId="@Model.CatId">
+        <tr>
+            <td>عنوان</td>
+            <td><input type="text" name="Title" value="@Model.Title" /></td>
+        </tr>
+        <tr>
+            <td>کد</td>
+            <td><input type="text" name="Code" value="@Model.Code"/></td>
+        </tr>
+        <tr>
+            <td>ترتیب</td>
+            <td><input type="number" name="Order"  value="@Model.Order"/></td>
+        </tr>
+        <tr>
+            <td>توضیحات</td>
+            <td><input type="text"  name="Dsc" value="@Model.Dsc"/></td>
+        </tr>
+    </table>
+</div>
+

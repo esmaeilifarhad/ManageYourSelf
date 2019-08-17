@@ -1,0 +1,103 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.PlayerScoreVM>
+@{float SumScoreTeam = 0; }
+@*<div class="table-responsive">*@
+    <p>تیم کشی</p>
+    <br><br>
+    <div class="row" style="font-family:BNazanin">
+        <div class="col-sm-4 ">
+            <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+                <thead>
+                    <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                        <th>تیم</th>
+                        <th>نام</th>
+                        <th>امتیاز</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{SumScoreTeam = 0; }
+                    @foreach (var item in Model)
+                    {
+                        if (item.TeamName == "A")
+                        {
+                            SumScoreTeam += item.AVGScore;
+                        <tr>
+                            <td>@item.TeamName</td>
+                            <td>@item.PlayerName</td>
+                            <td>@item.AVGScore</td>
+                        </tr>
+                        }
+                    }
+                    <tr>
+                        <td colspan="2">قدرت تیم</td>
+                        <td>@SumScoreTeam</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4 ">
+            <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+                <thead>
+                    <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                        <th>تیم</th>
+                        <th>نام</th>
+                        <th>امتیاز</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{SumScoreTeam = 0; }
+                    @foreach (var item in Model)
+                    {
+                        if (item.TeamName == "B")
+                        {
+                            SumScoreTeam += item.AVGScore;
+                            <tr>
+                                <td>@item.TeamName</td>
+                                <td>@item.PlayerName</td>
+                                <td>@item.AVGScore</td>
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        <td colspan="2">قدرت تیم</td>
+                        <td>@SumScoreTeam</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4 ">
+            <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+                <thead>
+                    <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                        <th>تیم</th>
+                        <th>نام</th>
+                        <th>امتیاز</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{SumScoreTeam = 0; }
+                    @foreach (var item in Model)
+                    {
+                        if (item.TeamName == "C")
+                        {
+                            SumScoreTeam += item.AVGScore;
+                            <tr>
+                                <td>@item.TeamName</td>
+                                <td>@item.PlayerName</td>
+                                <td>@item.AVGScore</td>
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        <td colspan="2">قدرت تیم</td>
+                        <td>@SumScoreTeam</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+@*</div>*@
+
+
+

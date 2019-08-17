@@ -1,0 +1,7 @@
+﻿@using ManageYourSelfMVC.Security
+<h2>AccessDeniedView</h2>
+<div>شما دسترسی به این صفحه را ندارید</div>
+        <br />
+        Welcome @SessionPersister.Username
+        <br />
+        <a href="@Url.Action("Logout","Account")">Logout</a>

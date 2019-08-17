@@ -1,0 +1,36 @@
+﻿@model ManageYourSelfMVC.ViewModels.DakhloKharj
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+<br><br>
+<div class="table-responsive">
+    <table class="table " style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>ماه</th>
+                <th>نام</th>
+                <th>تاریخ</th>
+                <th>جزئیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.lstReportMahane)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.Name</td>
+                    <td>@Utility.Rial(item.Rial.ToString())</td>
+                    <td><span style="color:green" class='fa fa-plus pointer ' TypeHazinehId="@item.TypeHazinehId"></span></td>
+                    @*<td><span style="color:orange" class='fa fa-exchange pointer ' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                    <td><span style="color:blue" class='fa fa-balance-scale pointer ' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                    <td><span style="color:green" class='fa fa-edit pointer' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' MojoodyBankId="@item.MojoodyBankId"></span></td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

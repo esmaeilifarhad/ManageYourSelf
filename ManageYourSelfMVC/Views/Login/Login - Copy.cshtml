@@ -1,0 +1,93 @@
+﻿@model ManageYourSelfMVC.Models.Login.HUser
+@{
+    ViewBag.Title = "UserRegister";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+<style>
+    p {
+        padding-right: 10px;
+        margin: 0px;
+    }
+
+    input[type='text'], input[type='password'] {
+        width: 70%;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="background-color:silver;border-radius: 20px; font-family:'Morvarid';">
+        <br />
+        <div style="background-color:palegoldenrod;padding:2px">
+            <p>صفحه ورود کاربر</p>
+            <p>لطفا لاگین نمایید و یا اگر اکانت ندارید ثبت نمایید</p>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <td>نام کاربری </td>
+                    <td>
+                        <input type="text" name="UserName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>پسورد  </td>
+                    <td>
+                        <input type="password" name="Password" />
+                    </td>
+                </tr>
+                @*<tr>
+                        <td>ایمیل  </td>
+                        <td>
+                            <input type="text" name="Email" />
+                        </td>
+                    </tr>*@
+                <tr>
+                    <td colspan="2"><input type="button" value="ورود" class="btn btn-danger" />  </td>
+                    @*<td><input type="button" value="Register" /> </td>*@
+                </tr>
+                <tr>
+                    <td><a class="pointer">ثبت نام</a></td>
+                    <td><a class="pointer">فراموشی رمز عبور</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+
+<script>
+    $("input[type='button']").click(function () {
+        var currentLocation = window.location;
+        var MyUrl = currentLocation.href;
+        MyUrl = MyUrl.split("ReturnUrl");
+        var splitURL = MyUrl[1].split("%2f");
+        var Controller = splitURL[1];
+        var Action = splitURL[2];
+        //console.log(s);
+        var result ='/'+ Controller + '/' + Action;
+        CheckUser(result);
+    });
+    function CheckUser(ReturnUrl) {
+        var UserName = $("table input[name='UserName']").val()
+        var Password = $("table input[name='Password']").val()
+        $.ajax(
+           {
+               type: 'POST',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/Login/Login?ReturnUrl=" + ReturnUrl,
+               data: JSON.stringify({ UserName: UserName, Password: Password}),
+               success: function (result) {
+                   if (result == true) {
+                       alert("yes")
+                   }
+                   else {
+                       alert("False")
+                   }
+               },
+               error: function (error) {
+                   alert(error);
+               }
+           });
+    }
+</script>

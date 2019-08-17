@@ -1,0 +1,63 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.DaramadVM>
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+<br>
+<input type="button" name="CreateDaramad" value="جدید" class="btn btn-info" />
+<br>
+<div class="table-responsive">
+    <table class="table Daramad" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr>
+                <th>بانک</th>
+                <th>نوع هزینه</th>
+                <th>تاریخ</th>
+                <th>پرداخت|دریافت</th>
+                <th>توضیحات</th>
+                <th>ریال</th>
+                <th>قبل</th>
+                <th>بعد</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.lstMojoodyBank.Select(q => q.MojoodyName).FirstOrDefault()</td>
+                    <td>@item.lstTypeHazineh.Select(q => q.name).FirstOrDefault()</td>
+                    <td>@item.Date</td>
+                    @if (item.lstTypeHazineh.Select(q => q.DaramadOrKharj).FirstOrDefault() == true)
+                    {
+                        <td style="color:green">دریافت</td>
+                    }
+                    else
+                    {
+                        <td style="color:red">پرداخت</td>
+                    }
+                    <td>@item.Description</td>
+                    <td>@Utility.Rial(item.Rial.ToString())</td>
+                    <td>@Utility.Rial(item.Before.ToString())</td>
+                    <td>@Utility.Rial(item.After.ToString())</td>
+                    @*@if (item.DaramadOrKharj == false)
+                        {
+                            <td style="color:red">پرداخت</td>
+                        }
+                        @if (item.DaramadOrKharj == true)
+                        {
+                            <td style="color:green">دریافت</td>
+                        }*@
+                    <td><span style="color:green" class='fa fa-edit pointer' DaramadId="@item.DaramadId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' DaramadId="@item.DaramadId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ManageYourSelfMVC.Models.DomainModels.SliderPhoto>
+
+@{
+    ViewBag.Title = "SliderPhoto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SliderPhoto</h2>
+
+<p>
+    @Html.ActionLink("اسلاید شو جدید", "SliderPhoto_Create","Admin")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoImg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Header)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Matn)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoImg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Header)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Matn)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SliderPhotoId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SliderPhotoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SliderPhotoId })
+        </td>
+    </tr>
+}
+
+</table>

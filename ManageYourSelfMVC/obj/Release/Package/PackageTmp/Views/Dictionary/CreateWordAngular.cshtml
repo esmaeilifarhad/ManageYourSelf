@@ -1,0 +1,29 @@
+﻿<script src="~/Scripts/angular.min.js"></script>
+<div ng-app="tt" ng-controller="MyController">
+    <table class='table table-hover' NameTbl='tblword'>
+        <tr>
+            <td>انگلیسی</td>
+            <td><input type='text' name='DicEng' ng-model="DicEng" /></td>
+        </tr>
+        <tr>
+            <td>فارسی</td>
+            <td><input type='text' name='DicFar' ng-model="DicFar" /></td>
+        </tr>
+        <tr>
+            <td>فونتیک</td>
+            <td><input type='text' name='DicPho' ng-model="DicPho" /></td>
+        </tr>
+        <tr>
+            <td><button type='button' class='btn btn-danger' data-dismiss='modal'>بستن</button></td>
+            <td><button ng-click='SaveWord()' type='button' class='btn btn-primary btnSave' data-dismiss='modal'>ثبت</button></td>
+        </tr>
+    </table>
+    <p>{{DicEng}}</p>
+</div>
+<script>
+    var app3 = angular.module('tt', []);
+    app3.controller('MyController', function ($scope) {
+        $scope.DicEng =  'fery'  
+      
+    });
+</script>

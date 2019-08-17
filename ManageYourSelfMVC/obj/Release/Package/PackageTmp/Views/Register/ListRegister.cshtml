@@ -1,0 +1,39 @@
+﻿@model List<ManageYourSelfMVC.Models.DomainModels.User>
+<br>
+<div class="table-responsive">
+    <p>لیست کاربران</p>
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>نام فرد</th>
+                <th>UserName</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>تلفن</th>
+                <th>تخصیص نقش</th>
+                <th>ویرایش</th>
+                <th>حذف</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Password</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td><span style='color:orange' class='UserRole fa fa-amazon pointer' data_id="@item.UserId"></span></td>
+                    <td><span style='color:blue' class='fa fa-edit pointer' data_id="@item.UserId"></span></td>
+                    <td><span style='color:red' class='fa fa-remove pointer' data_id="@item.UserId"></span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

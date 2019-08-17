@@ -1,0 +1,139 @@
+﻿@model ManageYourSelfMVC.Models.DomainModels.User
+@{
+    ViewBag.Title = "UserRegister";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+<style>
+    p {
+        padding-right: 10px;
+        margin: 0px;
+    }
+
+    input[type='text'], input[type='password'], input[type='email'], input[type='number'] {
+        width: 70%;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="background-color:silver;border-radius: 20px; font-family:'Morvarid';">
+        <br />
+        <div style="background-color:palegoldenrod;padding:2px">
+            <p>لطفا برای استفاده از امکانات سایت ثبت نام نمایید</p>
+            @*<p>لطفا لاگین نمایید و یا اگر اکانت ندارید ثبت نمایید</p>*@
+        </div>
+        <div class="table-responsive Register">
+            <table class="table">
+                <tr>
+                    <td>نام و نام خانوادگی</td>
+                    <td>
+                        <input type="text" name="Name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>نام کاربری </td>
+                    <td>
+                        <input type="text" name="UserName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>پسورد  </td>
+                    <td>
+                        <input type="password" name="Password" />
+                    </td>
+                </tr>
+                <tr>
+                        <td>ایمیل  </td>
+                        <td>
+                            <input type="email" name="Email" />
+                        </td>
+                    </tr>
+                <tr>
+                <tr>
+                    <td>تلفن</td>
+                    <td>
+                        <input type="number" name="PhoneNumber" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" value="ثبت نام" class="btn btn-danger btnsave" />  </td>
+                    @*<td><input type="button" value="Register" /> </td>*@
+                </tr>
+                <tr>
+                    <td><span><a    style="color: darkred;" href="/Admin/AdminPage">مدیریت سایت</a></span></td>
+                    <td><span><a    style="color: darkred;" href="/Footbal/Team">امتیاز دهی بازیکنان</a></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+
+<script>
+    /*
+    $("input[type='button']").click(function () {
+        var currentLocation = window.location;
+        var MyUrl = currentLocation.href;
+        MyUrl = MyUrl.split("ReturnUrl");
+        var splitURL = MyUrl[1].split("%2f");
+        var Controller = splitURL[1];
+        var Action = splitURL[2];
+        //console.log(s);
+        var result ='/'+ Controller + '/' + Action;
+        CheckUser(result);
+    });
+    function CheckUser(ReturnUrl) {
+        var UserName = $("table input[name='UserName']").val()
+        var Password = $("table input[name='Password']").val()
+        $.ajax(
+           {
+               type: 'POST',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/Login/Login?ReturnUrl=" + ReturnUrl,
+               data: JSON.stringify({ UserName: UserName, Password: Password}),
+               success: function (result) {
+                   if (result == true) {
+                       alert("yes")
+                   }
+                   else {
+                       alert("False")
+                   }
+               },
+               error: function (error) {
+                   alert(error);
+               }
+           });
+    }
+    */
+</script>
+<script>
+
+    $(document).ready(function () {
+        $(".Register table .btnsave").click(function () {
+          var UserName= $("input[name='UserName']").val(); //Reading text box values using Jquery
+          var Password= $("input[name='Password']").val();
+          var Email= $("input[name='Email']").val();
+          var PhoneNumber = $("input[name='PhoneNumber']").val();
+          var Name = $("input[name='Name']").val();
+            $.ajax(
+            {
+                type: 'POST',
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                url: "/Register/Register", // Controller/View
+                data: JSON.stringify({ UserName: UserName, Password: Password, Email: Email, PhoneNumber: PhoneNumber, Name: Name }),
+                success: function (result) {
+                    alert(result);
+                    window.location.href ="/Account/Index";
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+

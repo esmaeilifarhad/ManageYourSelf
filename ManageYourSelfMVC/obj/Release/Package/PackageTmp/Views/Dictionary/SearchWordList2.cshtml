@@ -1,0 +1,54 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+<div class="table-responsive">
+    <table class="table" style="direction:rtl; text-align: center;font-size:11px;">
+        <thead>
+            <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
+                <th>eng</th>
+                <th>per</th>
+                <th>level</th>
+                <th>DateRefresh</th>
+                <th>Success</th>
+                <th>UnSuccess</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var item in Model)
+            {
+                <tr WordId="@item.id" style="background-color:black;color:white;font-size: 14px;">
+                    <td>@item.eng</td>
+                    <td>@item.per</td>
+                    <td class="level">@item.level</td>
+                    <td>@item.date_refresh</td>
+                    <td>@item.SuccessCount</td>
+                    <td>@item.UnSuccessCount</td>
+                </tr>
+                foreach (var itemExample in item.lstExample)
+                {
+                    <tr style="background-color:#d6d5c7;color:black;text-align:left">
+                        <td class="Examplecls" style="white-space:pre" colspan="6"  data_id="@item.id" ExampleId="@itemExample.id"><span>@itemExample.example</span></td>
+                        @*<td colspan="1"><span style="color:red" class='fa fa-remove pointer' data_id="@item.id"  ExampleId="@itemExample.id"></span></td>*@
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    ////نمایش معنی لغت
+    //$("#HeaderExample").on("click", "span", function () {
+    //    $("span").css({ "display": "inline" });
+    //});
+    //$("#DicBaMesalPro").on("click", "table tr td", function () {
+    //    $(this).find('span').css({ "display": "inline" });
+    //});
+    //$("#DicBaMesalPro").on("click", "table tr td .ShowExample", function () {
+    //    var data_id = $(this).attr("data_id");
+    //    $(".Examplecls").each(function () {
+    //        var i = $(this).attr("data_id");
+    //        if (data_id == i)
+    //            $(this).removeAttr("style");
+    //        $(this).css({ "white-space": "pre" });
+
+    //    });
+    //});
+</script>
