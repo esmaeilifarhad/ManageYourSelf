@@ -62,7 +62,20 @@
     @*<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>*@
     <script src="~/Scripts/angular.min.js"></script>
 
- 
+ <script>
+     $(document).ready(function () {
+         //-------------execute when load client listnav
+         /*
+         setInterval(function () {
+             ListTaskFutureChk();
+             var dt = new Date();
+             var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+             console.log("exe ListTaskFutureChk in MasterPage: " + time);
+         }, 400000);
+         */
+     });
+
+ </script>
 </head>
 <body onload="BindTimes()">
     <!--==========================

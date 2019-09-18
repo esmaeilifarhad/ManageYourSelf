@@ -149,7 +149,7 @@ namespace ManageYourSelfMVC.Controllers
         {
             List<ViewModels.DaramadVM> lstDaramadVM = new List<ViewModels.DaramadVM>();
             string toDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat();
-            string firstDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().Substring(0, 4) + "01";
+            string firstDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().Substring(0,6) + "01";
 
             var res = DB.Daramads.Where(q => q.MojoodyBank.UserId == UserId ).OrderBy(q => q.MojoodyBankId).ThenByDescending(q => q.Date).ThenByDescending(q=>q.DaramadId).AsEnumerable().Where(q=> int.Parse(q.Date) >= int.Parse(firstDate) && int.Parse(q.Date) <= int.Parse(toDate)).ToList();
             foreach (var item in res)

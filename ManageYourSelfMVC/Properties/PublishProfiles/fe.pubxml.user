@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2018 17:59:50</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.dll">
-      <publishTime>07/18/2019 08:03:02</publishTime>
+      <publishTime>09/15/2019 10:58:43</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>02/01/2018 08:13:16</publishTime>
@@ -149,6 +149,45 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/font-awesome.min.css">
       <publishTime>05/18/2018 17:20:38</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.all.min.js">
+      <publishTime>07/25/2019 07:36:09</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.calendar.min.js">
+      <publishTime>07/25/2019 07:55:59</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.common.min.css">
+      <publishTime>07/25/2019 07:36:40</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.core.min.js">
+      <publishTime>07/25/2019 07:55:59</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.default.min.css">
+      <publishTime>07/25/2019 07:36:57</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.messages.fa-IR.min.js">
+      <publishTime>07/25/2019 07:55:59</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.numerictextbox.min.js">
+      <publishTime>07/25/2019 07:55:59</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.web.js">
+      <publishTime>07/25/2019 07:56:00</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.web.min.js">
+      <publishTime>07/25/2019 07:56:01</publishTime>
+    </File>
+    <File Include="Content/Kendo/kendo.window.min.js">
+      <publishTime>07/25/2019 07:56:01</publishTime>
+    </File>
+    <File Include="Content/Kendo/moment-jalaali.js">
+      <publishTime>07/25/2019 07:56:02</publishTime>
+    </File>
+    <File Include="Content/Kendo/moment.min.js">
+      <publishTime>07/25/2019 07:56:01</publishTime>
+    </File>
+    <File Include="Content/Kendo/persian-date.min.js">
+      <publishTime>07/25/2019 07:56:02</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>02/01/2018 12:45:22</publishTime>
@@ -849,6 +888,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/DakhloKharj/ListTypeHazineh.cshtml">
       <publishTime>10/12/2018 20:21:30</publishTime>
     </File>
+    <File Include="Views/DakhloKharj/ListTypeHazinehKendo.cshtml">
+      <publishTime>07/25/2019 08:33:47</publishTime>
+    </File>
     <File Include="Views/DakhloKharj/Rpt_ListGroupHazine.cshtml">
       <publishTime>02/21/2019 13:54:51</publishTime>
     </File>
@@ -1075,7 +1117,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/02/2018 08:57:58</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutBizPage.cshtml">
-      <publishTime>06/18/2019 17:55:44</publishTime>
+      <publishTime>07/21/2019 16:09:51</publishTime>
     </File>
     <File Include="Views/Sport/Create.cshtml">
       <publishTime>11/25/2018 22:37:20</publishTime>
@@ -1120,7 +1162,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2019 08:34:05</publishTime>
     </File>
     <File Include="Views/Task/ListTaskFutureChk.cshtml">
-      <publishTime>07/17/2019 17:02:39</publishTime>
+      <publishTime>07/18/2019 08:14:46</publishTime>
     </File>
     <File Include="Views/Task/ListTaskGeneral.cshtml">
       <publishTime>07/01/2019 09:10:31</publishTime>
@@ -1141,7 +1183,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 12:52:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/06/2019 14:37:05</publishTime>
+      <publishTime>09/15/2019 10:58:52</publishTime>
     </File>
   </ItemGroup>
 </Project>
