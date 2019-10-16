@@ -649,8 +649,9 @@ function TimingPost()
                       }
                       ListTaskGeneral();
                       ListTask("anjamnashode");
+
                       timeOff();
-                     
+                      RefreshTask();
                   }
                   else {
                       alert("خطا در ثبت");

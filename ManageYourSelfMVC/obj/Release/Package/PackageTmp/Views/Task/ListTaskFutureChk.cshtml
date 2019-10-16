@@ -4,6 +4,7 @@
     span {
         margin: 2px;
     }
+
     .Categories td {
         border: none;
         color: black;
@@ -13,7 +14,7 @@
 
         .Categories td:hover {
             opacity: 1;
-            color:darkred;
+            color: darkred;
         }
 </style>
 
@@ -24,48 +25,51 @@
 </div>
 
 @*<div class="row Categories">
-    @foreach (var item in Model)
-    {
-        <span><input type="checkbox" value="@item.CatId" /></span><span CatId="@item.CatId" class="CreateNewTask">@item.Title</span>
-    }
-</div>*@
+        @foreach (var item in Model)
+        {
+            <span><input type="checkbox" value="@item.CatId" /></span><span CatId="@item.CatId" class="CreateNewTask">@item.Title</span>
+        }
+    </div>*@
 
 <div class="row Categories">
-@{
-    //تعداد رکورد در هر ردیف
-    int rowCount = 4;
-    int colCount =( (Model.Count) / rowCount);
+    @{
+        //تعداد رکورد در هر ردیف
+        int rowCount = 4;
+        int colCount = ((Model.Count) / rowCount);
     }
-@for (int k = 0; k <= colCount; k++)
-{
-    if (k == colCount)
+    @for (int k = 0; k <= colCount; k++)
     {
-        <table>
-            @for (int i = (Model.Count / colCount) * k; i<Model.Count; i++)
-            {
-                <tr>
-                    <td><span><input style="cursor:pointer" type="checkbox" value="@Model[i].CatId" /></span><span style="cursor:pointer" CatId="@Model[i].CatId" class="CreateNewTask">@Model[i].Title</span></td>
-                </tr>
-            }
-        </table>
-    }
-    else
-    {
-    <table>
-        @for (int i = (Model.Count / colCount) * k; i < (Model.Count / colCount) * (k + 1); i++)
+        if (k == colCount)
         {
-            <tr>
-                <td><span><input style="cursor:pointer" type="checkbox" value="@Model[i].CatId" /></span><span style="cursor:pointer" CatId="@Model[i].CatId" class="CreateNewTask">@Model[i].Title</span></td>
-            </tr>
+            <table>
+                @for (int i = (Model.Count / colCount) * k; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <span><input style="cursor:pointer" type="checkbox" value="@Model[i].CatId" /></span>
+                            <span style="cursor:pointer" CatId="@Model[i].CatId" class="CreateNewTask">@Model[i].Title</span>
+                            <span style="color:darkmagenta" class="EditCat fa fa-apple" CatId="@Model[i].CatId"></span>
+                        </td>
+                    </tr>
+                }
+            </table>
         }
-    </table>
+        else
+        {
+            <table>
+                @for (int i = (Model.Count / colCount) * k; i < (Model.Count / colCount) * (k + 1); i++)
+                {
+                    <tr>
+                        <td>
+                            <span><input style="cursor:pointer" type="checkbox" value="@Model[i].CatId" /></span>
+                            <span style="cursor:pointer" CatId="@Model[i].CatId" class="CreateNewTask">@Model[i].Title</span>
+                            <span style="color:darkmagenta" class="EditCat fa fa-apple" CatId="@Model[i].CatId"></span>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
     }
-}
     <br />
-  
-    </div>
 
-
-
-
-
+</div>

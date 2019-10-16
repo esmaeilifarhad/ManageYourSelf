@@ -104,9 +104,13 @@ function UpdateMasterDataPost() {
               CatId:CatId
            }),
            success: function (result) {
+               debugger
                RefreshMasterData();
                ListTaskGeneral();
                ListTaslLevelHigh();
+               ListTaskFutureChk();
+              
+              // RefreshChk();
            }
        });
 }
