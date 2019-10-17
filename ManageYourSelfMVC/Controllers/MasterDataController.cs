@@ -58,6 +58,12 @@ namespace ManageYourSelfMVC.Controllers
             {
                 item.CatId = null;
             }
+            //کل ورزش ها را حذف میکنم
+            var sports = DB.Sports.Where(q=>q.CatId==Id);
+            foreach (var item in sports)
+            {
+                DB.Sports.Remove(item);
+            }
             DB.SaveChanges();
             bool result = false;
             var Old = DB.Cats.SingleOrDefault(q => q.CatId == Id);

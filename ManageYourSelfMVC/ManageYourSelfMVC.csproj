@@ -1101,6 +1101,7 @@
     <Content Include="Scripts\Logic\Karkard.js" />
     <Content Include="Scripts\Logic\MainAngular.js" />
     <Content Include="Scripts\Logic\MasterData.js" />
+    <Content Include="Scripts\Logic\Public.js" />
     <Content Include="Scripts\Logic\RoutineJob.js" />
     <Content Include="Scripts\Logic\Setting - Copy.js" />
     <Content Include="Scripts\Logic\Setting.js" />
