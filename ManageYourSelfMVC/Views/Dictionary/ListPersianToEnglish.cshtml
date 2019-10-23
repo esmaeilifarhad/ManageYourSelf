@@ -8,14 +8,15 @@
             <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
                 <th>eng</th>
                 <th>per</th>
+                <th>Up</th>
+                <th>Down</th>
                 <th>level</th>
                 <th>DateRefresh</th>
                 <th>Success</th>
                 <th>UnSuccess</th>
                 <th>eye</th>
                 <th>NewExa</th>
-                <th>Up</th>
-                <th>Down</th>
+               
                 <th>Edit</th>
                 <th>RemoveExa</th>
                 <th>Remove</th>
@@ -27,8 +28,10 @@
                 <tr WordId="@item.id" style="background-color:black;color:white;font-size: 14px;white-space:nowrap">
                     <td><span style="display:none;" class="per" onclick="MakeSound2(this)">@item.eng</span></td>
                     <td>@item.per</td>
+                    <td><button style='color:green' class='btn btn-danger pointer LevelEngUp' data_id="@item.id"></button></td>
+                    <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
                     <td class="level">@item.level</td>
-                    <td>@item.date_refresh</td>
+                    <td class="dateCol"><span style="padding-right:10px">@item.date_refresh</span></td>
                     <td>@item.SuccessCount</td>
                     <td>@item.UnSuccessCount</td>
                     @if (item.HasExample > 0)
@@ -40,8 +43,13 @@
                         <td><span class="fa fa-eye-slash ShowExample pointer" style='color:yellow' data_id="@item.id"></span></td>
                     }
                     <td><span style='color:dodgerblue' class='fa fa-list-alt btnExa pointer' data_id="@item.id"></span></td>
-                    <td><span style='color:red' class='fa fa-sort-up pointer LevelEngUp' data_id="@item.id"></span></td>
-                    <td><span style='color:green' class='fa fa-sort-down pointer LevelEngDown' data_id="@item.id"></span></td>
+
+                    @*<td><span style='color:red' class='fa fa-sort-up pointer LevelEngUp' data_id="@item.id"></span></td>
+                    <td><span style='color:green' class='fa fa-sort-down pointer LevelEngDown' data_id="@item.id"></span></td>*@
+
+      
+
+
                     <td><span style='color:purple' class='fa fa-edit pointer EditWord' data_id="@item.id"></span></td>
                     <td><span style='color:deeppink' class='fa fa-trash pointer' data_id="@item.id"></span></td>
                     <td><span style='color:mediumvioletred' class='fa fa-remove RemoveWord pointer' data_id="@item.id"></span></td>
@@ -66,6 +74,15 @@
 </div>
 
 <script>
+    $(".dateCol").each(function () {
+        debugger
+        var today = moment().format('jYYYY/jM/jD');//Today
+        var diffDays = showDays(today, $(this).text());//diff day : today to date
+        $($(this).prepend("<span style='color:red;padding-right:10px'>" + diffDays + "</span>"));
+        var dayOfWeek = calDayOfWeek($(this).text())//day of week
+        $($(this).prepend("<span style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
+    });
+
     /*$(document).ready(function () {
         var levelval = $('#DicBaMesalPro table tr:nth-child(2) .level').text();
         //console.log(levelval);

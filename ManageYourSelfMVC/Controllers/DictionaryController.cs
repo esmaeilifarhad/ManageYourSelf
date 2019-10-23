@@ -400,24 +400,108 @@ where example like '%"+str+ @"%'
 
                 string[] ids = str.Split(',');
 
-
-                var lstDic = DB.dic_tbl.Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.UserId, q.SuccessCount, q.UnSuccessCount }).Where(q => ids.Contains(q.level.ToString()) & q.UserId == UserId).OrderBy(q => q.date_refresh).ThenByDescending(q => new { q.level }).Take(10).ToList();
-                // var lstDic = DB.dic_tbl.Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh }).Where(q =>q.level.ToString().Contains(str) ).OrderBy(q => q.date_refresh).ThenByDescending(q => new { q.level }).ToList();
-                //var lstDic = (from Dic in DB.dic_tbl where Dic.level.ToString().Contains(str) select Dic).ToList();
-                foreach (var item in lstDic)
+                //badGhelegh
+                if (ids.Contains("101"))
                 {
-                    ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
-                    V.eng = item.eng;
-                    V.per = item.per;
-                    V.SuccessCount = item.SuccessCount;
-                    V.UnSuccessCount = item.UnSuccessCount;
-                    V.id = item.id;
-                    V.level = (int)item.level;
-                    V.date_refresh = item.date_refresh;
-                    V.HasExample = T.HasExample(item.id);
-                    V.lstExample = DB.example_tbl.Where(q => q.id_dic_tbl == item.id).ToList();
-                    lstV.Add(V);
+                    var lstDic = (from p in DB.dic_tbl
+                                  where p.UserId == UserId
+                                  orderby (((int)p.UnSuccessCount - (int)p.SuccessCount)) descending
+                                  //orderby p.UnSuccessCount descending
+                                  select p).AsEnumerable().Select(q => new
+                                  { q.eng, q.SuccessCount, q.UnSuccessCount, q.date_refresh, q.per, q.id, q.level, Grade = (q.UnSuccessCount - q.SuccessCount) }).Take(10).ToList();
+                    foreach (var item in lstDic)
+                    {
+                        ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
+                        V.eng = item.eng;
+                        V.per = item.per;
+                        V.SuccessCount = item.SuccessCount;
+                        V.UnSuccessCount = item.UnSuccessCount;
+                        V.id = item.id;
+                        V.level = (int)item.level;
+                        V.date_refresh = item.date_refresh;
+                        V.HasExample = T.HasExample(item.id);
+                        V.lstExample = DB.example_tbl.Where(q => q.id_dic_tbl == item.id).ToList();
+                        lstV.Add(V);
+                    }
                 }
+                //Top10LastMoroor
+                else if (ids.Contains("102"))
+                {
+                    var res = (from W in DB.dic_tbl
+                               where W.UserId == UserId
+                               orderby W.date_refresh
+                               select new { CountMoroor = ((int)W.UnSuccessCount + (int)W.SuccessCount),W.id ,W.eng, W.per, WordId = W.id, W.date_refresh, W.level, W.SuccessCount, W.UnSuccessCount }
+                                 ).Take(10).ToList();
+                    foreach (var item in res)
+                    {
+                        ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
+                        V.eng = item.eng;
+                        V.per = item.per;
+                        V.SuccessCount = item.SuccessCount;
+                        V.UnSuccessCount = item.UnSuccessCount;
+                        V.id = item.id;
+                        V.level = (int)item.level;
+                        V.date_refresh = item.date_refresh;
+                        V.HasExample = T.HasExample(item.id);
+                        V.lstExample = DB.example_tbl.Where(q => q.id_dic_tbl == item.id).ToList();
+                        lstV.Add(V);
+                    }
+                }
+                //کمترین تعداد مرور
+                else if (ids.Contains("103"))
+                {
+                    var res = (from W in DB.dic_tbl
+                               where W.UserId == UserId
+                               orderby (((int)W.UnSuccessCount + (int)W.SuccessCount))
+                               select new { CountMoroor = ((int)W.UnSuccessCount + (int)W.SuccessCount), W.eng, W.per, WordId = W.id , W.SuccessCount, W.UnSuccessCount, W.id, W.date_refresh, W.level }
+                             ).Take(10).ToList();
+
+                    foreach (var item in res)
+                    {
+                        ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
+                        V.eng = item.eng;
+                        V.per = item.per;
+                        V.SuccessCount = item.SuccessCount;
+                        V.UnSuccessCount = item.UnSuccessCount;
+                        V.id = item.id;
+                        V.level = (int)item.level;
+                        V.date_refresh = item.date_refresh;
+                        V.HasExample = T.HasExample(item.id);
+                        V.lstExample = DB.example_tbl.Where(q => q.id_dic_tbl == item.id).ToList();
+                        lstV.Add(V);
+                    }
+                }
+                else
+                {
+
+                    var lstDic = DB.dic_tbl.
+                    Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.UserId, q.SuccessCount, q.UnSuccessCount }).
+                    Where(q => ids.Contains(q.level.ToString()) & q.UserId == UserId).
+                    OrderBy(q => q.date_refresh).
+                    ThenByDescending(q => new { q.level }).
+                    Take(10).
+                    ToList();
+                    foreach (var item in lstDic)
+                    {
+                        ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
+                        V.eng = item.eng;
+                        V.per = item.per;
+                        V.SuccessCount = item.SuccessCount;
+                        V.UnSuccessCount = item.UnSuccessCount;
+                        V.id = item.id;
+                        V.level = (int)item.level;
+                        V.date_refresh = item.date_refresh;
+                        V.HasExample = T.HasExample(item.id);
+                        V.lstExample = DB.example_tbl.Where(q => q.id_dic_tbl == item.id).ToList();
+                        lstV.Add(V);
+                    }
+                }
+               
+
+
+                
+               
+
             }
             return PartialView("ListWordExampleDiv", lstV);
         }

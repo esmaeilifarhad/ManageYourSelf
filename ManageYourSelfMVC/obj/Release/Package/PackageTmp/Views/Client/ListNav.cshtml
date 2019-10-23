@@ -136,7 +136,12 @@
         <div class="row">
             <div class="col-sm-3 Category"></div>
             <div class="col-sm-6 Job"></div>
-            <div class="col-sm-3 PercentJob"></div>
+            <div class="col-sm-3 PercentJob">
+                <input type="button" name="CreatePercentJob" value="جدید" class="btn btn-info" />
+                <span></span>
+                <input type="button" name="ListPercentJob" value="بروز آوری" class="btn btn-info" />
+                <br>
+            </div>
         </div>
         @*<button onclick="ReportCircle()">CreateReport</button>
             <button onclick="rpt2()">rpt2</button>
@@ -503,6 +508,7 @@ a.diff(b, 'days')   // =1
         //-------------execute when load client listnav
         setInterval(function () {
             ListTaslLevelHigh();
+            ListTiming(0);
             var dt = new Date();
             var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
             console.log("exe ListTaslLevelHigh : " + time);

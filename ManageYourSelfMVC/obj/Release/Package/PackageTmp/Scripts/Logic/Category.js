@@ -136,6 +136,7 @@ function DeleteCategory(CategoryId) {
 //**************************************PercentJob*******************************************************
 //Create Get
 $("div .PercentJob").on("click", "input[name='CreatePercentJob']", function () {
+    debugger
     CreatePercentJobGet();
 });
 function CreatePercentJobGet() {
@@ -222,6 +223,7 @@ function UpdatePercentJobPost() {
        });
 }
 function ListPercentJob() {
+    debugger
     var urll = "/PercentJob/List";
     $.ajax({
         type: "Get",

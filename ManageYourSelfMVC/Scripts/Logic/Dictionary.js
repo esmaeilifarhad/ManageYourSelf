@@ -889,6 +889,7 @@ function CheckedInput() {
 }
 function ListWordExampleDivChk(MyArray)
 {
+    debugger
     $.ajax(
      {
          type: 'Post',

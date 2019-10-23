@@ -134,3 +134,4 @@ function showDays(firstDate, secondDate) {
     return(Math.floor(days));
 
 }
+
