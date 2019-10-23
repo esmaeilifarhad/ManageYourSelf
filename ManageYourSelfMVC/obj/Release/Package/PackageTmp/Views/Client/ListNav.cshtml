@@ -5,7 +5,7 @@
 }
 <p>@TempData["Error"]</p>
 @*<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
-<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>*@
+    <script src="~/Scripts/Bootstrap_v3.3.7.js"></script>*@
 <style>
     .vl {
         border-left: 1px dotted black;
@@ -88,7 +88,6 @@
 </div>
 <!-- Tab panes -->
 <div class="tab-content" style="font-family:BNazanin" ng-app="angularApp">
-
     <!--موجودی-->
     <div id="MojoodyBank" class="tab-pane fade">
         <div class="row"><div class="col-sm-12 ListMojoodyBank"></div></div>
@@ -140,19 +139,19 @@
             <div class="col-sm-3 PercentJob"></div>
         </div>
         @*<button onclick="ReportCircle()">CreateReport</button>
-        <button onclick="rpt2()">rpt2</button>
-        <div class="row">
-          
-               
-                <div  class="col-sm-12">
-                    <div  id="chartContainer" style="height: 300px; width: 100%;"></div>
-                </div>
-           
-         
-            <div id="chartContainer" style="width:100%; height:300px;"></div>*@
-          
+            <button onclick="rpt2()">rpt2</button>
+            <div class="row">
 
-       @*</div>*@
+
+                    <div  class="col-sm-12">
+                        <div  id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    </div>
+
+
+                <div id="chartContainer" style="width:100%; height:300px;"></div>*@
+
+
+        @*</div>*@
     </div>
     <!--زمان فعالیت-->
     <div id="TimeForJob" class="tab-pane">
@@ -295,20 +294,20 @@
         <br>
         <a target="_blank" href="http://estjt.ir/price">آدرس نمایش قیمت روز 2</a>
         @*<div class="row">
-            <div class="col-lg-12">
-                <iframe src="http://estjt.ir" style="width:100%"></iframe>
-            </div>
+                <div class="col-lg-12">
+                    <iframe src="http://estjt.ir" style="width:100%"></iframe>
+                </div>
 
-        </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <iframe src="http://estjt.ir/price" style="width:100%"></iframe>
+                </div>
+
+            </div>*@
         <div class="row">
             <div class="col-lg-12">
-                <iframe src="http://estjt.ir/price" style="width:100%"></iframe>
-            </div>
-
-        </div>*@
-        <div class="row">
-            <div class="col-lg-12">
-               <button class="btn btn-danger" onclick="transferGeramTala()">هر گرم طلا</button>
+                <button class="btn btn-danger" onclick="transferGeramTala()">هر گرم طلا</button>
             </div>
 
         </div>
@@ -337,7 +336,7 @@
                     </tr>
                     <tr>
                         <td><span>قیمت</span> </td>
-                        <td><input type="number" name="resultPrice" value="" style="background-color:red"/></td>
+                        <td><input type="number" name="resultPrice" value="" style="background-color:red" /></td>
                     </tr>
                 </table>
             </div>
@@ -365,7 +364,7 @@
                     </tr>
                     <tr>
                         <td><span>قیمت</span> </td>
-                        <td><input type="number" name="resultPrice" value=""  style="background-color:red"/></td>
+                        <td><input type="number" name="resultPrice" value="" style="background-color:red" /></td>
                     </tr>
                 </table>
             </div>
@@ -393,7 +392,7 @@
                     </tr>
                     <tr>
                         <td><span>قیمت</span> </td>
-                        <td><input type="number" name="resultPrice" value=""  style="background-color:red"/></td>
+                        <td><input type="number" name="resultPrice" value="" style="background-color:red" /></td>
                     </tr>
                 </table>
             </div>
@@ -408,12 +407,105 @@
 <script type="text/javascript">
     //**********************************
     $(document).ready(function () {
+        /*
+        const m = moment();
+       
+        console.log(moment().format('jYYYY/jM/jD'));//Today
+        //console.log(m.locale('fa'));
+        console.log(m.from('2018-04-04', 'en', 'YYYY-MM-DD'));// it would be in jalali system
+        console.log(m.format('YY-MM-DD'));
+        console.log(moment('2013-8-25 16:40:00', 'YYYY-M-D HH:mm:ss').endOf('jMonth').format('jYYYY/jM/jD HH:mm:ss')) // 1392/6/31 23:59:59)
+
+        console.log(moment('1360/5/26', 'jYYYY/jM/jD')) // Parse a Jalaali date
+        console.log(m.format('jYYYY/jM/jD [is] YYYY/M/D')) // 1360/5/26 is 1981/8/17
+
+        console.log("سال جاری" + m.jYear()) // 1360
+        console.log(m.jMonth()) // 4
+        console.log(m.jDate()) // 26
+
+        console.log("چندمین روز سال" + m.jDayOfYear()) // 150
+        console.log("چندمین هفته سال" + m.jWeek()) // 22
+        console.log(m.jWeekYear()) // 1360
+     
+        /*اضافه کردن سال ماه روز به تاریخ جاری*/
+        /*
+       m.add(1, 'jYear')
+       m.add(2, 'jMonth')
+       m.add(-2, 'day')
+       console.log(m.format('jYYYY/jM/jD')) // 1361/7/29
+       */      
+        /*تاریخ جاری را به صورت 98/12/01 نمایش میدهد*/
+/*
+        m.jMonth(11)
+        m.startOf('jMonth')
+        console.log(m.format('jYYYY/jM/jD')) // 1361/12/1
+
+
+        m.jYear(1392)
+        m.startOf('jYear')
+        m.format('jYYYY/jM/jD') // 1392/1/1
+
+        m.subtract(1, 'jYear')
+        m.subtract(1, 'jMonth')
+        m.format('jYYYY/jM/jD') // 1390/12/1
+
+        moment('1391/12/30', 'jYYYY/jMM/jDD').isValid() // true (leap year)
+        moment('1392/12/30', 'jYYYY/jMM/jDD').isValid() // false (common year)
+        moment.jIsLeapYear(1391) // true
+        moment.jIsLeapYear(1392) // false
+
+        moment.jDaysInMonth(1395, 11) // 30
+        moment.jDaysInMonth(1394, 11) // 29
+
+        moment('1392/6/3 16:40', 'jYYYY/jM/jD HH:mm').format('YYYY-M-D HH:mm:ss') // 2013-8-25 16:40:00
+
+        moment('2013-8-25 16:40:00', 'YYYY-M-D HH:mm:ss').endOf('jMonth').format('jYYYY/jM/jD HH:mm:ss') // 1392/6/31 23:59:59
+
+        // Complex parse:
+        moment('1981 5 17', 'YYYY jM D').format('YYYY/MM/DD') // 1981/07/17
+
+
+        public calDayOfWeek = (date: string): any => {
+        const moment = require('moment-jalaali');
+        const numberWeek = moment(date, 'jYYjMMjDD').weekday();
+        let day: string = "..";
+        switch (numberWeek) {
+            case 0:
+                day = "یکشنبه";
+                break;
+            case 1:
+                day = "دوشنبه";
+                break;
+            case 2:
+                day = "سه شنبه";
+                break;
+            case 3:
+                day = "چهارشنبه";
+                break;
+            case 4:
+                day = "پنج شنبه";
+                break;
+            case 5:
+                day = "جمعه";
+                break;
+            case 6:
+                day = "شنبه";
+        }
+        return day;
+    }
+
+
+    var a = moment([2007, 0, 29]);
+var b = moment([2007, 0, 28]);
+a.diff(b, 'days')   // =1
+
+        */
         //-------------execute when load client listnav
         setInterval(function () {
             ListTaslLevelHigh();
             var dt = new Date();
             var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-            console.log("exe ListTaslLevelHigh : "+time);
+            console.log("exe ListTaslLevelHigh : " + time);
         }, 300000);
         //-------------execute List When Click on Tab
         $("ul li a[href='#menu2']").on("click", function () {
@@ -436,83 +528,7 @@
             ListJob();
         });
 
-        //***********************************************MasterModal*****************************************
-        $('#MasterModal .btnSave').on("click", function () {
-            debugger;
-            var NameTbl = $("#MasterModal .BodyModal table").attr("nametbl")
-            if (NameTbl == "tbltask")
-                CreateTask();
-            if (NameTbl == "tblword")
-                CreateWord();
-            if (NameTbl == "UpdateTask")
-                UpdateTask();
-            //if (NameTbl == "UpdateWord") {
-            //    UpdateWord();
-            //}
-        });
-        //Create Post  Update
-        $("#MasterModal .btnSave").on("click", function () {
-            debugger;
-            //  CreateRoutineJob
-            var NameOperator = $("#MasterModal .BodyModal div").attr("Name");
-            if (NameOperator == "Create")
-                CreateCategoryPost();
-            if (NameOperator == "Update") {
-                UpdateCategory();
-            }
-            if (NameOperator == "CreateJob") {
-                CreateJobPost();
-            }
-            if (NameOperator == "CreateRoutineJob") {
-                CreateRoutineJobPost();
-            }
-            if (NameOperator == "EditJob") {
-                var JobId = $("#MasterModal table").attr("jobid");
-                UpdateJob(JobId);
-            }
-            if (NameOperator == "CreateKarkard") {
-                CreateKarkardPost();
-            }
-            if (NameOperator == "CreatePercentJob") {
-                CreatePercentJobPost();
-            }
-            if (NameOperator == "EditPercentJob") {
-                UpdatePercentJobPost();
-            }
-            if (NameOperator == "CreateMojoodyBank") {
-                CreateMojoodyBankPost();
-            }
-            if (NameOperator == "EditMojoodyBank") {
-                UpdateMojoodyBank();
-            }
-            if (NameOperator == "CreateTypeHazineh") {
-                CreateTypeHazinehPost();
-            }
-            if (NameOperator == "EditTypeHazineh") {
-                UpdateTypeHazineh();
-            }
-            if (NameOperator == "CreateDaramad") {
-                CreateDaramadPost();
-            }
-            if (NameOperator == "EditMojoodyBankBalance") {
-                UpdateMojoodyBankBalance();
-            }
-            if (NameOperator == "Exchange") {
-                UpdateMojoodyBankExchange();
-            }
-            if (NameOperator == "CreateMaterData") {
-                CreateMasterDataPost();
-            }
-            if (NameOperator == "UpdateMaterData") {
-                UpdateMasterDataPost();
-            }
-            if (NameOperator == "UpdateTiming") {
-                TimingPost();
-            }
-            if (NameOperator == "ChangeTodayTask") {
-                ChangeTodayTaskPost();
-            }
-        });
+    
 
         function ListHazineMohem() {
             var urll = "/HazineMohem/ListKharj";
@@ -529,11 +545,6 @@
                 }
             })
         }
-      
-       
-       
-
-        
         //********************
         function ShowStoreHoghoghPivot() {
             var urll = "/StoreHoghogh/ShowMazayaStoreHoghogh";
@@ -610,80 +621,4 @@
         });
     });
 </script>
-<!--Report-->
-@*<script>
- function  ReportCircle() {
-
-var options = {
-	title: {
-		text: "فرهاد اسماعیلی"
-	},
-	subtitles: [{
-		text: "As of November, 2017"
-	}],
-	animationEnabled: true,
-	data: [{
-		type: "pie",
-		startAngle: 40,
-		toolTipContent: "<b>{label}</b>: {y}%",
-		showInLegend: "true",
-		legendText: "{label}",
-		indexLabelFontSize: 16,
-		indexLabel: "{label} - {y}%",
-		dataPoints: [
-			{ y: 48.36, label: "Windows 7" },
-			{ y: 26.85, label: "Windows 10" },
-			{ y: 1.49, label: "Windows 8" },
-			{ y: 6.98, label: "Windows XP" },
-			{ y: 6.53, label: "Windows 8.1" },
-			{ y: 2.45, label: "Linux" },
-			{ y: 3.32, label: "Mac OS X 10.12" },
-			{ y: 4.03, label: "Others" }
-		]
-	}]
-};
-$("#chartContainer").CanvasJSChart(options);
-
-}
-</script>
-<script>
- function rpt2() {
-
-var options = {
-	animationEnabled: true,
-	title: {
-		text: "GDP Growth Rate - 2016"
-	},
-	axisY: {
-		title: "Growth Rate (in %)",
-		suffix: "%",
-		includeZero: false
-	},
-	axisX: {
-		title: "Countries"
-	},
-	data: [{
-		type: "column",
-		yValueFormatString: "#,##0.0#"%"",
-		dataPoints: [
-			{ label: "Iraq", y: 10.09 },
-			{ label: "Turks & Caicos Islands", y: 9.40 },
-			{ label: "Nauru", y: 8.50 },
-			{ label: "Ethiopia", y: 7.96 },
-			{ label: "Uzbekistan", y: 7.80 },
-			{ label: "Nepal", y: 7.56 },
-			{ label: "Iceland", y: 7.20 },
-			{ label: "India", y: 7.1 }
-
-		]
-	}]
-};
-$("#chartContainer").CanvasJSChart(options);
-
-}
-</script>*@
-
-
-
-
 

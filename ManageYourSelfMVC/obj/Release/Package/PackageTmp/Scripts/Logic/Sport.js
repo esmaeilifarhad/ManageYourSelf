@@ -314,6 +314,7 @@ $(".ListSport").on("click", ".fa-edit", function () {
 function ColorAvgMax()
 {
     var MaxNum = 0;
+    var MinNum = 1000000;
     var AvgNum = 0;
     var CountNum = 0;
     $(".SportPivot .DeleteSport").each(function () {
@@ -324,9 +325,14 @@ function ColorAvgMax()
             MaxNum = y;
             //this.setAttribute("style","color:blue")
         }
+        if (y < MinNum) {
+            MinNum = y;
+            //this.setAttribute("style","color:blue")
+        }
 
     })
     $(".SportPivot .DeleteSport").each(function () {
+      
         var y = parseInt($(this).text());
         if (y > (AvgNum / CountNum)) {
             this.setAttribute("style", "color:green")
@@ -337,6 +343,10 @@ function ColorAvgMax()
         if (y == MaxNum) {
             //MaxNum=y;
             this.setAttribute("style", "color:blue")
+        }
+        if (y == MinNum) {
+            //MaxNum=y;
+            this.setAttribute("style", "color:gray")
         }
 
     })

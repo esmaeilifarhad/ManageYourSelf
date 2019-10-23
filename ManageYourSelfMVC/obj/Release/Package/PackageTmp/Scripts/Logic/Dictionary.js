@@ -249,7 +249,7 @@ $("input[name='ListDictionary']").on("click", function () {
     ListDictionary();
 });
 //------------Remove Word
-$("body .MyDictionary").on("click", ".fa-remove", function () {
+$("body .MyDictionary").on("click", ".RemoveWord", function () {
     var WordId = $(this).attr("data_id");
     var result = confirm("آیا حذف انجام شود");
     if (result) {

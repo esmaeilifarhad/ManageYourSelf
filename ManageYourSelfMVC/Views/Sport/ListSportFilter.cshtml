@@ -38,7 +38,10 @@
             <hr />
          
           <span style="color:green" class="Text" tabindex="1">@item.Title</span>
-          <span class="Text" tabindex="3">@item.Date.Substring(0, 4)/@item.Date.Substring(4, 2)/@item.Date.Substring(6, 2)</span>
+        
+          <span class="Text dateCol" tabindex="3">@item.Date.Substring(0, 4)/@item.Date.Substring(4, 2)/@item.Date.Substring(6, 2)</span>
+         
+          @*<span onclick="calDayOfWeek('@item.Date.ConvertDateToSlash()')">{@item.Date.ConvertDateToSlash()}</span>*@
           <span class="DeleteSport" tabindex="5" SportId="@item.SportId">@item.Tedad</span>
             row += 1;
         }
@@ -52,3 +55,11 @@
     }
     <span class="Num" style="color:red">@sumTedad</span>
 </div>
+<script>
+    $(".SportPivot .dateCol").each(function () {
+        //console.log($(this).text());
+        var dayOfWeek=calDayOfWeek($(this).text())
+       // console.log(calDayOfWeek($(this).text()))
+        $($(this).prepend("<span>"+dayOfWeek+"</span>"));
+    });  
+</script>

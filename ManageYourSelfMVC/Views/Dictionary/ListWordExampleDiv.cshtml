@@ -38,7 +38,7 @@
                     <td onclick="MakeSound2(this)">@item.eng</td>
                     <td><span style="display:none;" class="per">@item.per</span></td>
                     <td class="level">@item.level</td>
-                    <td>@item.date_refresh</td>
+                    <td class="dateCol"><span style="padding-right:10px">@item.date_refresh</span></td>
                     <td>@item.SuccessCount</td>
                     <td>@item.UnSuccessCount</td>
                     @if (item.HasExample > 0)
@@ -76,52 +76,13 @@
         </tbody>
     </table>
 </div>
+<script>
 
-@*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.95.1/js/materialize.min.js"></script>
-
-    <script>
-
-        $(function () {
-            if ('speechSynthesis' in window) {
-                speechSynthesis.onvoiceschanged = function () {
-                    var $voicelist = $('#voices');
-
-                    if ($voicelist.find('option').length == 0) {
-                        speechSynthesis.getVoices().forEach(function (voice, index) {
-                            var $option = $('<option>')
-                            .val(index)
-                            .html(voice.name + (voice.default ? ' (default)' : ''));
-
-                            $voicelist.append($option);
-                        });
-
-                        $voicelist.material_select();
-                    }
-                }
-
-                $('#speak').click(function () {
-                    var text = $('#message').val();
-                    text = "hello";
-                    var msg = new SpeechSynthesisUtterance();
-                    var voices = window.speechSynthesis.getVoices();
-                    msg.voice = voices[$('#voices').val()];
-                    msg.rate = $('#rate').val() / 10;
-                    msg.pitch = $('#pitch').val();
-                    msg.text = text;
-
-                    msg.onend = function (e) {
-                        console.log('Finished in ' + event.elapsedTime + ' seconds.');
-                    };
-
-                    speechSynthesis.speak(msg);
-                })
-            } else {
-                $('#modal1').openModal();
-            }
-        });
-
-
-
-    </script>
-*@
+    $(".table-responsive .dateCol").each(function () {
+        var today=moment().format('jYYYY/jM/jD');//Today
+        var diffDays = showDays(today, $(this).text());
+        $($(this).prepend("<span style='color:red;padding-right:10px'>" + diffDays + "</span>"));
+        var dayOfWeek=calDayOfWeek($(this).text())
+        $($(this).prepend("<span style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
+    });
+</script>

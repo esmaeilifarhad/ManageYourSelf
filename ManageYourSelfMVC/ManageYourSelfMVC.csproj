@@ -1075,6 +1075,7 @@
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\JalalyDate\moment-jalaali.js" />
+    <Content Include="Scripts\JalalyDate\moment.js" />
     <Content Include="Scripts\JalalyDate\moment.min.js" />
     <Content Include="Scripts\JalalyDate\persian-date.min.js" />
     <Content Include="Scripts\JalalyDate\persian-datepicker.min.css" />
