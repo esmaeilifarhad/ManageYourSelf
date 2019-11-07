@@ -1316,6 +1316,9 @@
     <Compile Include="Models\DomainModels\Setting.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DomainModels\Seyed.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DomainModels\SliderPhoto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

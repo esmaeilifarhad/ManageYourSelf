@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2018 17:59:50</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.dll">
-      <publishTime>10/23/2019 11:09:33</publishTime>
+      <publishTime>11/03/2019 21:28:49</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>02/01/2018 08:13:16</publishTime>
@@ -250,7 +250,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 08:13:14</publishTime>
     </File>
     <File Include="Models/DomainModels/Model1.edmx.diagram">
-      <publishTime>06/24/2019 13:54:02</publishTime>
+      <publishTime>10/30/2019 11:50:26</publishTime>
     </File>
     <File Include="MyTemplate/MasterTemplate/.gitattributes">
       <publishTime>02/01/2018 08:47:28</publishTime>
@@ -3028,7 +3028,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/21/2019 14:02:51</publishTime>
     </File>
     <File Include="Scripts/Logic/Dictionary.js">
-      <publishTime>10/23/2019 09:24:30</publishTime>
+      <publishTime>10/30/2019 14:24:06</publishTime>
     </File>
     <File Include="Scripts/Logic/Gold.js">
       <publishTime>06/09/2019 08:20:56</publishTime>
@@ -3046,7 +3046,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/17/2019 09:22:28</publishTime>
     </File>
     <File Include="Scripts/Logic/Public.js">
-      <publishTime>10/23/2019 09:14:45</publishTime>
+      <publishTime>10/23/2019 16:06:44</publishTime>
     </File>
     <File Include="Scripts/Logic/RoutineJob.js">
       <publishTime>06/09/2019 16:39:54</publishTime>
@@ -3211,7 +3211,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/17/2018 14:28:36</publishTime>
     </File>
     <File Include="Views/Client/ListNav.cshtml">
-      <publishTime>10/23/2019 11:03:15</publishTime>
+      <publishTime>10/23/2019 16:06:43</publishTime>
     </File>
     <File Include="Views/Client/MainHome.cshtml">
       <publishTime>02/06/2018 16:03:58</publishTime>
@@ -3295,13 +3295,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2018 16:55:09</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleDiv.cshtml">
-      <publishTime>10/23/2019 09:06:08</publishTime>
+      <publishTime>10/30/2019 13:44:07</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleFalse.cshtml">
       <publishTime>06/09/2019 22:27:21</publishTime>
     </File>
     <File Include="Views/Dictionary/MainDictionary.cshtml">
-      <publishTime>10/23/2019 10:03:40</publishTime>
+      <publishTime>10/30/2019 13:40:06</publishTime>
     </File>
     <File Include="Views/Dictionary/NewExample.cshtml">
       <publishTime>06/07/2018 11:24:48</publishTime>

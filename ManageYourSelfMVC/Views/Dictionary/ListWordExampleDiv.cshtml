@@ -29,6 +29,8 @@
                 <th>Edit</th>
                 <th>RemoveExa</th>
                 <th>Remove</th>
+                <th>IsArchieve</th>
+
             </tr>
         </thead>
         <tbody id="myTable">
@@ -57,11 +59,20 @@
                     <td><span style='color:purple' class='fa fa-edit pointer EditWord' data_id="@item.id"></span></td>
                     <td><span style='color:deeppink' class='fa fa-trash pointer' data_id="@item.id"></span></td>
                     <td><span style='color:mediumvioletred' class='fa fa-remove RemoveWord pointer' data_id="@item.id"></span></td>
+                    @if (item.IsArchieve == true)
+                    {
+                        <td><span style='color:green' class='fa fa-archive ArchieveWord  pointer' data_id="@item.id"></span></td>
+                    }
+                    else
+                    {
+                        <td><span style='color:red' class='fa fa-archive ArchieveWord  pointer' data_id="@item.id"></span></td>
+                    }
+                 
                 </tr>
                 foreach (var itemExample in item.lstExample)
                 {
                     <tr style="background-color:#d6d5c7;color:black;text-align:left">
-                        <td class="Examplecls" colspan="13" style="display:none;direction:ltr" data_id="@item.id" ExampleId="@itemExample.id">
+                        <td class="Examplecls" colspan="14" style="display:none;direction:ltr" data_id="@item.id" ExampleId="@itemExample.id">
                             <span>@itemExample.example</span>
                             <span style='color:yellow' class='fa fa-edit pointer ShowEditExample' ExampleId="@itemExample.id"></span>
                             <br />

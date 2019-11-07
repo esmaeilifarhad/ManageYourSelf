@@ -45,6 +45,7 @@ namespace ManageYourSelfMVC.Controllers
             D.level = 10;
             D.UnSuccessCount = 0;
             D.SuccessCount = 0;
+            D.IsArchieve = false;
             D.timeword = 0;
             D.date_s = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
             D.date_refresh = D.date_s;
@@ -149,6 +150,36 @@ namespace ManageYourSelfMVC.Controllers
             Result = T.WordDelete(id);
             return Json(Result, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ArchieveWord(int id,bool res)
+        {
+            try
+            {
+                var OldObj = DB.dic_tbl.SingleOrDefault(q => q.id == id);
+                if (OldObj.level != 1)
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+                if (res == true)
+                {
+                    OldObj.IsArchieve = true;
+                    OldObj.date_refresh = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
+                    OldObj.DateRefreshM = DateTime.Now;
+                }
+                else
+                {
+                    OldObj.IsArchieve = false;
+                    OldObj.date_refresh = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
+                    OldObj.DateRefreshM = DateTime.Now;
+                }
+                DB.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ArgumentException(ex.Message);
+            }
+        }
         [HttpGet]
         public ActionResult RemoveExample(int WordId)
         {
@@ -216,7 +247,7 @@ namespace ManageYourSelfMVC.Controllers
             */
             DB.Configuration.ProxyCreationEnabled = false;
             List<ViewModels.DictionaryVM> ListDicVM = new List<ViewModels.DictionaryVM>();
-            List<Models.DomainModels.dic_tbl> lstdic_tbl = DB.dic_tbl.Where(q => q.UserId == UserId).OrderBy(q => q.date_refresh).OrderByDescending(q => new { q.level }).ToList();
+            List<Models.DomainModels.dic_tbl> lstdic_tbl = DB.dic_tbl.Where(q => q.UserId == UserId && q.IsArchieve==false).OrderBy(q => q.date_refresh).OrderByDescending(q => new { q.level }).ToList();
             foreach (var item in lstdic_tbl)
             {
                 ViewModels.DictionaryVM D = new ViewModels.DictionaryVM();
@@ -246,7 +277,7 @@ namespace ManageYourSelfMVC.Controllers
             int takeCount = Models.Help.Setting.takeCount;
             SkipN = SkipN * takeCount;
             List<ViewModels.Dictionary.VMDictionary> lstV = new List<ViewModels.Dictionary.VMDictionary>();
-            var lstDic = DB.dic_tbl.Where(q => q.UserId == UserId).OrderBy(q => q.date_refresh).OrderByDescending(q => new { q.level }).Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh }).Skip(SkipN).Take(takeCount).ToList();
+            var lstDic = DB.dic_tbl.Where(q => q.UserId == UserId && q.IsArchieve == false).OrderBy(q => q.date_refresh).OrderByDescending(q => new { q.level }).Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh }).Skip(SkipN).Take(takeCount).ToList();
             foreach (var item in lstDic)
             {
                 ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
@@ -281,13 +312,14 @@ namespace ManageYourSelfMVC.Controllers
                 }
 
                 List<ViewModels.Dictionary.VMDictionary> lstV = new List<ViewModels.Dictionary.VMDictionary>();
-                var lstDic = DB.dic_tbl.Where(q => q.level == MaxLevelCount && q.UserId == UserId).Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.SuccessCount, q.UnSuccessCount }).OrderBy(q => q.date_refresh).ThenByDescending(q => new { q.level }).Take(10).ToList();
+                var lstDic = DB.dic_tbl.Where(q => q.level == MaxLevelCount && q.UserId == UserId).Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.SuccessCount, q.UnSuccessCount,q.IsArchieve }).OrderBy(q => q.date_refresh).ThenByDescending(q => new { q.level }).Take(10).ToList();
                 foreach (var item in lstDic)
                 {
                     ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
                     V.eng = item.eng;
                     V.per = item.per;
                     V.id = item.id;
+                    V.IsArchieve = item.IsArchieve;
                     V.SuccessCount = item.SuccessCount;
                     V.UnSuccessCount = item.UnSuccessCount;
                     V.level = (int)item.level;
@@ -301,13 +333,14 @@ namespace ManageYourSelfMVC.Controllers
             else//-------------search
             {
                 List<ViewModels.Dictionary.VMDictionary> lstV = new List<ViewModels.Dictionary.VMDictionary>();
-                var lstDic = DB.dic_tbl.Where(q => q.eng.Contains(str) && q.UserId == UserId).Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.SuccessCount, q.UnSuccessCount }).OrderBy(q => q.date_refresh).ThenByDescending(q => new { q.level }).Take(10).ToList();
+                var lstDic = DB.dic_tbl.Where(q => q.eng.Contains(str) && q.UserId == UserId).Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.SuccessCount, q.UnSuccessCount,q.IsArchieve }).OrderBy(q => q.date_refresh).ThenByDescending(q => new { q.level }).Take(10).ToList();
                 foreach (var item in lstDic)
                 {
                     ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
                     V.eng = item.eng;
                     V.per = item.per;
                     V.id = item.id;
+                    V.IsArchieve = item.IsArchieve;
                     V.SuccessCount = item.SuccessCount;
                     V.UnSuccessCount = item.UnSuccessCount;
                     V.level = (int)item.level;
@@ -338,13 +371,14 @@ namespace ManageYourSelfMVC.Controllers
                 }
 
                 List<ViewModels.Dictionary.VMDictionary> lstV = new List<ViewModels.Dictionary.VMDictionary>();
-                var lstDic = DB.dic_tbl.Where(q => q.level == MaxLevelCount && q.UserId == UserId).Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.SuccessCount, q.UnSuccessCount }).OrderBy(q => q.date_refresh).ThenByDescending(q => new { q.level }).Take(10).ToList();
+                var lstDic = DB.dic_tbl.Where(q => q.level == MaxLevelCount && q.UserId == UserId).Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.SuccessCount, q.UnSuccessCount,q.IsArchieve }).OrderBy(q => q.date_refresh).ThenByDescending(q => new { q.level }).Take(10).ToList();
                 foreach (var item in lstDic)
                 {
                     ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
                     V.eng = item.eng;
                     V.per = item.per;
                     V.id = item.id;
+                    V.IsArchieve = item.IsArchieve;
                     V.SuccessCount = item.SuccessCount;
                     V.UnSuccessCount = item.UnSuccessCount;
                     V.level = (int)item.level;
@@ -371,7 +405,7 @@ dic_tbl.id
 from example_tbl inner join dic_tbl
 on example_tbl.id_dic_tbl=dic_tbl.id
 where example like '%"+str+ @"%' 
- group by eng,dic_tbl.id,dic_tbl.per,dic_tbl.level,dic_tbl.date_refresh,dic_tbl.date_s,dic_tbl.SuccessCount,dic_tbl.UnSuccessCount
+ group by eng,dic_tbl.id,dic_tbl.per,dic_tbl.level,dic_tbl.date_refresh,dic_tbl.date_s,dic_tbl.SuccessCount,dic_tbl.UnSuccessCount,dic_tbl.IsArchieve
 ");
                 foreach (DataRow item in DT.Rows)
                 {
@@ -379,6 +413,7 @@ where example like '%"+str+ @"%'
                     V.id = int.Parse(item["id"].ToString());
                     V.eng = item["eng"].ToString();
                     V.per = item["per"].ToString();
+                    V.IsArchieve =(bool)item["IsArchieve"];
                     V.level = int.Parse(item["level"].ToString());
                     V.date_refresh = item["date_refresh"].ToString();
                     V.date_s = item["date_s"].ToString();
@@ -404,8 +439,32 @@ where example like '%"+str+ @"%'
                 if (ids.Contains("101"))
                 {
                     var lstDic = (from p in DB.dic_tbl
-                                  where p.UserId == UserId
-                                  orderby (((int)p.UnSuccessCount - (int)p.SuccessCount)) descending
+                                  where p.UserId == UserId && p.IsArchieve == false
+                                  orderby (((int)p.UnSuccessCount - (int)p.SuccessCount)) descending,p.date_refresh ascending
+                                  //orderby p.UnSuccessCount descending
+                                  select p).AsEnumerable().Select(q => new
+                                  { q.eng, q.SuccessCount, q.UnSuccessCount, q.date_refresh, q.per, q.id, q.level, Grade = (q.UnSuccessCount - q.SuccessCount) }).Take(10).ToList();
+                    foreach (var item in lstDic)
+                    {
+                        ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
+                        V.eng = item.eng;
+                        V.per = item.per;
+                        V.SuccessCount = item.SuccessCount;
+                        V.UnSuccessCount = item.UnSuccessCount;
+                        V.id = item.id;
+                        V.level = (int)item.level;
+                        V.date_refresh = item.date_refresh;
+                        V.HasExample = T.HasExample(item.id);
+                        V.lstExample = DB.example_tbl.Where(q => q.id_dic_tbl == item.id).ToList();
+                        lstV.Add(V);
+                    }
+                }
+                //Best for Remove
+                if (ids.Contains("104"))
+                {
+                    var lstDic = (from p in DB.dic_tbl
+                                  where p.UserId == UserId && p.IsArchieve == false
+                                  orderby (((int)p.SuccessCount - (int)p.UnSuccessCount)) descending, p.date_refresh ascending
                                   //orderby p.UnSuccessCount descending
                                   select p).AsEnumerable().Select(q => new
                                   { q.eng, q.SuccessCount, q.UnSuccessCount, q.date_refresh, q.per, q.id, q.level, Grade = (q.UnSuccessCount - q.SuccessCount) }).Take(10).ToList();
@@ -428,7 +487,7 @@ where example like '%"+str+ @"%'
                 else if (ids.Contains("102"))
                 {
                     var res = (from W in DB.dic_tbl
-                               where W.UserId == UserId
+                               where W.UserId == UserId && W.IsArchieve == false
                                orderby W.date_refresh
                                select new { CountMoroor = ((int)W.UnSuccessCount + (int)W.SuccessCount),W.id ,W.eng, W.per, WordId = W.id, W.date_refresh, W.level, W.SuccessCount, W.UnSuccessCount }
                                  ).Take(10).ToList();
@@ -451,7 +510,7 @@ where example like '%"+str+ @"%'
                 else if (ids.Contains("103"))
                 {
                     var res = (from W in DB.dic_tbl
-                               where W.UserId == UserId
+                               where W.UserId == UserId && W.IsArchieve == false
                                orderby (((int)W.UnSuccessCount + (int)W.SuccessCount))
                                select new { CountMoroor = ((int)W.UnSuccessCount + (int)W.SuccessCount), W.eng, W.per, WordId = W.id , W.SuccessCount, W.UnSuccessCount, W.id, W.date_refresh, W.level }
                              ).Take(10).ToList();
@@ -471,12 +530,37 @@ where example like '%"+str+ @"%'
                         lstV.Add(V);
                     }
                 }
+                //آرشیو
+                else if (ids.Contains("105"))
+                {
+                    var res = (from W in DB.dic_tbl
+                               where W.UserId == UserId && W.IsArchieve == true
+                               orderby (W.date_refresh)
+                               select new { CountMoroor = ((int)W.UnSuccessCount + (int)W.SuccessCount), W.eng, W.per, WordId = W.id, W.SuccessCount, W.UnSuccessCount, W.id, W.date_refresh, W.level,W.IsArchieve }
+                             ).ToList();
+
+                    foreach (var item in res)
+                    {
+                        ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
+                        V.eng = item.eng;
+                        V.per = item.per;
+                        V.IsArchieve = item.IsArchieve;
+                        V.SuccessCount = item.SuccessCount;
+                        V.UnSuccessCount = item.UnSuccessCount;
+                        V.id = item.id;
+                        V.level = (int)item.level;
+                        V.date_refresh = item.date_refresh;
+                        V.HasExample = T.HasExample(item.id);
+                        V.lstExample = DB.example_tbl.Where(q => q.id_dic_tbl == item.id).ToList();
+                        lstV.Add(V);
+                    }
+                }
                 else
                 {
 
                     var lstDic = DB.dic_tbl.
-                    Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.UserId, q.SuccessCount, q.UnSuccessCount }).
-                    Where(q => ids.Contains(q.level.ToString()) & q.UserId == UserId).
+                    Select(q => new { q.id, q.eng, q.per, q.level, q.date_refresh, q.UserId, q.SuccessCount, q.UnSuccessCount,q.IsArchieve }).
+                    Where(q => ids.Contains(q.level.ToString()) & q.UserId == UserId & q.IsArchieve == false).
                     OrderBy(q => q.date_refresh).
                     ThenByDescending(q => new { q.level }).
                     Take(10).
@@ -687,6 +771,7 @@ order by DE.diff desc,D.Date_Refresh asc
                 ViewModels.Dictionary.VMDictionary v = new ViewModels.Dictionary.VMDictionary();
                 v.eng = item.eng;
                 v.per = item.per;
+                v.IsArchieve = item.IsArchieve;
                 v.id = item.id;
                 v.SuccessCount = item.SuccessCount;
                 v.UnSuccessCount = item.UnSuccessCount;
@@ -734,7 +819,7 @@ order by DE.diff desc,D.Date_Refresh asc
                 // OldDic.level = OldDic.level - 1;
                 OldDic.date_refresh = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
                 OldDic.DateRefreshM = DateTime.Now;
-                // OldDic.SuccessCount = OldDic.SuccessCount + 1;
+               // OldDic.SuccessCount = OldDic.SuccessCount + 1;
             }
            // DB.Entry(OldDic).State = EntityState.Modified;
             if (DB.SaveChanges() > 0)
@@ -785,7 +870,7 @@ order by DE.diff desc,D.Date_Refresh asc
 
             List<ViewModels.Dictionary.VMDictionary> lstCount = new List<ViewModels.Dictionary.VMDictionary>();
             var results = from W in DB.dic_tbl
-                          where W.UserId == UserId
+                          where W.UserId == UserId && W.IsArchieve == false
                           group W.eng by W.level into g
 
                           select new { level = g.Key, GroupWord = g.ToList() };
@@ -802,6 +887,16 @@ order by DE.diff desc,D.Date_Refresh asc
             V.NameLevel = "جمع";
             V.CountLevel = AllCount;
             lstCount.Add(V);
+
+            ViewModels.Dictionary.VMDictionary V3 = new ViewModels.Dictionary.VMDictionary();
+            V3.NameLevel = "آرشیو";
+            V3.CountLevel =DB.dic_tbl.Where(q=>q.UserId==UserId && q.IsArchieve==true).Count();
+            lstCount.Add(V3);
+
+            ViewModels.Dictionary.VMDictionary V4 = new ViewModels.Dictionary.VMDictionary();
+            V4.NameLevel = "جمع کل";
+            V4.CountLevel = DB.dic_tbl.Where(q => q.UserId == UserId).Count();
+            lstCount.Add(V4);
             return PartialView(lstCount);
         }
         public ActionResult Top10MaxGroupBy()
@@ -849,7 +944,8 @@ order by DE.diff desc,D.Date_Refresh asc
 
             var data = (from p in DB.dic_tbl
                         where p.UserId == UserId
-                        orderby (((int)p.UnSuccessCount - (int)p.SuccessCount)) descending
+                        orderby (((int)p.UnSuccessCount - (int)p.SuccessCount)) descending,p.date_refresh 
+                        
                         //orderby p.UnSuccessCount descending
                         select p).AsEnumerable().Select(q => new
                         { q.eng, q.per, q.id, q.level, Grade = (q.UnSuccessCount - q.SuccessCount) }).Take(10).ToList();

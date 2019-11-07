@@ -100,6 +100,13 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
     <Property Name="RoutineJobId" Type="int" Nullable="false" />
     <Property Name="IsCheck" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="Seyed">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="250" />
+  </EntityType>
   <EntityType Name="Sport">
     <Key>
       <PropertyRef Name="SportId" />
@@ -172,7 +179,7 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
     </Key>
     <Property Name="DataCardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="personelid" Type="int" Nullable="false" />
-    <Property Name="DateCard" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="DateCard" Type="char" MaxLength="8" Nullable="false" />
     <Property Name="I" Type="int" Nullable="false" />
     <Property Name="O" Type="int" Nullable="false" />
   </EntityType>
@@ -204,6 +211,7 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="CreateDateM" Type="date" />
     <Property Name="DateRefreshM" Type="date" />
+    <Property Name="IsArchieve" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view '5069_ManageYourSelf.dbo.dic_tbl_LOG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -282,7 +290,7 @@ warning 6002: The table/view '5069_ManageYourSelf.dbo.dic_tbl_LOG' does not have
     <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="Rial" Type="int" />
     <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="DateKharj" Type="nvarchar" MaxLength="6" />
+    <Property Name="DateKharj" Type="nvarchar" MaxLength="8" />
     <Property Name="KharjTypeId" Type="int" />
   </EntityType>
   <EntityType Name="KharjType">
@@ -973,6 +981,7 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
     <EntitySet Name="Mazaya" EntityType="Self.Mazaya" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="RoutineJob" EntityType="Self.RoutineJob" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="RoutineJobHa" EntityType="Self.RoutineJobHa" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="Seyed" EntityType="Self.Seyed" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="Sport" EntityType="Self.Sport" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="StoreHoghogh" EntityType="Self.StoreHoghogh" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="Timing" EntityType="Self.Timing" Schema="5069_Esmaeili" store:Type="Tables" />

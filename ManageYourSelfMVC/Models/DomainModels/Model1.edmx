@@ -105,6 +105,13 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
           <Property Name="RoutineJobId" Type="int" Nullable="false" />
           <Property Name="IsCheck" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Seyed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="Sport">
           <Key>
             <PropertyRef Name="SportId" />
@@ -177,7 +184,7 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
           </Key>
           <Property Name="DataCardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="personelid" Type="int" Nullable="false" />
-          <Property Name="DateCard" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="DateCard" Type="char" MaxLength="8" Nullable="false" />
           <Property Name="I" Type="int" Nullable="false" />
           <Property Name="O" Type="int" Nullable="false" />
         </EntityType>
@@ -209,6 +216,7 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="CreateDateM" Type="date" />
           <Property Name="DateRefreshM" Type="date" />
+          <Property Name="IsArchieve" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view '5069_ManageYourSelf.dbo.dic_tbl_LOG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -287,7 +295,7 @@ warning 6002: The table/view '5069_ManageYourSelf.dbo.dic_tbl_LOG' does not have
           <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Rial" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="DateKharj" Type="nvarchar" MaxLength="6" />
+          <Property Name="DateKharj" Type="nvarchar" MaxLength="8" />
           <Property Name="KharjTypeId" Type="int" />
         </EntityType>
         <EntityType Name="KharjType">
@@ -978,6 +986,7 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <EntitySet Name="Mazaya" EntityType="Self.Mazaya" Schema="5069_Esmaeili" store:Type="Tables" />
           <EntitySet Name="RoutineJob" EntityType="Self.RoutineJob" Schema="5069_Esmaeili" store:Type="Tables" />
           <EntitySet Name="RoutineJobHa" EntityType="Self.RoutineJobHa" Schema="5069_Esmaeili" store:Type="Tables" />
+          <EntitySet Name="Seyed" EntityType="Self.Seyed" Schema="5069_Esmaeili" store:Type="Tables" />
           <EntitySet Name="Sport" EntityType="Self.Sport" Schema="5069_Esmaeili" store:Type="Tables" />
           <EntitySet Name="StoreHoghogh" EntityType="Self.StoreHoghogh" Schema="5069_Esmaeili" store:Type="Tables" />
           <EntitySet Name="Timing" EntityType="Self.Timing" Schema="5069_Esmaeili" store:Type="Tables" />
@@ -1271,6 +1280,7 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <EntitySet Name="Mazayas" EntityType="ManageYourSelfModel.Mazaya" />
           <EntitySet Name="RoutineJobs" EntityType="ManageYourSelfModel.RoutineJob" />
           <EntitySet Name="RoutineJobHas" EntityType="ManageYourSelfModel.RoutineJobHa" />
+          <EntitySet Name="Seyeds" EntityType="ManageYourSelfModel.Seyed" />
           <EntitySet Name="Sports" EntityType="ManageYourSelfModel.Sport" />
           <EntitySet Name="StoreHoghoghs" EntityType="ManageYourSelfModel.StoreHoghogh" />
           <EntitySet Name="Timings" EntityType="ManageYourSelfModel.Timing" />
@@ -1554,6 +1564,13 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <Property Name="IsCheck" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="RoutineJob" Relationship="ManageYourSelfModel.FK_RoutineJobHa_RoutineJob" FromRole="RoutineJobHa" ToRole="RoutineJob" />
         </EntityType>
+        <EntityType Name="Seyed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Sport">
           <Key>
             <PropertyRef Name="SportId" />
@@ -1635,7 +1652,7 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           </Key>
           <Property Name="DataCardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="personelid" Type="Int32" Nullable="false" />
-          <Property Name="DateCard" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="DateCard" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
           <Property Name="I" Type="Int32" Nullable="false" />
           <Property Name="O" Type="Int32" Nullable="false" />
         </EntityType>
@@ -1668,6 +1685,7 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="CreateDateM" Type="DateTime" Precision="0" />
           <Property Name="DateRefreshM" Type="DateTime" Precision="0" />
+          <Property Name="IsArchieve" Type="Boolean" />
           <NavigationProperty Name="DaysExercises" Relationship="ManageYourSelfModel.FK_DaysExercise_dic_tbl" FromRole="dic_tbl" ToRole="DaysExercise" />
           <NavigationProperty Name="User" Relationship="ManageYourSelfModel.FK_dic_tbl_Users" FromRole="dic_tbl" ToRole="User" />
           <NavigationProperty Name="example_tbl" Relationship="ManageYourSelfModel.FK_example_tbl_dic_tbl" FromRole="dic_tbl" ToRole="example_tbl" />
@@ -1733,7 +1751,7 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Rial" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateKharj" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="DateKharj" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="KharjTypeId" Type="Int32" />
           <NavigationProperty Name="KharjType" Relationship="ManageYourSelfModel.FK_Kharj_KharjType" FromRole="Kharj" ToRole="KharjType" />
         </EntityType>
@@ -2526,6 +2544,14 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Seyeds">
+            <EntityTypeMapping TypeName="ManageYourSelfModel.Seyed">
+              <MappingFragment StoreEntitySet="Seyed">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Sports">
             <EntityTypeMapping TypeName="ManageYourSelfModel.Sport">
               <MappingFragment StoreEntitySet="Sport">
@@ -2623,6 +2649,7 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <EntitySetMapping Name="dic_tbl">
             <EntityTypeMapping TypeName="ManageYourSelfModel.dic_tbl">
               <MappingFragment StoreEntitySet="dic_tbl">
+                <ScalarProperty Name="IsArchieve" ColumnName="IsArchieve" />
                 <ScalarProperty Name="DateRefreshM" ColumnName="DateRefreshM" />
                 <ScalarProperty Name="CreateDateM" ColumnName="CreateDateM" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

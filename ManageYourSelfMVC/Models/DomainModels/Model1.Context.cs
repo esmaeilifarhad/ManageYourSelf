@@ -35,6 +35,7 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public virtual DbSet<Mazaya> Mazayas { get; set; }
         public virtual DbSet<RoutineJob> RoutineJobs { get; set; }
         public virtual DbSet<RoutineJobHa> RoutineJobHas { get; set; }
+        public virtual DbSet<Seyed> Seyeds { get; set; }
         public virtual DbSet<Sport> Sports { get; set; }
         public virtual DbSet<StoreHoghogh> StoreHoghoghs { get; set; }
         public virtual DbSet<Timing> Timings { get; set; }

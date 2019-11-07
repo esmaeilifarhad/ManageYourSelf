@@ -36,6 +36,7 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public int UserId { get; set; }
         public Nullable<System.DateTime> CreateDateM { get; set; }
         public Nullable<System.DateTime> DateRefreshM { get; set; }
+        public Nullable<bool> IsArchieve { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DaysExercise> DaysExercises { get; set; }

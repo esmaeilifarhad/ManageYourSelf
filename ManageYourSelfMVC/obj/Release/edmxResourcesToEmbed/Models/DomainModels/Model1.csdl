@@ -115,6 +115,7 @@
     <EntitySet Name="Mazayas" EntityType="ManageYourSelfModel.Mazaya" />
     <EntitySet Name="RoutineJobs" EntityType="ManageYourSelfModel.RoutineJob" />
     <EntitySet Name="RoutineJobHas" EntityType="ManageYourSelfModel.RoutineJobHa" />
+    <EntitySet Name="Seyeds" EntityType="ManageYourSelfModel.Seyed" />
     <EntitySet Name="Sports" EntityType="ManageYourSelfModel.Sport" />
     <EntitySet Name="StoreHoghoghs" EntityType="ManageYourSelfModel.StoreHoghogh" />
     <EntitySet Name="Timings" EntityType="ManageYourSelfModel.Timing" />
@@ -398,6 +399,13 @@
     <Property Name="IsCheck" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="RoutineJob" Relationship="ManageYourSelfModel.FK_RoutineJobHa_RoutineJob" FromRole="RoutineJobHa" ToRole="RoutineJob" />
   </EntityType>
+  <EntityType Name="Seyed">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Sport">
     <Key>
       <PropertyRef Name="SportId" />
@@ -479,7 +487,7 @@
     </Key>
     <Property Name="DataCardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="personelid" Type="Int32" Nullable="false" />
-    <Property Name="DateCard" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="DateCard" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
     <Property Name="I" Type="Int32" Nullable="false" />
     <Property Name="O" Type="Int32" Nullable="false" />
   </EntityType>
@@ -512,6 +520,7 @@
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="CreateDateM" Type="DateTime" Precision="0" />
     <Property Name="DateRefreshM" Type="DateTime" Precision="0" />
+    <Property Name="IsArchieve" Type="Boolean" />
     <NavigationProperty Name="DaysExercises" Relationship="ManageYourSelfModel.FK_DaysExercise_dic_tbl" FromRole="dic_tbl" ToRole="DaysExercise" />
     <NavigationProperty Name="User" Relationship="ManageYourSelfModel.FK_dic_tbl_Users" FromRole="dic_tbl" ToRole="User" />
     <NavigationProperty Name="example_tbl" Relationship="ManageYourSelfModel.FK_example_tbl_dic_tbl" FromRole="dic_tbl" ToRole="example_tbl" />
@@ -577,7 +586,7 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Rial" Type="Int32" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DateKharj" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="DateKharj" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
     <Property Name="KharjTypeId" Type="Int32" />
     <NavigationProperty Name="KharjType" Relationship="ManageYourSelfModel.FK_Kharj_KharjType" FromRole="Kharj" ToRole="KharjType" />
   </EntityType>

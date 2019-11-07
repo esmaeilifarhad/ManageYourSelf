@@ -257,6 +257,24 @@ $("body .MyDictionary").on("click", ".RemoveWord", function () {
         // ListDictionary();
     }
 });
+//------------Archive Word
+$("body .MyDictionary").on("click", ".ArchieveWord", function () {
+    var WordId = $(this).attr("data_id");
+    //if (confirm('Are you sure you want to save this thing into the database?')) {
+    //    // Save it!
+    //} else {
+    //    // Do nothing!
+    //}
+    var result = confirm("آیا آرشیو انجام شود");
+    if (result) {
+        ArchieveWord(WordId,true);
+        // ListDictionary();
+    }
+    else {
+        ArchieveWord(WordId,false);
+    }
+
+});
 //------------Edit Word
 $("body .MyDictionary").on("click", ".EditWord ", function () {
     var WordId = $(this).attr("data_id");
@@ -889,7 +907,6 @@ function CheckedInput() {
 }
 function ListWordExampleDivChk(MyArray)
 {
-    debugger
     $.ajax(
      {
          type: 'Post',
@@ -921,6 +938,37 @@ function RemoveWord(WordId) {
                 //ListDictionary();
                 // ShowExampleRefresh(WordId);
                 RefreshListWithCheckedCheckbox();
+            }
+
+        },
+        error: function (error) {
+            alert(error);
+        }
+    })
+
+}
+function ArchieveWord(WordId, res) {
+    var urll
+    if (res == true) {
+         urll = "/Dictionary/ArchieveWord?id=" + WordId+"&res="+res;
+    }
+    else {
+        urll = "/Dictionary/ArchieveWord?id=" + WordId + "&res=" + res;
+    }
+    $.ajax({
+        type: "Post",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        url: urll,
+        success: function (data) {
+            var obj = JSON.parse(data);
+            if (obj == true) {
+               // alert("آرشیو با موفقیت انجام شد");
+                RefreshListWithCheckedCheckbox();
+                ShowLevel();
+            }
+            else {
+                alert("برای آرشیو شدن حتما باید سطح لغت یک باشد");
             }
 
         },

@@ -199,6 +199,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Seyeds">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Seyed">
+        <MappingFragment StoreEntitySet="Seyed">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Sports">
       <EntityTypeMapping TypeName="ManageYourSelfModel.Sport">
         <MappingFragment StoreEntitySet="Sport">
@@ -296,6 +304,7 @@
     <EntitySetMapping Name="dic_tbl">
       <EntityTypeMapping TypeName="ManageYourSelfModel.dic_tbl">
         <MappingFragment StoreEntitySet="dic_tbl">
+          <ScalarProperty Name="IsArchieve" ColumnName="IsArchieve" />
           <ScalarProperty Name="DateRefreshM" ColumnName="DateRefreshM" />
           <ScalarProperty Name="CreateDateM" ColumnName="CreateDateM" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
