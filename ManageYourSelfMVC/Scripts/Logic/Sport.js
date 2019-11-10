@@ -61,6 +61,7 @@ function ListSportFilter() {
         success: function (data) {
             $(".ListSportCatId").html(data);
             ColorAvgMax();
+            findRotbeh();
         },
         error: function (error) {
             alert(error);
@@ -355,5 +356,36 @@ function ColorAvgMax()
     $("#tt").remove();
     $(".ListSportChk").append("<P id='tt'>  میانگین :   " + (AvgNum / CountNum)+"</p>");
     //$(".ListSportChk").append("<li>Prepended item</li>");
+}
+function findRotbeh()
+{
+    var i = 0
+    //var arraySport = new Array();
+    //arraySport
+    arraySport = [];
+    $(".DeleteSport").each(function () {
+        arraySport.push(parseInt($(this)[0].textContent));
+        //console.log($(this)[0].textContent);
+        //i = i + 1
+    })
+    //---------find rotbe
+   // arraySport.sort();
+   // arraySport.reverse();
+
+    arraySport.sort(function (a, b) {
+        return parseInt(b) - parseInt(a)  ;
+    });
+
+    console.log(arraySport);
+    $(".DeleteSport").each(function () {
+        for (i = 0; i < arraySport.length; ++i) {
+            //console.log(arraySport[i]);
+            if (arraySport[i] == $(this)[0].textContent) {
+                $(this).append("<span>" + (i + 1) + "/" + arraySport.length + "</span>")
+               // console.log(arraySport[i] + " - " + (i + 1) + "/" + arraySport.length)
+                break;
+            }
+        }
+    });
 }
 

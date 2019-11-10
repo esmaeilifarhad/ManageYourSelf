@@ -482,10 +482,11 @@
         setInterval(function () {
             ListTaslLevelHigh();
             ListTiming(0);
+            //--------------------
             var dt = new Date();
             var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
             console.log("exe ListTaslLevelHigh : " + time);
-        }, 300000);
+        }, 10000);
         //-------------execute List When Click on Tab
         $("ul li a[href='#menu2']").on("click", function () {
             ListHazineMohem();

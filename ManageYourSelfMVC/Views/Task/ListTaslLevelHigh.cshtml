@@ -1,18 +1,17 @@
 ﻿@model List<ManageYourSelfMVC.ViewModels.Task.ListTaskFuture>
 
 <style>
-.ListTaskLevelHight1 p {
-  border: none;
-  color: white;
-  opacity: 0.8;
-  transition: 0.3s;
-}
+    .ListTaskLevelHight1 p {
+        border: none;
+        color: white;
+        opacity: 0.8;
+        transition: 0.3s;
+    }
 
-.ListTaskLevelHight1 p:hover {
-    opacity: 1;
-    color:greenyellow
-
-}
+        .ListTaskLevelHight1 p:hover {
+            opacity: 1;
+            color: greenyellow;
+        }
 </style>
 
 @{
@@ -68,29 +67,38 @@
     @foreach (var item in lstRuz)
     {
         <div class="col-sm-12" style="font-size: 9px!important;font-family:'BNazanin'">
-        
+
             <p style="color:#eac451;font-size:11px">
                 <span>@item.ChandShanbeh </span>
                 <span>@Utility.ConvertDateToSlash(item.DateEnd)</span>
                 <span>هفته</span>
                 <span>@item.HafteChandom</span>
             </p>
-           
+            @{int row = 1;
+                int olaviat = 1;}
             @foreach (var item2 in Model)
+            {
+                if (olaviat != item2.Olaviat)
                 {
-                    if (item.DateEnd == item2.DateEnd)
-                    {
+                   <hr style="border:1px solid red"/>
+                }
+                olaviat= item2.Olaviat;
+                if (item.DateEnd == item2.DateEnd)
+                {
                     <p CatId="@item2.CatId" style="line-height:12px;margin:0px">
-                       
+                        <span style="color:#72daea;font-weight:bolder">@row</span> /
+                        <span style="color:#72daea;font-weight:bolder">@item2.Olaviat</span> -
                         <span style="color:yellow;cursor:pointer" class="EditCat" CatId="@item2.CatId">@item2.Title</span> -
                         <span style="cursor:pointer" onclick="EditTask(@item2.TaskId)">@item2.Name</span>
+                        <span style="color:#0aefa5;cursor:pointer" onclick="TimingTask(@item2.TaskId)">@item2.Label</span>
                     </p>
-                       
+
 
                 }
+                row += 1;
             }
         </div>
-    }
+                }
 
 </div>
 <br />

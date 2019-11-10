@@ -398,14 +398,15 @@ dic_tbl.id
 ,dic_tbl.eng
 ,dic_tbl.per
 ,dic_tbl.level
+,dic_tbl.IsArchieve
 ,dic_tbl.date_refresh
 ,dic_tbl.date_s
 ,dic_tbl.SuccessCount
 ,dic_tbl.UnSuccessCount
 from example_tbl inner join dic_tbl
 on example_tbl.id_dic_tbl=dic_tbl.id
-where example like '%"+str+ @"%' 
- group by eng,dic_tbl.id,dic_tbl.per,dic_tbl.level,dic_tbl.date_refresh,dic_tbl.date_s,dic_tbl.SuccessCount,dic_tbl.UnSuccessCount,dic_tbl.IsArchieve
+where example like '%" + str+ @"%' 
+ group by eng,dic_tbl.id,dic_tbl.per,dic_tbl.level,dic_tbl.IsArchieve,dic_tbl.date_refresh,dic_tbl.date_s,dic_tbl.SuccessCount,dic_tbl.UnSuccessCount,dic_tbl.IsArchieve
 ");
                 foreach (DataRow item in DT.Rows)
                 {

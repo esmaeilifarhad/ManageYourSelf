@@ -61,11 +61,13 @@
                     <td><span style='color:mediumvioletred' class='fa fa-remove RemoveWord pointer' data_id="@item.id"></span></td>
                     @if (item.IsArchieve == true)
                     {
-                        <td><span style='color:green' class='fa fa-archive ArchieveWord  pointer' data_id="@item.id"></span></td>
+                        @*<td><span style='color:green' class='fa fa-archive ArchieveWord  pointer' data_id="@item.id"></span></td>*@
+                        <td><button style='color:green' class='btn btn-default pointer ArchieveWord' data_id="@item.id"></button></td>
                     }
                     else
                     {
-                        <td><span style='color:red' class='fa fa-archive ArchieveWord  pointer' data_id="@item.id"></span></td>
+                        @*<td><span style='color:red' class='fa fa-archive ArchieveWord  pointer' data_id="@item.id"></span></td>*@
+                        <td><button style='color:red' class='btn btn-info pointer ArchieveWord' data_id="@item.id"></button></td>
                     }
                  
                 </tr>
@@ -88,7 +90,9 @@
     </table>
 </div>
 <script>
+   // $(".table-responsive .dateCol span").remove();
     $(".table-responsive .dateCol").each(function () {
+       
         var today=moment().format('jYYYY/jM/jD');//Today
         var diffDays = showDays(today, $(this).text());
         $($(this).prepend("<span style='color:red;padding-right:10px'>" + diffDays + "</span>"));

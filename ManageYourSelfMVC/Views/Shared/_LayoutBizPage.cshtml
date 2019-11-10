@@ -247,9 +247,18 @@
                             @*<div class="col-sm-9" id="RoutineJobCreate">
                                 </div>*@
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row" style="font-family:BNazanin;">
+                                    <div class="col-sm-12 ColShowLevel" style="font-size: 8px!important;">
+                                        @Html.Action("ListMojoodyBank", "DakhloKharj")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-links" style="font-family:BNazanin">
+                    <div class="col-lg-2 col-md-6 footer-links" style="font-family:BNazanin">
                         <h4>لینک های مفید</h4>
                         <ul>
                             <li><i class="ion-ios-arrow-right"></i> <a href="#">Home</a></li>
@@ -261,7 +270,7 @@
                             <li><i class="ion-ios-arrow-right"></i> <a onclick="location.href='@Url.Action("MainDictionary", "Dictionary")'">دیگشنری</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-contact">
+                    <div class="col-lg-4 col-md-6 footer-contact">
                         <div>
                             @Html.Action("ListTaslLevelHigh", "Task")
                         </div>
@@ -278,8 +287,17 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="row" style="font-family:BNazanin;">
-                                    <div class="col-sm-12 ColShowLevel RoutineJobListMasterPage" style="font-size: 9px!important;">
+                                    <div class="col-sm-12  RoutineJobListMasterPage" style="font-size: 9px!important;">
                                         @Html.Action("RoutineJobListMasterPage", "RoutineJob")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row" style="font-family:BNazanin;">
+                                    <div class="col-sm-12 ColShowLevel" style="font-size: 9px!important;">
+                                        @Html.Action("ShowLevel","Dictionary")
                                     </div>
                                 </div>
                             </div>

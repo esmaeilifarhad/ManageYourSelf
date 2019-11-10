@@ -647,7 +647,7 @@ Task.TaskId
 ,isnull(Task.Olaviat,0) Olaviat
 ,isnull(Cat.CatId,0) CatId
 ,isnull(Cat.Title,N'بدون عنوان') Title
-,ManageTime.Label
+,isnull(ManageTime.Label,'NoClock') Label
 ,Taghvim.IsHolyDay
 ,Taghvim.ChandShanbeh
 ,Taghvim.HafteChandom
@@ -662,10 +662,10 @@ on ManageTime.ManageTimeId=Timing.ManageTimeId
 left join Taghvim on Task.DateEnd=Taghvim.DayDate
 where Task.IsCheck=0 
 and Task.IsActive=1
-and Task.Olaviat=1
+and Task.Olaviat in (1,2,3,4,5)
 and Task.DateEnd=" + Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date()) + @"
 and Task.UserId=" + UserId + @"
-order by Cat.[Order],Cat.Title,Task.DateEnd,isnull(Olaviat,0)
+order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
  ");
 
                 foreach (DataRow item in DT.Rows)

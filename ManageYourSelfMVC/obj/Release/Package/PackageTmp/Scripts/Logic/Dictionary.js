@@ -576,7 +576,7 @@ function ShowLevel() {
         url: urll,
         success: function (data) {
             $("#ShowLevel").html(data);
-            $(".ColShowLevel").html(data);
+           // $(".ColShowLevel").html(data);
         },
         error: function (error) {
             alert(error);
@@ -965,7 +965,7 @@ function ArchieveWord(WordId, res) {
             if (obj == true) {
                // alert("آرشیو با موفقیت انجام شد");
                 RefreshListWithCheckedCheckbox();
-                ShowLevel();
+                ShouldExecute();
             }
             else {
                 alert("برای آرشیو شدن حتما باید سطح لغت یک باشد");
@@ -1002,10 +1002,10 @@ function CreateNewExample(WordId) {
 function ShouldExecute() {
 
     ShowLevel();
-    BadGheleghtarinWord();
-    LessMoroor();
-    Top10LastMoroor();
-    Top10MaxGroupBy();
+    //BadGheleghtarinWord();
+    //LessMoroor();
+    //Top10LastMoroor();
+    //Top10MaxGroupBy();
     //ListDictionaryHamrahBaExamplePro();
 }
 

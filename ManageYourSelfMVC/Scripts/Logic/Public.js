@@ -5,6 +5,7 @@ $('#MasterModal .btnSave').on("click", function () {
     if (NameTbl == "tbltask")
         CreateTask();
     if (NameTbl == "tblword")
+        //2
         CreateWord();
     if (NameTbl == "UpdateTask")
         UpdateTask();
@@ -14,7 +15,6 @@ $('#MasterModal .btnSave').on("click", function () {
 });
 //Create Post  Update
 $("#MasterModal .btnSave").on("click", function () {
-    debugger;
     //  CreateRoutineJob
     var NameOperator = $("#MasterModal .BodyModal div").attr("Name");
     if (NameOperator == "Create")
