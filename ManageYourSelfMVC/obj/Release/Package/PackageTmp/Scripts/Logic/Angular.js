@@ -80,7 +80,7 @@ app.controller('MyController', function ($scope, $http) {
         }
        // $("#ListWordExampleFalse").html(data)
     }, function myError(error) {
-        alert(error.data.Message);
+        console.log(error.data.Message);
     });
     // }
 });
@@ -102,7 +102,7 @@ appAng.controller('TaskControllerr', function ($scope, $http) {
             //}
             // $("#ListWordExampleFalse").html(data)
         }, function myError(error) {
-            alert(error.data.Message);
+            console.log(error.data.Message);
         });
 
     }
@@ -120,7 +120,7 @@ appAng.controller('customersCtrl2', function ($scope, $http) {
             $scope.myOrderBy = x;
         }
     }, function myError(error) {
-        alert(error.data.Message);
+        console.log(error.data.Message);
     });
 });
 

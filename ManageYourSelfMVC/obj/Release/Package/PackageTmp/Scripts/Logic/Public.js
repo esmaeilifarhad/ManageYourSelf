@@ -81,9 +81,9 @@ $("#MasterModal .btnSave").on("click", function () {
 1398/02/03 فرمت پارامتر وردی
 */
 function calDayOfWeek(date) {
+    console.log(date)
     date = date.replace(/\//g, '');
     date = date.substr(date.length - 6); // 13980203=> 980203
-    
     const m = moment();
     const numberWeek = moment(date, 'jYYjMMjDD').weekday();
     let day;
@@ -134,4 +134,19 @@ function showDays(firstDate, secondDate) {
     return(Math.floor(days));
 
 }
+
+setInterval(function () {
+   
+    ListTaslLevelHigh();
+   
+    ListTiming(0);
+    
+    ShowLevel();
+    RoutineJobListMasterPage();
+   
+    //--------------------
+    var dt = new Date();
+    var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+    console.log("exe ListTaslLevelHigh : " + time);
+}, 60000);
 

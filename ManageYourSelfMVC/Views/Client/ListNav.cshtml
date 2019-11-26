@@ -479,14 +479,7 @@
 
 
         //-------------execute when load client listnav
-        setInterval(function () {
-            ListTaslLevelHigh();
-            ListTiming(0);
-            //--------------------
-            var dt = new Date();
-            var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-            console.log("exe ListTaslLevelHigh : " + time);
-        }, 10000);
+      
         //-------------execute List When Click on Tab
         $("ul li a[href='#menu2']").on("click", function () {
             ListHazineMohem();
@@ -521,7 +514,7 @@
                     $(".HazineMohem").html(data);
                 },
                 error: function (error) {
-                    alert(error);
+                    console.log(error);
                 }
             })
         }
@@ -538,7 +531,7 @@
                     $(".ListStoreHoghogh").html(data);
                 },
                 error: function (error) {
-                    alert(error);
+                    console.log(error);
                 }
             })
         }

@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2018 17:59:50</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.dll">
-      <publishTime>11/09/2019 10:56:06</publishTime>
+      <publishTime>11/24/2019 11:57:46</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>02/01/2018 08:13:16</publishTime>
@@ -3019,58 +3019,58 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2018 09:43:08</publishTime>
     </File>
     <File Include="Scripts/Logic/Angular.js">
-      <publishTime>02/05/2019 08:19:53</publishTime>
+      <publishTime>11/11/2019 11:30:17</publishTime>
     </File>
     <File Include="Scripts/Logic/Category.js">
-      <publishTime>10/23/2019 10:42:59</publishTime>
+      <publishTime>11/11/2019 11:30:17</publishTime>
     </File>
     <File Include="Scripts/Logic/DakhloKharj.js">
-      <publishTime>02/21/2019 14:02:51</publishTime>
+      <publishTime>11/11/2019 11:30:17</publishTime>
     </File>
     <File Include="Scripts/Logic/Dictionary.js">
-      <publishTime>11/10/2019 10:31:27</publishTime>
+      <publishTime>11/24/2019 14:42:05</publishTime>
     </File>
     <File Include="Scripts/Logic/Gold.js">
       <publishTime>06/09/2019 08:20:56</publishTime>
     </File>
     <File Include="Scripts/Logic/Job.js">
-      <publishTime>07/06/2019 16:36:40</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Karkard.js">
-      <publishTime>06/17/2019 15:17:39</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/MainAngular.js">
       <publishTime>01/04/2019 11:20:48</publishTime>
     </File>
     <File Include="Scripts/Logic/MasterData.js">
-      <publishTime>10/17/2019 09:22:28</publishTime>
+      <publishTime>11/11/2019 11:57:52</publishTime>
     </File>
     <File Include="Scripts/Logic/Public.js">
-      <publishTime>11/10/2019 10:28:54</publishTime>
+      <publishTime>11/23/2019 15:00:50</publishTime>
     </File>
     <File Include="Scripts/Logic/RoutineJob.js">
-      <publishTime>06/09/2019 16:39:54</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Setting - Copy.js">
-      <publishTime>10/14/2018 08:12:22</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Setting.js">
-      <publishTime>02/05/2019 08:19:53</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Speech.js">
       <publishTime>03/31/2019 21:51:50</publishTime>
     </File>
     <File Include="Scripts/Logic/Sport.js">
-      <publishTime>11/09/2019 10:44:54</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/StopWatch.js">
-      <publishTime>06/18/2019 17:58:59</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Taradod.js">
-      <publishTime>06/24/2019 17:40:45</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Task.js">
-      <publishTime>10/14/2019 08:30:08</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>02/01/2018 12:45:28</publishTime>
@@ -3172,7 +3172,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/01/2019 11:56:13</publishTime>
     </File>
     <File Include="Views/Admin/AdminPage.cshtml">
-      <publishTime>11/07/2019 09:35:39</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Views/Admin/ExampleList.cshtml">
       <publishTime>05/04/2018 11:20:30</publishTime>
@@ -3193,7 +3193,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2018 16:41:28</publishTime>
     </File>
     <File Include="Views/BaseData/BaseData.cshtml">
-      <publishTime>08/12/2018 10:47:05</publishTime>
+      <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Views/Category/CreateCategory.cshtml">
       <publishTime>06/23/2018 10:37:17</publishTime>
@@ -3211,13 +3211,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/17/2018 14:28:36</publishTime>
     </File>
     <File Include="Views/Client/ListNav.cshtml">
-      <publishTime>11/10/2019 10:32:08</publishTime>
+      <publishTime>11/11/2019 11:45:44</publishTime>
     </File>
     <File Include="Views/Client/MainHome.cshtml">
       <publishTime>02/06/2018 16:03:58</publishTime>
     </File>
     <File Include="Views/DakhloKharj/CreateDaramad.cshtml">
-      <publishTime>10/12/2018 20:03:13</publishTime>
+      <publishTime>11/11/2019 11:45:45</publishTime>
     </File>
     <File Include="Views/DakhloKharj/CreateMojoodyBank.cshtml">
       <publishTime>08/18/2018 14:16:08</publishTime>
@@ -3226,7 +3226,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/17/2018 14:52:23</publishTime>
     </File>
     <File Include="Views/DakhloKharj/EditDaramad.cshtml">
-      <publishTime>08/28/2018 15:33:56</publishTime>
+      <publishTime>11/11/2019 11:45:45</publishTime>
     </File>
     <File Include="Views/DakhloKharj/EditMojoodyBank.cshtml">
       <publishTime>08/15/2018 17:34:07</publishTime>
@@ -3289,19 +3289,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/09/2019 22:34:29</publishTime>
     </File>
     <File Include="Views/Dictionary/ListPersianToEnglish.cshtml">
-      <publishTime>10/23/2019 09:14:43</publishTime>
+      <publishTime>11/23/2019 14:54:31</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleAngular.cshtml">
       <publishTime>12/11/2018 16:55:09</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleDiv.cshtml">
-      <publishTime>11/08/2019 01:05:13</publishTime>
+      <publishTime>11/24/2019 14:47:25</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleFalse.cshtml">
       <publishTime>06/09/2019 22:27:21</publishTime>
     </File>
     <File Include="Views/Dictionary/MainDictionary.cshtml">
-      <publishTime>11/07/2019 09:43:27</publishTime>
+      <publishTime>11/24/2019 14:42:05</publishTime>
     </File>
     <File Include="Views/Dictionary/NewExample.cshtml">
       <publishTime>06/07/2018 11:24:48</publishTime>
@@ -3364,7 +3364,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/06/2018 18:35:56</publishTime>
     </File>
     <File Include="Views/Footbal/Team.cshtml">
-      <publishTime>08/12/2018 10:46:59</publishTime>
+      <publishTime>11/11/2019 11:45:45</publishTime>
     </File>
     <File Include="Views/HazineMohem/ListKharj.cshtml">
       <publishTime>08/11/2018 11:42:33</publishTime>
@@ -3403,7 +3403,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/17/2019 09:49:06</publishTime>
     </File>
     <File Include="Views/Login/Login - Copy.cshtml">
-      <publishTime>02/05/2019 08:19:53</publishTime>
+      <publishTime>11/11/2019 11:45:45</publishTime>
     </File>
     <File Include="Views/Login/Login.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -3445,7 +3445,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/02/2018 14:43:53</publishTime>
     </File>
     <File Include="Views/Register/Register.cshtml">
-      <publishTime>02/05/2019 08:19:53</publishTime>
+      <publishTime>11/11/2019 11:45:45</publishTime>
     </File>
     <File Include="Views/Register/Registerfrm.cshtml">
       <publishTime>09/27/2639 22:44:28</publishTime>
@@ -3478,7 +3478,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/02/2018 08:57:58</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutBizPage.cshtml">
-      <publishTime>11/07/2019 10:46:29</publishTime>
+      <publishTime>11/10/2019 14:05:15</publishTime>
     </File>
     <File Include="Views/Sport/Create.cshtml">
       <publishTime>11/25/2018 22:37:20</publishTime>

@@ -14,7 +14,7 @@ function ListHolyDay() {
             $(".ListHolyDay").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -37,7 +37,7 @@ function CreateHolyDayPost() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -54,7 +54,7 @@ function CreateHolyDayGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        }
        );
@@ -71,7 +71,7 @@ function EditHolyDay(HolyDayId) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }

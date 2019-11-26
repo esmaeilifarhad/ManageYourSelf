@@ -18,18 +18,20 @@
             <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
                 <th>eng</th>
                 <th>per</th>
+                <th>eye</th>
+                <th>NewExa</th>
+                <th>Edit</th>
+                <th>Up</th>
+                <th>Down</th>
                 <th>level</th>
+                <th>IsArchieve</th>               
                 <th>DateRefresh</th>
                 <th>Success</th>
                 <th>UnSuccess</th>
-                <th>eye</th>
-                <th>NewExa</th>
-                <th>Up</th>
-                <th>Down</th>
-                <th>Edit</th>
+       
                 <th>RemoveExa</th>
                 <th>Remove</th>
-                <th>IsArchieve</th>
+               
 
             </tr>
         </thead>
@@ -39,10 +41,6 @@
                 <tr WordId="@item.id" style="background-color:black;color:white;font-size: 14px;white-space:nowrap">
                     <td onclick="MakeSound2(this)">@item.eng</td>
                     <td><span style="display:none;" class="per">@item.per</span></td>
-                    <td class="level">@item.level</td>
-                    <td class="dateCol"><span style="padding-right:10px">@item.date_refresh</span></td>
-                    <td>@item.SuccessCount</td>
-                    <td>@item.UnSuccessCount</td>
                     @if (item.HasExample > 0)
                     {
                         <td><span class="fa fa-eye ShowExample pointer" style='color:green' data_id="@item.id"></span></td>
@@ -52,23 +50,29 @@
                         <td><span class="fa fa-eye-slash ShowExample pointer" style='color:yellow' data_id="@item.id"></span></td>
                     }
                     <td><span style='color:dodgerblue' class='fa fa-list-alt btnExa pointer' data_id="@item.id"></span></td>
-                    @*<td><span style='color:red' class='fa   fa-sort-up pointer LevelEngUp' data_id="@item.id"></span></td>*@
-                    <td><button style='color:green' class='btn btn-danger pointer LevelEngUp' data_id="@item.id"></button></td>
-                    @*<td><span style='color:green' class='fa fa-sort-down pointer LevelEngDown' data_id="@item.id"></span></td>*@
-                    <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
+
                     <td><span style='color:purple' class='fa fa-edit pointer EditWord' data_id="@item.id"></span></td>
-                    <td><span style='color:deeppink' class='fa fa-trash pointer' data_id="@item.id"></span></td>
-                    <td><span style='color:mediumvioletred' class='fa fa-remove RemoveWord pointer' data_id="@item.id"></span></td>
-                    @if (item.IsArchieve == true)
+                    <td><button style='color:green' class='btn btn-danger pointer LevelEngUp' data_id="@item.id"></button></td>
+                    <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
+                    <td class="level">@item.level</td>
+                      @if (item.IsArchieve == true)
                     {
-                        @*<td><span style='color:green' class='fa fa-archive ArchieveWord  pointer' data_id="@item.id"></span></td>*@
                         <td><button style='color:green' class='btn btn-default pointer ArchieveWord' data_id="@item.id"></button></td>
                     }
                     else
                     {
-                        @*<td><span style='color:red' class='fa fa-archive ArchieveWord  pointer' data_id="@item.id"></span></td>*@
                         <td><button style='color:red' class='btn btn-info pointer ArchieveWord' data_id="@item.id"></button></td>
                     }
+                   
+                    <td class="dateCol"><span style="padding-right:10px">@item.date_refresh</span></td>
+                    <td>@item.SuccessCount</td>
+                    <td>@item.UnSuccessCount</td>
+                   
+
+                  
+                    <td><span style='color:deeppink' class='fa fa-trash pointer' data_id="@item.id"></span></td>
+                    <td><span style='color:mediumvioletred' class='fa fa-remove RemoveWord pointer' data_id="@item.id"></span></td>
+                   
                  
                 </tr>
                 foreach (var itemExample in item.lstExample)
@@ -76,11 +80,15 @@
                     <tr style="background-color:#d6d5c7;color:black;text-align:left">
                         <td class="Examplecls" colspan="14" style="display:none;direction:ltr" data_id="@item.id" ExampleId="@itemExample.id">
                             <span>@itemExample.example</span>
-                            <span style='color:yellow' class='fa fa-edit pointer ShowEditExample' ExampleId="@itemExample.id"></span>
-                            <br />
-                            <span style='color:purple' class='fa fa-soundcloud pointer ' onclick="MakeSound(this)" ExampleId="@itemExample.id"></span>
-                            <br />
-                            <span style='color:red' class='fa fa-deafness pointer RemoveExampleEng' ExampleId="@itemExample.id"></span>
+                         <br />
+                            <button style='color:black' class='fa fa-edit pointer ShowEditExample' ExampleId="@itemExample.id">Edit</button>
+                            @*<span style='color:yellow' class='fa fa-edit pointer ShowEditExample' ExampleId="@itemExample.id"></span>*@
+                          
+                            <button style='color:black' class='fa fa-soundcloud pointer' onclick="MakeSound(this)" ExampleId="@itemExample.id">Sound</button>
+                            @*<span style='color:purple' class='fa fa-soundcloud pointer ' onclick="MakeSound(this)" ExampleId="@itemExample.id"></span>*@
+                       
+                            <button style='color:black' class='fa fa-remove pointer RemoveExampleEng' ExampleId="@itemExample.id">Delete</button>
+                            @*<span style='color:red' class='fa fa-deafness pointer RemoveExampleEng' ExampleId="@itemExample.id"></span>*@
                         </td>
                         @*<td colspan="1"><span style="color:red" class='fa fa-remove pointer' data_id="@item.id"  ExampleId="@itemExample.id"></span></td>*@
                     </tr>
@@ -90,13 +98,16 @@
     </table>
 </div>
 <script>
-   // $(".table-responsive .dateCol span").remove();
+    $(".table-responsive .dateCol .calDayOfWeek").remove();
+   // var i=1
     $(".table-responsive .dateCol").each(function () {
-       
+       //console.log(this)
         var today=moment().format('jYYYY/jM/jD');//Today
-        var diffDays = showDays(today, $(this).text());
-        $($(this).prepend("<span style='color:red;padding-right:10px'>" + diffDays + "</span>"));
-        var dayOfWeek=calDayOfWeek($(this).text())
-        $($(this).prepend("<span style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
+        var diffDays = showDays(today, $(this).text()); 
+        var dayOfWeek = calDayOfWeek($(this).text())
+        $($(this).append("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + diffDays + "</span>"));
+        $($(this).append("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
+      //  i = i + 1;
+      
     });
 </script>

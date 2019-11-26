@@ -39,7 +39,7 @@ function ListTaskFutureChkPost(MyArray) {
 
          },
          error: function (error) {
-             alert(error);
+             console.log(error);
          }
      });
 }
@@ -60,7 +60,7 @@ function ListTaskFuture() {
 
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 
@@ -82,7 +82,7 @@ function ListTaskFutureChk() {
 
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 
@@ -190,7 +190,7 @@ function DeleteTiming() {
               error: function (error) {
                   // alert(result.message);
                   // alert(result.result)
-                  alert(error.responseText);
+                  console.log(error.responseText);
               }
           });
 }
@@ -229,7 +229,7 @@ function TaskUpLevel(TaskId) {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -246,7 +246,11 @@ function ListTaslLevelHigh()
             //--------
         },
         error: function (error) {
-            alert(error);
+            console.log("******start******")
+            console.log("ListTaslLevelHigh : ");
+            console.log(error)
+            console.log("******end******")
+          
         }
     })
 }
@@ -279,7 +283,11 @@ function TaskDownLevel(TaskId) {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log("******start******")
+               console.log("TaskDownLevel : ");
+               console.log(error)
+               console.log("******end******")
+              
            }
        });
 }
@@ -306,9 +314,10 @@ function removeTimeTask(TaskId) {
                   }
               },
               error: function (error) {
-                  // alert(result.message);
-                  // alert(result.result)
-                  alert(error.responseText);
+                  console.log("******start******")
+                  console.log("removeTimeTask : ");
+                  console.log(error.responseText)
+                  console.log("******end******")
               }
           });
 }
@@ -328,7 +337,7 @@ function EditTask(TaskId) {
             //--------
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -352,7 +361,7 @@ function ChangeTodayTask(CatId) {
             //--------
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -444,7 +453,7 @@ function UpdateTask() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -488,7 +497,7 @@ function UpdateTask() {
 //        },
 //        error: function (error) {
 //            $(".ListTask").html("<p>دسترسی ندارید</p>");
-//            // alert(error);
+//            // console.log(error);
 //        }
 //    })
 //}
@@ -506,7 +515,7 @@ function ListTask(typeTask) {
         },
         error: function (error) {
             $(".ListTask").html("<p>دسترسی ندارید</p>");
-            // alert(error);
+            // console.log(error);
         }
     })
 }
@@ -526,7 +535,7 @@ function TimingTask(TaskId) {
             //--------
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -551,7 +560,7 @@ function ListTiming(x) {
                 //--------
             },
             error: function (error) {
-                alert(error.message);
+                console.log("ListTiming : " + error.message);
             }
         })
     }
@@ -571,7 +580,7 @@ function ListTiming(x) {
                 //--------
             },
             error: function (error) {
-                alert(error);
+                console.log(error);
             }
         })
     }
@@ -593,7 +602,7 @@ function ListTaskGeneral() {
 
             },
             error: function (error) {
-                alert(error);
+                console.log(error);
             }
         })
     
@@ -658,7 +667,7 @@ function TimingPost()
                   }
               },
               error: function (error) {
-                  alert(error);
+                  console.log(error);
               }
           });
 }

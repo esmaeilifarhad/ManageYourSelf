@@ -15,7 +15,7 @@ function ListMasterData() {
             $(".ListMasterData").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -46,7 +46,7 @@ function CreateMasterDataPost() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -63,7 +63,7 @@ function CreateMasterDataGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        }
        );
@@ -80,7 +80,7 @@ function EditMasterData(Id) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -104,7 +104,6 @@ function UpdateMasterDataPost() {
               CatId:CatId
            }),
            success: function (result) {
-               debugger
                RefreshMasterData();
                ListTaskGeneral();
                ListTaslLevelHigh();

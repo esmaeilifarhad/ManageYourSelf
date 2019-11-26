@@ -15,7 +15,7 @@ function List() {
             $(".ListRoutineJob").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -33,7 +33,7 @@ function RoutineJobCreate() {
             $("#RoutineJobCreate").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -51,7 +51,8 @@ function RoutineJobListMasterPage()
             $(".RoutineJobListMasterPage").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log("RoutineJobListMasterPage : ");
+            console.log( error);
         }
     })
 }
@@ -66,7 +67,7 @@ function ShowPivot() {
             $(".ListRoutineJobHa").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -90,7 +91,7 @@ function CreateRoutineJobPost() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -107,7 +108,7 @@ function CreateRoutineJobGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        }
        );
@@ -124,7 +125,7 @@ function EditHolyDay(HolyDayId) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -187,7 +188,7 @@ function SaveRoutineJob() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -244,7 +245,7 @@ $("#RoutineJobCreate").on("click", "input[type=checkbox]", function () {
           }
       },
       error: function (error) {
-          alert(error);
+          console.log(error);
       }
   });
     */
@@ -272,7 +273,7 @@ function SaveCheckedRoutineJobHa(RoutineJobId,thiss)
           }
       },
       error: function (error) {
-          alert(error);
+          console.log(error);
       }
   });
 }
@@ -289,7 +290,7 @@ $("#RoutineJobCreate").on("click", ".btn-danger", function () {
             $("#RoutineJobCreate").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     });
 });

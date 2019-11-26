@@ -37,7 +37,7 @@ function ListSportChk() {
 
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 
@@ -64,7 +64,7 @@ function ListSportFilter() {
             findRotbeh();
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -97,7 +97,7 @@ function SaveNewSport()
               ListSportFilter();
           },
           error: function (error) {
-              alert(error);
+              console.log(error);
           }
       });
 
@@ -132,7 +132,7 @@ function ListSport() {
             $(".ListSport").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -148,7 +148,7 @@ function ShowPivotSport() {
             $(".ShowPivotSport").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -164,7 +164,7 @@ function ShowPivotSportOrder() {
             $(".ShowPivotSportOrder").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -180,7 +180,7 @@ function ShowPivotGroupingSets(CatId) {
             $(".ShowPivotGroupingSets").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -209,7 +209,7 @@ function CreateSportPost() {
                    RefreshSport();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -226,7 +226,7 @@ function CreateSportGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        }
        );
@@ -243,7 +243,7 @@ function EditSport(Id) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }

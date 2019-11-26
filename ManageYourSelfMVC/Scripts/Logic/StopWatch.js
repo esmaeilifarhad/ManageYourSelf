@@ -93,7 +93,7 @@ function CreateSTime(sta, value, key) {
               }
           },
           error: function (error) {
-              alert(error);
+              console.log(error);
           }
       });
 
@@ -162,7 +162,7 @@ function SaveInKarkard() {
               }
           },
           error: function (error) {
-              alert(error);
+              console.log(error);
           }
       });
 }

@@ -74,13 +74,15 @@
 </div>
 
 <script>
+    $(".table-responsive .dateCol .calDayOfWeek").remove();
     $(".dateCol").each(function () {
-        debugger
         var today = moment().format('jYYYY/jM/jD');//Today
         var diffDays = showDays(today, $(this).text());//diff day : today to date
-        $($(this).prepend("<span style='color:red;padding-right:10px'>" + diffDays + "</span>"));
+ 
         var dayOfWeek = calDayOfWeek($(this).text())//day of week
-        $($(this).prepend("<span style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
+        $($(this).prepend("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + diffDays + "</span>"));
+        $($(this).prepend("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
+      
     });
 
     /*$(document).ready(function () {

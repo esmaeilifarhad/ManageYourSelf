@@ -34,7 +34,7 @@ function ListCategory() {
             $(".Category").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -70,7 +70,7 @@ function CreateCategoryGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
 
        }
@@ -90,7 +90,7 @@ function EditCategory(CategoryId) {
 
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -151,7 +151,7 @@ function CreatePercentJobGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
 
        }
@@ -170,7 +170,7 @@ function EditPercentJobGet(thiss) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
 
        }
@@ -235,7 +235,7 @@ function ListPercentJob() {
             $(".PercentJob").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }

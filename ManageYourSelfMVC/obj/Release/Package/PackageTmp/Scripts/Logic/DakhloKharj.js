@@ -17,7 +17,7 @@ function ListMojoodyBank() {
             $(".ListMojoodyBank").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -40,7 +40,7 @@ function CreateMojoodyBankPost() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -57,7 +57,7 @@ function CreateMojoodyBankGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        }
        );
@@ -74,7 +74,7 @@ function EditMojoodyBank(MojoodyBankId) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -172,7 +172,7 @@ function ListTypeHazineh() {
             $(".ListTypeHazineh").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -211,7 +211,7 @@ function CreateTypeHazinehGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        }
        );
@@ -235,7 +235,7 @@ function CreateTypeHazinehPost() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -251,7 +251,7 @@ function EditTypeHazineh(TypeHazinehId) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -303,7 +303,7 @@ function ListDaramd() {
             $(".ListDaramad").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -319,7 +319,7 @@ function CreateDaramdGet(MojoodyBankId) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        }
        );
@@ -347,7 +347,7 @@ function CreateDaramadPost() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -385,7 +385,7 @@ function EditDaramad(DaramadId) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -420,7 +420,7 @@ function EditMojoodyBankBalance(MojoodyBankId) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -453,7 +453,7 @@ function EditMojoodyBankExchange(MojoodyBankId) {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -486,7 +486,7 @@ function Rpt_ListGroupHazine() {
             $(".Rpt_ListGroupHazine").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }

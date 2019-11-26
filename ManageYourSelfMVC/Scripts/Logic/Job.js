@@ -28,7 +28,7 @@ function CreateJobGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
 
        }
@@ -91,7 +91,7 @@ function EditJob(JobId) {
 
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
@@ -130,7 +130,7 @@ function ListJob() {
             $(".Job").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }

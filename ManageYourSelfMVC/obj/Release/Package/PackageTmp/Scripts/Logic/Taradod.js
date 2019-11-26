@@ -17,7 +17,7 @@ function ListTaradod() {
             $(".ListTaradod").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -32,7 +32,7 @@ function ListRotbeh() {
             $(".ListRotbeh").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -50,7 +50,7 @@ function ListRotbehByDate(SDate) {
             $(".ListRotbehByDate").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }

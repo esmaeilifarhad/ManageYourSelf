@@ -48,7 +48,7 @@ function CreateNewExamplePost(wordId, Example) {
             }
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -143,11 +143,13 @@ function ListDictionaryHamrahBaExamplePro(str) {
     })
 }
 //---------------SearchInExamples
-$("#SeachInExample").keyup(function () {
+$("#SeachInExample").blur(function () {
+    debugger
     var str = $(this).val();
     SearchInExamples(str);
     speakText();
 });
+
 function SearchInExamples(str) {
     if (str == null) {
         str = "";
@@ -174,12 +176,7 @@ $("#SpeechText").keyup(function () {
     var str = $(this).val();
     speakText(str);
 });
-//$("body .MyDictionary").on("dblclick", "td", function () {
-   
-//    var str = $(this).text();
-//   // speakText(str);
-//    TestSound(str);
-//});
+
 
 $(".MyDictionary  td").dblclick(function () {
     var str = $(this).text();
@@ -198,6 +195,7 @@ function speakText(str) {
 
            },
            error: function (error) {
+               console.log(error)
               // alert(error.message);
            }
        });
@@ -386,7 +384,11 @@ function RefreshListWithCheckedCheckbox()
         lvl += $(this).val() + ",";
     });
     MyArray.push(lvl);
+   
     ListWordExampleDivChk(MyArray);
+    ListDictionaryHamrahBaExampleProUnSuccess();
+    ListPersianToEnglish();
+   
 }
 //-----------------
 //Remove Example
@@ -402,7 +404,7 @@ function MainDictionary()
             //$("#LessMoroor").html(data)
         },
         error: function (error) {
-           // alert(error);
+            console.log(error);
         }
     })
 }
@@ -425,7 +427,7 @@ function RemoveExa(ExampleId, WordId) {
 
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -467,7 +469,7 @@ function ShowExampleRefresh(WordId) {
             }
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -576,10 +578,11 @@ function ShowLevel() {
         url: urll,
         success: function (data) {
             $("#ShowLevel").html(data);
-           // $(".ColShowLevel").html(data);
+            $(".ColShowLevel").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log("ShowLevel : ");
+            console.log( error);
         }
     })
 }
@@ -597,7 +600,7 @@ function BadGheleghtarinWord() {
             // $("#HazineMohem").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -612,7 +615,7 @@ function LessMoroor() {
             $("#LessMoroor").html(data)
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -627,7 +630,7 @@ function Top10LastMoroor() {
             $("#Top10LastMoroor").html(data)
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -643,7 +646,7 @@ function Top10MaxGroupBy() {
             $("#Top10MaxGroupBy").html(data)
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -659,7 +662,7 @@ function RandomWord() {
             $(".DicRandomWord").html(data)
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -674,7 +677,7 @@ function RandomWord_HardWord() {
             $(".DicRandomWord_HardWord").html(data)
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -689,7 +692,7 @@ function RandomWord_HardWordExample() {
             $(".DicRandomWord_HardWordExample").html(data)
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -723,7 +726,7 @@ function CreateWord() {
                }
            },
            error: function (error) {
-               alert(error)
+               console.log(error)
            }
        });
 }
@@ -755,11 +758,12 @@ function UpdateWord() {
                }
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
        });
 }
 function UpdateExample() {
+    debugger
     var Example = $("#MasterModal table textarea[name='Example']").val()
     var ExampleId = $("#MasterModal table").attr("ExampleId")
     $.ajax(
@@ -774,7 +778,7 @@ function UpdateExample() {
                    RefreshListWithCheckedCheckbox();
                }
                else {
-                   alert(error.message);
+                   alert(result.message);
                }
            },
            error: function (error) {
@@ -844,7 +848,7 @@ function ListDictionaryHamrahBaExample(SkipN) {
             //CountLevel();
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -858,7 +862,7 @@ function ListDictionaryHamrahBaExampleProUnSuccess() {
         success: function (data) {
 
             $("#DicBaMesalProUnSuccess").html(data);
-            CheckedInput();
+          //  CheckedInput();
         },
         error: function (error) {
             alert('Dictionary/ListWordExampleSucc_OR_UnSucc' + error);
@@ -875,7 +879,7 @@ function ListPersianToEnglish() {
         success: function (data) {
 
             $("#DicPersianToEnglish").html(data);
-            CheckedInput();
+          //  CheckedInput();
         },
         error: function (error) {
             alert('Dictionary/ListPersianToEnglish' + error);
@@ -883,6 +887,7 @@ function ListPersianToEnglish() {
     })
 }
 function CheckedInput() {
+
     var levelval = 0;
     var urll = "/Dictionary/MaxLevelCount";
     $.ajax({
@@ -891,6 +896,7 @@ function CheckedInput() {
         dataType: "json",
         url: urll,
         success: function (data) {
+            debugger
             levelval = data;
             $("#MenuDicBaMesalPro .chkLevel input").each(function () {
                 if (levelval == $(this).val()) {
@@ -901,12 +907,13 @@ function CheckedInput() {
            // alert(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     });  
 }
 function ListWordExampleDivChk(MyArray)
 {
+    debugger
     $.ajax(
      {
          type: 'Post',
@@ -920,7 +927,7 @@ function ListWordExampleDivChk(MyArray)
        
          },
          error: function (error) {
-             alert(error);
+             console.log(error);
          }
      });
 }
@@ -942,7 +949,7 @@ function RemoveWord(WordId) {
 
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 
@@ -973,7 +980,7 @@ function ArchieveWord(WordId, res) {
 
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 

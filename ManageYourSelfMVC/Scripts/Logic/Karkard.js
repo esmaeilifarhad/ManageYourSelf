@@ -31,7 +31,7 @@ function ListKarkard() {
             $(".DivKarkard").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -47,7 +47,7 @@ function ShowKarkadPivot() {
             $(".ShowKarkadPivot").html(data);
         },
         error: function (error) {
-            alert(error);
+            console.log(error);
         }
     })
 }
@@ -63,7 +63,7 @@ function CreateKarkardGet() {
                $("#MasterModal").modal();
            },
            error: function (error) {
-               alert(error);
+               console.log(error);
            }
 
        }
