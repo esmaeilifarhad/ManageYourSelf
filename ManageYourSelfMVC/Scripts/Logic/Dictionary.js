@@ -220,13 +220,27 @@ function MakeSound2(thiss) {
 
     // TestSound(str)
 }
+function MakeSoundExample(thiss) {
+     debugger;
+  //  console.log(thiss)
+    // var str = $(thiss).parent().text();
+     var str = ($(thiss).parent().parent().find(".ExampleSound")).text()
+     debugger
+    //var str = $(thiss).text();
+    // speakText(str);
+    TestSound(str);
+
+    // TestSound(str)
+}
+
 function TestSound(str)
 {
+    debugger;
    // alert("start")
     // var x=$("Body input[name='SpeedSpeach']").val();
     var x = varx = $("Body input[name='SpeedSpeach']").val();
     var y = varx = $("Body input[name='SoundSpeach']").val();
-    debugger;
+
     text = str;
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();

@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2018 17:59:50</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.dll">
-      <publishTime>11/24/2019 11:57:46</publishTime>
+      <publishTime>11/26/2019 17:52:23</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>02/01/2018 08:13:16</publishTime>
@@ -3028,7 +3028,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2019 11:30:17</publishTime>
     </File>
     <File Include="Scripts/Logic/Dictionary.js">
-      <publishTime>11/24/2019 14:42:05</publishTime>
+      <publishTime>11/26/2019 22:26:53</publishTime>
     </File>
     <File Include="Scripts/Logic/Gold.js">
       <publishTime>06/09/2019 08:20:56</publishTime>
@@ -3295,7 +3295,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2018 16:55:09</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleDiv.cshtml">
-      <publishTime>11/24/2019 14:47:25</publishTime>
+      <publishTime>11/27/2019 10:35:23</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleFalse.cshtml">
       <publishTime>06/09/2019 22:27:21</publishTime>
@@ -3523,7 +3523,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/14/2019 08:19:57</publishTime>
     </File>
     <File Include="Views/Task/ListTaskFutureChk.cshtml">
-      <publishTime>10/15/2019 13:30:48</publishTime>
+      <publishTime>10/15/2019 11:56:20</publishTime>
     </File>
     <File Include="Views/Task/ListTaskGeneral.cshtml">
       <publishTime>07/01/2019 09:10:31</publishTime>
@@ -3544,7 +3544,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 12:52:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/06/2019 14:37:05</publishTime>
+      <publishTime>11/27/2019 10:58:00</publishTime>
     </File>
   </ItemGroup>
 </Project>
