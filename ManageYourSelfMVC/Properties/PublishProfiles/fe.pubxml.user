@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2018 17:59:50</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.dll">
-      <publishTime>11/26/2019 17:52:23</publishTime>
+      <publishTime>11/28/2019 12:23:11</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>02/01/2018 08:13:16</publishTime>
@@ -250,7 +250,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 08:13:14</publishTime>
     </File>
     <File Include="Models/DomainModels/Model1.edmx.diagram">
-      <publishTime>10/30/2019 11:50:26</publishTime>
+      <publishTime>10/30/2019 11:50:25</publishTime>
     </File>
     <File Include="MyTemplate/MasterTemplate/.gitattributes">
       <publishTime>02/01/2018 08:47:28</publishTime>
@@ -679,7 +679,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/03/2018 22:08:58</publishTime>
     </File>
     <File Include="Scripts/angular.js">
-      <publishTime>09/03/2018 22:08:58</publishTime>
+      <publishTime>11/28/2019 11:44:22</publishTime>
     </File>
     <File Include="Scripts/angular.min.js">
       <publishTime>09/03/2018 22:08:58</publishTime>
@@ -3022,13 +3022,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2019 11:30:17</publishTime>
     </File>
     <File Include="Scripts/Logic/Category.js">
-      <publishTime>11/11/2019 11:30:17</publishTime>
+      <publishTime>11/28/2019 11:44:38</publishTime>
     </File>
     <File Include="Scripts/Logic/DakhloKharj.js">
       <publishTime>11/11/2019 11:30:17</publishTime>
     </File>
     <File Include="Scripts/Logic/Dictionary.js">
-      <publishTime>11/26/2019 22:26:53</publishTime>
+      <publishTime>11/28/2019 11:51:38</publishTime>
     </File>
     <File Include="Scripts/Logic/Gold.js">
       <publishTime>06/09/2019 08:20:56</publishTime>
@@ -3043,16 +3043,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/04/2019 11:20:48</publishTime>
     </File>
     <File Include="Scripts/Logic/MasterData.js">
-      <publishTime>11/11/2019 11:57:52</publishTime>
+      <publishTime>11/28/2019 11:44:39</publishTime>
     </File>
     <File Include="Scripts/Logic/Public.js">
-      <publishTime>11/23/2019 15:00:50</publishTime>
+      <publishTime>11/28/2019 11:45:53</publishTime>
     </File>
     <File Include="Scripts/Logic/RoutineJob.js">
       <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Setting - Copy.js">
-      <publishTime>11/11/2019 11:45:55</publishTime>
+      <publishTime>11/28/2019 11:44:39</publishTime>
     </File>
     <File Include="Scripts/Logic/Setting.js">
       <publishTime>11/11/2019 11:45:55</publishTime>
@@ -3061,7 +3061,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2019 21:51:50</publishTime>
     </File>
     <File Include="Scripts/Logic/Sport.js">
-      <publishTime>11/11/2019 11:45:55</publishTime>
+      <publishTime>11/28/2019 11:44:02</publishTime>
     </File>
     <File Include="Scripts/Logic/StopWatch.js">
       <publishTime>11/11/2019 11:45:55</publishTime>
@@ -3070,7 +3070,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Task.js">
-      <publishTime>11/11/2019 11:45:55</publishTime>
+      <publishTime>11/28/2019 11:44:39</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>02/01/2018 12:45:28</publishTime>
@@ -3289,19 +3289,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/09/2019 22:34:29</publishTime>
     </File>
     <File Include="Views/Dictionary/ListPersianToEnglish.cshtml">
-      <publishTime>11/23/2019 14:54:31</publishTime>
+      <publishTime>11/23/2019 14:54:30</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleAngular.cshtml">
       <publishTime>12/11/2018 16:55:09</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleDiv.cshtml">
-      <publishTime>11/27/2019 10:35:23</publishTime>
+      <publishTime>11/28/2019 11:51:39</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleFalse.cshtml">
       <publishTime>06/09/2019 22:27:21</publishTime>
     </File>
     <File Include="Views/Dictionary/MainDictionary.cshtml">
-      <publishTime>11/24/2019 14:42:05</publishTime>
+      <publishTime>11/28/2019 12:07:28</publishTime>
     </File>
     <File Include="Views/Dictionary/NewExample.cshtml">
       <publishTime>06/07/2018 11:24:48</publishTime>
@@ -3493,7 +3493,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/09/2019 10:10:26</publishTime>
     </File>
     <File Include="Views/Sport/MainSport.cshtml">
-      <publishTime>10/17/2019 09:39:33</publishTime>
+      <publishTime>11/28/2019 11:44:04</publishTime>
     </File>
     <File Include="Views/Sport/ShowPivot.cshtml">
       <publishTime>10/17/2018 17:11:58</publishTime>
@@ -3544,7 +3544,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 12:52:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/27/2019 10:58:00</publishTime>
+      <publishTime>11/28/2019 12:23:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

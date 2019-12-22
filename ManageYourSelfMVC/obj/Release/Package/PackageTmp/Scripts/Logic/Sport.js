@@ -112,7 +112,7 @@ $("body").on("click", ".DeleteSport", function () {
     ListSportFilter()
 });
 function intervalSport() {
-    debugger;
+    
    
     setInterval(function () {
         ListSportFilter();

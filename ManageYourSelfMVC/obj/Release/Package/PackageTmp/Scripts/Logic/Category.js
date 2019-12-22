@@ -136,7 +136,7 @@ function DeleteCategory(CategoryId) {
 //**************************************PercentJob*******************************************************
 //Create Get
 $("div .PercentJob").on("click", "input[name='CreatePercentJob']", function () {
-    debugger
+    
     CreatePercentJobGet();
 });
 function CreatePercentJobGet() {
@@ -200,7 +200,7 @@ function CreatePercentJobPost() {
        });
 }
 function UpdatePercentJobPost() {
-    debugger
+    
     var PercentValue = $("#MasterModal input[name='PercentValue'").val();
     var JobId = $("#MasterModal table tr td span").attr("JobId");
     // var Mohasebe = $("#MasterModal input[name=Moh]:checked").val();
@@ -223,7 +223,7 @@ function UpdatePercentJobPost() {
        });
 }
 function ListPercentJob() {
-    debugger
+    
     var urll = "/PercentJob/List";
     $.ajax({
         type: "Get",

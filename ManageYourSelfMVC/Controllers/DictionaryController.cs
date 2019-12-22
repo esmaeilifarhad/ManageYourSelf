@@ -556,6 +556,28 @@ where example like '%" + str+ @"%'
                         lstV.Add(V);
                     }
                 }
+                else if (ids.Contains("106"))
+                {
+                    // List<ViewModels.Dictionary.VMDictionary> lstV = new List<ViewModels.Dictionary.VMDictionary>();
+
+                    DataTable DT = U.Select("exec [PersianToEnglish] " + UserId.ToString());
+                    foreach (DataRow item in DT.Rows)
+                    {
+                        ViewModels.Dictionary.VMDictionary V = new ViewModels.Dictionary.VMDictionary();
+                        V.id = int.Parse(item["id"].ToString());
+                        V.eng = item["eng"].ToString();
+                        V.per = item["per"].ToString();
+                        V.level = int.Parse(item["level"].ToString());
+                        V.date_refresh = item["date_refresh"].ToString();
+                        V.date_s = item["date_s"].ToString();
+                        V.SuccessCount = int.Parse(item["SuccessCount"].ToString());
+                        V.UnSuccessCount = int.Parse(item["UnSuccessCount"].ToString());
+                        V.HasExample = T.HasExample(V.id);
+                        V.lstExample = DB.example_tbl.Where(q => q.id_dic_tbl == V.id).ToList();
+
+                        lstV.Add(V);
+                    }
+                }
                 else
                 {
 
@@ -1127,8 +1149,6 @@ on W.id=E.id_dic_tbl");
                 lstV.Add(V);
             }
 
-            // var jsonSerialiser = new JavaScriptSerializer();
-            // var json = jsonSerialiser.Serialize(lstV);
 
             return Json(lstV, JsonRequestBehavior.AllowGet);
         }

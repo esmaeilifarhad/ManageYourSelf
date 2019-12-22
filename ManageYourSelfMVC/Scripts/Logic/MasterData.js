@@ -144,7 +144,7 @@ $(".ListMasterData").on("click", "input[name='CreateMasterData']", function () {
 //--Delete
 $(".ListMasterData").on("click", ".RemoveMaster", function () {
     var res = confirm("آیا حذف انجام شود؟");
-    debugger
+    
     if (res == true) {
         var Id = $(this).attr("catid");
         DeleteMasterData(Id);

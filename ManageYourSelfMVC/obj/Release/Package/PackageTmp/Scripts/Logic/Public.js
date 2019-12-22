@@ -1,6 +1,6 @@
 ﻿//***********************************************MasterModal*****************************************
 $('#MasterModal .btnSave').on("click", function () {
-    debugger;
+    
     var NameTbl = $("#MasterModal .BodyModal table").attr("nametbl")
     if (NameTbl == "tbltask")
         CreateTask();
@@ -134,7 +134,23 @@ function showDays(firstDate, secondDate) {
     return(Math.floor(days));
 
 }
-
+/*
+this function get date and return day of week and how days pass to today
+*/
+function changeDateToRoozHateAndDayPass(date) {
+    
+    var myDate;
+    if (date.toString().length == 8) {
+        myDate = date.toString().slice(0, 4) + "/" + date.toString().slice(4, 6) + "/" + date.toString().slice(6, 8)
+    }
+    
+    var today = moment().format('jYYYY/jM/jD');//Today
+    var diffDays = showDays(today, myDate);
+    var dayOfWeek = calDayOfWeek(myDate);
+    
+    return dayOfWeek
+    
+}
 setInterval(function () {
    
     ListTaslLevelHigh();

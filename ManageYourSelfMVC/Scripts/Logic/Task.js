@@ -152,7 +152,7 @@ $("Body").on("click", ".CreateNewTask", function () {
     CreateTaskView(CatId);
 });
 function CreateTaskView(CatId) {
-    debugger
+    
    
     var urll = "/Task/CreateTaskView?CatId=" + CatId;
     $.ajax({
@@ -392,7 +392,7 @@ function ChangeTodayTaskPost() {
           });
 }
 function CreateTask() {
-   // debugger;
+   // 
     var _CatId = $("#MasterModal table .MYSelect option:selected").val();
     var _Name = $("#MasterModal table textarea[name='Name']").val()
     //var _Name = $("#MasterModal table input[name='Name']").val()
@@ -613,7 +613,7 @@ $("body").on("click", ".AllCatChecked", function () {
     });
 });
 $(".ListTaskFutureChk").on("click", "input", function () {
-    debugger;
+    
     var MyArray = [];
     var lvl = '';
     $(".ListTaskFutureChk .Categories  input:checked").each(function () {

@@ -4,7 +4,7 @@ $("ul li a[href='#Setting']").on("click", function () {
 });
 //***************************************************HolyDay
 function ListHolyDay() {
-    debugger
+    
     var urll = "/HolyDay/ListHolyDay";
     $.ajax({
         type: "Get",

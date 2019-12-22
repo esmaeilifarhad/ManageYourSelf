@@ -144,7 +144,7 @@ function ListDictionaryHamrahBaExamplePro(str) {
 }
 //---------------SearchInExamples
 $("#SeachInExample").blur(function () {
-    debugger
+    
     var str = $(this).val();
     SearchInExamples(str);
     speakText();
@@ -201,9 +201,9 @@ function speakText(str) {
        });
 }
 function MakeSound(thiss) {
-   // debugger;
+   // 
     
-       var str = $(thiss).parent().text();
+    var str = $(thiss).parent().text();
        // var str = $(thiss).text();
         // speakText(str);
         TestSound(str);
@@ -211,7 +211,7 @@ function MakeSound(thiss) {
    // TestSound(str)
 }
 function MakeSound2(thiss) {
-    // debugger;
+    // 
 
    // var str = $(thiss).parent().text();
     var str = $(thiss).text();
@@ -221,11 +221,11 @@ function MakeSound2(thiss) {
     // TestSound(str)
 }
 function MakeSoundExample(thiss) {
-     debugger;
+     debugger
   //  console.log(thiss)
     // var str = $(thiss).parent().text();
      var str = ($(thiss).parent().parent().find(".ExampleSound")).text()
-     debugger
+     
     //var str = $(thiss).text();
     // speakText(str);
     TestSound(str);
@@ -235,7 +235,7 @@ function MakeSoundExample(thiss) {
 
 function TestSound(str)
 {
-    debugger;
+    
    // alert("start")
     // var x=$("Body input[name='SpeedSpeach']").val();
     var x = varx = $("Body input[name='SpeedSpeach']").val();
@@ -777,7 +777,7 @@ function UpdateWord() {
        });
 }
 function UpdateExample() {
-    debugger
+    
     var Example = $("#MasterModal table textarea[name='Example']").val()
     var ExampleId = $("#MasterModal table").attr("ExampleId")
     $.ajax(
@@ -910,7 +910,7 @@ function CheckedInput() {
         dataType: "json",
         url: urll,
         success: function (data) {
-            debugger
+            
             levelval = data;
             $("#MenuDicBaMesalPro .chkLevel input").each(function () {
                 if (levelval == $(this).val()) {
@@ -927,7 +927,7 @@ function CheckedInput() {
 }
 function ListWordExampleDivChk(MyArray)
 {
-    debugger
+    
     $.ajax(
      {
          type: 'Post',
