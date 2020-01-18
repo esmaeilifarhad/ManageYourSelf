@@ -117,7 +117,7 @@ function SearchWordList() {
     })
 }
 //---------------SearchInDatabse
-$("#SeachInDB").keyup(function () {
+$("#SeachInDB").blur(function () {
     var str = $(this).val();
     ListDictionaryHamrahBaExamplePro(str);
 });
@@ -221,7 +221,7 @@ function MakeSound2(thiss) {
     // TestSound(str)
 }
 function MakeSoundExample(thiss) {
-     debugger
+     
   //  console.log(thiss)
     // var str = $(thiss).parent().text();
      var str = ($(thiss).parent().parent().find(".ExampleSound")).text()
@@ -236,8 +236,6 @@ function MakeSoundExample(thiss) {
 function TestSound(str)
 {
     
-   // alert("start")
-    // var x=$("Body input[name='SpeedSpeach']").val();
     var x = varx = $("Body input[name='SpeedSpeach']").val();
     var y = varx = $("Body input[name='SoundSpeach']").val();
 
@@ -254,7 +252,7 @@ function TestSound(str)
     };
 
     speechSynthesis.speak(msg);
-  //  alert("finish")
+
 }
 //----------ListDictionary
 $("input[name='ListDictionary']").on("click", function () {
@@ -316,18 +314,18 @@ $("#MasterModal").on("click", "table[nametbl='RemoveExample'] td .fa-eraser", fu
     RemoveExamplePost(ExampleId);
 });
 //---------------Ajax Show Example     
-$("#DivDictionary").on("click", ".btnExa", function () {
+//$("#DivDictionary").on("click", ".btnExa", function () {
    
-    var _eng = $(this).closest("tr")   // Finds the closest row <tr>
-                 .find(".eng")     // Gets a descendent with class="nr"
-                 .text();
-    var _per = $(this).closest("tr")   // Finds the closest row <tr>
-                 .find(".per")     // Gets a descendent with class="nr"
-                 .text();
-    $("#HeaderExample").html("<span>" + _eng + "</span><span class='TranslateWord' style='display:none'>" + _per + "</span>");
-    var _idd = $(this).attr("data_id");
-    ShowExampleRefresh(_idd);
-});
+//    var _eng = $(this).closest("tr")   // Finds the closest row <tr>
+//                 .find(".eng")     // Gets a descendent with class="nr"
+//                 .text();
+//    var _per = $(this).closest("tr")   // Finds the closest row <tr>
+//                 .find(".per")     // Gets a descendent with class="nr"
+//                 .text();
+//    $("#HeaderExample").html("<span>" + _eng + "</span><span class='TranslateWord' style='display:none'>" + _per + "</span>");
+//    var _idd = $(this).attr("data_id");
+//    ShowExampleRefresh(_idd);
+//});
 //Create New Example   #DicBaMesalPro
 $("Body").on("click", ".btnExa", function () {
     var WordId = $(this).attr("data_id");
@@ -563,6 +561,7 @@ function LevelChangeDown(wordId) {
         dataType: "json",
         url: urll,
         success: function (res) {
+            RefreshListWithCheckedCheckbox();
             ShouldExecute();
         },
         error: function (res) {
@@ -577,7 +576,9 @@ function LevelChangeUp(wordId) {
         dataType: "json",
         url: urll,
         success: function (res) {
+            RefreshListWithCheckedCheckbox();
             ShouldExecute();
+           
         },
         error: function (res) {
         }
@@ -593,6 +594,7 @@ function ShowLevel() {
         success: function (data) {
             $("#ShowLevel").html(data);
             $(".ColShowLevel").html(data);
+            GetlLevelByJqueryAndAppend();
         },
         error: function (error) {
             console.log("ShowLevel : ");
@@ -1029,7 +1031,49 @@ function ShouldExecute() {
     //Top10MaxGroupBy();
     //ListDictionaryHamrahBaExamplePro();
 }
+function GetlLevelByJqueryAndAppend() {
+    $("#MenuDicBaMesalPro .chkLevel div .lvlchk").remove();
+    var i = 0
+    var lvl = 1
+    $(".ColShowLevel table tr td").each(function () {
+        if (i % 2 == 0) {
+            lvl = $(this).text()
+            //console.log(z)
 
+        }
+        else {
+            //console.log(i)
+            var res = $(this).text()
+            $("#MenuDicBaMesalPro .chkLevel div input[name='Level" + lvl + "'] ").after("<span class='lvlchk' style='color:red'>" + res + "</span>")
+        }
+        i = i + 1
+    })
+}
+function ShowAndHiddenExample(id) {
+    
+    var res = $(".examples_" + id).attr("hidden");
+    if (res == "hidden") {
+        $(".examples_" + id).attr("hidden", false);
+    }
+    else {
+        $(".examples_" + id).attr("hidden", true);
+    }
+
+
+}
+function ShowAndHiddenPersian(id) {
+    var eng=$(".per_" + id).parent().prev().text()
+    TestSound(eng)
+    var res = $(".per_" + id).attr("hidden");
+    if (res == "hidden") {
+        $(".per_" + id).attr("hidden", false);
+    }
+    else {
+        $(".per_" + id).attr("hidden", true);
+    }
+
+
+}
 $(document).ready(function () {
         //----------function ListDictionary()
         $("#SeachInTblDicList").on("keyup", function () {

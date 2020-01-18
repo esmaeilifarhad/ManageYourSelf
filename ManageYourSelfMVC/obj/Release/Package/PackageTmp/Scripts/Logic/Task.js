@@ -30,6 +30,7 @@ function ListTaskFutureChkPost(MyArray) {
          dataType: "html",
          url: "/Task/ListTaskFutureChkPost",
          success: function (result) {
+             debugger
              if (result.result == false) {
                  alert(result.message)
              }
@@ -39,7 +40,7 @@ function ListTaskFutureChkPost(MyArray) {
 
          },
          error: function (error) {
-             console.log(error);
+             $(".ListTaskFuture").html("<p>موردی برای مشاهده وجود ندارد</p>")
          }
      });
 }
@@ -51,6 +52,7 @@ function ListTaskFuture() {
         dataType: "html",
         url: urll,
         success: function (result) {
+            
             if (result.result == false) {
                 alert(result.message)
             }
@@ -60,6 +62,7 @@ function ListTaskFuture() {
 
         },
         error: function (error) {
+            debugger
             console.log(error);
         }
     })
@@ -73,6 +76,7 @@ function ListTaskFutureChk() {
         dataType: "html",
         url: urll,
         success: function (result) {
+            
             if (result.result == false) {
                 alert(result.message)
             }
@@ -82,6 +86,7 @@ function ListTaskFutureChk() {
 
         },
         error: function (error) {
+            debugger
             console.log(error);
         }
     })

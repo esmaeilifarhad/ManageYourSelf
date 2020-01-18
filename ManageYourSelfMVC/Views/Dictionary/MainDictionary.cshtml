@@ -12,8 +12,7 @@
         padding: 5px;
     }
 </style>
-@*<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />*@
-@*<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>*@
+
 <br />
 <div class="MyDictionary" ng-app="MyApp" style="font-size: 12px;">
     <!-- Nav tabs -->
@@ -422,8 +421,7 @@
         //***********************************************MasterModal*****************************************
         $('#MasterModal .btnSave').on("click", function () {
             var NameTbl = $("#MasterModal .BodyModal table").attr("nametbl")
-            if (NameTbl == "tbltask")
-                CreateTask();
+           
            // if (NameTbl == "tblword")
                 //1
                // CreateWord();
@@ -491,9 +489,9 @@
     });
 </script>
 <!--************************************Logic Scripts*********************************************-->
-@*<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>*@
+
 <script src="~/Scripts/Logic/MainAngular.js"></script>
-@*<script src="~/Scripts/Logic/Dictionary.js"></script>*@
+
 <script src="~/Scripts/Logic/Angular.js"></script>
 <!--************************************Dictionary*********************************************-->
 <!--Persian DatePicker-->

@@ -3,6 +3,14 @@
     <fieldset id="SubmitForm">
         <table class="Task" TaskId="@Model.Task.TaskId" nametbl="UpdateTask">
             <tr>
+                <td>تاریخ شروع</td>
+                <td><input type="text" name="DateStart" class="PersianDatePickerEditTaskS" value="@Model.Task.DateStart" autocomplete="off" /></td>
+            </tr>
+            <tr>
+                <td>تاریخ پایان</td>
+                <td><input type="text" name="DateEnd" class="PersianDatePickerEditTaskE" value="@Model.Task.DateEnd" autocomplete="off" /></td>
+            </tr>
+            <tr>
                 <td>نوع</td>
                 <td>
 
@@ -29,14 +37,7 @@
                 @*<td><input type="text" style="width: 250px; height:100px;"   name="Name" value="@Model.Task.Name" autocomplete="off"/></td>*@
                 <td><textarea  name="Name"  rows="4" cols="50" autocomplete="off">@Model.Task.Name</textarea></td>
             </tr>
-            <tr>
-                <td>تاریخ شروع</td>
-                <td><input type="text" name="DateStart" class="PersianDatePickerEditTaskS" value="@Model.Task.DateStart" autocomplete="off"/></td>
-            </tr>
-            <tr>
-                <td>تاریخ پایان</td>
-                <td><input type="text" name="DateEnd" class="PersianDatePickerEditTaskE" value="@Model.Task.DateEnd" autocomplete="off"/></td>
-            </tr>
+           
             <tr>
                 <td>درصد پیشرفت</td>
                 <td>

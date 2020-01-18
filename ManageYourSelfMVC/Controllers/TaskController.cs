@@ -427,8 +427,8 @@ order by DateEnd,isnull(Olaviat,0)
             {
                 Error.message = ex.Message;
                 Error.result = false;
-                //throw new ArgumentException(ex.InnerException.Message);
-                return Json(Error, JsonRequestBehavior.AllowGet);
+                throw new ArgumentException(ex.ToString());
+               // return Json(Error, JsonRequestBehavior.AllowGet);
 
             }
         }

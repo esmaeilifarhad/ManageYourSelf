@@ -18,11 +18,12 @@
             <tr style="color: white;background-color: #3a0b0b;font-weight: bold;">
                 <th>eng</th>
                 <th>per</th>
+                <th>Up</th>
+                <th>Down</th>
                 <th>eye</th>
                 <th>NewExa</th>
                 <th>Edit</th>
-                <th>Up</th>
-                <th>Down</th>
+               
                 <th>level</th>
                 <th>IsArchieve</th>
                 <th>cambridge</th>
@@ -40,20 +41,21 @@
             {
                 <tr WordId="@item.id" style="background-color:black;color:white;font-size: 14px;white-space:nowrap">
                     <td onclick="MakeSound2(this)">@item.eng</td>
-                    <td><span style="display:none;" class="per">@item.per</span></td>
+                    <td   onclick="ShowAndHiddenPersian(@item.id)"><span  class="per_@item.id"  hidden >@item.per</span></td>
+                    <td><button style='color:green' class='btn btn-danger pointer LevelEngUp' data_id="@item.id"></button></td>
+                    <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
                     @if (item.HasExample > 0)
                     {
-                        <td><span class="fa fa-eye ShowExample pointer" style='color:green' data_id="@item.id"></span></td>
+                        <td><span class="fa fa-eye ShowExample pointer" style='color:green' onclick="ShowAndHiddenExample(@item.id)" data_id="@item.id"></span></td>
                     }
                     else
                     {
-                        <td><span class="fa fa-eye-slash ShowExample pointer" style='color:yellow' data_id="@item.id"></span></td>
+                        <td><span class="fa fa-eye-slash ShowExample pointer" style='color:yellow' onclick="ShowAndHiddenExample(@item.id)" data_id="@item.id"></span></td>
                     }
                     <td><span style='color:dodgerblue' class='fa fa-list-alt btnExa pointer' data_id="@item.id"></span></td>
 
                     <td><span style='color:purple' class='fa fa-edit pointer EditWord' data_id="@item.id"></span></td>
-                    <td><button style='color:green' class='btn btn-danger pointer LevelEngUp' data_id="@item.id"></button></td>
-                    <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
+                   
                     <td class="level">@item.level</td>
                     @if (item.IsArchieve == true)
                     {
@@ -76,11 +78,11 @@
                 </tr>
                 foreach (var itemExample in item.lstExample)
                 {
-                    <tr style="background-color:#d6d5c7;color:black;text-align:left">
-                        <td class="Examplecls" colspan="14" style="display:none;direction:ltr" data_id="@item.id" ExampleId="@itemExample.id">
+                    <tr class="examples_@item.id" hidden style="background-color:#d6d5c7;color:black;text-align:left;white-space: pre-line;">
+                        <td class="Examplecls" colspan="14" style="direction:ltr" data_id="@item.id" ExampleId="@itemExample.id">
                             <span class="ExampleSound">@itemExample.example</span>
                             <p>
-                                <button style='color:black' class='fa fa-edit pointer ShowEditExample' ExampleId="@itemExample.id">Edit</button><span> | </span><button  onclick="MakeSoundExample(this)" style='color:black' class='fa fa-soundcloud pointer'  ExampleId="@itemExample.id">Sound</button><span> | </span><button style='color:black' class='fa fa-remove pointer RemoveExampleEng' ExampleId="@itemExample.id">Delete</button><span> | </span><a target="_blank" href="https://translate.google.com/?hl=en&tab=wT#view=home&op=translate&sl=en&tl=fa&text=@itemExample.example">google</a>
+                                <button style='color:black' class='fa fa-edit pointer ShowEditExample' ExampleId="@itemExample.id">Edit</button><span> | </span><button onclick="MakeSoundExample(this)" style='color:black' class='fa fa-soundcloud pointer' ExampleId="@itemExample.id">Sound</button><span> | </span><button style='color:black' class='fa fa-remove pointer RemoveExampleEng' ExampleId="@itemExample.id">Delete</button><span> | </span><a target="_blank" href="https://translate.google.com/?hl=en&tab=wT#view=home&op=translate&sl=en&tl=fa&text=@itemExample.example">google</a>
                             </p>
                         </td>
                     </tr>

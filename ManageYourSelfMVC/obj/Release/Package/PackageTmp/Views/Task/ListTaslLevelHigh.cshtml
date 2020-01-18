@@ -63,12 +63,15 @@
     }
 }
 <div class="row ListTaskLevelHight1">
-
-    @foreach (var item in lstRuz)
-    {
-        <div class="col-sm-12" style="font-size: 9px!important;font-family:'BNazanin'">
-
-            <p style="color:#eac451;font-size:11px">
+   
+      
+        @foreach (var item in lstRuz)
+        {
+            <div class="col-sm-12" style="font-size: 9px!important;font-family:'BNazanin'">
+                <p >
+                <span style="color:black;font-size:11px;cursor:pointer;border:1px solid white;padding:5px;background-color:#8ed069" onclick="CreateTaskView()">تسک جدید</span>
+                </p>
+<p style="color:#eac451;font-size:11px">
                 <span>@item.ChandShanbeh </span>
                 <span>@Utility.ConvertDateToSlash(item.DateEnd)</span>
                 <span>هفته</span>

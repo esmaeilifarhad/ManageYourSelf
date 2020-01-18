@@ -37,8 +37,6 @@
     <!-- Favicons -->
     <link href="~/MyTemplate/MasterTemplate/img/favicon.png" rel="icon">
     <link href="~/MyTemplate/MasterTemplate/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <!-- Google Fonts -->
-    @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">*@
     <!-- Bootstrap CSS File -->
     <link href="~/MyTemplate/MasterTemplate/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Libraries CSS Files -->
@@ -261,11 +259,7 @@
                     <div class="col-lg-2 col-md-6 footer-links" style="font-family:BNazanin">
                         <h4>لینک های مفید</h4>
                         <ul>
-                            <li><i class="ion-ios-arrow-right"></i> <a href="#">Home</a></li>
-                            <li><i class="ion-ios-arrow-right"></i> <a href="#">About us</a></li>
-                            <li><i class="ion-ios-arrow-right"></i> <a href="http://pushakshik.ir/BaseData/BaseData">اطلاعات پایه</a></li>
-                            <li><i class="ion-ios-arrow-right"></i> <a href="http://pushakshik.ir/client/ContactUs">ارتباط با ما</a></li>
-                            <li><i class="ion-ios-arrow-right"></i> <a href="http://pushakshik.ir/client/listnav">مدیریت خود</a></li>
+                            <li><i class="ion-ios-arrow-right"></i> <a onclick="location.href='@Url.Action("ListNav", "Client")'">کاربری</a></li>
                             <li><i class="ion-ios-arrow-right"></i> <a onclick="location.href='@Url.Action("MainSport", "Sport")'">ورزش</a></li>
                             <li><i class="ion-ios-arrow-right"></i> <a onclick="location.href='@Url.Action("MainDictionary", "Dictionary")'">دیگشنری</a></li>
                         </ul>
