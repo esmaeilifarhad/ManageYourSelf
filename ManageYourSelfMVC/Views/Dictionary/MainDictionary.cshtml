@@ -104,7 +104,7 @@
                 <div class="col-sm-3">
                     <br>
                     <input class="form-control" id="SeachInExample" type="text" placeholder="Search in Examples..">
-                    
+
                     <br>
                 </div>
                 <div class="col-sm-3">
@@ -119,26 +119,26 @@
                 </div>
             </div>
             @*<div class="row">
-                <div class="col-sm-12">
-                    <br>
-                    <input class="form-control" id="SeachInExample" type="text" placeholder="Search in Examples..">
-                    <br>
-                </div>
-            </div>*@
+                    <div class="col-sm-12">
+                        <br>
+                        <input class="form-control" id="SeachInExample" type="text" placeholder="Search in Examples..">
+                        <br>
+                    </div>
+                </div>*@
             @*<div class="row">
-                <div class="col-sm-12">
-                    <br>
-                    <input class="form-control" id="myInputDic" type="text" placeholder="Search..">
-                    <br>
-                </div>
-            </div>*@
+                    <div class="col-sm-12">
+                        <br>
+                        <input class="form-control" id="myInputDic" type="text" placeholder="Search..">
+                        <br>
+                    </div>
+                </div>*@
             @*<div class="row">
-                <div class="col-sm-12">
-                    <br>
-                    <input class="form-control" id="SpeechText" type="text" placeholder="Speech Text..">
-                    <br>
-                </div>
-            </div>*@
+                    <div class="col-sm-12">
+                        <br>
+                        <input class="form-control" id="SpeechText" type="text" placeholder="Speech Text..">
+                        <br>
+                    </div>
+                </div>*@
             <div class="row chkLevel" style="font-size:10px;">
 
                 <div class="col-sm-12">
@@ -152,13 +152,13 @@
                     <input type="checkbox" name="Level8" value="8"> سطح 8 <span />&nbsp;&nbsp;
                     <input type="checkbox" name="Level9" value="9"> سطح 9 <span />&nbsp;&nbsp;
                     <input type="checkbox" name="Level10" value="10"> سطح 10<span />&nbsp;&nbsp;
-                    <input type="checkbox" name="maxMistake" value="101">بیشترین اشتباه<span />&nbsp;&nbsp;         
+                    <input type="checkbox" name="maxMistake" value="101">بیشترین اشتباه<span />&nbsp;&nbsp;
                     <input type="checkbox" name="LastMoroor" value="102">آخرین مرور<span />&nbsp;&nbsp;
                     <input type="checkbox" name="MinMoror" value="103">کمترین تعداد مرور<span />&nbsp;&nbsp;
                     <input type="checkbox" name="maxBest" value="104">یاد گرفته شده<span />&nbsp;&nbsp;
                     <input type="checkbox" name="Arch" value="105">آرشیو<span />&nbsp;&nbsp;
                     <input type="checkbox" name="Arch" value="106">اشتباه<span />&nbsp;&nbsp;
-                    
+
                 </div>
             </div>
             <div id="DicBaMesalPro"></div>
@@ -228,7 +228,7 @@
         <!--پیشرفته دیگشنری  غلط-->
         <div id="MenuWordExampleFalse" class="tab-pane">
             <br>
-           
+
             <br />
             <div class="row">
                 <div class="col-sm-12">
@@ -251,7 +251,7 @@
                     <br>
                 </div>
             </div>
-    
+
             <div class="row chkLevel">
 
                 <div class="col-sm-12">
@@ -270,32 +270,32 @@
 
             <div id="ListWordExampleFalse" ng-controller="MyController">
                 <br />
-                <input type="button" name="btnNewWord" value="لغت جدید Angular"  ng-click="ShowModal()" class="btn btn-info" />
+                <input type="button" name="btnNewWord" value="لغت جدید Angular" ng-click="ShowModal()" class="btn btn-info" />
                 <br />
                 <div ng-repeat="x in names | orderBy:myOrderBy">
                     <div ng-if="$odd" style="background-color:#f1f1f1;direction:rtl">
-                    <span ng-show="e{{x.id}}">{{ x.eng }}</span>|
-                    <span data-id="{{x.id}}"    ng-show="p{{x.id}}">{{ x.per }}</span>|
-                    <span>{{x.level}}</span>|
-                    <span>{{x.date_refresh}}</span>|
-                    <span>{{x.date_s}}</span>|
-                    <span>{{x.SuccessCount}}</span>|
-                    <span>{{x.UnSuccessCount}}</span>|
-                    <span class="fa fa-android" ng-click="myFunc()"></span>|
-                    <span class="fa fa-bandcamp" ng-click="Showper(x.id)"></span>|
-                    <span class="fa fa-child" ng-click="Showeng(x.id)"></span>
-                    </div>
-                    <div ng-if="$even" style="background-color:burlywood;direction:rtl">
-                    <span ng-show="e{{x.id}}">{{ x.eng }}</span>|
-                    <span data-id="{{x.id}}" ng-show="p{{x.id}}">{{ x.per }}</span>|
+                        <span ng-show="e{{x.id}}">{{ x.eng }}</span>|
+                        <span data-id="{{x.id}}" ng-show="p{{x.id}}">{{ x.per }}</span>|
                         <span>{{x.level}}</span>|
                         <span>{{x.date_refresh}}</span>|
                         <span>{{x.date_s}}</span>|
                         <span>{{x.SuccessCount}}</span>|
                         <span>{{x.UnSuccessCount}}</span>|
-                    <span class="fa fa-android" ng-click="myFunc()"></span>|
-                    <span class="fa fa-bandcamp" ng-click="Showper(x.id)"></span>|
-                    <span class="fa fa-child" ng-click="Showeng(x.id)"></span>
+                        <span class="fa fa-android" ng-click="myFunc()"></span>|
+                        <span class="fa fa-bandcamp" ng-click="Showper(x.id)"></span>|
+                        <span class="fa fa-child" ng-click="Showeng(x.id)"></span>
+                    </div>
+                    <div ng-if="$even" style="background-color:burlywood;direction:rtl">
+                        <span ng-show="e{{x.id}}">{{ x.eng }}</span>|
+                        <span data-id="{{x.id}}" ng-show="p{{x.id}}">{{ x.per }}</span>|
+                        <span>{{x.level}}</span>|
+                        <span>{{x.date_refresh}}</span>|
+                        <span>{{x.date_s}}</span>|
+                        <span>{{x.SuccessCount}}</span>|
+                        <span>{{x.UnSuccessCount}}</span>|
+                        <span class="fa fa-android" ng-click="myFunc()"></span>|
+                        <span class="fa fa-bandcamp" ng-click="Showper(x.id)"></span>|
+                        <span class="fa fa-child" ng-click="Showeng(x.id)"></span>
                     </div>
                     <div ng-show="showMe" ng-repeat="y in x.lstExample">
                         <div ng-if="$odd" style="background-color:lightblue;text-align: left;direction:ltr;white-space: pre;"><span>{{y.example}}</span></div>
@@ -308,23 +308,54 @@
         <!--#MenuDicRandomWord-->
         <div id="MenuDicRandomWord" class="tab-pane">
             <br />
-            <input type="button" name="RandomWord" value="لغت بعدی" class="btn btn-danger btnNextRandomWord" />
-            <br /><br />
             <div class="row">
-                <div class="col-sm-6 DicRandomWord"></div>
-                <div class="vl"></div>
-                <div class="col-sm-6 DicRandomWord_HardWord"></div>
+                <div class="col-sm-12">
+                    <input type="radio" name="TestCorretWord" value="1"  onclick="RandomWordWithSound()"> سطح 1 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="2"  onclick="RandomWordWithSound()"> سطح 2 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="3"  onclick="RandomWordWithSound()"> سطح 3 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="4"  onclick="RandomWordWithSound()"> سطح 4 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="5"  onclick="RandomWordWithSound()"> سطح 5 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="6"  onclick="RandomWordWithSound()"> سطح 6 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="7"  onclick="RandomWordWithSound()"> سطح 7 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="8"  onclick="RandomWordWithSound()"> سطح 8 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="9"  onclick="RandomWordWithSound()"> سطح 9 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="10" onclick="RandomWordWithSound()"> سطح 10<span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="101">بیشترین اشتباه<span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="102">آخرین مرور<span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="103">کمترین تعداد مرور<span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="104">یاد گرفته شده<span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="105">آرشیو<span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="106" onclick="RandomWordWithSound()">اشتباه<span />&nbsp;&nbsp;
+                </div>
             </div>
-            <hr />
             <div class="row">
-                <div class="col-sm-12 DicRandomWord_HardWordExample"></div>
+                <div class="col-sm-6 " id="RandomWordWithSound"></div>
+                <div class="col-sm-6 " id="ShowLevel"></div>
             </div>
-
+            <div class="vl"></div>
         </div>
-    </div>
 
-    <!--Modal Start-->
-    @*<div>
+
+
+
+        <br />
+        <input type="button" name="RandomWord" value="لغت بعدی" class="btn btn-danger btnNextRandomWord" />
+        <br /><br />
+        <div class="row">
+            <div class="col-sm-6 DicRandomWord"></div>
+            <div class="vl"></div>
+            <div class="col-sm-6 DicRandomWord_HardWord"></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12 DicRandomWord_HardWordExample"></div>
+        </div>
+
+    </div>
+</div>
+
+<!--Modal Start-->
+@*<div>
         <!--  Modal Master -->
         <div class="modal fade" id="MasterModal">
             <div class="modal-dialog modal-dialog-centered">
@@ -411,7 +442,7 @@
             </div>
         </div>
     </div>*@
-   
+
 </div>
 
 <!--Script Ajax Business-->
@@ -421,10 +452,10 @@
         //***********************************************MasterModal*****************************************
         $('#MasterModal .btnSave').on("click", function () {
             var NameTbl = $("#MasterModal .BodyModal table").attr("nametbl")
-           
-           // if (NameTbl == "tblword")
-                //1
-               // CreateWord();
+
+            // if (NameTbl == "tblword")
+            //1
+            // CreateWord();
             if (NameTbl == "UpdateTask")
                 UpdateTask();
             if (NameTbl == "UpdateWord")

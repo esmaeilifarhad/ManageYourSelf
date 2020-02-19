@@ -145,13 +145,19 @@ namespace ManageYourSelfMVC.Controllers
         }
         #endregion
         #region Daramad
-        public ActionResult ListDaramad()
+        public ActionResult ListDaramad(int MojoodyBankId = 0)
         {
             List<ViewModels.DaramadVM> lstDaramadVM = new List<ViewModels.DaramadVM>();
             string toDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat();
             string firstDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().Substring(0,6) + "01";
 
-            var res = DB.Daramads.Where(q => q.MojoodyBank.UserId == UserId ).OrderBy(q => q.MojoodyBankId).ThenByDescending(q => q.Date).ThenByDescending(q=>q.DaramadId).AsEnumerable().Where(q=> int.Parse(q.Date) >= int.Parse(firstDate) && int.Parse(q.Date) <= int.Parse(toDate)).ToList();
+            var res = DB.Daramads.Where(q => q.MojoodyBank.UserId == UserId && q.MojoodyBankId==MojoodyBankId).
+                OrderBy(q => q.MojoodyBankId).
+                ThenByDescending(q => q.Date).
+                ThenByDescending(q=>q.DaramadId).AsEnumerable().
+                Where(q=> int.Parse(q.Date) >= int.Parse(firstDate) &&
+                int.Parse(q.Date) <= int.Parse(toDate)).
+                ToList();
             foreach (var item in res)
             {
                 ViewModels.DaramadVM V = new ViewModels.DaramadVM();

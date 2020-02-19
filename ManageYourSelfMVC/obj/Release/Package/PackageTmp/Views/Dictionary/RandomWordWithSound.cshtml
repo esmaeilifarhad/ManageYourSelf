@@ -1,0 +1,69 @@
+﻿@model List<ManageYourSelfMVC.ViewModels.Dictionary.VMDictionary>
+ @{ 
+     int wordId = 0;
+ }
+
+<table>
+    <tr style="color:red">
+        @foreach (var item in Model)
+        {
+            if (item.statusCheck == true)
+            {
+                <td >
+                    <input  onclick="MakeSoundStr('@item.eng')" type="button" value="sound"/>
+                 
+                    @{ 
+                        wordId = item.id;
+                    }
+
+                </td>
+                <td>
+                    <input onclick="RandomWordWithSound()" type="button" value="next" />
+                    <span>@*@item.per*@</span>
+                </td>
+                <td>
+                    <input onclick="showTheWord('@item.eng')" type="button" value="show word" />
+                    
+                </td>
+                <td id="showTheWord"></td>
+            }
+        }
+    </tr>
+</table>
+
+<table id="FindCorretWord">
+
+    @foreach (var item in Model)
+    {
+        //if (@item.statusCheck == false)
+        //{
+            <tr>
+                <td>
+                    @if(item.statusCheck==true)
+                    {
+                    <input type="radio" IsTrue=true name="FindCorretWord"  onclick="RandomWordWithSoundCheckIsTrue({check:true,wordId:@wordId})">
+                    }
+                    else
+                    {
+                    <input type="radio"  IsTrue=false name="FindCorretWord"  onclick="RandomWordWithSoundCheckIsTrue({check:false,wordId:@wordId})">
+                    }
+                </td>
+                <td>
+                    <span>@item.per</span> (<span>@item.level</span>)
+                </td>
+
+            </tr>
+        //}
+    }
+    <tr>
+        <td><input type="radio" IsTrue=false name="FindCorretWord" onclick="RandomWordWithSoundCheckIsTrue({ check: false, wordId: @wordId })"></td>
+        <td>نمیدانم</td>
+    </tr>
+
+</table>
+<script>
+    function showTheWord(eng) {
+        $("#showTheWord span").remove()
+        $("#showTheWord").append("<span>"+eng+"</span>")
+    }
+</script>

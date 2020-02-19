@@ -111,11 +111,7 @@ $(".ListTask").on("click", ".TblTask .fa-edit", function () {
     // alert(TaskId)
     EditTask(TaskId);
 });
-//-----Timing Task Event
-//$(".ListTask").on("click", ".TblTask .fa-calendar", function () {
-//    var TaskId = $(this).attr("Data_id");
-//    TimingTask(TaskId);
-//});
+
 $(".ListTiming").on("click","div table tbody tr td  .Ti",function () {
     var TaskId = $(this).attr("Data_id");
     TimingTask(TaskId);
@@ -545,6 +541,7 @@ function TimingTask(TaskId) {
     })
 }
 function ListTiming(x) {
+    
     if (x == 0) {
         var urll = "/Task/ListTiming?x="+x;
         $.ajax({
@@ -646,6 +643,7 @@ function TimingPost()
    
     var ManageTimeId = $("#MasterModal .MYSelect option:selected").val();
     var TaskId = $("#MasterModal div[name='UpdateTiming'] table").attr("TaskId");
+    debugger
     $.ajax(
           {
               type: 'POST',
@@ -654,6 +652,7 @@ function TimingPost()
               url: "/Task/CreateTiming",
               data: JSON.stringify({ ManageTimeId: ManageTimeId, TaskId: TaskId}),
               success: function (result) {
+                  debugger
                   if (result == true) {
                       if ($("input[name='chkTomarrow']").prop('checked') == true) {
                           ListTiming(1);
@@ -728,4 +727,5 @@ function RefreshTask() {
     RefreshChk();
     ListTaskGeneral();
     ListTaslLevelHigh();
+    ListTiming(0);
 }

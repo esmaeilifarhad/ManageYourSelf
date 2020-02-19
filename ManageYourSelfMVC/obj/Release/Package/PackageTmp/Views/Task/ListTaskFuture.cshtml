@@ -3,7 +3,9 @@
     span {
         margin: 2px;
     }
-
+      .ListTaskFuture  p span {
+        white-space: pre-line;
+    }
     .calendarTask, .ChangeTodayTask, .Ta {
         cursor: pointer;
     }
@@ -85,7 +87,8 @@
                     {
                         <p CatId="@item2.CatId">
                             <span>@item2.Olaviat</span> -
-                            <span style="color:darkmagenta" class="EditCat" CatId="@item2.CatId">@item2.Title</span> -
+                            <span style="color:darkmagenta" class="EditCat" CatId="@item2.CatId">@item2.Title</span> 
+                            <br />
                             <span>@item2.Name</span>
                             <span>@item2.Label</span>
                             <span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item2.CatId"></span>

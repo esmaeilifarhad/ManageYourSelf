@@ -1,4 +1,32 @@
 ﻿//************************************Dictionary*****************************************************
+async function RandomWordWithSoundCheckIsTrue(param) {
+    debugger
+    if (param.check == true) {
+        $("#FindCorretWord input").each(function () {
+            if ($(this).attr("IsTrue") == "true") {
+                $(this).parent().parent().css("background-color", "#06f976")
+            }
+        })
+
+        var x=await LevelChangeDown(param.wordId);
+
+        RandomWordWithSound();
+        ShowLevel();
+    }
+    else {
+        LevelChangeUp(param.wordId);
+       
+        $("#FindCorretWord input").each(function () {
+            if ($(this).attr("IsTrue") == "true")
+            {
+                $(this).parent().parent().css("background-color", "#06f976")
+            }
+        })
+
+    }
+   
+   
+}
 //-------------execute List When Click on Tab
 $("ul li a[href='#MenuDicBaMesalPro']").on("click", function () {
     ListDictionaryHamrahBaExamplePro();
@@ -200,6 +228,7 @@ function speakText(str) {
            }
        });
 }
+
 function MakeSound(thiss) {
    // 
     
@@ -220,6 +249,11 @@ function MakeSound2(thiss) {
 
     // TestSound(str)
 }
+function MakeSoundStr(txt) {
+    debugger
+    TestSound(txt);
+}
+
 function MakeSoundExample(thiss) {
      
   //  console.log(thiss)
@@ -554,18 +588,21 @@ function RemoveExamplePost(ExampleId) {
     })
 }
 function LevelChangeDown(wordId) {
-    var urll = "/Dictionary/LevelChangeDown?WordId=" + wordId
-    $.ajax({
-        type: 'POST',
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        url: urll,
-        success: function (res) {
-            RefreshListWithCheckedCheckbox();
-            ShouldExecute();
-        },
-        error: function (res) {
-        }
+    return new Promise(resolve => {
+        var urll = "/Dictionary/LevelChangeDown?WordId=" + wordId
+        $.ajax({
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: urll,
+            success: function (res) {
+                RefreshListWithCheckedCheckbox();
+                ShouldExecute();
+                resolve(res)
+            },
+            error: function (res) {
+            }
+        })
     })
 }
 function LevelChangeUp(wordId) {
@@ -594,6 +631,12 @@ function ShowLevel() {
         success: function (data) {
             $("#ShowLevel").html(data);
             $(".ColShowLevel").html(data);
+            $("#MenuDicRandomWord #ShowLevel br").remove()
+            $("#MenuDicRandomWord #ShowLevel div").remove()
+            $("#MenuDicRandomWord #ShowLevel").append(data)
+
+            //$("#ShowLevel").html(data);
+            
             GetlLevelByJqueryAndAppend();
         },
         error: function (error) {
@@ -712,6 +755,32 @@ function RandomWord_HardWordExample() {
         }
     })
 }
+function RandomWordWithSound() {
+    
+    var res= $("input[name='TestCorretWord']:checked").val()
+
+    var request = { str: res }
+    $.ajax(
+      {
+          type: 'Post',
+          contentType: "application/json;charset=utf-8",
+          url: "/Dictionary/RandomWordWithSound",
+          dataType: "html",
+          data: JSON.stringify(request),
+          success: function (result) {
+              
+              $("#RandomWordWithSound table").remove()
+              $("#RandomWordWithSound").append(result)
+              
+              
+          },
+          error: function (error) {
+              console.log(error)
+          }
+      });
+    
+}
+
 function CreateWord() {
     var eng = $("#MasterModal .table input[name='DicEng']").val()
     var per = $("#MasterModal .table input[name='DicFar']").val()

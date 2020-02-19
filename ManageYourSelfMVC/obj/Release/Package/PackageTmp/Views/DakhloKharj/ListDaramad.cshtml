@@ -50,8 +50,8 @@
                         {
                             <td style="color:green">دریافت</td>
                         }*@
-                    <td><span style="color:green" class='fa fa-edit pointer' DaramadId="@item.DaramadId"></span></td>
-                    <td><span style="color:red" class='fa fa-remove pointer' DaramadId="@item.DaramadId"></span></td>
+                    <td><span style="color:green" class='fa fa-edit pointer' onclick="EditDaramad(@item.DaramadId)" DaramadId="@item.DaramadId"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' onclick="DeleteDaramad(@item.DaramadId)" DaramadId="@item.DaramadId"></span></td>
                 </tr>
             }
         </tbody>

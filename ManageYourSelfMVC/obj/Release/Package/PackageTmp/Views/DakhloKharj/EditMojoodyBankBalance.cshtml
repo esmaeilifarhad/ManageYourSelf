@@ -10,7 +10,13 @@
         <tr>
             <td><span>@Model.MojoodyName</span></td>
             <td><input name="FalseRial" type="text" value="@Utility.Rial(Model.Rial.ToString())" readonly/></td>
-            <td><input name="OkRial" type="text" value="@Utility.Rial(Model.Rial.ToString())" /></td>
+            <td><input type='text' name='OkRial'   value="@Utility.Rial(Model.Rial.ToString())" onkeyup='changeInputToThreeDigit(this)' />
+            </td>
+        </tr>
+        <tr>
+
+            <td colspan="2"><input class="btn btn-success" onclick="UpdateMojoodyBankExchange()" type="button" value="ذخیره" /></td>
+
         </tr>
     </table>
 </div>

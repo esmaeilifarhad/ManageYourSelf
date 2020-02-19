@@ -16,6 +16,7 @@ namespace ManageYourSelfMVC.ViewModels.Dictionary
         public int HasExample { get; set; }
         public int ExampleId { get; set; }
         public int Radif { get; set; }
+        public bool statusCheck { get; set; }
         public List<Models.DomainModels.example_tbl> lstExample { get; set; }
     }
 }

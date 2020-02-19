@@ -3,19 +3,26 @@
     th {
         text-align: center;
     }
+
+.modal-dialog {
+    max-width: 726px;
+    }
 </style>
-@*<br>
-<input type="button" name="CreateMojoodyBank" value="جدید" class="btn btn-info" />*@
-<br><br>
+
+
 <div class="table-responsive">
+    <input type="button" name="CreateMojoodyBank" value="بانک" class="btn btn-info" onclick="CreateMojoodyBankGet()" />
+    <input type="button" name="CreateMojoodyBank" value="نوع هزینه" class="btn btn-info" onclick="CreateTypeHazinehGet()" />
+    <br><br>
     <table class="table MojoodyBank" style="direction:rtl; text-align: center;">
         <thead>
             <tr>
                 <th>بانک</th>
                 <th>ریال</th>
-                <th>تراکنش</th>
+                <th>تراکنش</th>    
                 <th>انتقال</th>
                 <th>بالانس</th>
+                <th>گردش حساب</th>
                 <th>ویرایش</th>
                 <th>حذف</th>
             </tr>
@@ -28,11 +35,12 @@
                 <tr>
                     <td>@item.MojoodyName</td>
                     <td>@Utility.Rial(item.Rial.ToString())</td>
-                    <td><span style="color:green" class='fa fa-plus pointer ' MojoodyBankId="@item.MojoodyBankId"></span></td>
-                    <td><span style="color:orange" class='fa fa-exchange pointer ' MojoodyBankId="@item.MojoodyBankId"></span></td>
-                    <td><span style="color:blue" class='fa fa-balance-scale pointer ' MojoodyBankId="@item.MojoodyBankId"></span></td>
-                    <td><span style="color:green" class='fa fa-edit pointer' MojoodyBankId="@item.MojoodyBankId"></span></td>
-                    <td><span style="color:red" class='fa fa-remove pointer' MojoodyBankId="@item.MojoodyBankId"></span></td>
+                    <td><span style="color:green" class='fa fa-plus pointer ' MojoodyBankId="@item.MojoodyBankId" onclick="CreateDaramdGet(@item.MojoodyBankId)"></span></td>       
+                    <td><span style="color:orange" class='fa fa-exchange pointer ' MojoodyBankId="@item.MojoodyBankId" onclick="EditMojoodyBankExchange(@item.MojoodyBankId)"></span></td>
+                    <td><span style="color:blue" class='fa fa-balance-scale pointer ' MojoodyBankId="@item.MojoodyBankId"   onclick="EditMojoodyBankBalance(@item.MojoodyBankId)"></span></td>
+                    <td><input type="button" value="گردش حساب" style="color:green" MojoodyBankId="@item.MojoodyBankId" onclick="ListDaramd(@item.MojoodyBankId)" /></td>
+                    <td><span style="color:green" class='fa fa-edit pointer' MojoodyBankId="@item.MojoodyBankId" onclick="EditMojoodyBank(@item.MojoodyBankId)"></span></td>
+                    <td><span style="color:red" class='fa fa-remove pointer' MojoodyBankId="@item.MojoodyBankId" onclick="DeleteMojoodyBank(@item.MojoodyBankId)"></span></td>
                 </tr>
             }
             <tr>

@@ -49,7 +49,7 @@
         </tr>
         <tr>
             <td>ریال</td>
-            <td><input type="text" name="Rial" /></td>
+            <td><input type="text" name="Rial" onkeyup='changeInputToThreeDigit(this)'/></td>
         </tr>
         <tr>
             <td>تاریخ پایان</td>
@@ -58,6 +58,9 @@
         <tr>
             <td>توضیحات</td>
             <td><input type="text" name="Description" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input class="btn btn-secondary" onclick="CreateDaramadPost()" type="button" value="ذخیره" /></td>
         </tr>
     </table>
 </div>
@@ -112,7 +115,7 @@
                 </tr>
                 <tr>
                     <td>ریال</td>
-                    <td><input type="text" name="Rial" /></td>
+                    <td><input type='text' name='Rial' onkeyup='changeInputToThreeDigit(this)' /></td>
                 </tr>
                 <tr>
                     <td>تاریخ پایان</td>
@@ -121,6 +124,11 @@
                 <tr>
                     <td>توضیحات</td>
                     <td><input type="text" name="Description" /></td>
+                </tr>
+                <tr>
+             
+                    <td colspan="2"><input class="btn btn-success" onclick="CreateDaramadPost()" type="button" value="ذخیره" /></td>
+               
                 </tr>
             </table>
         </div>

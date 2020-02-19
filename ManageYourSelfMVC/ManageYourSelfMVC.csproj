@@ -1561,6 +1561,7 @@
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Dictionary\RandomWordWithSound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

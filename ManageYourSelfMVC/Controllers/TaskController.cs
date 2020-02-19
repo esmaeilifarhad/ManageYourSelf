@@ -427,8 +427,9 @@ order by DateEnd,isnull(Olaviat,0)
             {
                 Error.message = ex.Message;
                 Error.result = false;
-                throw new ArgumentException(ex.ToString());
-               // return Json(Error, JsonRequestBehavior.AllowGet);
+                Error.description = "موردی برای مشاهده وجود ندارد";
+                //throw new ArgumentException(ex.ToString());
+                return Json(Error, JsonRequestBehavior.AllowGet);
 
             }
         }
