@@ -934,7 +934,7 @@ where example like '%" + str + @"%'
                 OldDic.DateRefreshM = DateTime.Now;
                 OldDic.time = DateTime.Now.ToString("HH:mm:ss");
                 OldDic.IsArchieve = true;
-                // OldDic.SuccessCount = OldDic.SuccessCount + 1;
+                 OldDic.SuccessCount = OldDic.SuccessCount + 1;
             }
             // DB.Entry(OldDic).State = EntityState.Modified;
             if (DB.SaveChanges() > 0)
@@ -971,7 +971,7 @@ where example like '%" + str + @"%'
                 OldDic.date_refresh = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
                 OldDic.DateRefreshM = DateTime.Now;
                 OldDic.time = DateTime.Now.ToString("HH:mm:ss");
-                //OldDic.UnSuccessCount = OldDic.UnSuccessCount + 1;
+                OldDic.UnSuccessCount = OldDic.UnSuccessCount + 1;
 
             }
             if (DB.SaveChanges() > 0)

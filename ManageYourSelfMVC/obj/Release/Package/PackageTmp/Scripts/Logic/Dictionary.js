@@ -1,32 +1,5 @@
 ﻿//************************************Dictionary*****************************************************
-async function RandomWordWithSoundCheckIsTrue(param) {
-    debugger
-    if (param.check == true) {
-        $("#FindCorretWord input").each(function () {
-            if ($(this).attr("IsTrue") == "true") {
-                $(this).parent().parent().css("background-color", "#06f976")
-            }
-        })
-
-        var x=await LevelChangeDown(param.wordId);
-
-        RandomWordWithSound();
-        ShowLevel();
-    }
-    else {
-        LevelChangeUp(param.wordId);
-       
-        $("#FindCorretWord input").each(function () {
-            if ($(this).attr("IsTrue") == "true")
-            {
-                $(this).parent().parent().css("background-color", "#06f976")
-            }
-        })
-
-    }
-   
-   
-}
+var _wordId=0
 //-------------execute List When Click on Tab
 $("ul li a[href='#MenuDicBaMesalPro']").on("click", function () {
     ListDictionaryHamrahBaExamplePro();
@@ -94,7 +67,7 @@ $("Body").on("click", ".LevelEngUp", function () {
 });
 //------Down Level
 $("Body").on("click", ".LevelEngDown", function () {
-  // alert(1);
+    // alert(1);
     var Wordid = $(this).attr("data_id");
     LevelChangeDown(Wordid);
     $(this).parent().parent().css({ "display": "none" });
@@ -163,7 +136,7 @@ function ListDictionaryHamrahBaExamplePro(str) {
 
             $("#DicBaMesalPro").html(data);
             // CheckedInput();
-           // RefreshListWithCheckedCheckbox();
+            // RefreshListWithCheckedCheckbox();
         },
         error: function (error) {
             alert('Dictionary/ListWordExampleDiv' + error);
@@ -224,25 +197,25 @@ function speakText(str) {
            },
            error: function (error) {
                console.log(error)
-              // alert(error.message);
+               // alert(error.message);
            }
        });
 }
 
 function MakeSound(thiss) {
-   // 
+    // 
     
     var str = $(thiss).parent().text();
-       // var str = $(thiss).text();
-        // speakText(str);
-        TestSound(str);
+    // var str = $(thiss).text();
+    // speakText(str);
+    TestSound(str);
     
-   // TestSound(str)
+    // TestSound(str)
 }
 function MakeSound2(thiss) {
     // 
 
-   // var str = $(thiss).parent().text();
+    // var str = $(thiss).parent().text();
     var str = $(thiss).text();
     // speakText(str);
     TestSound(str);
@@ -250,15 +223,15 @@ function MakeSound2(thiss) {
     // TestSound(str)
 }
 function MakeSoundStr(txt) {
-    debugger
+   
     TestSound(txt);
 }
 
 function MakeSoundExample(thiss) {
-     
-  //  console.log(thiss)
+     debugger
+    //  console.log(thiss)
     // var str = $(thiss).parent().text();
-     var str = ($(thiss).parent().parent().find(".ExampleSound")).text()
+    var str = ($(thiss).parent().parent().find(".ExampleSound")).text()
      
     //var str = $(thiss).text();
     // speakText(str);
@@ -276,7 +249,7 @@ function TestSound(str)
     text = str;
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
-   // msg.voice = voices[$('#voices').val()];
+    // msg.voice = voices[$('#voices').val()];
     msg.rate = x/10;// $('#rate').val() / 10;
     msg.pitch = y/10;//$('#pitch').val();
     msg.text = text;
@@ -377,7 +350,7 @@ $("#myModalExa").on("click", ".NewExample", function () {
 //----Edit Example
 $("Body").on("click", ".ShowEditExample", function () {
     var ExampleId = $(this).attr("ExampleId");
-   // alert(ExampleId);
+    // alert(ExampleId);
     EditExample(ExampleId);
 });
 //-----------#DicBaMesalPro
@@ -414,7 +387,7 @@ $("#MenuDicBaMesalPro .chkLevel").on("click", "input", function () {
     var MyArray = [];
     var lvl = '';
     $("#MenuDicBaMesalPro .chkLevel input:checked").each(function () {
-      //  console.log($(this).val())
+        //  console.log($(this).val())
         lvl += $(this).val() + ",";
        
     });
@@ -519,6 +492,23 @@ function ShowExampleRefresh(WordId) {
         }
     })
 }
+function ListExampleWord(WordId) {
+    return new Promise(resolve => {
+        var urll = "/Dictionary/ListExample?id=" + WordId;
+        $.ajax({
+            type: "Get",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: urll,
+            success: function (data) {
+                resolve(JSON.parse(data))
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    })
+}
 function EditWord(WordId) {
     var Word=""
     var urll = "/Dictionary/EditWord?WordId=" + WordId;
@@ -536,7 +526,9 @@ function EditWord(WordId) {
         }
     })
 }
-function EditExample(ExampleId) {
+function EditExample(ExampleId,wordId) {
+    debugger
+    _wordId=wordId
     var Word = ""
     var urll = "/Dictionary/EditExample?ExampleId=" + ExampleId;
     $.ajax({
@@ -545,8 +537,6 @@ function EditExample(ExampleId) {
         dataType: "html",
         url: urll,
         success: function (result) {
-            // var obj = data;
-            //var obj = JSON.parse(data);
             $(".BodyModal").html(result);
             $("#MasterModal").modal();
 
@@ -579,7 +569,7 @@ function RemoveExamplePost(ExampleId) {
         url: urll,
         success: function (result) {
             alert(result);
-           // $('#MasterModal').modal('toggle');
+            // $('#MasterModal').modal('toggle');
             RefreshListWithCheckedCheckbox();
         },
         error(result) {
@@ -631,9 +621,9 @@ function ShowLevel() {
         success: function (data) {
             $("#ShowLevel").html(data);
             $(".ColShowLevel").html(data);
-            $("#MenuDicRandomWord #ShowLevel br").remove()
-            $("#MenuDicRandomWord #ShowLevel div").remove()
-            $("#MenuDicRandomWord #ShowLevel").append(data)
+            //$("#MenuDicRandomWord #ShowLevel br").remove()
+            //$("#MenuDicRandomWord #ShowLevel div").remove()
+            //$("#MenuDicRandomWord #ShowLevel").append(data)
 
             //$("#ShowLevel").html(data);
             
@@ -756,7 +746,7 @@ function RandomWord_HardWordExample() {
     })
 }
 function RandomWordWithSound() {
-    
+    ClearExamplesTable()
     var res= $("input[name='TestCorretWord']:checked").val()
 
     var request = { str: res }
@@ -804,7 +794,7 @@ function CreateWord() {
                if (result == true) {
                    $("#ShowMessage").text('ثبت شد');
                    //ListDictionary();
-                  // ShouldExecute();
+                   // ShouldExecute();
                }
                else {
                    $("#ShowMessage").text('خطا در ثبت');
@@ -833,8 +823,8 @@ function UpdateWord() {
            data: JSON.stringify({ id: Word_id, eng: eng, per: per }),
            success: function (result) {
                if (result == true) {
-                  // $("#ShowMessage").text('ثبت شد');
-                  // ListDictionary();
+                   // $("#ShowMessage").text('ثبت شد');
+                   // ListDictionary();
                    //  ListTask("anjamnashode");
                    RefreshListWithCheckedCheckbox();
                }
@@ -861,6 +851,7 @@ function UpdateExample() {
            success: function (result) {
                if (result.result == true) {
                    RefreshListWithCheckedCheckbox();
+                   ShowExamples(_wordId)
                }
                else {
                    alert(result.message);
@@ -947,7 +938,7 @@ function ListDictionaryHamrahBaExampleProUnSuccess() {
         success: function (data) {
 
             $("#DicBaMesalProUnSuccess").html(data);
-          //  CheckedInput();
+            //  CheckedInput();
         },
         error: function (error) {
             alert('Dictionary/ListWordExampleSucc_OR_UnSucc' + error);
@@ -964,7 +955,7 @@ function ListPersianToEnglish() {
         success: function (data) {
 
             $("#DicPersianToEnglish").html(data);
-          //  CheckedInput();
+            //  CheckedInput();
         },
         error: function (error) {
             alert('Dictionary/ListPersianToEnglish' + error);
@@ -989,7 +980,7 @@ function CheckedInput() {
                     this.checked = true;
                 }
             });
-           // alert(data);
+            // alert(data);
         },
         error: function (error) {
             console.log(error);
@@ -1008,7 +999,7 @@ function ListWordExampleDivChk(MyArray)
          url: "/Dictionary/ListWordExampleDivChk",
          success: function (data) {
 
-                 $("#DicBaMesalPro").html(data);
+             $("#DicBaMesalPro").html(data);
        
          },
          error: function (error) {
@@ -1042,7 +1033,7 @@ function RemoveWord(WordId) {
 function ArchieveWord(WordId, res) {
     var urll
     if (res == true) {
-         urll = "/Dictionary/ArchieveWord?id=" + WordId+"&res="+res;
+        urll = "/Dictionary/ArchieveWord?id=" + WordId+"&res="+res;
     }
     else {
         urll = "/Dictionary/ArchieveWord?id=" + WordId + "&res=" + res;
@@ -1055,7 +1046,7 @@ function ArchieveWord(WordId, res) {
         success: function (data) {
             var obj = JSON.parse(data);
             if (obj == true) {
-               // alert("آرشیو با موفقیت انجام شد");
+                // alert("آرشیو با موفقیت انجام شد");
                 RefreshListWithCheckedCheckbox();
                 ShouldExecute();
             }
@@ -1101,7 +1092,10 @@ function ShouldExecute() {
     //ListDictionaryHamrahBaExamplePro();
 }
 function GetlLevelByJqueryAndAppend() {
+    
     $("#MenuDicBaMesalPro .chkLevel div .lvlchk").remove();
+    $("#MenuDicRandomWord .chkLevel div .lvlchk").remove();
+    
     var i = 0
     var lvl = 1
     $(".ColShowLevel table tr td").each(function () {
@@ -1114,9 +1108,12 @@ function GetlLevelByJqueryAndAppend() {
             //console.log(i)
             var res = $(this).text()
             $("#MenuDicBaMesalPro .chkLevel div input[name='Level" + lvl + "'] ").after("<span class='lvlchk' style='color:red'>" + res + "</span>")
+            
+            $("#MenuDicRandomWord .chkLevel div .level" + lvl + " ").after("<span class='lvlchk' style='color:red'>" + res + "</span>")
         }
         i = i + 1
     })
+
 }
 function ShowAndHiddenExample(id) {
     
@@ -1143,21 +1140,73 @@ function ShowAndHiddenPersian(id) {
 
 
 }
+function ClearExamplesTable(){
+    $("#Showexamples table").remove()
+}
+async function RandomWordWithSoundCheckIsTrue(param) {
+   
+    if (param.check == true) {
+        $("#FindCorretWord input").each(function () {
+            if ($(this).attr("IsTrue") == "true") {
+                $(this).parent().parent().css("background-color", "#06f976")
+            }
+        })
+
+        var x=await LevelChangeDown(param.wordId);
+
+        RandomWordWithSound();
+        ShowLevel();
+    }
+    else {
+        LevelChangeUp(param.wordId);
+       
+        $("#FindCorretWord input").each(function () {
+            if ($(this).attr("IsTrue") == "true")
+            {
+                $(this).parent().parent().css("background-color", "#06f976")
+            }
+        })
+
+    }
+   
+   
+}
+async function ShowExamples(wordId){
+    _wordId=wordId
+    var x=await  ListExampleWord(wordId)
+    var table="<table class='table'>"
+    for (let index = 0; index <  x.lstExample.length; index++) {
+        table+="<tr>"+
+             //"<td><input type='button' value='edit' onclick='EditExample("+x.lstExample[index].id+")'/>"+
+             //"</td>"+
+            "<td style='white-space: pre-line;direction: ltr; text-align: left;'>"+x.lstExample[index].example+"</br>"+
+            "<input type='button' value='edit' onclick='EditExample("+x.lstExample[index].id+","+wordId+")'/></td>"+
+            "</tr>"
+    }
+    table+="</table>"
+    $("#Showexamples table").remove()
+    $("#Showexamples").append(table)
+
+}
+function showTheWord(eng) {
+    $("#showTheWord span").remove()
+    $("#showTheWord").append("<span>"+eng+"</span>")
+}
 $(document).ready(function () {
-        //----------function ListDictionary()
-        $("#SeachInTblDicList").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $(".ListDictionarySearch tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
+    //----------function ListDictionary()
+    $("#SeachInTblDicList").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $(".ListDictionarySearch tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
-        //--------------------------
-        $("#myInputDic").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
+    });
+    //--------------------------
+    $("#myInputDic").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
+    });
 });
 
 

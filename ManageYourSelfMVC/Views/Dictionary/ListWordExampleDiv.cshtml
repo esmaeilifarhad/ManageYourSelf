@@ -2,16 +2,6 @@
 
 <!---------------------------------------------------------------------------------------->
 <div class="table-responsive">
-    @*<input type="checkbox" name="Level1" value="1"> سطح 1 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level2" value="2"> سطح 2 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level3" value="3"> سطح 3 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level4" value="4"> سطح 4 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level5" value="5"> سطح 5 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level6" value="6"> سطح 6 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level7" value="7"> سطح 7 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level8" value="8"> سطح 8 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level9" value="9"> سطح 9 <span />&nbsp;&nbsp;
-        <input type="checkbox" name="Level10" value="10"> سطح 10*@
 
     <table class="table" style="direction:rtl; text-align: center;font-size:11px;">
         <thead>
@@ -23,7 +13,7 @@
                 <th>eye</th>
                 <th>NewExa</th>
                 <th>Edit</th>
-               
+
                 <th>level</th>
                 <th>IsArchieve</th>
                 <th>cambridge</th>
@@ -37,11 +27,13 @@
             </tr>
         </thead>
         <tbody id="myTable">
+            @{ int i = 0;}
             @foreach (var item in Model)
             {
+                i += 1;
                 <tr WordId="@item.id" style="background-color:black;color:white;font-size: 14px;white-space:nowrap">
                     <td onclick="MakeSound2(this)">@item.eng</td>
-                    <td   onclick="ShowAndHiddenPersian(@item.id)"><span  class="per_@item.id"  hidden >@item.per</span></td>
+                    <td onclick="ShowAndHiddenPersian(@item.id)"><span class="per_@item.id" hidden>@item.per</span></td>
                     <td><button style='color:green' class='btn btn-danger pointer LevelEngUp' data_id="@item.id"></button></td>
                     <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
                     @if (item.HasExample > 0)
@@ -55,7 +47,7 @@
                     <td><span style='color:dodgerblue' class='fa fa-list-alt btnExa pointer' data_id="@item.id"></span></td>
 
                     <td><span style='color:purple' class='fa fa-edit pointer EditWord' data_id="@item.id"></span></td>
-                   
+
                     <td class="level">@item.level</td>
                     @if (item.IsArchieve == true)
                     {
@@ -70,7 +62,17 @@
                         |
                         <a target="_blank" href="https://translate.google.com/?hl=en&tab=wT#view=home&op=translate&sl=en&tl=fa&text=@item.eng">google</a>
                     </td>
-                    <td class="dateCol"><span style="padding-right:10px">@item.date_refresh</span></td>
+                    <td class="dateCol_@i">
+                        <span style="padding-right:10px"></span>
+
+                        <script>
+                            $(".dateCol_"+@i).append("<span style='color:red'>"+ showDays(todayShamsy(), foramtDate(@item.date_refresh))+ "</span> "+
+                                "<span>"+foramtDate(@item.date_refresh)+"</span> "+
+                                 "<span style='color:red'>"+calDayOfWeek(@item.date_refresh)+"</span>"
+                )
+                        </script>
+
+                    </td>
                     <td>@item.SuccessCount</td>
                     <td>@item.UnSuccessCount</td>
                     @*<td><span style='color:deeppink' class='fa fa-trash pointer' data_id="@item.id"></span></td>*@
@@ -91,17 +93,17 @@
         </tbody>
     </table>
 </div>
-<script>
-    $(".table-responsive .dateCol .calDayOfWeek").remove();
- 
-    $(".table-responsive .dateCol").each(function () {
-     
-        var today = moment().format('jYYYY/jM/jD');//Today
-        var diffDays = showDays(today, $(this).text());
-        var dayOfWeek = calDayOfWeek($(this).text())
-        $($(this).append("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + diffDays + "</span>"));
-        $($(this).append("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
-   
+@*<script>
+        $(".table-responsive .dateCol .calDayOfWeek").remove();
 
-    });
-</script>
+        $(".table-responsive .dateCol").each(function () {
+
+            var today = moment().format('jYYYY/jM/jD');//Today
+            var diffDays = showDays(today, $(this).text());
+            var dayOfWeek = calDayOfWeek($(this).text())
+            $($(this).append("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + diffDays + "</span>"));
+            $($(this).append("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
+
+
+        });
+    </script>*@

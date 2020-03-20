@@ -2,7 +2,7 @@
 //--Execute All List when click Tab
 $("ul li a[href='#menuTiming']").on("click", function () {
 
-   // var s = $('input[name="chkTomarrow"]:checked');
+    // var s = $('input[name="chkTomarrow"]:checked');
     //ListTiming(0);
 
     if ($("input[name='chkTomarrow']").prop('checked') == true) {
@@ -30,7 +30,7 @@ function ListTaskFutureChkPost(MyArray) {
          dataType: "html",
          url: "/Task/ListTaskFutureChkPost",
          success: function (result) {
-             debugger
+             
              if (result.result == false) {
                  alert(result.message)
              }
@@ -52,7 +52,7 @@ function ListTaskFuture() {
         dataType: "html",
         url: urll,
         success: function (result) {
-            
+
             if (result.result == false) {
                 alert(result.message)
             }
@@ -62,7 +62,7 @@ function ListTaskFuture() {
 
         },
         error: function (error) {
-            debugger
+            
             console.log(error);
         }
     })
@@ -76,7 +76,7 @@ function ListTaskFutureChk() {
         dataType: "html",
         url: urll,
         success: function (result) {
-            
+
             if (result.result == false) {
                 alert(result.message)
             }
@@ -86,7 +86,7 @@ function ListTaskFutureChk() {
 
         },
         error: function (error) {
-            debugger
+            
             console.log(error);
         }
     })
@@ -112,13 +112,13 @@ $(".ListTask").on("click", ".TblTask .fa-edit", function () {
     EditTask(TaskId);
 });
 
-$(".ListTiming").on("click","div table tbody tr td  .Ti",function () {
+$(".ListTiming").on("click", "div table tbody tr td  .Ti", function () {
     var TaskId = $(this).attr("Data_id");
     TimingTask(TaskId);
 })
 $("Body").on("click", ".calendarTask", function () {
     var TaskId = $(this).attr("Data_id");
-   TimingTask(TaskId);
+    TimingTask(TaskId);
 });
 
 $("body").on("click", ".Ta", function () {
@@ -153,8 +153,8 @@ $("Body").on("click", ".CreateNewTask", function () {
     CreateTaskView(CatId);
 });
 function CreateTaskView(CatId) {
-    
-   
+
+
     var urll = "/Task/CreateTaskView?CatId=" + CatId;
     $.ajax({
         type: "Get",
@@ -206,16 +206,18 @@ $("Body").on("click", ".TaskUpLevel", function () {
     TaskUpLevel(TaskId);
 });
 function TaskUpLevel(TaskId) {
+    
+    $.LoadingOverlay("show");
     $.ajax(
        {
            type: 'POST',
            contentType: "application/json;charset=utf-8",
            dataType: "json",
            url: "/Task/TaskUpLevel",
-           data: JSON.stringify({ TaskId: TaskId}),
+           data: JSON.stringify({ TaskId: TaskId }),
            success: function (result) {
                if (result == true) {
-                 //  $("#ShowMessage").text('ثبت شد');
+                   //  $("#ShowMessage").text('ثبت شد');
                    ListTask("anjamnashode");
                    RefreshTask();
                    if ($("input[name='chkTomarrow']").prop('checked') == true) {
@@ -228,14 +230,14 @@ function TaskUpLevel(TaskId) {
                else {
                    $("#ShowMessage").text('خطا در ثبت');
                }
+               $.LoadingOverlay("hide");
            },
            error: function (error) {
                console.log(error);
            }
        });
 }
-function ListTaslLevelHigh()
-{
+function ListTaslLevelHigh() {
     var urll = "/Task/ListTaslLevelHigh";
     $.ajax({
         type: "Get",
@@ -251,7 +253,7 @@ function ListTaslLevelHigh()
             console.log("ListTaslLevelHigh : ");
             console.log(error)
             console.log("******end******")
-          
+
         }
     })
 }
@@ -260,6 +262,7 @@ $("Body").on("click", ".TaskDownLevel", function () {
     TaskDownLevel(TaskId);
 });
 function TaskDownLevel(TaskId) {
+    $.LoadingOverlay("show");
     $.ajax(
        {
            type: 'POST',
@@ -271,7 +274,7 @@ function TaskDownLevel(TaskId) {
                if (result == true) {
                    //  $("#ShowMessage").text('ثبت شد');
                    ListTask("anjamnashode");
-                  RefreshTask();
+                   RefreshTask();
                    if ($("input[name='chkTomarrow']").prop('checked') == true) {
                        ListTiming(1);
                    }
@@ -282,13 +285,14 @@ function TaskDownLevel(TaskId) {
                else {
                    $("#ShowMessage").text('خطا در ثبت');
                }
+               $.LoadingOverlay("hide");
            },
            error: function (error) {
                console.log("******start******")
                console.log("TaskDownLevel : ");
                console.log(error)
                console.log("******end******")
-              
+
            }
        });
 }
@@ -302,7 +306,7 @@ function removeTimeTask(TaskId) {
               url: "/Task/removeTimeTask?TaskId=" + TaskId,
               // data: JSON.stringify({ DateEnd: DateEnd, CatId: CatId }),
               success: function (result) {
-                  
+
                   if ($("input[name='chkTomarrow']").prop('checked') == true) {
                       ListTiming(1);
                   }
@@ -323,6 +327,7 @@ function removeTimeTask(TaskId) {
           });
 }
 function EditTask(TaskId) {
+    $.LoadingOverlay("show");
     var urll = "/Task/EditTask?TaskId=" + TaskId;
     $.ajax({
         type: "Get",
@@ -334,11 +339,12 @@ function EditTask(TaskId) {
             //var obj = JSON.parse(data);
             $(".BodyModal").html(result);
             $("#MasterModal").modal();
-
+            $.LoadingOverlay("hide");
             //--------
         },
         error: function (error) {
             console.log(error);
+            $.LoadingOverlay("hide");
         }
     })
 }
@@ -372,12 +378,12 @@ function ChangeTodayTaskPost() {
     var chkIsTransfer = $("#MasterModal div[name='ChangeTodayTask'] table input[name='chkIsTransfer']").prop('checked');
     $.ajax(
           {
-            
+
               type: 'POST',
               contentType: "application/json;charset=utf-8",
               dataType: "json",
               url: "/Task/ChangeTodayTask?CatId=" + CatId + "&&DateEnd=" + DateEnd + "&&chkIsTransfer=" + chkIsTransfer,
-             // data: JSON.stringify({ DateEnd: DateEnd, CatId: CatId }),
+              // data: JSON.stringify({ DateEnd: DateEnd, CatId: CatId }),
               success: function (result) {
                   ListTaskGeneral();
                   RefreshTask();
@@ -386,14 +392,14 @@ function ChangeTodayTaskPost() {
                   }
               },
               error: function (error) {
-                 // alert(result.message);
-                 // alert(result.result)
+                  // alert(result.message);
+                  // alert(result.result)
                   alert("ChangeTodayTaskPost() : " + error.responseText);
               }
           });
 }
 function CreateTask() {
-   // 
+    // 
     var _CatId = $("#MasterModal table .MYSelect option:selected").val();
     var _Name = $("#MasterModal table textarea[name='Name']").val()
     //var _Name = $("#MasterModal table input[name='Name']").val()
@@ -435,13 +441,13 @@ function UpdateTask() {
            contentType: "application/json;charset=utf-8",
            dataType: "json",
            url: "/Task/UpdateTask",
-           data: JSON.stringify({ TaskId: TaskId, DateStart: DateStart, DateEnd: DateEnd, IsActive: IsActive, IsCheck: IsCheck, DarsadPishraft: DarsadPishraft, Name: Name, Olaviat: Olaviat,CatId:CatId }),
+           data: JSON.stringify({ TaskId: TaskId, DateStart: DateStart, DateEnd: DateEnd, IsActive: IsActive, IsCheck: IsCheck, DarsadPishraft: DarsadPishraft, Name: Name, Olaviat: Olaviat, CatId: CatId }),
            success: function (result) {
                if (result == true) {
                    $("#ShowMessage").text('ثبت شد');
                    ListTask("anjamnashode");
                    RefreshTask()
-                  
+
                    if ($("input[name='chkTomarrow']").prop('checked') == true) {
                        ListTiming(1);
                    }
@@ -458,51 +464,9 @@ function UpdateTask() {
            }
        });
 }
-//function ListTask(typeTask) {
-//    var s = typeTask
-//    var urll = "/Task/ListTaskAnjamnashode?typeTask=" + typeTask;
-//    $.ajax({
-//        type: "Get",
-//        contentType: "application/json;charset=utf-8",
-//        dataType: "json",
-//        url: urll,
-//        success: function (data) {
-//            var obj = data
-//            var html = "<table class='table table-responsive table-dark table-striped TblTask' style='direction: rtl; text-align: center;font-size:11px'>\
-//            <thead>\
-//                <tr>\
-//                    <th>اولویت</th>\
-//                    <th>عنوان وظیف</th>\
-//                    <th>تاریخ شروع</th>\
-//                    <th>تاریخ پایان</th>\
-//                    <th>پیشرفت</th>\
-//                    <th>گذشته</th>\
-//                    <th>مانده روز</th>\
-//                    <th>زمان بندی</th>\
-//                    <th>ویرایش</th>\
-//                    <th>حذف</th>\
-//                </tr>\
-//            </thead>\
-//            <tbody>"
-//            for (var i = 0; i < obj.length; i++) {
-//                html += "<tr>  <td>" + obj[i].Olaviat + "</td><td  style='text-align: right!important;'>" + obj[i].Name + "</td><td>" + obj[i].DateStart + "</td><td>" + obj[i].DateEnd + "</td><td>" + obj[i].DarsadPishraft + "</td>"
-//                html += "<td>" + obj[i].Gozashteh + "</td><td>" + obj[i].MandehRooz + "</td>"
-//                html += "<td><span class='fa fa-calendar' Data_id=" + obj[i].TaskId + "></span></td>"
-//                html += "<td><span class='fa fa-edit'   Data_id=" + obj[i].TaskId + "></span></td>"
-//                html += "<td><span class='fa fa-remove' Data_id=" + obj[i].TaskId + "></span></td>"
-//                html += " </tr>"
-//            }
-//            html += "</tbody></table>"
-//            $(".ListTask").html(html);
-//            eachColorTask();
-//        },
-//        error: function (error) {
-//            $(".ListTask").html("<p>دسترسی ندارید</p>");
-//            // console.log(error);
-//        }
-//    })
-//}
+
 function ListTask(typeTask) {
+    $.LoadingOverlay("show");
     var s = typeTask
     var urll = "/Task/ListTaskAnjamnashode?typeTask=" + typeTask;
     $.ajax({
@@ -513,6 +477,7 @@ function ListTask(typeTask) {
         success: function (data) {
             $(".ListTask").html(data);
             eachColorTask();
+            $.LoadingOverlay("hide");
         },
         error: function (error) {
             $(".ListTask").html("<p>دسترسی ندارید</p>");
@@ -541,9 +506,9 @@ function TimingTask(TaskId) {
     })
 }
 function ListTiming(x) {
-    
+
     if (x == 0) {
-        var urll = "/Task/ListTiming?x="+x;
+        var urll = "/Task/ListTiming?x=" + x;
         $.ajax({
             type: "Get",
             contentType: "application/json;charset=utf-8",
@@ -588,26 +553,26 @@ function ListTiming(x) {
     }
 }
 function ListTaskGeneral() {
-        var urll = "/Task/ListTaskGeneral";
-        $.ajax({
-            type: "Get",
-            contentType: "application/json;charset=utf-8",
-            dataType: "html",
-            url: urll,
-            success: function (result) {
-                if (result.result == false) {
-                    alert(result.message)
-                }
-                else {
-                    $(".ListTaskGeneral").html(result);
-                }
-
-            },
-            error: function (error) {
-                console.log(error);
+    var urll = "/Task/ListTaskGeneral";
+    $.ajax({
+        type: "Get",
+        contentType: "application/json;charset=utf-8",
+        dataType: "html",
+        url: urll,
+        success: function (result) {
+            if (result.result == false) {
+                alert(result.message)
             }
-        })
-    
+            else {
+                $(".ListTaskGeneral").html(result);
+            }
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+
 }
 $("body").on("click", ".AllCatChecked", function () {
     $(".ListTaskFutureChk").each(function () {
@@ -615,7 +580,7 @@ $("body").on("click", ".AllCatChecked", function () {
     });
 });
 $(".ListTaskFutureChk").on("click", "input", function () {
-    
+
     var MyArray = [];
     var lvl = '';
     $(".ListTaskFutureChk .Categories  input:checked").each(function () {
@@ -626,8 +591,7 @@ $(".ListTaskFutureChk").on("click", "input", function () {
     MyArray.push(lvl);
     ListTaskFutureChkPost(MyArray);
 });
-function RefreshChk()
-{
+function RefreshChk() {
     var MyArray = [];
     var lvl = '';
     $(".ListTaskFutureChk .Categories input:checked").each(function () {
@@ -638,21 +602,20 @@ function RefreshChk()
     MyArray.push(lvl);
     ListTaskFutureChkPost(MyArray);
 }
-function TimingPost()
-{
-   
+function TimingPost() {
+
     var ManageTimeId = $("#MasterModal .MYSelect option:selected").val();
     var TaskId = $("#MasterModal div[name='UpdateTiming'] table").attr("TaskId");
-    debugger
+    
     $.ajax(
           {
               type: 'POST',
               contentType: "application/json;charset=utf-8",
               dataType: "json",
               url: "/Task/CreateTiming",
-              data: JSON.stringify({ ManageTimeId: ManageTimeId, TaskId: TaskId}),
+              data: JSON.stringify({ ManageTimeId: ManageTimeId, TaskId: TaskId }),
               success: function (result) {
-                  debugger
+                  
                   if (result == true) {
                       if ($("input[name='chkTomarrow']").prop('checked') == true) {
                           ListTiming(1);
@@ -676,35 +639,52 @@ function TimingPost()
           });
 }
 function eachColorTask() {
-    $(".TblTask tr td:nth-child(10)").each(function () {
-        var valuee = ($(this).text());
-        if (valuee < 0) {
-            $(this).parent().css({ "color": "gray" });
+    $(".TblTask tr td:nth-child(2)").each(function () {
+        //اگر مانده روز بیشتر از صفر بود
+        var mandeRooz=$(this).parent().find("td").eq(10).text()
+        if(mandeRooz==0)
+        {
+
+            var valuee = ($(this).text());
+            if (valuee < 0) {
+                $(this).parent().css({ "color": "gray" });
+            }
+            if (valuee == 0) {
+                $(this).parent().css({ "color": "gray" });
+            }
+            if (valuee == 1) {
+                $(this).parent().css({ "color": "red" });
+            }
+            if (valuee == 2) {
+                $(this).parent().css({ "color": "orange" });
+            }
+            if (valuee == 3) {
+                $(this).parent().css({ "color": "#5a49e0" });
+            }
+            if (valuee == 4) {
+                $(this).parent().css({ "color": "#26d826" });
+            }
+            if (valuee == 5) {
+                $(this).parent().css({ "color": "darkgreen" });
+            }
         }
-        if (valuee == 0) {
-            $(this).parent().css({ "color": "red" });
+        else
+        {
+            if(mandeRooz%2==0)
+                $(this).parent().css({ "color": "#b5b7b9" });
+            else
+                $(this).parent().css({ "color": "black" });
         }
-        if (valuee == 1) {
-            $(this).parent().css({ "color": "orange" });
-        }
-        if (valuee == 2) {
-            $(this).parent().css({ "color": "yellow" });
-        }
-        if (valuee == 3) {
-            $(this).parent().css({ "color": "greenyellow" });
-        }
-        if (valuee > 7) {
-            $(this).parent().css({ "color": "green" });
-        }
+        
+
     });
 }
-function timeOff()
-{
+function timeOff() {
     $("#menuTiming .ListTiming  table tr td:nth-child(1)").each(function () {
         var valuee = ($(this).text());
         var d = new Date();
         var n = d.getHours();
-       // var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        // var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
         var TMinut = d.getMinutes();
         var TSec = d.getSeconds();
         //alert(TMinut);
@@ -712,7 +692,7 @@ function timeOff()
 
         if (TMinut < 2 && valuee == n) {
             //alert("okk");
-           // alert($(this).next().next().text());
+            // alert($(this).next().next().text());
         }
 
         if (valuee < n) {
@@ -722,6 +702,56 @@ function timeOff()
             $(this).parent().css({ "color": "green" });
         }
     });
+}
+async function changeToAnjamShode() {
+    $.LoadingOverlay("show");
+    var obj={}
+    var count= $(".TblTask tr td .AnjamShode").length
+    var i=0;
+    $(".TblTask tr td .AnjamShode").each(async function () {
+        i+=1;
+        if ($(this).is(':checked')) {
+            // checked
+            obj.IsCheck = true
+            obj.TaskId = $(this).attr("Data_id")
+
+         var x=await   UpdateTask2(obj)
+            
+        }
+        else {
+            // unchecked
+
+        }
+
+        if(count==i)
+        {
+            ListTask("anjamnashode");
+            $.LoadingOverlay("hide");
+       // resolve("finish")
+        }
+
+    })
+    
+}
+function UpdateTask2(obj) {
+
+    return new Promise(resolve => {
+        $.ajax(
+           {
+               type: 'POST',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/Task/UpdateTask",
+               data: JSON.stringify({ TaskId: obj.TaskId, IsCheck: obj.IsCheck }),
+               success: function (result) {
+                   resolve(result)
+
+               },
+               error: function (error) {
+                   resolve(error)
+               }
+           });
+    })
 }
 function RefreshTask() {
     RefreshChk();

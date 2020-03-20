@@ -2,7 +2,11 @@
  @{ 
      int wordId = 0;
  }
-
+<style>
+    table {
+      margin-top: 24px;
+    }
+</style>
 <table>
     <tr style="color:red">
         @foreach (var item in Model)
@@ -25,18 +29,27 @@
                     <input onclick="showTheWord('@item.eng')" type="button" value="show word" />
                     
                 </td>
+                <td>
+                   @if (item.HasExample > 0)
+                   {
+                       <span onclick='ShowExamples("@item.id")' class='fa fa-eye  pointer' style='color:green'>@item.HasExample</span>
+                   }
+                   else
+                   {
+                    <span onclick='ShowExamples()' class='fa fa-eye-slash  pointer' style='color:yellow'></span>
+                   }
+                </td>
                 <td id="showTheWord"></td>
-            }
-        }
+                            }
+                        }
     </tr>
 </table>
 
 <table id="FindCorretWord">
-
+    @{int i = 0;}
     @foreach (var item in Model)
     {
-        //if (@item.statusCheck == false)
-        //{
+        i += 1;
             <tr>
                 <td>
                     @if(item.statusCheck==true)
@@ -49,11 +62,18 @@
                     }
                 </td>
                 <td>
-                    <span>@item.per</span> (<span>@item.level</span>)
+                    <span>@item.per</span>     - (<span style='color:blue'>@item.level</span>) - <span class="daySpend_@i">
+                        <script>
+                            $(".daySpend_"+@i).append("<span style='color:red'>"+ showDays(todayShamsy(), foramtDate(@item.date_refresh))+ "</span>  -"+
+                               "<span>"+foramtDate(@item.date_refresh)+"</span>  -"+
+                                "<span style='color:#2bc3dc'>"+calDayOfWeek(@item.date_refresh)+"</span> -"+
+                                 "<span "+((@item.SuccessCount - @item.UnSuccessCount)<0? "style='color:red'>M"+(@item.SuccessCount - @item.UnSuccessCount):"style='color:green'>P"+(@item.SuccessCount - @item.UnSuccessCount) )+"</span> -"+
+                                 ((@item.HasExample>0)?"<span onclick='ShowExamples("+@item.id+")' class='fa fa-eye  pointer' style='color:green' ></span>":"<span onclick='ShowExamples()' class='fa fa-eye-slash  pointer' style='color:yellow'></span>")
+               )
+                     </script></span>
                 </td>
 
             </tr>
-        //}
     }
     <tr>
         <td><input type="radio" IsTrue=false name="FindCorretWord" onclick="RandomWordWithSoundCheckIsTrue({ check: false, wordId: @wordId })"></td>
@@ -61,9 +81,4 @@
     </tr>
 
 </table>
-<script>
-    function showTheWord(eng) {
-        $("#showTheWord span").remove()
-        $("#showTheWord").append("<span>"+eng+"</span>")
-    }
-</script>
+

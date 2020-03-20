@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2018 17:59:50</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.dll">
-      <publishTime>02/18/2020 14:47:25</publishTime>
+      <publishTime>03/07/2020 16:56:51</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>02/01/2018 08:13:16</publishTime>
@@ -28,7 +28,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 08:13:06</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>02/01/2018 08:13:08</publishTime>
+      <publishTime>02/19/2020 10:10:40</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>02/01/2018 08:13:14</publishTime>
@@ -571,7 +571,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 08:47:28</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>03/30/2019 11:48:12</publishTime>
+      <publishTime>02/19/2020 10:10:39</publishTime>
     </File>
     <File Include="Scripts/angular-animate.js">
       <publishTime>12/25/2019 09:51:43</publishTime>
@@ -3028,7 +3028,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2020 10:34:58</publishTime>
     </File>
     <File Include="Scripts/Logic/Dictionary.js">
-      <publishTime>02/18/2020 14:25:46</publishTime>
+      <publishTime>02/20/2020 09:43:22</publishTime>
     </File>
     <File Include="Scripts/Logic/Gold.js">
       <publishTime>06/09/2019 08:20:56</publishTime>
@@ -3046,7 +3046,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/28/2019 11:44:39</publishTime>
     </File>
     <File Include="Scripts/Logic/Public.js">
-      <publishTime>02/13/2020 15:39:56</publishTime>
+      <publishTime>02/19/2020 11:23:30</publishTime>
     </File>
     <File Include="Scripts/Logic/RoutineJob.js">
       <publishTime>11/11/2019 11:45:55</publishTime>
@@ -3070,7 +3070,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2019 11:45:55</publishTime>
     </File>
     <File Include="Scripts/Logic/Task.js">
-      <publishTime>02/02/2020 10:42:44</publishTime>
+      <publishTime>03/07/2020 08:05:26</publishTime>
+    </File>
+    <File Include="Scripts/Logic/Utility.js">
+      <publishTime>02/19/2020 14:46:28</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>12/25/2019 09:52:09</publishTime>
@@ -3158,6 +3161,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/umd/popper.min.js.map">
       <publishTime>12/25/2019 09:52:10</publishTime>
+    </File>
+    <File Include="Scripts/Utility/loadingoverlay.js">
+      <publishTime>03/04/2020 10:53:50</publishTime>
+    </File>
+    <File Include="Scripts/Utility/loadingoverlay.min.js">
+      <publishTime>03/04/2020 10:53:50</publishTime>
     </File>
     <File Include="Scripts/version.json">
       <publishTime>12/25/2019 09:52:10</publishTime>
@@ -3295,13 +3304,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2018 16:55:09</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleDiv.cshtml">
-      <publishTime>12/28/2019 13:50:02</publishTime>
+      <publishTime>02/19/2020 13:20:44</publishTime>
     </File>
     <File Include="Views/Dictionary/ListWordExampleFalse.cshtml">
       <publishTime>06/09/2019 22:27:21</publishTime>
     </File>
     <File Include="Views/Dictionary/MainDictionary.cshtml">
-      <publishTime>02/18/2020 13:01:49</publishTime>
+      <publishTime>02/20/2020 09:32:03</publishTime>
     </File>
     <File Include="Views/Dictionary/NewExample.cshtml">
       <publishTime>06/07/2018 11:24:48</publishTime>
@@ -3310,7 +3319,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/31/2018 11:06:51</publishTime>
     </File>
     <File Include="Views/Dictionary/RandomWordWithSound.cshtml">
-      <publishTime>02/18/2020 14:45:55</publishTime>
+      <publishTime>02/20/2020 09:41:21</publishTime>
     </File>
     <File Include="Views/Dictionary/RandomWord_HardWord.cshtml">
       <publishTime>06/10/2019 14:30:43</publishTime>
@@ -3481,7 +3490,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/02/2018 08:57:58</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutBizPage.cshtml">
-      <publishTime>01/30/2020 10:35:25</publishTime>
+      <publishTime>03/04/2020 10:58:59</publishTime>
     </File>
     <File Include="Views/Sport/Create.cshtml">
       <publishTime>11/25/2018 22:37:20</publishTime>
@@ -3520,7 +3529,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2019 10:53:14</publishTime>
     </File>
     <File Include="Views/Task/ListTaskAnjamnashode.cshtml">
-      <publishTime>06/02/2019 09:38:14</publishTime>
+      <publishTime>03/07/2020 08:00:57</publishTime>
     </File>
     <File Include="Views/Task/ListTaskFuture.cshtml">
       <publishTime>02/01/2020 11:17:10</publishTime>
@@ -3529,7 +3538,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2020 11:17:10</publishTime>
     </File>
     <File Include="Views/Task/ListTaskGeneral.cshtml">
-      <publishTime>07/01/2019 09:10:31</publishTime>
+      <publishTime>03/04/2020 08:49:49</publishTime>
     </File>
     <File Include="Views/Task/ListTaslLevelHigh.cshtml">
       <publishTime>12/28/2019 13:48:05</publishTime>
@@ -3547,7 +3556,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 12:52:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/25/2019 11:54:35</publishTime>
+      <publishTime>02/19/2020 14:04:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

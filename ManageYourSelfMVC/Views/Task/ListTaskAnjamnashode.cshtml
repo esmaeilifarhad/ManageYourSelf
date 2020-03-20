@@ -1,14 +1,14 @@
 ﻿@model  List<ManageYourSelfMVC.ViewModels.TaskVM>
 
-<table class='table table-responsive table-dark table-striped TblTask' 
+<table class='table table-responsive table-striped TblTask' 
        style='direction: rtl; text-align: center;font-size:11px'>
     <thead>
         <tr>
+            <th><input type="button" value="انجام" onclick="changeToAnjamShode()"/></th>
             <th>اولویت</th>
             <th>بالا</th>
             <th>پایین</th>
             <th>نوع</th>
-       
             <th>عنوان وظیف</th>
             <th>تاریخ شروع</th>
             <th>تاریخ پایان</th>
@@ -25,13 +25,14 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Olaviat</td>
-                <td><span style='color:red' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@item.TaskId"></span></td>
-                <td><span style='color:green' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@item.TaskId"></span></td>
+                <td><input class="AnjamShode" Data_id="@item.TaskId" type="checkbox"/></td>
+                <td class="Olaviat">@item.Olaviat</td>
+                <td><input type="button" style='background-color:green' class='fa fa-sort-up pointer ' onclick="TaskUpLevel(@item.TaskId)" Data_id="@item.TaskId"/></td>
+                <td><input type="button" style='background-color:red' class='fa fa-sort-down pointer  ' onclick="TaskDownLevel(@item.TaskId)"  Data_id="@item.TaskId"/></td>
                 <td>@item.Title</td>
                 <td style='text-align: right!important;'>@item.Name</td>
-                <td>@item.DateStart</td>
-                <td>@item.DateEnd</td>
+                <td>@Utility.ConvertDateToSlash(item.DateStart)</td>
+                <td>@Utility.ConvertDateToSlash(item.DateEnd)</td>
                 <td>@item.DarsadPishraft</td>
                 <td>@item.Gozashteh</td>
                 <td>@item.MandehRooz</td>

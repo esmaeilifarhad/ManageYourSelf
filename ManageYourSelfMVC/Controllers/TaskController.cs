@@ -38,17 +38,45 @@ namespace ManageYourSelfMVC.Controllers
         }
         public JsonResult CreateTask(Models.DomainModels.Task T)
         {
-            bool Result = false;
-            Models.MyData.MyDataTransfer DT = new Models.MyData.MyDataTransfer();
-            T.DarsadPishraft = 0;
-            T.DateStart = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
-            T.DateEnd = Utility.Utility.ConvertDateToSqlFormat(T.DateEnd);
-            T.IsActive = true;
-            T.IsCheck = false;
-            T.UserId = UserId;
-            T.Olaviat = T.Olaviat;
-            Result = DT.TaskInsert(T);
-            return Json(Result, JsonRequestBehavior.AllowGet);
+            string[] parts = T.Name.Split(new string[] { "@@" }, StringSplitOptions.None);
+            if (parts.Length > 1)
+            {
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    Models.DomainModels.Task NewTask = new Models.DomainModels.Task();
+                    NewTask.Name = parts[i];
+                    NewTask.Olaviat = T.Olaviat;
+                    NewTask.DarsadPishraft = 0;
+                    NewTask.DateStart = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
+                    NewTask.DateEnd = Utility.Utility.ConvertDateToSqlFormat(T.DateEnd);
+                    NewTask.IsActive = true;
+                    NewTask.IsCheck = false;
+                    NewTask.UserId = UserId;
+                    NewTask.CatId = T.CatId;
+                    DB.Tasks.Add(NewTask);
+                    DB.SaveChanges();
+                }
+              
+            }
+            else
+            {
+                Models.MyData.MyDataTransfer DT = new Models.MyData.MyDataTransfer();
+                T.DarsadPishraft = 0;
+                T.DateStart = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
+                T.DateEnd = Utility.Utility.ConvertDateToSqlFormat(T.DateEnd);
+                T.IsActive = true;
+                T.IsCheck = false;
+                T.UserId = UserId;
+                T.Olaviat = T.Olaviat;
+                T.CatId = T.CatId;
+                DB.Tasks.Add(T);
+                DB.SaveChanges();
+
+            }
+
+
+
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
         public ActionResult CreateTaskView(int CatId=0)
         {
@@ -181,28 +209,64 @@ namespace ManageYourSelfMVC.Controllers
         [HttpPost]
         public JsonResult UpdateTask(Models.DomainModels.Task NewTask)
         {
-            try
+            string[] parts=new string[0];
+            if (NewTask.Name != null)
+            {
+                 parts = NewTask.Name.Split(new string[] { "@@" }, StringSplitOptions.None);
+
+            }
+            if (parts.Length > 1)
             {
                 int TaskId = NewTask.TaskId;
                 var OldTask = DB.Tasks.SingleOrDefault(q => q.TaskId == TaskId);
-                OldTask.IsActive = NewTask.IsActive;
-                OldTask.IsCheck = NewTask.IsCheck;
-                OldTask.DateStart = Utility.Utility.ConvertDateToSqlFormat(NewTask.DateStart);
-                OldTask.DateEnd = Utility.Utility.ConvertDateToSqlFormat(NewTask.DateEnd);
-                OldTask.DarsadPishraft = NewTask.DarsadPishraft;
-                OldTask.Name = NewTask.Name;
-                OldTask.Olaviat = NewTask.Olaviat;
-                OldTask.CatId = NewTask.CatId;
-                DB.SaveChanges();
-                return Json(true, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
 
-                throw new ArgumentException(ex.Message);
+                for (int i = 0; i < parts.Length; i++)
+                {
+
+                   
+                    Models.DomainModels.Task newTask = new Models.DomainModels.Task();
+                    newTask.IsActive = (NewTask.IsActive == null ? OldTask.IsActive : NewTask.IsActive);
+                    newTask.IsCheck = (NewTask.IsCheck == null ? OldTask.IsCheck : NewTask.IsCheck);
+                    newTask.DateStart = (NewTask.DateStart == null ? OldTask.DateStart : Utility.Utility.ConvertDateToSqlFormat(NewTask.DateStart));
+                    newTask.DateEnd = (NewTask.DateEnd == null ? OldTask.DateEnd : Utility.Utility.ConvertDateToSqlFormat(NewTask.DateEnd));
+                    newTask.DarsadPishraft = (NewTask.DarsadPishraft == null ? OldTask.DarsadPishraft : NewTask.DarsadPishraft);
+                    newTask.Name = parts[i];
+                    newTask.Olaviat = (NewTask.Olaviat == null ? OldTask.Olaviat : NewTask.Olaviat);
+                    newTask.CatId = (NewTask.CatId == null ? OldTask.CatId : NewTask.CatId);
+                    newTask.UserId = UserId;
+                    DB.Tasks.Add(newTask);
+                    DB.SaveChanges();
+                }
+                DB.Tasks.Remove(OldTask);
+                DB.SaveChanges();
+
             }
+            else
+            {
+                int TaskId = NewTask.TaskId;
+                var OldTask = DB.Tasks.SingleOrDefault(q => q.TaskId == TaskId);
+                OldTask.IsActive = (NewTask.IsActive == null ? OldTask.IsActive : NewTask.IsActive);
+                OldTask.IsCheck = (NewTask.IsCheck == null ? OldTask.IsCheck : NewTask.IsCheck);
+                OldTask.DateStart = (NewTask.DateStart == null ? OldTask.DateStart : Utility.Utility.ConvertDateToSqlFormat(NewTask.DateStart));
+                OldTask.DateEnd = (NewTask.DateEnd == null ? OldTask.DateEnd : Utility.Utility.ConvertDateToSqlFormat(NewTask.DateEnd));
+                OldTask.DarsadPishraft = (NewTask.DarsadPishraft == null ? OldTask.DarsadPishraft : NewTask.DarsadPishraft);
+                OldTask.Name = (NewTask.Name == null ? OldTask.Name : NewTask.Name);
+                OldTask.Olaviat = (NewTask.Olaviat == null ? OldTask.Olaviat : NewTask.Olaviat);
+                OldTask.CatId = (NewTask.CatId == null ? OldTask.CatId : NewTask.CatId);
+
+                DB.SaveChanges();
+
+            }
+
+
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+
+
+           
 
         }
+
         public JsonResult TaskToday()
         {
             string res = "";

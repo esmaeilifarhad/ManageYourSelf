@@ -118,27 +118,7 @@
                     <br>
                 </div>
             </div>
-            @*<div class="row">
-                    <div class="col-sm-12">
-                        <br>
-                        <input class="form-control" id="SeachInExample" type="text" placeholder="Search in Examples..">
-                        <br>
-                    </div>
-                </div>*@
-            @*<div class="row">
-                    <div class="col-sm-12">
-                        <br>
-                        <input class="form-control" id="myInputDic" type="text" placeholder="Search..">
-                        <br>
-                    </div>
-                </div>*@
-            @*<div class="row">
-                    <div class="col-sm-12">
-                        <br>
-                        <input class="form-control" id="SpeechText" type="text" placeholder="Speech Text..">
-                        <br>
-                    </div>
-                </div>*@
+
             <div class="row chkLevel" style="font-size:10px;">
 
                 <div class="col-sm-12">
@@ -308,18 +288,18 @@
         <!--#MenuDicRandomWord-->
         <div id="MenuDicRandomWord" class="tab-pane">
             <br />
-            <div class="row">
+            <div class="row chkLevel">
                 <div class="col-sm-12">
-                    <input type="radio" name="TestCorretWord" value="1"  onclick="RandomWordWithSound()"> سطح 1 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="2"  onclick="RandomWordWithSound()"> سطح 2 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="3"  onclick="RandomWordWithSound()"> سطح 3 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="4"  onclick="RandomWordWithSound()"> سطح 4 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="5"  onclick="RandomWordWithSound()"> سطح 5 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="6"  onclick="RandomWordWithSound()"> سطح 6 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="7"  onclick="RandomWordWithSound()"> سطح 7 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="8"  onclick="RandomWordWithSound()"> سطح 8 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="9"  onclick="RandomWordWithSound()"> سطح 9 <span />&nbsp;&nbsp;
-                    <input type="radio" name="TestCorretWord" value="10" onclick="RandomWordWithSound()"> سطح 10<span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="1"  onclick="RandomWordWithSound()" class="level1"> سطح 1 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="2"  onclick="RandomWordWithSound()" class="level2"> سطح 2 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="3"  onclick="RandomWordWithSound()" class="level3"> سطح 3 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="4"  onclick="RandomWordWithSound()" class="level4"> سطح 4 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="5"  onclick="RandomWordWithSound()" class="level5"> سطح 5 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="6"  onclick="RandomWordWithSound()" class="level6"> سطح 6 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="7"  onclick="RandomWordWithSound()" class="level7"> سطح 7 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="8"  onclick="RandomWordWithSound()" class="level8"> سطح 8 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="9"  onclick="RandomWordWithSound()" class="level9"> سطح 9 <span />&nbsp;&nbsp;
+                    <input type="radio" name="TestCorretWord" value="10" onclick="RandomWordWithSound()" class="level10"> سطح 10<span />&nbsp;&nbsp;
                     <input type="radio" name="TestCorretWord" value="101">بیشترین اشتباه<span />&nbsp;&nbsp;
                     <input type="radio" name="TestCorretWord" value="102">آخرین مرور<span />&nbsp;&nbsp;
                     <input type="radio" name="TestCorretWord" value="103">کمترین تعداد مرور<span />&nbsp;&nbsp;
@@ -330,118 +310,18 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 " id="RandomWordWithSound"></div>
-                <div class="col-sm-6 " id="ShowLevel"></div>
+                <div class="col-sm-6 " id="Showexamples"></div>
             </div>
-            <div class="vl"></div>
         </div>
 
 
 
 
-        <br />
-        <input type="button" name="RandomWord" value="لغت بعدی" class="btn btn-danger btnNextRandomWord" />
-        <br /><br />
-        <div class="row">
-            <div class="col-sm-6 DicRandomWord"></div>
-            <div class="vl"></div>
-            <div class="col-sm-6 DicRandomWord_HardWord"></div>
-        </div>
-        <hr />
-        <div class="row">
-            <div class="col-sm-12 DicRandomWord_HardWordExample"></div>
-        </div>
 
     </div>
 </div>
 
-<!--Modal Start-->
-@*<div>
-        <!--  Modal Master -->
-        <div class="modal fade" id="MasterModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header" style="direction:ltr">
-                        <br>
-                        <h4 class="modal-title HeaderModal"></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body BodyModal">
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
-                        <span> </span>
-                        <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ثبت</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  Modal Show Example -->
-        <div class="modal fade" id="myModalExa">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header" style="direction:ltr">
-                        <br>
-                        <h4 class="modal-title" id="HeaderExample"></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body" id="EditHolder">
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">بستن</button>
-                        <span></span><span></span>
-                        <button type="button" class="btn btn-success NewExample">مثال جدید</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--New Example-->
-        <div class="modal fade" id="ModalNewExample">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header" style="direction:ltr">
-                        <br>
-                        <h4 class="modal-title"></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
-                        <span></span>
-                        <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ذخیره</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  Modal For Angular -->
-        <div class="modal fade" id="ModalAngular" >
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header" style="direction:ltr">
-                        <br>
-                        <h4 class="modal-title HeaderModal"></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body BodyModal" >
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer FooterModal">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
+
 
 </div>
 

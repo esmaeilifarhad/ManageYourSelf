@@ -112,13 +112,14 @@ function calDayOfWeek(date) {
     return day;
 }
 
-/*
+
+function showDays(firstDate, secondDate) {
+    /*
 Pass you dates to this function like this:  showDays('1/1/2014','12/25/2014')
 
 پارامتر وردی تابع شمسی میباشد
 1367/07/09
 */
-function showDays(firstDate, secondDate) {
     var firstDate = moment(firstDate, 'jYYYY/jM/jD ').format('M/D/YYYY')//'1/1/2014'
     var secondDate = moment(secondDate, 'jYYYY/jM/jD ').format('M/D/YYYY')//'1/1/2014'
 
