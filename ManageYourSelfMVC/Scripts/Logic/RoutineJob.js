@@ -5,6 +5,7 @@ $("ul li a[href='#RoutineJob']").on("click", function () {
 });
 //***************************************************RoutineJob
 function List() {
+    $.LoadingOverlay("show");
     var urll = "/RoutineJob/List";
     $.ajax({
         type: "Get",
@@ -13,9 +14,11 @@ function List() {
         url: urll,
         success: function (data) {
             $(".ListRoutineJob").html(data);
+            $.LoadingOverlay("hide");
         },
         error: function (error) {
             console.log(error);
+            $.LoadingOverlay("hide");
         }
     })
 }
@@ -71,27 +74,35 @@ function ShowPivot() {
         }
     })
 }
-function CreateRoutineJobPost() {
-   
+function CreateRoutineJobPost(RoutineJobId) {
+    $(".modal-footer table").remove();
+    $.LoadingOverlay("show");
     var Job = $("#MasterModal input[name='Job']").val();
+    var Order = $("#MasterModal input[name='Order']").val();
+    var Rate = $("#MasterModal input[name='Rate']").val();
     var RoozDaily = "1,2,3,4,5,6,7";
+  
     $.ajax(
        {
            type: 'POST',
            contentType: "application/json;charset=utf-8",
            dataType: "json",
            url: "/RoutineJob/Create",
-           data: JSON.stringify({ Job: Job,RoozDaily:RoozDaily }),
+           data: JSON.stringify({ Job: Job, RoozDaily: RoozDaily, Order: Order, Rate: Rate, RoutineJobId: RoutineJobId }),
            success: function (result) {
+               
                if (result == true) {
                    Refresh();
+                   closeModal()
                }
                else {
                    alert("خطا در ثبت");
                }
+               $.LoadingOverlay("hide");
            },
            error: function (error) {
                console.log(error);
+               $.LoadingOverlay("hide");
            }
        });
 }
@@ -103,7 +114,16 @@ function CreateRoutineJobGet() {
            contentType: "application/json;charset=utf-8",
            dataType: "html",
            url: "/RoutineJob/Create",
-           success: function (result) {
+            success: function (result) {
+                var tablebutt = "<table class='table' style='font-size: 9px;'>"
+                tablebutt += "<tr>" +
+                    "<td><input type='button' style='background-color:green' value='ذخیره' onclick='CreateRoutineJobPost()'/> | " +
+                    "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                    "</tr>"
+                tablebutt += "</table>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(tablebutt);
+
                $(".BodyModal").html(result);
                $("#MasterModal").modal();
            },
@@ -128,6 +148,54 @@ function EditHolyDay(HolyDayId) {
                console.log(error);
            }
        });
+}
+function EditRoutineJob(RoutineJobId) {
+    $.LoadingOverlay("show");
+        $.ajax(
+           {
+               type: 'POST',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/RoutineJob/EditRoutineJob",
+               data: JSON.stringify({ RoutineJobId: RoutineJobId }),
+               success: function (result) {
+
+                   var table = "<table class='table' style='font-size: 9px;'>"
+                   table += "<tr>" +
+                       "<td>عنوان</td><td><input name='Job' type='text' value='" + result.Job + "'/></td>" +
+                       "</tr><tr>"+
+                         "<td>Rate</td><td><input name='Rate' type='number' value='" + result.Rate + "'/></td>" +
+                         "</tr><tr>"+
+                          "<td>Order</td><td><input name='Order' type='number' value='" + result.Order + "'/></td>" +
+                       "</tr>"
+                   table += "</table>"
+
+                   var tablebutt = "<table class='table' style='font-size: 9px;'>"
+                   tablebutt += "<tr>" +
+                       "<td><input type='button' style='background-color:green' value='ذخیره' onclick='CreateRoutineJobPost(" + RoutineJobId + ")'/> | " +
+                        "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                       "</tr>"
+                   tablebutt += "</table>"
+
+                 //  $(".ListTaskAnjamShode table").remove()
+                   // $(".ListTaskAnjamShode span").remove()  modal-footer
+                   $(".BodyModal").empty();
+                   $(".modal-footer").empty();
+                   $(".BodyModal").append(table);
+                   $(".modal-footer").append(tablebutt);
+                   $("#MasterModal").modal();
+                   $.LoadingOverlay("hide");
+               },
+               error: function (error) {
+                   
+                  // $("html body").remove();
+                   alert(error.responseText)
+                   console.log(error.responseText)
+                   $.LoadingOverlay("hide");
+                  
+               }
+           });
+   
 }
 function UpdateHolyDay() {
  
@@ -197,13 +265,14 @@ function Refresh() {
     ShowPivot();
     RoutineJobCreate();
     RoutineJobListMasterPage();
+    ListTaskAnjamShode();
    // RoutineJobCreate();
 }
+function closeModal() {
+    $(".modal-footer table").remove();
+    $('#MasterModal').modal('toggle');
+}
 //--------------------------Events
-//--Create Get
-$(".ListRoutineJob").on("click", "input[name='CreateRoutineJob']", function () {
-    CreateRoutineJobGet();
-});
 //--Delete
 $(".ListRoutineJob").on("click", ".fa-remove", function () {
     var res = confirm("آیا حذف انجام شود؟");
@@ -294,18 +363,5 @@ $("#RoutineJobCreate").on("click", ".btn-danger", function () {
         }
     });
 });
-
-//jQuery('#menu4 #RoutineJobCreate #bd-root-PersianDatePicker').on('input', function () {
-//    alert("1");
-//});
-////...which is nice and clean, but may be extended further to:
-
-//jQuery("#RoutineJobCreate #bd-root-PersianDatePicker").on('input propertychange paste', function() {
-//    alert("2");
-//});
-//$('#RoutineJobCreate').bind('input', function () {
-//    alert();
-//    /* This will be fired every time, when textbox's value changes. */
-//});
 
 

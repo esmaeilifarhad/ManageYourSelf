@@ -49,7 +49,7 @@
                         <td>
                             <span><input style="cursor:pointer" type="checkbox" value="@Model[i].CatId" /></span>
                             <span style="cursor:pointer" CatId="@Model[i].CatId" class="CreateNewTask">@Model[i].Title</span>
-                            <span style="color:darkmagenta" class="EditCat fa fa-apple" CatId="@Model[i].CatId"></span>
+                            <span style="color:darkmagenta" onclick="EditMasterData(@Model[i].CatId)" class="fa fa-apple" CatId="@Model[i].CatId"></span>
                         </td>
                     </tr>
                 }
@@ -64,7 +64,7 @@
                         <td>
                             <span><input style="cursor:pointer" type="checkbox" value="@Model[i].CatId" /></span>
                             <span style="cursor:pointer" CatId="@Model[i].CatId" class="CreateNewTask">@Model[i].Title</span>
-                            <span style="color:darkmagenta" class="EditCat fa fa-apple" CatId="@Model[i].CatId"></span>
+                            <span style="color:darkmagenta" onclick="EditMasterData(@Model[i].CatId)" class="fa fa-apple" CatId="@Model[i].CatId"></span>
                         </td>
                     </tr>
                 }

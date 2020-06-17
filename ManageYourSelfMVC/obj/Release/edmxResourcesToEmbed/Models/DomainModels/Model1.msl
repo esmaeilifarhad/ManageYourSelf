@@ -116,9 +116,27 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CompareToAvg" FunctionName="ManageYourSelfModel.Store.CompareToAvg" />
+    <FunctionImportMapping FunctionImportName="LastPositiveAlMinus" FunctionName="ManageYourSelfModel.Store.LastPositiveAlMinus" />
+    <FunctionImportMapping FunctionImportName="findBookDsc" FunctionName="ManageYourSelfModel.Store.findBookDsc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.findBookDsc_Result">
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="dsc" ColumnName="dsc" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RepeatCount" ColumnName="RepeatCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="Books">
       <EntityTypeMapping TypeName="ManageYourSelfModel.Book">
         <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="RepeatedNumber" ColumnName="RepeatedNumber" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="RepeatCount" ColumnName="RepeatCount" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="dsc" ColumnName="dsc" />
           <ScalarProperty Name="Order" ColumnName="Order" />
@@ -179,9 +197,37 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Namads">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.Namad">
+        <MappingFragment StoreEntitySet="Namad">
+          <ScalarProperty Name="tseId" ColumnName="tseId" />
+          <ScalarProperty Name="NamadSahih" ColumnName="NamadSahih" />
+          <ScalarProperty Name="RahavardId" ColumnName="RahavardId" />
+          <ScalarProperty Name="tseAdrs" ColumnName="tseAdrs" />
+          <ScalarProperty Name="CodeSherkat" ColumnName="CodeSherkat" />
+          <ScalarProperty Name="Namad1" ColumnName="Namad" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NamadDetails">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.NamadDetail">
+        <MappingFragment StoreEntitySet="NamadDetail">
+          <ScalarProperty Name="GheymatPayany" ColumnName="GheymatPayany" />
+          <ScalarProperty Name="DarsadGheymatPayany" ColumnName="DarsadGheymatPayany" />
+          <ScalarProperty Name="TedadMoamelat" ColumnName="TedadMoamelat" />
+          <ScalarProperty Name="Hajm" ColumnName="Hajm" />
+          <ScalarProperty Name="ShamsyDate" ColumnName="ShamsyDate" />
+          <ScalarProperty Name="NamadId" ColumnName="NamadId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="RoutineJobs">
       <EntityTypeMapping TypeName="ManageYourSelfModel.RoutineJob">
         <MappingFragment StoreEntitySet="RoutineJob">
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Job" ColumnName="Job" />
           <ScalarProperty Name="RoozDaily" ColumnName="RoozDaily" />
@@ -226,6 +272,16 @@
           <ScalarProperty Name="SHdate" ColumnName="SHdate" />
           <ScalarProperty Name="PersonelId" ColumnName="PersonelId" />
           <ScalarProperty Name="StoreHoghoghId" ColumnName="StoreHoghoghId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskImages">
+      <EntityTypeMapping TypeName="ManageYourSelfModel.TaskImage">
+        <MappingFragment StoreEntitySet="TaskImage">
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TaskImageId" ColumnName="TaskImageId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -494,6 +550,7 @@
     <EntitySetMapping Name="Settings">
       <EntityTypeMapping TypeName="ManageYourSelfModel.Setting">
         <MappingFragment StoreEntitySet="Setting">
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Value" ColumnName="Value" />
@@ -539,6 +596,7 @@
     <EntitySetMapping Name="Tasks">
       <EntityTypeMapping TypeName="ManageYourSelfModel.Task">
         <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="CatId" ColumnName="CatId" />
           <ScalarProperty Name="Olaviat" ColumnName="Olaviat" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />

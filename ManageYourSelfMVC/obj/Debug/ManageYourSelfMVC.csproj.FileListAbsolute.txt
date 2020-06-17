@@ -5212,7 +5212,6 @@ C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC98
 C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\bin\System.Net.Http.Formatting.xml
 C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\bin\System.Web.Http.xml
 C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\bin\System.Web.Http.WebHost.xml
-C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.csprojResolveAssemblyReference.cache
 C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.dll
 C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.pdb
 C:\Users\Esmaeili\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\bin\roslyn\csc.exe
@@ -5267,3 +5266,6 @@ C:\Users\Esmaeili\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\Ma
 C:\Users\Esmaeili\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.csprojResolveAssemblyReference.cache
 C:\Users\Esmaeili\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.dll
 C:\Users\Esmaeili\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.pdb
+C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.csproj.CopyComplete
+C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.csproj.CoreCompileInputs.cache
+C:\Users\esmaeili.farhad\Dropbox\MyProject\ManageYourSelfMVC\ManageYourSelfMVC980524\ManageYourSelfMVC\obj\Debug\ManageYourSelfMVC.csprojAssemblyReference.cache

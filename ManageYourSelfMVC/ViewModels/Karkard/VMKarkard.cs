@@ -10,7 +10,12 @@ namespace ManageYourSelfMVC.ViewModels.Karkard
     {
         public string TimePer { get; set; }
         public string JobName { get; set; }
+        public string Date { get; set; }
         public int JobId { get; set; }
+        public int Row { get; set; }
+        public int weekday { get; set; }
+        
+
         public DataTable ShowKarkadPivotNotParamHeader { get; set; }
     }
 }

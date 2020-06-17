@@ -1,11 +1,24 @@
 ﻿@model  List<ManageYourSelfMVC.ViewModels.TaskVM>
+<style>
+    .btn-group-vertical button {
+    white-space: pre-wrap;
+    font-size:8px
+    }
+</style>
+@*<div class="btn-group-vertical" style="left:10px;z-index:10;top: 210px;width: 41px;position: fixed;font-family:'B Nazanin';">
+    <button type="button" class="btn btn-primary" onclick="transferDate('00')">شنبه هفته بعد</button>
+    <button type="button" class="btn btn-info" onclick="transferDate('1')">انتقال به فردا</button>
+    <button type="button" class="btn btn-danger" onclick="transferDate('0101')">یکم ماه بعد</button>
+    <button type="button" class="btn btn-success" onclick="transferDate('30')">ماه بعد</button>
+</div>*@
 
-<table class='table table-responsive table-striped TblTask' 
+<table class='table-bordered table-responsive table-striped TblTask' 
        style='direction: rtl; text-align: center;font-size:11px'>
     <thead>
         <tr>
             <th><input type="button" value="انجام" onclick="changeToAnjamShode()"/></th>
             <th>اولویت</th>
+            <th>Rate</th>
             <th>بالا</th>
             <th>پایین</th>
             <th>نوع</th>
@@ -27,6 +40,7 @@
             <tr>
                 <td><input class="AnjamShode" Data_id="@item.TaskId" type="checkbox"/></td>
                 <td class="Olaviat">@item.Olaviat</td>
+                <td >@item.Rate</td>
                 <td><input type="button" style='background-color:green' class='fa fa-sort-up pointer ' onclick="TaskUpLevel(@item.TaskId)" Data_id="@item.TaskId"/></td>
                 <td><input type="button" style='background-color:red' class='fa fa-sort-down pointer  ' onclick="TaskDownLevel(@item.TaskId)"  Data_id="@item.TaskId"/></td>
                 <td>@item.Title</td>
@@ -40,7 +54,7 @@
  
                 <td><span class='fa fa-calendar pointer calendarTask' Data_id="@item.TaskId"></span></td>
                 <td><span class='fa fa-edit pointer'     Data_id="@item.TaskId"></span></td>
-                <td><span class='fa fa-remove pointer'   Data_id="@item.TaskId "></span></td>     
+                <td><span class='fa fa-remove pointer'   Data_id="@item.TaskId" onclick="DeleteTask({Title:@item.Name,Id:@item.TaskId})"></span></td>     
             </tr>
         }
     </tbody>

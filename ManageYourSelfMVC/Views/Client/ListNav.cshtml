@@ -15,12 +15,28 @@
         top: 0;
     }
 </style>
+<style>
+    .btn-group-vertical button {
+        white-space: pre-wrap;
+        font-size: 8px;
+    }
 
+    #SumKarkard p {
+        margin: 0px;
+        padding: 0px
+    }
 
-<div class="row" style="font-family:BNazanin"></div>
-<br />
-<p id="ShowMessage">@TempData["Message"]</p>
-<br />
+    table#SumKarkard {
+        font-size: 12px;
+        text-align: center;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+@*<div class="row" style="font-family:BNazanin"></div>
+    <br />
+    <p id="ShowMessage">@TempData["Message"]</p>
+    <br />*@
 <!--style="font-family:'B Morvarid';-->
 <!-- Nav tabs -->
 <div style="font-size: 12px;">
@@ -49,7 +65,7 @@
             <a class="nav-link" data-toggle="tab" href="#Category">Category</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#TimeForJob">زمان فعالیت</a>
+            <a class="nav-link" data-toggle="tab" href="#TimeForJob" onclick="ListKarkardNew()">زمان فعالیت</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#menu4">لیست وظایف</a>
@@ -137,7 +153,7 @@
             <div class="col-sm-3 Category"></div>
             <div class="col-sm-6 Job"></div>
             <div class="col-sm-3 PercentJob">
-                <input type="button" name="CreatePercentJob" value="جدید" class="btn btn-info" />
+                <input type="button" name="CreatePercentJob" onclick="CreatePercentJobGet()" value="جدید" class="btn btn-info" />
                 <span></span>
                 <input type="button" name="ListPercentJob" value="بروز آوری" class="btn btn-info" />
                 <br>
@@ -174,9 +190,61 @@
         @*<div class="col-sm-9">*@
         <div class="row">
             <div class="col-sm-12 ShowKarkadPivot"></div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 PercentJob table-responsive"></div>
         </div>
         <div class="row">
-            <div class="col-sm-12 PercentJob"></div>
+            <div class="col-sm-12 sss table-responsive"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4  table-responsive">
+                <div class="row">
+                    <div class="col-sm-12 ReportsKarkard  table-responsive">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 SumKarkardUntilToToday  table-responsive">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 TopBestKarkard  table-responsive">
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="col-sm-4  table-responsive">
+                <div class="row">
+                    <div class="col-sm-12 SumKarkardPerJob  table-responsive">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 ListDaysOfWeek  table-responsive">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 ListToCurrentTime  table-responsive">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-4  table-responsive">
+                <div class="row">
+                    <div class="col-sm-12 SumMounthKarkardPerJob  table-responsive">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 ListSumDaysOfWeek  table-responsive">
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div class="row">
             <div class="col-sm-12 DivKarkard"></div>
@@ -186,19 +254,57 @@
     </div>
     <!--لیست وظایف-->
     <div id="menu4" class="tab-pane fade">
-        <table>
-            <tr>
-                <td><input type="radio" name="task" value="anjamnashode"> انجام نشده<br></td>
-                <td><input type="radio" name="task" value="anjamshode"> انجام شده<br></td>
-                <td><input type="radio" name="task" value="gheirefal"> غیر فعال</td>
-            </tr>
-        </table>
-        <br />
-        <input type="button" name="new" value="جدید" class="btn btn-danger CreateNewTask" /> |
-        <input type="button" value="انتقال کار به امروز" class="btn btn-info" ng-controller="TaskControllerr" ng-click="TaskToday()" />
-        <br />
-        <br />
         <div class="row">
+            <div class="col-md-6">
+                <table>
+                    <tr>
+                        <td><input type="radio" name="task" value="anjamnashode"> انجام نشده<br></td>
+                        <td><input type="radio" name="task" value="anjamshode"> انجام شده<br></td>
+                        <td><input type="radio" name="task" value="gheirefal"> غیر فعال</td>
+                    </tr>
+                </table>
+                <br />
+                <input type="button" name="new" value="جدید" class="btn btn-danger CreateNewTask" /> |
+                <input type="button" value="انتقال کار به امروز" class="btn btn-info" ng-controller="TaskControllerr" ng-click="TaskToday()" />
+                <br />
+                <br />
+
+                <img id="ItemPreview" src="">
+                <input id="fileInput" type="file" multiple>
+                <input type="button" onclick="uploadImage()" value="Upload file" />
+
+                <input type="button" onclick="Documentt(9)" value="show image" />
+
+
+                <div class="row">
+                    <div class="col-sm-12 ListTaskFutureChk" type="ListTask"></div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <table>
+                        <tr>
+                            <td>تاریخ</td>
+                            <td><input type="text" name="DateEnd" class="PersianDatePickerEditTaskS" autocomplete="off" onchange="ListTaskAnjamShode()" /></td>
+
+                            <td><input placeholder="search" type="text" autocomplete="off" onchange="SearchTask(this)" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="ListTaskAnjamShode"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="btn-group-vertical" style="left:10px;top: 210px;width: 41px;position: fixed;font-family:'B Nazanin';z-index:10;">
+                <button type="button" class="btn btn-primary" onclick="transferDate('00')">شنبه هفته بعد</button>
+                <button type="button" class="btn btn-info" onclick="transferDate('1')">انتقال به فردا</button>
+                <button type="button" class="btn btn-danger" onclick="transferDate('0101')">یکم ماه بعد</button>
+                <button type="button" class="btn btn-success" onclick="transferDate('30')">ماه بعد</button>
+            </div>
+            <div class="ShowSumRate" style="left:10px;bottom:0;width: 41px;position: fixed;font-family:'B Nazanin';z-index:5">
+
+            </div>
             <div class="col-sm-12 ListTask"></div>
         </div>
     </div>
@@ -412,10 +518,30 @@
 <script type="text/javascript">
     //**********************************
     $(document).ready(function () {
+        /*
+        const m = moment();
 
-        //const m = moment();
 
-        //console.log(moment().format('jYYYY/jM/jD'));//Today
+
+        setInterval(function () {
+            var table = "<table class='table' style='font-size: 9px;'>" +
+             "<tr><th>امروز</th><th>روز</th><th>ساعت</th><th>هفته</th><th>روز</th></tr>" +
+                "<tr>" +
+                "<td>" + foramtDate(todayShamsy8char()) + "</td>" +
+                  "<td>" + calDayOfWeek(todayShamsy8char()) + "</td>" +
+                    "<td>" + foramtTime(CurrentTime()) + "</td>" +
+                      "<td>" + m.jWeek() + "</td>" +
+                       "<td>" + m.jDayOfYear() + "</td>" +
+
+                "</tr></table>"
+            $("#DateDetail").empty()
+            $("#DateDetail").append(table)
+        }, 1000);
+        */
+
+        // console.log(moment().format('jYYYY/jM/jD'));//Today
+        // console.log(foramtDate(todayShamsy8char()))
+        // console.log(calDayOfWeek(todayShamsy8char()))
         ////console.log(m.locale('fa'));
         //console.log(m.from('2018-04-04', 'en', 'YYYY-MM-DD'));// it would be in jalali system
         //console.log(m.format('YY-MM-DD'));
@@ -428,8 +554,8 @@
         //console.log(m.jMonth()) // 4
         //console.log(m.jDate()) // 26
 
-        //console.log("چندمین روز سال" + m.jDayOfYear()) // 150
-        //console.log("چندمین هفته سال" + m.jWeek()) // 22
+        // console.log("چندمین روز سال" + m.jDayOfYear()) // 150
+        // console.log("چندمین هفته سال" + m.jWeek()) // 22
         //console.log(m.jWeekYear()) // 1360
 
         ///*اضافه کردن سال ماه روز به تاریخ جاری*/
@@ -456,7 +582,7 @@
 
         //moment('1391/12/30', 'jYYYY/jMM/jDD').isValid() // true (leap year)
         //moment('1392/12/30', 'jYYYY/jMM/jDD').isValid() // false (common year)
-        //moment.jIsLeapYear(1391) // true
+        //moment.jIsLeapYear(1391) // true   آیا سال کبیسه است
         //moment.jIsLeapYear(1392) // false
 
         //moment.jDaysInMonth(1395, 11) // 30
@@ -479,7 +605,7 @@
 
 
         //-------------execute when load client listnav
-      
+
         //-------------execute List When Click on Tab
         $("ul li a[href='#menu2']").on("click", function () {
             ListHazineMohem();
@@ -494,6 +620,10 @@
         });
         $("ul li a[href='#menu4']").on("click", function () {
             ListTask("anjamnashode");
+
+            ListTaskFutureChk();
+            ListTaskAnjamShode();
+            $(".PersianDatePickerEditTaskS").val(foramtDate(todayShamsy8char()))
         });
         $("ul li a[href='#Category']").on("click", function () {
             ListCategory();
@@ -537,23 +667,23 @@
         }
         function UploadDataCard() {
             $.ajax(
-               {
-                   type: 'POST',
-                   contentType: "application/json;charset=utf-8",
-                   dataType: "json",
-                   url: "/PersonnelGsystem/SelectInsertDatacard",
+                {
+                    type: 'POST',
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    url: "/PersonnelGsystem/SelectInsertDatacard",
 
-                   data: JSON.stringify({ StartDateCard: "970601" }),
-                   success: function (result) {
-                       if (result == true) {
-                           ListKarkard();
-                           RefreshExecute();
-                       }
-                       else {
-                           alert("خطا در ثبت");
-                       }
-                   }
-               });
+                    data: JSON.stringify({ StartDateCard: "970601" }),
+                    success: function (result) {
+                        if (result == true) {
+                            ListKarkard();
+                            RefreshExecute();
+                        }
+                        else {
+                            alert("خطا در ثبت");
+                        }
+                    }
+                });
         }
     });
 </script>
@@ -566,18 +696,33 @@
     $(document).ready(function () {
         kamaDatepicker('PersianDatePicker', {
             nextButtonIcon: "timeir_next.png"
-               , previousButtonIcon: "timeir_prev.png"
-               , forceFarsiDigits: true
-               , markToday: true
-               , markHolidays: true
-               , highlightSelectedDay: true
-               , sync: true
+            , previousButtonIcon: "timeir_prev.png"
+            , forceFarsiDigits: true
+            , markToday: true
+            , markHolidays: true
+            , highlightSelectedDay: true
+            , sync: true
         });
+
+        kamaDatepicker('PersianDatePickerEditTaskS', {
+            nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+            , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+            , forceFarsiDigits: true
+            , markToday: true
+            , markHolidays: true
+            , highlightSelectedDay: true
+            , sync: true
+        });
+
     });
 </script>
 <!--Search-->
 <script>
     $(document).ready(function () {
+        var SName = getCookie("SName")
+        $("#Moshakhasat").empty()
+        $("#Moshakhasat").append("<span>خوش آمدید : </span><span>" + SName + "</span> | <span onclick='removeCookie()' style='color:red;cursor:pointer'> خروج </span>")
+
         //----------function ListDictionary()
         $("#SeachInTblDicList").on("keyup", function () {
             var value = $(this).val().toLowerCase();
@@ -594,4 +739,3 @@
         });
     });
 </script>
-

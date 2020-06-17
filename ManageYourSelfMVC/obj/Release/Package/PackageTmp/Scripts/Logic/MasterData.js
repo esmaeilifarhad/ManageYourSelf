@@ -2,9 +2,10 @@
 $("ul li a[href='#MasterData']").on("click", function () {
     ListMasterData();
 });
+
 //***************************************************MasterData
 function ListMasterData() {
-
+    $.LoadingOverlay("show");
     var urll = "/MasterData/List";
     $.ajax({
         type: "Get",
@@ -13,9 +14,11 @@ function ListMasterData() {
         url: urll,
         success: function (data) {
             $(".ListMasterData").html(data);
+            $.LoadingOverlay("hide");
         },
         error: function (error) {
             console.log(error);
+            $.LoadingOverlay("hide");
         }
     })
 }
@@ -40,6 +43,7 @@ function CreateMasterDataPost() {
            success: function (result) {
                if (result == true) {
                    RefreshMasterData();
+                   GetData()
                }
                else {
                    alert("خطا در ثبت");
@@ -69,6 +73,7 @@ function CreateMasterDataGet() {
        );
 }
 function EditMasterData(Id) {
+    $.LoadingOverlay("show");
     $.ajax(
        {
            type: 'get',
@@ -76,16 +81,31 @@ function EditMasterData(Id) {
            dataType: "html",
            url: "/MasterData/Edit?Id=" + Id,
            success: function (result) {
+               
+               var tablebutt = "<table class='table' style='font-size: 9px;'>"
+               tablebutt += "<tr>" +
+                   "<td><input type='button' style='background-color:green' value='ذخیره' onclick='UpdateMasterDataPost(" + Id + ")'/> | " +
+                   "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                   "</tr>"
+               tablebutt += "</table>"
+               $(".modal-footer").empty();
+               $(".modal-footer").append(tablebutt);
+
+
                $(".BodyModal").html(result);
                $("#MasterModal").modal();
+               $.LoadingOverlay("hide");
            },
            error: function (error) {
                console.log(error);
+               $.LoadingOverlay("hide");
            }
        });
 }
-function UpdateMasterDataPost() {
-    var CatId = $("#MasterModal div[name='UpdateMaterData'] table").attr("CatId");
+function UpdateMasterDataPost(CatId) {
+    debugger
+    $.LoadingOverlay("show");
+    //var CatId = $("#MasterModal div[name='UpdateMaterData'] table").attr("CatId");
     var Title = $("#MasterModal input[name='Title']").val();
     var Code = $("#MasterModal input[name='Code']").val();
     var Dsc = $("#MasterModal input[name='Dsc']").val();
@@ -104,13 +124,16 @@ function UpdateMasterDataPost() {
               CatId:CatId
            }),
            success: function (result) {
+               $("#MasterModal").modal("toggle");
                RefreshMasterData();
                ListTaskGeneral();
                ListTaslLevelHigh();
                ListTaskFutureChk();
 
-               ListSportChk();
-              // RefreshChk();
+              // ListSportChk();
+               GetData()
+               // RefreshChk();
+               $.LoadingOverlay("hide");
            }
        });
 }
@@ -150,13 +173,5 @@ $(".ListMasterData").on("click", ".RemoveMaster", function () {
         DeleteMasterData(Id);
     }
 });
-//--Edit
-//$(".ListMasterData").on("click", ".fa-edit", function () {
-//    var Id = $(this).attr("catid");
-//    EditMasterData(Id);
-//});
-$("body").on("click", ".EditCat", function () {
-    var Id = $(this).attr("catid");
-    EditMasterData(Id);
-})
+
 

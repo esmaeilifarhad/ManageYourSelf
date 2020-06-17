@@ -20,5 +20,6 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public string Value { get; set; }
         public string Description { get; set; }
         public Nullable<int> UserId { get; set; }
+        public byte[] RowVersion { get; set; }
     }
 }

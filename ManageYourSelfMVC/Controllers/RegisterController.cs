@@ -43,7 +43,7 @@ namespace ManageYourSelfMVC.Controllers
             else
                 return Json("خطا در ثبت", JsonRequestBehavior.AllowGet);
         }
-        [Security.CustomAthorize(Roles = "SuperAdmin")]
+        
         public ActionResult ListRegister()
         {
             var lstUsers = DB.Users.ToList();

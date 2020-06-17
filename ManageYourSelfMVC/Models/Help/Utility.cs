@@ -17,6 +17,13 @@ namespace ManageYourSelfMVC.Models.Help
         //{
         //    return $"{request.Scheme}://{request.Host}{request.Path}{request.QueryString}";
         //}
+        public static byte[] ConvertToByte(HttpPostedFileBase file)
+        {
+            byte[] imageByte = null;
+            BinaryReader rdr = new BinaryReader(file.InputStream);
+            imageByte = rdr.ReadBytes((int)file.ContentLength);
+            return imageByte;
+        }
         public static byte[] Serialize(Object obj)
         {
             BinaryFormatter bf = new BinaryFormatter();

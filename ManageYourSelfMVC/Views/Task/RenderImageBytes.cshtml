@@ -1,0 +1,5 @@
+﻿@model ManageYourSelfMVC.ViewModels.TaskImage.TaskImageVM
+    <div>
+       <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String(Model.imgByte)))" alt="fery" />
+   <img src="@Url.Action("GetImage","Task",new {id=1 })" alt="Image" height="100" width="50" />
+     </div>

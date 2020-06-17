@@ -13,21 +13,22 @@ namespace ManageYourSelfMVC.Controllers
         Models.Repository.GenericRepository<Models.DomainModels.KarKard> Rep = new Models.Repository.GenericRepository<Models.DomainModels.KarKard>();
         Models.Repository.KarkardsRepository _Repository = new Models.Repository.KarkardsRepository();
         Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
+        Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
         string toDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat();
         string firstDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().Substring(0, 6) + "01";
-        int UserId = 0;
+        int UserId = Models.staticClass.staticClass.UserId;//0;
         public KarkardController()
         {
             //if(System.Web.HttpContext.Current.Session["UserId"])
-            object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
-            if (UserId1 == null || UserId1 == "")
-            {
-                UserId = 0;
-            }
-            else
-            {
-                UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
-            }
+            //object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
+            //if (UserId1 == null || UserId1 == "")
+            //{
+            //    UserId = 0;
+            //}
+            //else
+            //{
+            //    UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
+            //}
         }
         public ActionResult List()
         {
@@ -130,18 +131,12 @@ namespace ManageYourSelfMVC.Controllers
         public ActionResult ShowKarkadPivot()
         {
             #region ShowKarkadPivot
-
-
             ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
-
-
-            Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
             DataTable DT = U.Select("exec [ShowKarkadPivotDateToDate] " + firstDate + "," + toDate + "," + UserId.ToString());
             DataTable reversedDt = new DataTable();
             reversedDt = DT.Clone();
             for (var row = DT.Rows.Count - 1; row >= 0; row--)
                 reversedDt.ImportRow(DT.Rows[row]);
-
             V.ShowKarkadPivotNotParamHeader = reversedDt;
             #endregion
             return PartialView(V);
@@ -160,6 +155,232 @@ namespace ManageYourSelfMVC.Controllers
                 return PartialView(V);
             }
         }
-      
+        public ActionResult ListKarkard(int dateParam) {
+            var res = (from k in DB.KarKards
+                       join j in DB.Jobs
+                       on k.JobId equals j.JobId
+                       select new { DayDate= k.DayDate, Name= j.Name,k.SpendTimeMinute,j.JobId }).AsEnumerable().
+                       Where(y=>int.Parse(y.DayDate)>= dateParam).
+                       Select(x =>new {x.Name,x.DayDate,x.SpendTimeMinute,x.JobId }).OrderByDescending(q=>q.DayDate).ThenBy(q=>q.JobId);
+                     
+                  return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SumMounthKarkard() {
+           List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
+            DataTable DT =U.Select(@"
+select 
+left(DayDate,6) date,
+sum(SpendTimeMinute)/3600 clock
+from KarKard
+where JobId in (select JobId from Job where CategoryId in (select CategoryId from Category where UserId=" + UserId + @"))
+group by left(DayDate,6)
+order by left(DayDate,6) desc
+ ");
+
+            foreach (DataRow item in DT.Rows)
+            {
+                ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
+     
+                V.Date = item["date"].ToString();
+                V.TimePer = item["clock"].ToString();
+                lstV.Add(V);
+            }
+            return Json(lstV, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SumKarkardPerJob()
+        {
+            List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
+            DataTable DT = U.Select(@"
+select 
+(select top 1 Name from Job where JobId=KarKard.JobId) as JobName,
+JobId,
+cast(sum(SpendTimeMinute)/(3600*1.0) as decimal(10,1))   SpendTimeMinute 
+ from KarKard
+ where JobId in (select JobId from Job where CategoryId in (select CategoryId from Category where UserId=" + UserId + @"))
+group by JobId
+having sum(SpendTimeMinute)/3600>0
+order by cast(sum(SpendTimeMinute)/(3600*1.0) as decimal(10,1)) desc
+ ");
+
+            foreach (DataRow item in DT.Rows)
+            {
+                ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
+
+                V.JobName = item["JobName"].ToString();
+                V.JobId =int.Parse(item["JobId"].ToString());
+                V.TimePer = item["SpendTimeMinute"].ToString();
+
+                lstV.Add(V);
+            }
+            return Json(lstV, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SumMounthKarkardPerJob()
+        {
+            List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
+            DataTable DT = U.Select(@"
+select 
+left(DayDate,6) Date,
+(select top 1 Name from Job where JobId=KarKard.JobId) as JobName,
+ JobId,
+ cast(sum(SpendTimeMinute)/(3600*1.0) as decimal(10,1))   SpendTimeMinute 
+ from KarKard
+  where JobId in (select JobId from Job where CategoryId in (select CategoryId from Category where UserId=" + UserId + @"))
+group by JobId,left(DayDate,6)
+--having sum(SpendTimeMinute)/3600>0
+order by JobName, Date desc,cast(sum(SpendTimeMinute)/(3600*1.0) as decimal(10,1)) desc
+ ");
+
+            foreach (DataRow item in DT.Rows)
+            {
+                ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
+
+                V.JobName = item["JobName"].ToString();
+                V.JobId = int.Parse(item["JobId"].ToString());
+                V.TimePer = item["SpendTimeMinute"].ToString();
+                V.Date= item["Date"].ToString();
+                lstV.Add(V);
+            }
+            return Json(lstV, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SumKarkardUntilToToday(string today)
+        {
+            List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
+            DataTable DT = U.Select(@"
+select left(DayDate,6) Date,sum(SpendTimeMinute)/3600  SpendTimeMinute
+from karkard
+where JobId in (select JobId from Job where CategoryId in (select CategoryId from Category where UserId=" + UserId + @"))
+and right(DayDate,2)<=" + today + @"
+group by left(DayDate,6)
+
+ ");
+
+            foreach (DataRow item in DT.Rows)
+            {
+                ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
+
+                V.Date = item["Date"].ToString();
+                V.TimePer = item["SpendTimeMinute"].ToString();
+
+                lstV.Add(V);
+            }
+            return Json(lstV, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult TopBestKarkard(string today, int Offset, int FETCH)
+        {
+            List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
+
+            DataTable DT = U.Select(@"exec TopBestKarkard "+ UserId + ","+ today + ","+ Offset + ","+ FETCH + "");
+            /*DataTable DT = U.Select(@"
+select top 30 
+ROW_NUMBER() OVER(ORDER BY  sum(SpendTimeMinute) desc) AS Row,
+DayDate,
+sum(SpendTimeMinute)/60  SpendTimeMinute
+from karkard
+where JobId in (select JobId from Job where CategoryId in (select CategoryId from Category where UserId=" + UserId + @"))
+group by DayDate
+	order by sum(SpendTimeMinute) asc
+	OFFSET     0 ROWS       -- skip 10 rows
+FETCH NEXT 20 ROWS ONLY; -- take 10 rows
+ ");
+*/
+            foreach (DataRow item in DT.Rows)
+            {
+                ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
+
+                V.Date = item["DayDate"].ToString();
+                V.TimePer = item["SpendTimeMinute"].ToString();
+                V.Row=int.Parse(item["Row"].ToString());
+                lstV.Add(V);
+            }
+            return Json(lstV, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ListDaysOfWeek(string weekday) {
+            List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
+            DataTable DT = U.Select(@"
+select 
+ ROW_NUMBER() OVER(ORDER BY cast(sum(SpendTimeMinute)/(3600*1.0) as decimal(10,2)) desc) AS Row,
+--DATEPART ( weekday , MiladyDate ) weekday,
+sum(SpendTimeMinute)/60  SpendTimeMinute,
+DayDate
+from karkard
+where DATEPART ( weekday , MiladyDate )="+ weekday + @"
+and JobId in (select JobId from Job where CategoryId in (select CategoryId from Category where UserId=" + UserId + @"))
+group by DATEPART ( weekday , MiladyDate ),DayDate
+ ");
+
+            foreach (DataRow item in DT.Rows)
+            {
+                ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
+
+                V.Date = item["DayDate"].ToString();
+                V.TimePer = item["SpendTimeMinute"].ToString();
+                V.Row = int.Parse(item["Row"].ToString());
+                lstV.Add(V);
+            }
+            return Json(lstV, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ListSumDaysOfWeek()
+        {
+            List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
+            DataTable DT = U.Select(@"
+select 
+ ROW_NUMBER() OVER(ORDER BY cast(sum(SpendTimeMinute)/(3600*1.0) as decimal(10,2)) desc) AS Row,
+DATEPART ( weekday , MiladyDate ) weekday,
+sum(SpendTimeMinute)/60  SpendTimeMinute
+from karkard
+where JobId in (select JobId from Job where CategoryId in (select CategoryId from Category where UserId=" + UserId + @"))
+group by DATEPART ( weekday , MiladyDate )
+ ");
+
+            foreach (DataRow item in DT.Rows)
+            {
+                ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
+
+                V.weekday =int.Parse(item["weekday"].ToString());
+                V.TimePer = item["SpendTimeMinute"].ToString();
+                V.Row = int.Parse(item["Row"].ToString());
+                lstV.Add(V);
+            }
+            return Json(lstV, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ListToCurrentTime()
+        {
+            List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
+            DataTable DT = U.Select(@"
+select 
+ROW_NUMBER() OVER(ORDER BY sum(SpendTimeMinute) desc) AS Row,
+DayDate,
+sum(SpendTimeMinute) SpendTimeMinute
+from KarKard
+where 
+JobId in (select JobId from Job where CategoryId in (select CategoryId from Category where UserId=" + UserId + @"))
+and
+cast(MiladyDate as Time)<=(
+select Convert(Time, GetDate())
+)
+group by DayDate
+having
+sum(SpendTimeMinute)>=(	select sum(SpendTimeMinute) 
+	from KarKard 
+	where cast(MiladyDate as date)=(select cast(CURRENT_TIMESTAMP as date))
+	)
+
+ ");
+
+            foreach (DataRow item in DT.Rows)
+            {
+                ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
+
+                V.DayDate = item["DayDate"].ToString();
+                V.TimePer = item["SpendTimeMinute"].ToString();
+                V.Row = int.Parse(item["Row"].ToString());
+                lstV.Add(V);
+            }
+            return Json(lstV, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

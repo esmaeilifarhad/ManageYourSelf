@@ -15,19 +15,19 @@ namespace ManageYourSelfMVC.Controllers
         string firstDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().Substring(0, 4) + "01";
         //int UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
 
-        int UserId = 0;
+        int UserId = Models.staticClass.staticClass.UserId;//0;
         public PercentJobController()
         {
             //if(System.Web.HttpContext.Current.Session["UserId"])
-            object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
-            if (UserId1 == null || UserId1 == "")
-            {
-                UserId = 0;
-            }
-            else
-            {
-                UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
-            }
+            //object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
+            //if (UserId1 == null || UserId1 == "")
+            //{
+            //    UserId = 0;
+            //}
+            //else
+            //{
+            //    UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
+            //}
         }
 
         // GET: PercentJob
@@ -118,6 +118,10 @@ select CategoryId from Category where UserId=" + UserId.ToString() + ")) and  le
         {
            
             return PartialView();
+        }
+        public ActionResult ListPercentJob(string Date) {
+          var res=  DB.PercentJobs.Where(q => q.Date == Date).Select(q=>new {q.Date,q.JobId,q.PercentId,q.PercentValue,q.Job.Name }).ToList();
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>سهام</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <style>
+        @@font-face {
+            font-family: 'BNazanin';
+            src: url('/fonts/BNazanin.eot?#') format('eot'), url('/fonts/BNazanin.woff') format('woff'), url('/fonts/BNazanin.ttf') format('truetype');
+            /*font-family: 'Morvarid';
+            src: url('/fonts/Far_Morvarid.eot?#') format('eot'), url('/fonts/Far_Morvarid.woff') format('woff'), url('/fonts/Far_Morvarid.ttf') format('truetype');*/
+        }
+
+        @@font-face {
+            /*font-family: 'BNazanin';
+            src: url('/fonts/BNazanin.eot?#') format('eot'), url('/fonts/BNazanin.woff') format('woff'), url('/fonts/BNazanin.ttf') format('truetype');*/
+            font-family: 'Morvarid';
+            src: url('/fonts/Far_Morvarid.eot?#') format('eot'), url('/fonts/Far_Morvarid.woff') format('woff'), url('/fonts/Far_Morvarid.ttf') format('truetype');
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        table th {
+            text-align: center;
+        }
+
+        
+    </style>
+   
+    <!-- Favicons -->
+    <link href="~/MyTemplate/MasterTemplate/img/favicon.png" rel="icon">
+    <link href="~/MyTemplate/MasterTemplate/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Bootstrap CSS File -->
+    <link href="~/MyTemplate/MasterTemplate/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="~/MyTemplate/MasterTemplate/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/MyTemplate/MasterTemplate/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/MyTemplate/MasterTemplate/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="~/MyTemplate/MasterTemplate/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/MyTemplate/MasterTemplate/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href="~/MyTemplate/MasterTemplate/css/style.css" rel="stylesheet">
+    <!--Persian DatePickers-->
+    <link href="~/Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/style/kamadatepicker.css" rel="stylesheet" />
+    @*<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />*@
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <!-- =======================================================
+     
+    ======================================================= -->
+
+
+    <script>
+        $(document).ready(function () {
+            const m = moment();
+            setInterval(function () {
+                var table = "<table class='table-bordered' style='font-size: 9px;'>" +
+                 "<tr><th>امروز</th><th>روز</th><th>ساعت</th><th>هفته</th><th>روز</th><th>سال</th><th>روز</th></tr>" +
+                    "<tr>" +
+                    "<td>" + foramtDate(todayShamsy8char()) + "</td>" +
+                      "<td>" + calDayOfWeek(todayShamsy8char()) + "</td>" +
+                        "<td>" + foramtTime(CurrentTime()) + "</td>" +
+                          "<td>" + m.jWeek() + "</td>" +
+                           "<td>" + m.jDayOfYear() + "</td>" +
+                             "<td>" + baghyMandeYaer(todayShamsy8char()) + "</td>" +
+                              "<td>" + baghyMandeDay() + "</td>" +
+                    "</tr></table>"
+                $("#DateDetail").empty()
+                $("#DateDetail").append(table)
+            }, 1000);
+            //-------------execute when load client listnav
+            /*
+            setInterval(function () {
+                ListTaskFutureChk();
+                var dt = new Date();
+                var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+                console.log("exe ListTaskFutureChk in MasterPage: " + time);
+            }, 400000);
+            */
+
+            //kamaDatepicker('PersianDatePicker', {
+            //    nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+            //               , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+            //               , forceFarsiDigits: true
+            //               , markToday: true
+            //               , markHolidays: true
+            //               , highlightSelectedDay: true
+            //               , sync: true
+            //});
+        });
+
+    </script>
+
+</head>
+<body>
+
+    <header id="header">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div style="font-family:'B Nazanin';direction:ltr">
+            <a href="https://tse.ir/archive.html#/cash" target="_blank"> <button type="button" class="btn btn-primary">مرجع آرشیو</button></a>
+            <a href="https://tse.ir/MarketWatch.html" target="_blank"> <button type="button" class="btn btn-info">آمروز</button></a>
+            <a href="https://ddn.csdiran.com/login" target="_blank"> <button type="button" class="btn btn-primary">سهام های من</button></a>
+            <a href="https://ddn.csdiran.com/login" target="_blank"> <button type="button" class="btn btn-info">سهام های من</button></a>
+            <a href="https://rahavard365.com/stock" target="_blank"> <button type="button" class="btn btn-primary">رهاورد365</button></a>
+
+        </div>
+                        @*<div id="LinkSaham" class="btn-group-toggle" style="left:0px;bottom: 10px;width: 30px;position: fixed;font-family:'B Nazanin';direction:ltr">
+            <a href="https://tse.ir/archive.html#/cash" target="_blank"> <button type="button" class="btn btn-primary">مرجع آرشیو</button></a>
+            <a href="https://tse.ir/MarketWatch.html" target="_blank"> <button type="button" class="btn btn-info">آمروز</button></a>
+            <a href="https://ddn.csdiran.com/login" target="_blank"> <button type="button" class="btn btn-primary">سهام های من</button></a>
+            <a href="https://ddn.csdiran.com/login" target="_blank"> <button type="button" class="btn btn-info">سهام های من</button></a>
+            <a href="https://rahavard365.com/stock" target="_blank"> <button type="button" class="btn btn-primary">رهاورد365</button></a>
+
+        </div>*@
+                    </div>
+                   
+                    <div class="col-md-4" style="font-family: BNazanin;">
+                        <div id="Moshakhasat"></div>
+                    </div>
+                </div>
+            </div>
+                      
+        </section>
+    </header>
+    <main class="container body-content">
+    
+            @RenderBody()
+
+            <hr />
+            <section>
+                <!--  Modal Master -->
+                <div class="modal fade" id="MasterModal" style="font-family: BNazanin;font-size: 12px;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header" style="direction:ltr">
+                                <br>
+                                <h4 class="modal-title HeaderModal"></h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body BodyModal">
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                                <span> </span>
+                                <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ثبت</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-info">
+
+                </div>
+                <div class="col-md-4 footer-info">
+
+                </div>
+                <div class="col-md-4 footer-info">
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+
+
+    <script src="~/MyTemplate/MasterTemplate/lib/jquery/jquery.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/jquery/jquery-migrate.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/easing/easing.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/superfish/hoverIntent.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/superfish/superfish.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/wow/wow.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/counterup/counterup.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="~/MyTemplate/MasterTemplate/lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+
+
+    <!--************************************Logic Scripts*********************************************-->
+
+    <script src="~/Scripts/Logic/Setting.js"></script>
+
+
+    <script src="~/Scripts/Logic/Utility.js"></script>
+    <script src="~/Scripts/Logic/Services.js"></script>
+    <script src="~/Scripts/Logic/Saham.js"></script>
+    <!--************************************jalaly date*********************************************-->
+    <script src="~/Scripts/JalalyDate/moment.min.js"></script>
+    <script src="~/Scripts/JalalyDate/moment-jalaali.js"></script>
+    <script src="~/Scripts/Logic/sweetalert2@9.js"></script>
+    <script src="~/Scripts/Utility/loadingoverlay.min.js"></script>
+</body>
+</html>

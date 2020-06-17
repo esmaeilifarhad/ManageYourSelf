@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewBag.Title = "MainSaham";
+    Layout = "~/Views/Shared/SahamMasterPage.cshtml";
+}
+<style>
+    table tr td {
+        padding: 2px;
+        text-align: center;
+    }
+
+    .modal-content {
+        margin-top: 160px;
+    }
+
+    #LinkSaham button {
+        font-size: 10px;
+        margin-top: 1px;
+        border-radius: 0px 10px 10px 0px;
+    }
+
+    .tablinks li {
+        border-top-right-radius: 20px 90px;
+        border-top-left-radius: 20px 90px;
+        /*background-color: pink;*/
+        margin: 5px -10px 0;
+        padding: 0 30px 0 25px;
+        height: 35px;
+        background: #e22609;
+        box-shadow: 0 10px 20px rgba(0,0,0,.5);
+        max-width: 100%;
+    }
+
+        .tablinks li:hover {
+            border-top-right-radius: 20px 90px;
+            border-top-left-radius: 20px 90px;
+            /*background-color: pink;*/
+            margin: 5px -10px 0;
+            padding: 0 30px 0 25px;
+            height: 35px;
+            background: green;
+            box-shadow: 0 10px 20px rgba(0,0,0,.5);
+            max-width: 100%;
+        }
+    .myActive {
+     background: blue!important;
+     z-index:10!important;
+    }
+
+        .tablinks li a {
+            color: white;
+        }
+
+            .tablinks li a:hover {
+                background-color:  rgba(0, 0, 0, 0.0) !important;
+                border-color:none;
+            }
+
+    .nav > li > a:focus, .nav > li > a:hover {
+        text-decoration: none !important;
+        background-color: rgba(0, 0, 0, 0.0) !important;
+         border-color:none !important;
+    }
+    .nav-tabs>li>a:hover {
+    border-color:rgba(0, 0, 0, 0) !important;
+}
+</style>
+<script>
+    $(document).ready(function () {
+        $(".tablinks ul li").click(function () {
+            
+            $(".tablinks ul").each(function () {
+                $(this).find("li").removeClass("myActive")
+              
+            })
+            $(this).addClass("myActive")
+        })
+    })
+   
+</script>
+<link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
+@*<div id="LinkSaham" class="btn-group-toggle" style="left:0px;bottom: 10px;width: 30px;position: fixed;font-family:'B Nazanin';direction:ltr">
+        <a href="https://tse.ir/archive.html#/cash" target="_blank"> <button type="button" class="btn btn-primary">مرجع آرشیو</button></a>
+        <a href="https://tse.ir/MarketWatch.html" target="_blank"> <button type="button" class="btn btn-info">آمروز</button></a>
+        <a href="https://ddn.csdiran.com/login" target="_blank"> <button type="button" class="btn btn-primary">سهام های من</button></a>
+        <a href="https://ddn.csdiran.com/login" target="_blank"> <button type="button" class="btn btn-info">سهام های من</button></a>
+        <a href="https://rahavard365.com/stock" target="_blank"> <button type="button" class="btn btn-primary">رهاورد365</button></a>
+
+    </div>*@
+<div class="tablinks" onload="CheckLocalStorage()">
+    <ul class="nav nav-tabs" style="font-family:'Morvarid';">
+        <li class="myActive"><a data-toggle="tab" href="#home" onclick="GetCompareToAvg('Rate')">حجم آخرین معاملات نسبت به میانگین</a></li>
+        <li><a data-toggle="tab" href="#menu1" onclick="GetLastPositiveAlMinus(1)">منفی های روز آخر مثبت</a></li>
+        <li><a data-toggle="tab" href="#menu2" onclick="getDateFromLocalStorage()">بروز رسانی</a></li>
+        <li><a href="/Client/ListNav">کاربری</a></li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <div class="row" style="font-family:BNazanin">
+            <div>
+                <input type="radio" name="LastPositiveAlMinus" onclick="GetMoreMinusFive()" /><label>بیشتر از منفی پنج بوده اند</label>
+
+            </div>
+            <div class="col-sm-12 CompareToAvg"></div>
+            @*<div class="col-sm-5 NamadDetail"></div>*@
+        </div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+        <div class="row" style="font-family:BNazanin">
+            <div>
+                <input type="radio" name="LastPositiveAlMinus" onclick="GetLastPositiveAlMinus(1)" /><label>یک روز آخر مثبت</label>
+                <input type="radio" name="LastPositiveAlMinus" onclick="GetLastPositiveAlMinus(2)" />   <label>دو روز آخر مثبت</label>
+                <input type="radio" name="LastPositiveAlMinus" onclick="GetLastPositiveAlMinus(3)" />  <label>سه روز آخر مثبت</label>
+            </div>
+            <div class="col-sm-12 LastPositiveAlMinus"></div>
+        </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+        <div class="row" style="font-family:BNazanin">
+            <div  class="col-sm-6">
+                <br>
+                <p>لطفا فایل جیسون مربوطه را در اینجا قرار دهید</p>
+             
+                <p><a target="_blank" href="https://tse.ir/MarketWatch.html">سایت tse</a></p>
+                <p><input type="button" onclick="InsertTseJsonToDB()" value="ذخیره"/><input type="number" onchange="DateForUpToDateSahamChange(this)" onkeyup="DateForUpToDateSahamChange(this)" name="DateForUpToDateSaham" value="ذخیره" /></p>
+                @*<a href="https://tse.ir/MarketWatch.html">سایت tse</a>*@
+                <textarea name="tseJson" rows="15" cols="60" style="direction: ltr;">var lst=[]
+$("#main-table table tbody tr").each(function(){
+var obj = {}
+if($(this).attr("id")!=null)
+{
+var id=$(this).attr("id")
+var title=$(this).find("td:eq(1)").text()
+var name=$(this).find("td:eq(2)").text()
+var hajm=$(this).find("td:eq(3)").text()
+var arzesh=$(this).find("td:eq(4)").text()
+var tedadMoamele=$(this).find("td:eq(5)").text()
+var max=$(this).find("td:eq(6)").text()
+var min=$(this).find("td:eq(7)").text()
+var meghdar=$(this).find("td:eq(11)").text()
+var taghir=$(this).find("td:eq(12)").text()
+var darsad=$(this).find("td:eq(13)").text()
+var bestarze=$(this).find("td:eq(19)").text()
+var besttaghaza=$(this).find("td:eq(20)").text()
+obj.id=id
+obj.title=title
+obj.name=name
+obj.hajm=hajm
+obj.arzesh=arzesh
+obj.tedadMoamele=tedadMoamele
+obj.max=max
+obj.min=min
+obj.meghdar=meghdar
+obj.taghir=taghir
+obj.darsad=darsad
+obj.bestarze=bestarze
+obj.besttaghaza=besttaghaza
+lst.push(obj)
+}
+})
+var myJsonString = JSON.stringify(lst);
+console.log(myJsonString)</textarea>
+            </div>
+            <div class="col-sm-6"></div>
+        </div>
+    </div>
+</div>
+
+
+

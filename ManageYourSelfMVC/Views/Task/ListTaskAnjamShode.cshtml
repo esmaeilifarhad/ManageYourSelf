@@ -1,0 +1,24 @@
+﻿@model ManageYourSelfMVC.ViewModels.Task.Task
+    <title></title>
+   @{double sum = 0;}
+
+
+<table class="table" style="font-size: 9px;">
+   
+    @foreach (var item in Model.lstListTaskFuture)
+    {
+      
+            sum += item.Rate;
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Name</td>
+                <td>@item.Rate</td>
+            </tr>
+        
+    }
+    <tr><td colspan="2">مجموع : </td><td>@sum</td></tr>
+</table>
+
+
+
+  

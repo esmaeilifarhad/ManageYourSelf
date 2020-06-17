@@ -12,6 +12,7 @@ namespace ManageYourSelfMVC.ViewModels.Task
         public string DateStart { get; set; }
         public string DateEnd { get; set; }
         public int Olaviat { get; set; }
+        public int Rate { get; set; }
         public int CatId { get; set; }
         public string Title { get; set; }
         public string Label { get; set; }
@@ -20,5 +21,7 @@ namespace ManageYourSelfMVC.ViewModels.Task
         public int HafteChandom { get; set; }
         public int MaheChandom { get; set; }
         public int SaleChandom { get; set; }
+       
+
     }
 }

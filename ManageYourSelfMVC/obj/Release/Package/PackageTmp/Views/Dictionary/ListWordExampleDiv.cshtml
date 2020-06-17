@@ -62,15 +62,10 @@
                         |
                         <a target="_blank" href="https://translate.google.com/?hl=en&tab=wT#view=home&op=translate&sl=en&tl=fa&text=@item.eng">google</a>
                     </td>
-                    <td class="dateCol_@i">
-                        <span style="padding-right:10px"></span>
+                    <td class="dateCol">
+                        <span style="padding-right:10px">@item.date_refresh</span>
 
-                        <script>
-                            $(".dateCol_"+@i).append("<span style='color:red'>"+ showDays(todayShamsy(), foramtDate(@item.date_refresh))+ "</span> "+
-                                "<span>"+foramtDate(@item.date_refresh)+"</span> "+
-                                 "<span style='color:red'>"+calDayOfWeek(@item.date_refresh)+"</span>"
-                )
-                        </script>
+                       
 
                     </td>
                     <td>@item.SuccessCount</td>

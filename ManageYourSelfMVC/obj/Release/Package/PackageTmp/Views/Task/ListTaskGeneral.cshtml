@@ -1,17 +1,19 @@
 ﻿@model ManageYourSelfMVC.ViewModels.VM_Public
-   <style>
-       span {
-       margin:2px;
-       }
-       .calendarTask,.ChangeTodayTask,.Ta,.CreateNewTask {
-            cursor: pointer;
-       }
-         .ListTaskGeneral  p span {
+<style>
+    span {
+        margin: 2px;
+    }
+
+    .calendarTask, .ChangeTodayTask, .Ta, .CreateNewTask {
+        cursor: pointer;
+    }
+
+    .ListTaskGeneral p span {
         white-space: pre-line;
     }
-   </style>
-  <input type="button" name="new" value="جدید" class="btn btn-danger CreateNewTask" />  |  
-  <input type="button" name="new" value="حذف زمان بندی ها" class="btn btn-light DeleteTiming" /> 
+</style>
+<input type="button" name="new" value="جدید" class="btn btn-danger CreateNewTask" />  |
+<input type="button" name="new" value="حذف زمان بندی ها" class="btn btn-light DeleteTiming" />
 <br />
 <br />
 @{int i = 1;}
@@ -22,23 +24,39 @@
         {
             <div class="col-sm-4 ">
 
-                <div style="border: 1px solid black;padding: 12px;">      
+                <div style="border: 1px solid black;padding: 12px;">
 
                     <p style="color:red" CatId="@item.CatId">
-                    <span style="cursor:pointer" class="EditCat" CatId="@item.CatId">@item.Title</span>
-                    <span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item.CatId"></span>
-                    <span  style="padding-right:5px" CatId="@item.CatId" class="fa fa-bookmark CreateNewTask"></span>
+                        <span style="cursor:pointer" class="EditCat" CatId="@item.CatId">@item.Title</span>
+                        <span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item.CatId"></span>
+                        <span style="padding-right:5px" CatId="@item.CatId" class="fa fa-bookmark CreateNewTask"></span>
+
+
                     </p>
                     <hr />
                     @foreach (var T in Model.ListTask)
                     {
                         if (item.CatId == T.CatId)
                         {
-                            <p><span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span><span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span><span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span><span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span></p><hr />
+                <p>
+                    <span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span>
+                    <span class="fa fa-edit Ta" data_id=@T.TaskId></span>
+                    <span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span>
+                    <span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span>
+                    <span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span>
+                   
+                    <input type="button" value="حذف" class="btn  pointer" onclick="DeleteTask({Id:@T.TaskId})"/>
+                </p><hr />
                         }
                         if (item.CatId == 0 && T.CatId.ToString() == string.Empty)
                         {
-                            <p><span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span><span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span><span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span><span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span></p><hr />
+                <p>
+                    <span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span>
+                    <span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span>
+                    <span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span>
+                    <span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span>
+                    <input type="button" value="حذف" class="btn  pointer" onclick="DeleteTask({Id:@T.TaskId})" />
+                </p><hr />
                         }
 
                     }
@@ -56,19 +74,35 @@
                 <div style="border: 1px solid black;padding: 12px;">
 
                     <p style="color:red" CatId="@item.CatId">
-                    <span style="cursor:pointer" class="EditCat" CatId="@item.CatId">@item.Title</span><span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item.CatId"></span>
-                     <span style="padding-right:5px" CatId="@item.CatId" class="fa fa-bookmark CreateNewTask"></span>
-                     </p>
+                        <span style="cursor:pointer" class="EditCat" CatId="@item.CatId">@item.Title</span>
+                        <span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item.CatId"></span>
+                        <span style="padding-right:5px" CatId="@item.CatId" class="fa fa-bookmark CreateNewTask"></span>
+                       
+                    </p>
                     <hr />
                     @foreach (var T in Model.ListTask)
                     {
                         if (item.CatId == T.CatId)
                         {
-                            <p><span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span><span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span><span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span><span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span></p><hr />
+                <p>
+                    <span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span><span class="fa fa-edit Ta" data_id=@T.TaskId></span>
+                    <span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span>
+                    <span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span>
+                    <span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span>
+                    <input type="button" value="حذف" class="btn  pointer" onclick="DeleteTask({Id:@T.TaskId})" />
+
+
+                </p><hr />
                         }
                         if (item.CatId == 0 && T.CatId.ToString() == string.Empty)
                         {
-                            <p><span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span><span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span><span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span><span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span></p><hr />
+                <p>
+                    <span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span>
+                    <span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span>
+                    <span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span>
+                    <span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span>
+                    <input type="button" value="حذف" class="btn  pointer" onclick="DeleteTask({Id:@T.TaskId})" />
+                </p><hr />
                         }
                     }
 
@@ -85,19 +119,32 @@
                 <div style="border: 1px solid black;padding: 12px;">
 
                     <p style="color:red" CatId="@item.CatId">
-                    <span style="cursor:pointer" class="EditCat" CatId="@item.CatId">@item.Title</span><span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item.CatId"></span>
+                        <span style="cursor:pointer" class="EditCat" CatId="@item.CatId">@item.Title</span><span style="padding-right:5px" class="fa fa-train ChangeTodayTask" CatId="@item.CatId"></span>
                         <span style="padding-right:5px" CatId="@item.CatId" class="fa fa-bookmark CreateNewTask"></span>
                     </p><hr />
                     @foreach (var T in Model.ListTask)
                     {
                         if (item.CatId == T.CatId)
                         {
-                            <p><span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span><span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span><span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span><span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span></p><hr />
+                <p>
+                    <span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span>
+                    <span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span>
+                    <span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span>
+                    <span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span>
+                    <input type="button" value="حذف" class="btn  pointer" onclick="DeleteTask({Id:@T.TaskId})" />
+                </p><hr />
                         }
                         if (item.CatId == 0 && T.CatId.ToString() == string.Empty)
                         {
-                            <p><span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span><span class="fa fa-edit Ta" data_id=@T.TaskId></span><span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span><span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span><span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span></p><hr />
+                <p>
+                    <span>@T.Olaviat - </span><span>@T.Name</span><span>(@T.Label)</span><span class="fa fa-edit Ta" data_id=@T.TaskId></span>
+                    <span class='fa fa-calendar calendarTask' Data_id="@T.TaskId"></span>
+                    <span style='color:red' class='fa fa-sort-down pointer TaskDownLevel' Data_id="@T.TaskId"></span>
+                    <span style='color:green' class='fa fa-sort-up pointer TaskUpLevel' Data_id="@T.TaskId"></span>
+                    <input type="button" value="حذف" class="btn  pointer" onclick="DeleteTask({Id:@T.TaskId})" />
+                </p><hr />
                         }
+
                     }
 
                 </div>

@@ -5,12 +5,12 @@
     }
 </style>
 <br>
-<input type="button" name="CreatePercentJob" value="جدید" class="btn btn-info" />
+<input type="button" onclick="CreatePercentJobGet()"  value="جدید" class="btn btn-info" />
 <span></span>
 <input type="button" name="ListPercentJob" value="بروز آوری" class="btn btn-info" />
 <br>
 <p><span>برای هر درصد چند ثانیه مطالعه لازم است : </span><span id="PercentOneMinute">@Model.Select(q=>q.PercentOneMinute).First()</span></p>
-<p><span>برای هر درصد چند دقیقه مطالعه لازم است : </span><span>@(Model.Select(q => q.PercentOneMinute).First()/60)</span></p>
+<p><span>برای هر درصد چند دقیقه مطالعه لازم است : </span><span>@Math.Round((Model.Select(q => q.PercentOneMinute).First()/60),1)</span></p>
 <br>
 <div class="table-responsive">
     <table class="table" style="direction:rtl; text-align: center;font-size:11px">
@@ -32,7 +32,7 @@
                 SumK = SumK + item.PercentJobInMounth;
                 // var DD = item.DayDate;
                 <tr>
-                    <td style="cursor:pointer" PercentId="@item.PercentId" onclick="EditPercentJobGet(this)">@item.JobName</td>
+                    <td style="cursor:pointer" PercentId="@item.PercentId" onclick="EditPercentJobGet(@item.PercentId)">@item.JobName</td>
                     <td>@item.Date</td>
                     <td>@item.PercentValue</td>
                     <td>@item.PercentJobInMounth</td>

@@ -22,6 +22,10 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.back_MasterData'
     <Property Name="Order" Type="nchar" MaxLength="10" />
     <Property Name="dsc" Type="nvarchar(max)" />
     <Property Name="UserId" Type="int" />
+    <Property Name="RepeatCount" Type="int" />
+    <Property Name="date" Type="nvarchar" MaxLength="250" />
+    <Property Name="time" Type="nvarchar" MaxLength="250" />
+    <Property Name="RepeatedNumber" Type="int" />
   </EntityType>
   <EntityType Name="Cat">
     <Key>
@@ -82,6 +86,30 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
     <Property Name="MazayaName" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="IsMazaya" Type="int" />
   </EntityType>
+  <EntityType Name="Namad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Namad" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CodeSherkat" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="tseAdrs" Type="nvarchar" MaxLength="500" />
+    <Property Name="RahavardId" Type="int" />
+    <Property Name="NamadSahih" Type="nvarchar" MaxLength="250" />
+    <Property Name="tseId" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="NamadDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NamadId" Type="int" />
+    <Property Name="ShamsyDate" Type="nvarchar" MaxLength="16" />
+    <Property Name="Hajm" Type="bigint" />
+    <Property Name="TedadMoamelat" Type="bigint" />
+    <Property Name="DarsadGheymatPayany" Type="float" />
+    <Property Name="GheymatPayany" Type="bigint" />
+  </EntityType>
   <EntityType Name="RoutineJob">
     <Key>
       <PropertyRef Name="RoutineJobId" />
@@ -90,6 +118,8 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
     <Property Name="RoozDaily" Type="nvarchar" MaxLength="250" />
     <Property Name="Job" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="UserId" Type="int" />
+    <Property Name="Rate" Type="int" />
+    <Property Name="Order" Type="int" />
   </EntityType>
   <EntityType Name="RoutineJobHa">
     <Key>
@@ -126,6 +156,15 @@ warning 6002: The table/view '5069_ManageYourSelf.5069_Esmaeili.example_tbl_back
     <Property Name="SHdate" Type="int" Nullable="false" />
     <Property Name="MazayaId" Type="int" Nullable="false" />
     <Property Name="MazRyialMah" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskImage">
+    <Key>
+      <PropertyRef Name="TaskImageId" />
+    </Key>
+    <Property Name="TaskImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="img" Type="image" />
+    <Property Name="TaskId" Type="int" />
   </EntityType>
   <EntityType Name="Timing">
     <Key>
@@ -396,6 +435,7 @@ warning 6002: The table/view '5069_ManageYourSelf.dbo.dic_tbl_LOG' does not have
     <Property Name="Value" Type="nvarchar" MaxLength="250" />
     <Property Name="Description" Type="nvarchar" MaxLength="250" />
     <Property Name="UserId" Type="int" />
+    <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="SliderPhoto">
     <Key>
@@ -441,6 +481,7 @@ warning 6002: The table/view '5069_ManageYourSelf.dbo.dic_tbl_LOG' does not have
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Olaviat" Type="int" />
     <Property Name="CatId" Type="int" />
+    <Property Name="Rate" Type="int" />
   </EntityType>
   <EntityType Name="TypeHazineh">
     <Key>
@@ -644,6 +685,20 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_NamadDetail_Namad">
+    <End Role="Namad" Type="Self.Namad" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="NamadDetail" Type="Self.NamadDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Namad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NamadDetail">
+        <PropertyRef Name="NamadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PercentJob_Job">
     <End Role="Job" Type="Self.Job" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -762,8 +817,22 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TaskImage_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+    <End Role="TaskImage" Type="Self.TaskImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="TaskImage">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Timing_ManageTime">
-    <End Role="ManageTime" Type="Self.ManageTime" Multiplicity="1" />
+    <End Role="ManageTime" Type="Self.ManageTime" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Timing" Type="Self.Timing" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ManageTime">
@@ -775,7 +844,9 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Timing_Task">
-    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Timing" Type="Self.Timing" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Task">
@@ -826,7 +897,18 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="CompareToAvg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
+    <Parameter Name="SortBy" Type="varchar" Mode="In" />
+    <Parameter Name="today" Type="nvarchar" Mode="In" />
+    <Parameter Name="yesterday" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="CreateTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili" />
+  <Function Name="findBookDsc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
+    <Parameter Name="UserId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="LastPositiveAlMinus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
+    <Parameter Name="TedadRooz" Type="int" Mode="In" />
+  </Function>
   <Function Name="ListGroupHazine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
     <Parameter Name="DaramadOrKharj" Type="int" Mode="In" />
@@ -875,6 +957,10 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
   <Function Name="DarsadKarkard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Sdate" Type="varchar" Mode="In" />
     <Parameter Name="Edate" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FindRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+    <Parameter Name="NamadId" Type="int" Mode="In" />
+    <Parameter Name="ShamsyDate" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="fn_3DigitSeperate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
     <Parameter Name="Amount" Type="money" Mode="In" />
@@ -979,11 +1065,14 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
     <EntitySet Name="LogTBL" EntityType="Self.LogTBL" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="ManageTime" EntityType="Self.ManageTime" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="Mazaya" EntityType="Self.Mazaya" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="Namad" EntityType="Self.Namad" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="NamadDetail" EntityType="Self.NamadDetail" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="RoutineJob" EntityType="Self.RoutineJob" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="RoutineJobHa" EntityType="Self.RoutineJobHa" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="Seyed" EntityType="Self.Seyed" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="Sport" EntityType="Self.Sport" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="StoreHoghogh" EntityType="Self.StoreHoghogh" Schema="5069_Esmaeili" store:Type="Tables" />
+    <EntitySet Name="TaskImage" EntityType="Self.TaskImage" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="Timing" EntityType="Self.Timing" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="TitleTbl" EntityType="Self.TitleTbl" Schema="5069_Esmaeili" store:Type="Tables" />
     <EntitySet Name="BaseDaramadData" EntityType="Self.BaseDaramadData" Schema="dbo" store:Type="Tables" />
@@ -1099,6 +1188,10 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
       <End Role="Users" EntitySet="Users" />
       <End Role="KharjType" EntitySet="KharjType" />
     </AssociationSet>
+    <AssociationSet Name="FK_NamadDetail_Namad" Association="Self.FK_NamadDetail_Namad">
+      <End Role="Namad" EntitySet="Namad" />
+      <End Role="NamadDetail" EntitySet="NamadDetail" />
+    </AssociationSet>
     <AssociationSet Name="FK_PercentJob_Job" Association="Self.FK_PercentJob_Job">
       <End Role="Job" EntitySet="Job" />
       <End Role="PercentJob" EntitySet="PercentJob" />
@@ -1134,6 +1227,10 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
     <AssociationSet Name="FK_Task_Users" Association="Self.FK_Task_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskImage_Task" Association="Self.FK_TaskImage_Task">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="TaskImage" EntitySet="TaskImage" />
     </AssociationSet>
     <AssociationSet Name="FK_Timing_ManageTime" Association="Self.FK_Timing_ManageTime">
       <End Role="ManageTime" EntitySet="ManageTime" />

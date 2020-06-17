@@ -14,7 +14,7 @@ namespace ManageYourSelfMVC.Controllers
         string Connection = Models.Connection.ConnectionString._ConnectionStringPersonnelGsystem;
         Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
         Models.MyData.MyDataTransfer T = new Models.MyData.MyDataTransfer();
-        int UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
+        int UserId = Models.staticClass.staticClass.UserId;//(int)System.Web.HttpContext.Current.Session["UserId"];
         public ActionResult Index()
         {
             return View();

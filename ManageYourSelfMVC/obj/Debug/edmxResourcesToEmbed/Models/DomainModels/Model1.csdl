@@ -107,17 +107,35 @@
     <FunctionImport Name="PersianToEnglish" ReturnType="Collection(ManageYourSelfModel.PersianToEnglish_Result)">
       <Parameter Name="UserId" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="CompareToAvg">
+      <Parameter Name="SortBy" Mode="In" Type="String" />
+      <Parameter Name="today" Mode="In" Type="String" />
+      <Parameter Name="yesterday" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ProgressNamad">
+      <Parameter Name="Sdate" Mode="In" Type="String" />
+      <Parameter Name="Edate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="LastPositiveAlMinus">
+      <Parameter Name="TedadRooz" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="findBookDsc" ReturnType="Collection(ManageYourSelfModel.findBookDsc_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
     <EntitySet Name="Books" EntityType="ManageYourSelfModel.Book" />
     <EntitySet Name="Cats" EntityType="ManageYourSelfModel.Cat" />
     <EntitySet Name="ContentTbls" EntityType="ManageYourSelfModel.ContentTbl" />
     <EntitySet Name="LogTBLs" EntityType="ManageYourSelfModel.LogTBL" />
     <EntitySet Name="ManageTimes" EntityType="ManageYourSelfModel.ManageTime" />
     <EntitySet Name="Mazayas" EntityType="ManageYourSelfModel.Mazaya" />
+    <EntitySet Name="Namads" EntityType="ManageYourSelfModel.Namad" />
+    <EntitySet Name="NamadDetails" EntityType="ManageYourSelfModel.NamadDetail" />
     <EntitySet Name="RoutineJobs" EntityType="ManageYourSelfModel.RoutineJob" />
     <EntitySet Name="RoutineJobHas" EntityType="ManageYourSelfModel.RoutineJobHa" />
     <EntitySet Name="Seyeds" EntityType="ManageYourSelfModel.Seyed" />
     <EntitySet Name="Sports" EntityType="ManageYourSelfModel.Sport" />
     <EntitySet Name="StoreHoghoghs" EntityType="ManageYourSelfModel.StoreHoghogh" />
+    <EntitySet Name="TaskImages" EntityType="ManageYourSelfModel.TaskImage" />
     <EntitySet Name="Timings" EntityType="ManageYourSelfModel.Timing" />
     <EntitySet Name="TitleTbls" EntityType="ManageYourSelfModel.TitleTbl" />
     <EntitySet Name="BaseDaramadDatas" EntityType="ManageYourSelfModel.BaseDaramadData" />
@@ -177,6 +195,10 @@
       <End Role="ManageTime" EntitySet="ManageTimes" />
       <End Role="Timing" EntitySet="Timings" />
     </AssociationSet>
+    <AssociationSet Name="FK_NamadDetail_Namad" Association="ManageYourSelfModel.FK_NamadDetail_Namad">
+      <End Role="Namad" EntitySet="Namads" />
+      <End Role="NamadDetail" EntitySet="NamadDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_RoutineJob_Users" Association="ManageYourSelfModel.FK_RoutineJob_Users">
       <End Role="User" EntitySet="Users" />
       <End Role="RoutineJob" EntitySet="RoutineJobs" />
@@ -184,6 +206,10 @@
     <AssociationSet Name="FK_RoutineJobHa_RoutineJob" Association="ManageYourSelfModel.FK_RoutineJobHa_RoutineJob">
       <End Role="RoutineJob" EntitySet="RoutineJobs" />
       <End Role="RoutineJobHa" EntitySet="RoutineJobHas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskImage_Task" Association="ManageYourSelfModel.FK_TaskImage_Task">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="TaskImage" EntitySet="TaskImages" />
     </AssociationSet>
     <AssociationSet Name="FK_Timing_Task" Association="ManageYourSelfModel.FK_Timing_Task">
       <End Role="Task" EntitySet="Tasks" />
@@ -315,6 +341,14 @@
     <Property Type="Int32" Name="Column1" Nullable="false" />
     <Property Type="Int32" Name="Column2" Nullable="false" />
   </ComplexType>
+  <ComplexType Name="findBookDsc_Result">
+    <Property Type="Int32" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Order" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="dsc" Nullable="true" />
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="Int32" Name="RepeatCount" Nullable="true" />
+  </ComplexType>
   <EntityType Name="Book">
     <Key>
       <PropertyRef Name="BookId" />
@@ -324,6 +358,10 @@
     <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="dsc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserId" Type="Int32" />
+    <Property Name="RepeatCount" Type="Int32" />
+    <Property Name="date" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="time" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="RepeatedNumber" Type="Int32" />
     <NavigationProperty Name="User" Relationship="ManageYourSelfModel.FK_Book_Users" FromRole="Book" ToRole="User" />
     <NavigationProperty Name="TitleTbls" Relationship="ManageYourSelfModel.FK_TitleTbl_Book" FromRole="Book" ToRole="TitleTbl" />
   </EntityType>
@@ -378,6 +416,32 @@
     <Property Name="MazayaName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="IsMazaya" Type="Int32" />
   </EntityType>
+  <EntityType Name="Namad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Namad1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CodeSherkat" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="tseAdrs" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="RahavardId" Type="Int32" />
+    <Property Name="NamadSahih" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="tseId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NamadDetails" Relationship="ManageYourSelfModel.FK_NamadDetail_Namad" FromRole="Namad" ToRole="NamadDetail" />
+  </EntityType>
+  <EntityType Name="NamadDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NamadId" Type="Int32" />
+    <Property Name="ShamsyDate" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Hajm" Type="Int64" />
+    <Property Name="TedadMoamelat" Type="Int64" />
+    <Property Name="DarsadGheymatPayany" Type="Double" />
+    <Property Name="GheymatPayany" Type="Int64" />
+    <NavigationProperty Name="Namad" Relationship="ManageYourSelfModel.FK_NamadDetail_Namad" FromRole="NamadDetail" ToRole="Namad" />
+  </EntityType>
   <EntityType Name="RoutineJob">
     <Key>
       <PropertyRef Name="RoutineJobId" />
@@ -386,6 +450,8 @@
     <Property Name="RoozDaily" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Job" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="UserId" Type="Int32" />
+    <Property Name="Rate" Type="Int32" />
+    <Property Name="Order" Type="Int32" />
     <NavigationProperty Name="User" Relationship="ManageYourSelfModel.FK_RoutineJob_Users" FromRole="RoutineJob" ToRole="User" />
     <NavigationProperty Name="RoutineJobHas" Relationship="ManageYourSelfModel.FK_RoutineJobHa_RoutineJob" FromRole="RoutineJob" ToRole="RoutineJobHa" />
   </EntityType>
@@ -426,6 +492,16 @@
     <Property Name="SHdate" Type="Int32" Nullable="false" />
     <Property Name="MazayaId" Type="Int32" Nullable="false" />
     <Property Name="MazRyialMah" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TaskImage">
+    <Key>
+      <PropertyRef Name="TaskImageId" />
+    </Key>
+    <Property Name="TaskImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="img" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="TaskId" Type="Int32" />
+    <NavigationProperty Name="Task" Relationship="ManageYourSelfModel.FK_TaskImage_Task" FromRole="TaskImage" ToRole="Task" />
   </EntityType>
   <EntityType Name="Timing">
     <Key>
@@ -701,6 +777,7 @@
     <Property Name="Value" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="UserId" Type="Int32" />
+    <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="SliderPhoto">
     <Key>
@@ -746,7 +823,9 @@
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="Olaviat" Type="Int32" />
     <Property Name="CatId" Type="Int32" />
+    <Property Name="Rate" Type="Int32" />
     <NavigationProperty Name="Cat" Relationship="ManageYourSelfModel.FK_Task_Cat" FromRole="Task" ToRole="Cat" />
+    <NavigationProperty Name="TaskImages" Relationship="ManageYourSelfModel.FK_TaskImage_Task" FromRole="Task" ToRole="TaskImage" />
     <NavigationProperty Name="Timings" Relationship="ManageYourSelfModel.FK_Timing_Task" FromRole="Task" ToRole="Timing" />
     <NavigationProperty Name="Task1" Relationship="ManageYourSelfModel.FK_Task_Task" FromRole="Task" ToRole="Task1" />
     <NavigationProperty Name="Task2" Relationship="ManageYourSelfModel.FK_Task_Task" FromRole="Task1" ToRole="Task" />
@@ -892,7 +971,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Timing_ManageTime">
-    <End Type="ManageYourSelfModel.ManageTime" Role="ManageTime" Multiplicity="1" />
+    <End Type="ManageYourSelfModel.ManageTime" Role="ManageTime" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ManageYourSelfModel.Timing" Role="Timing" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ManageTime">
@@ -900,6 +981,20 @@
       </Principal>
       <Dependent Role="Timing">
         <PropertyRef Name="ManageTimeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NamadDetail_Namad">
+    <End Type="ManageYourSelfModel.Namad" Role="Namad" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ManageYourSelfModel.NamadDetail" Role="NamadDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Namad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NamadDetail">
+        <PropertyRef Name="NamadId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -929,8 +1024,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TaskImage_Task">
+    <End Type="ManageYourSelfModel.Task" Role="Task" Multiplicity="0..1" />
+    <End Type="ManageYourSelfModel.TaskImage" Role="TaskImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="TaskImage">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Timing_Task">
-    <End Type="ManageYourSelfModel.Task" Role="Task" Multiplicity="1" />
+    <End Type="ManageYourSelfModel.Task" Role="Task" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ManageYourSelfModel.Timing" Role="Timing" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Task">

@@ -21,12 +21,13 @@
                     @if (item.Check == true)
                     {
                         <span><input type="checkbox" onclick="SaveCheckedRoutineJobHa(@item.RoutineJobId,this)" readonly name="@item.Job" value="@item.RoutineJobId" title="@item.Job" checked /></span>
-                        <span>@item.Job</span>
+                        <span>@item.Rate</span><span> | </span><span onclick="EditRoutineJob(@item.RoutineJobId)" style="cursor:pointer">@item.Job</span>
+  
                     }
                     else
                     {
                         <span><input type="checkbox" onclick="SaveCheckedRoutineJobHa(@item.RoutineJobId,this)" readonly name="@item.Job" value="@item.RoutineJobId" title="@item.Job" /></span>
-                        <span>@item.Job</span>
+                        <span>@item.Rate</span><span> | </span><span onclick="EditRoutineJob(@item.RoutineJobId)" style="cursor:pointer">@item.Job</span>
                     }
                 </td>
             </tr>

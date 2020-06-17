@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,46 +13,95 @@ namespace ManageYourSelfMVC.Models.Filtering
         public Filter()
         {
 
+            //string s = "";
+            //var controllers = Assembly.GetExecutingAssembly().GetExportedTypes().Where(t => typeof(ControllerBase).IsAssignableFrom(t)).Select(t => t);
+            //foreach (Type controller in controllers)
+            //{
+            //    var actions = controller.GetMethods().Where(t => t.Name != "Dispose" && !t.IsSpecialName && t.DeclaringType.IsSubclassOf(typeof(ControllerBase)) && t.IsPublic && !t.IsStatic).ToList();
+            //    foreach (var action in actions)
+            //    {
+            //        var myAttributes = action.GetCustomAttributes(false);
+            //        for (int j = 0; j < myAttributes.Length; j++)
+            //            s += string.Format("ActionName: {0}, Attribute: {1}<br>", action.Name, myAttributes[j]);
+
+
+            //    }
+            //}
+
         }
 
         public override void OnActionExecuting(System.Web.Mvc.ActionExecutingContext filterContext)
         {
-            var url = filterContext.HttpContext.Request.Url;
-            var Segment = HttpContext.Current.Request.Url.AbsolutePath.Split('/');
-            //var MyHost = HttpContext.Current.Request.Url.AbsolutePath.Split('//');
-            var h = HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Length - 1].Split('.')[0].TrimStart('/');
-            string Scheme = string.Empty;
-            string Host = string.Empty;
-            string Path = string.Empty;
-            string QueryStrin = string.Empty;
+            Models.DomainModels.ManageYourSelfEntities DB = new DomainModels.ManageYourSelfEntities();
+            string Username = string.Empty;
+            string Password = string.Empty;
+            var ActionName = filterContext.ActionDescriptor.ActionName;
+            var ControllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
 
-            bool Result = false;
-            //if (filterContext.HttpContext.Session["UserId"] != null)
-            //{
-            //    Models.CheckAccess.UserRoleAccess C = new CheckAccess.UserRoleAccess();
-            //    Result = C.IsRegister(int.Parse(filterContext.HttpContext.Session["UserId"].ToString()));
-            //}
+           
 
-            if (Result == false)
+            var UsernameCookie = filterContext.HttpContext.Request.Cookies["SUsername"];
+            var PasswordCookie = filterContext.HttpContext.Request.Cookies["SPassword"];
+            if (UsernameCookie != null && PasswordCookie != null)
             {
-                //RedirectToAction("IdentificationForm", "Identity");
+                Username = UsernameCookie.Value;
+                Password = PasswordCookie.Value;
 
+                if (Username == "" && Password == "")
+                {
+                    filterContext.Result = new RedirectResult(@"http://pushakshik.ir/Account/Index");
+                    //filterContext.HttpContext.Response.Write("ssss");
+                    //  filterContext.Result = new RedirectResult(@"http://localhost:1812/ShowMessage/message");
+                    return;
+                }
+                var OldUser = DB.Users.SingleOrDefault(q => q.UserName == Username && q.Password == Password);
+                if (OldUser == null && Username != null && Password != null)
+                {
+                   // filterContext.Result = new RedirectResult(@"http://localhost:1812/Account/Index");
+                    filterContext.Result = new RedirectResult(@"http://pushakshik.ir/Account/Index");
+                    //filterContext.Result = new EmptyResult();
+                    /*
+                    Models.DomainModels.User U = new DomainModels.User();
+                    U.UserName = Username;
+                    U.Password = Password;
+                    DB.Users.Add(U);
+                    DB.SaveChanges();
+                    */
+                }
+                if (OldUser != null && Username != null && Password != null)
+                {
+                    //-------------------------create cookie
+                    HttpCookie myCookie = new HttpCookie("SName");
+                    myCookie.Value = OldUser.Name;
+                    myCookie.Expires = DateTime.Now.AddDays(1d);
+                    filterContext.HttpContext.Response.Cookies.Add(myCookie);
+                    //-----------------------------------------------------
+                    Models.staticClass.staticClass.UserId = OldUser.UserId;
+                    if (ActionName == "InsertUpdateJson" && ControllerName == "Saham")
+                    {
+                        //if (OldUser.UserId != 1 || OldUser.UserId != 36)
+                        //{
+                        //    filterContext.Result = new RedirectResult(@"http://localhost:1812/ShowMessage/message");
+                        //}
 
-                filterContext.Result = new RedirectResult(@"http://localhost:1812/Register/Registerfrm");
-                return;
-
+                    }
+                }
             }
             else
             {
-                //var U = new Models.UIDS.IdentityUser();
-                //var lst2 = U.DontAccess(Session["UserName"].ToString());
-                //foreach (var item in lst2)
-                //{
-                //    TempData[item.ControlName] = "none";
-                //}
+                //  filterContext.Result = new EmptyResult();
+                //  filterContext.Result = new RedirectToAction("message", "ShowMessage");
+
+
+                // filterContext.HttpContext.Response.Write("ssss");
+                //filterContext.Result = new RedirectResult(@"http://localhost:1812/ShowMessage/message");
+                //filterContext.Result = new RedirectResult(@"http://localhost:1812/Account/Index");
+                filterContext.Result = new RedirectResult(@"http://pushakshik.ir/Account/Index");
+                
+
+                return;
             }
-
-
+          
         }
         public override void OnActionExecuted(System.Web.Mvc.ActionExecutedContext filterContext)
         {

@@ -33,11 +33,14 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public virtual DbSet<LogTBL> LogTBLs { get; set; }
         public virtual DbSet<ManageTime> ManageTimes { get; set; }
         public virtual DbSet<Mazaya> Mazayas { get; set; }
+        public virtual DbSet<Namad> Namads { get; set; }
+        public virtual DbSet<NamadDetail> NamadDetails { get; set; }
         public virtual DbSet<RoutineJob> RoutineJobs { get; set; }
         public virtual DbSet<RoutineJobHa> RoutineJobHas { get; set; }
         public virtual DbSet<Seyed> Seyeds { get; set; }
         public virtual DbSet<Sport> Sports { get; set; }
         public virtual DbSet<StoreHoghogh> StoreHoghoghs { get; set; }
+        public virtual DbSet<TaskImage> TaskImages { get; set; }
         public virtual DbSet<Timing> Timings { get; set; }
         public virtual DbSet<TitleTbl> TitleTbls { get; set; }
         public virtual DbSet<BaseDaramadData> BaseDaramadDatas { get; set; }
@@ -446,6 +449,54 @@ namespace ManageYourSelfMVC.Models.DomainModels
                 new ObjectParameter("UserId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PersianToEnglish_Result>("PersianToEnglish", userIdParameter);
+        }
+    
+        public virtual int CompareToAvg(string sortBy, string today, string yesterday)
+        {
+            var sortByParameter = sortBy != null ?
+                new ObjectParameter("SortBy", sortBy) :
+                new ObjectParameter("SortBy", typeof(string));
+    
+            var todayParameter = today != null ?
+                new ObjectParameter("today", today) :
+                new ObjectParameter("today", typeof(string));
+    
+            var yesterdayParameter = yesterday != null ?
+                new ObjectParameter("yesterday", yesterday) :
+                new ObjectParameter("yesterday", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompareToAvg", sortByParameter, todayParameter, yesterdayParameter);
+        }
+    
+        public virtual int ProgressNamad(string sdate, string edate)
+        {
+            var sdateParameter = sdate != null ?
+                new ObjectParameter("Sdate", sdate) :
+                new ObjectParameter("Sdate", typeof(string));
+    
+            var edateParameter = edate != null ?
+                new ObjectParameter("Edate", edate) :
+                new ObjectParameter("Edate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProgressNamad", sdateParameter, edateParameter);
+        }
+    
+        public virtual int LastPositiveAlMinus(Nullable<int> tedadRooz)
+        {
+            var tedadRoozParameter = tedadRooz.HasValue ?
+                new ObjectParameter("TedadRooz", tedadRooz) :
+                new ObjectParameter("TedadRooz", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LastPositiveAlMinus", tedadRoozParameter);
+        }
+    
+        public virtual ObjectResult<findBookDsc_Result> findBookDsc(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<findBookDsc_Result>("findBookDsc", userIdParameter);
         }
     }
 }

@@ -15,23 +15,23 @@ namespace ManageYourSelfMVC.Controllers
      
         Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
 
-        int UserId = 0;
+        int UserId = Models.staticClass.staticClass.UserId;// 0;
         public RoutineJobController()
         {
             //if(System.Web.HttpContext.Current.Session["UserId"])
-            object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
-            if (UserId1 == null || UserId1 == "")
-            {
-                UserId = 0;
-            }
-            else
-            {
-                UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
-            }
+            //object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
+            //if (UserId1 == null || UserId1 == "")
+            //{
+            //    UserId = 0;
+            //}
+            //else
+            //{
+            //    UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
+            //}
         }
         public ActionResult List()
         {
-            var res = DB.RoutineJobs.Where(q => q.UserId == UserId).OrderByDescending(q => q.Job).ToList();
+            var res = DB.RoutineJobs.Where(q => q.UserId == UserId).OrderByDescending(q => q.Order).ThenBy(q=>q.Rate).ToList();
             return PartialView(res);
         }
         public JsonResult SaveRoutineJob(List<string> MyData)
@@ -96,12 +96,48 @@ namespace ManageYourSelfMVC.Controllers
         [HttpPost]
         public JsonResult Create(Models.DomainModels.RoutineJob New)
         {
-            bool result = false;
-            New.UserId = UserId;
-            DB.RoutineJobs.Add(New);
-            if (DB.SaveChanges() > 0)
-                result = true;
-            return Json(result, JsonRequestBehavior.AllowGet);
+            //update
+            if (New.RoutineJobId > 0)
+            {
+                var OldRoutineJob = DB.RoutineJobs.SingleOrDefault(q => q.RoutineJobId == New.RoutineJobId);
+                OldRoutineJob.Rate = New.Rate;
+                OldRoutineJob.Order = New.Order;
+                OldRoutineJob.Job = New.Job;
+                DB.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            //insert
+            else
+            {
+                bool result = false;
+                New.UserId = UserId;
+                DB.RoutineJobs.Add(New);
+                if (DB.SaveChanges() > 0)
+                    result = true;
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        public ActionResult EditRoutineJob(int RoutineJobId)
+        {
+            try
+            {
+                var RoutineJobOld = DB.RoutineJobs.SingleOrDefault(q => q.RoutineJobId == RoutineJobId);
+                ViewModels.RoutineJob.RoutineJobVMMaster R = new ViewModels.RoutineJob.RoutineJobVMMaster();
+                R.Rate = RoutineJobOld.Rate;
+                R.RoutineJobId = RoutineJobOld.RoutineJobId;
+                R.RoozDaily = RoutineJobOld.RoozDaily;
+                R.Order = RoutineJobOld.Order;
+                R.Job = RoutineJobOld.Job;
+                return Json(R, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ArgumentException("RoutineJobController/Edit", ex);
+            }
+
+          
         }
         public JsonResult Delete(int RoutineJobId)
         {
@@ -223,7 +259,7 @@ EXECUTE(@sql)
             }
 
             string RoozHafte = U.OneRecord(" select RoozHafte from Taghvim where DayDate=" + MyData);
-            var R = DB.RoutineJobs.Where(q=>q.UserId==UserId).ToList();
+            var R = DB.RoutineJobs.Where(q=>q.UserId==UserId).OrderBy(q=>q.Order).ToList();
             foreach (var item in R)
             {
                 string[] Array = item.RoozDaily.Split(',');
@@ -243,6 +279,8 @@ EXECUTE(@sql)
                         }
 
                         V.RoutineJobId = item.RoutineJobId;
+                        V.Rate = item.Rate;
+                        V.Order = item.Order;
                         V.RoozDailySplit = int.Parse(item2);
                         V.Job = item.Job;
                         V.Currentdate =  MyData.ConvertDateToDateFormat();

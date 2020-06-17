@@ -5,13 +5,15 @@
     }
 </style>
 <br>
-<input type="button" name="CreateRoutineJob" value="جدید" class="btn btn-info" />
+<input type="button" name="CreateRoutineJob" onclick="CreateRoutineJobGet()" value="جدید" class="btn btn-info" />
 <br><br>
 <div class="table-responsive">
     <table class="table" style="direction:rtl; text-align: center;font-size:11px">
         <thead>
             <tr>
                 <th>عنوان</th>
+                <th>Rate</th>
+                <th>Order</th>
                 <th>تکرار</th>
                 <th>ذخیره</th>
                 <th>ویرایش</th>
@@ -23,6 +25,8 @@
             {
                 <tr>
                     <td>@item.Job</td>
+                    <td>@item.Rate</td>
+                    <td>@item.Order</td>
                     <td>
                         @{
                             bool Check = false;
@@ -107,7 +111,7 @@
 
                     </td>
                     <td><span style="color:blue" class='fa fa-save pointer' RoutineJobId="@item.RoutineJobId"></span></td>
-                    <td><span style="color:green" class='fa fa-edit pointer' RoutineJobId="@item.RoutineJobId"></span></td>
+                    <td><span style="color:green" class='fa fa-edit pointer' RoutineJobId="@item.RoutineJobId" onclick="EditRoutineJob(@item.RoutineJobId)"></span></td>
                     <td><span style="color:red" class='fa fa-remove pointer' RoutineJobId="@item.RoutineJobId"></span></td>
                 </tr>
             }

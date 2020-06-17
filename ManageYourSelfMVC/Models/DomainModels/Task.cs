@@ -17,6 +17,7 @@ namespace ManageYourSelfMVC.Models.DomainModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Task()
         {
+            this.TaskImages = new HashSet<TaskImage>();
             this.Timings = new HashSet<Timing>();
         }
     
@@ -30,8 +31,11 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public int UserId { get; set; }
         public Nullable<int> Olaviat { get; set; }
         public Nullable<int> CatId { get; set; }
+        public Nullable<int> Rate { get; set; }
     
         public virtual Cat Cat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskImage> TaskImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Timing> Timings { get; set; }
         public virtual Task Task1 { get; set; }

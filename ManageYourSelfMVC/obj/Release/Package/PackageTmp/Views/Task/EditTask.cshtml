@@ -50,7 +50,12 @@
                     <input type="number" name="Olaviat" value="@Model.Task.Olaviat" autocomplete="off" max="5" min="1">
                 </td>
             </tr>
-
+            <tr>
+                <td>Rate(1-5)</td>
+                <td>
+                    <input type="number" name="Rate" value="@Model.Task.Rate" autocomplete="off" max="5" min="1">
+                </td>
+            </tr>
             @if (Model.Task.IsActive == true)
             {
                 <tr><td>فعال</td><td><input type="checkbox" name="TaskIsActive" value="True" checked></td></tr>

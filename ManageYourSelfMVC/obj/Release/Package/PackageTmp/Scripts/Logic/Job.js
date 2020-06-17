@@ -140,4 +140,8 @@ function RefreshExecute() {
     ListPercentJob();
     ShowKarkadPivot();
     ListKarkard();
+    ListKarkardNew();
+    SumMounthKarkard();
+    SumKarkardPerJob();
+    SumMounthKarkardPerJob();
 }

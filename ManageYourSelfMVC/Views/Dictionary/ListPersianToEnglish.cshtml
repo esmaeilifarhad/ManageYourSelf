@@ -31,7 +31,7 @@
                     <td><button style='color:green' class='btn btn-danger pointer LevelEngUp' data_id="@item.id"></button></td>
                     <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
                     <td class="level">@item.level</td>
-                    <td class="dateCol"><span style="padding-right:10px">@item.date_refresh</span></td>
+                    <td class="dateCol"><span>@item.date_refresh</span></td>
                     <td>@item.SuccessCount</td>
                     <td>@item.UnSuccessCount</td>
                     @if (item.HasExample > 0)
@@ -73,29 +73,3 @@
     </table>
 </div>
 
-<script>
-    $(".table-responsive .dateCol .calDayOfWeek").remove();
-    $(".dateCol").each(function () {
-        var today = moment().format('jYYYY/jM/jD');//Today
-        var diffDays = showDays(today, $(this).text());//diff day : today to date
- 
-        var dayOfWeek = calDayOfWeek($(this).text())//day of week
-        $($(this).prepend("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + diffDays + "</span>"));
-        $($(this).prepend("<span class='calDayOfWeek' style='color:red;padding-right:10px'>" + dayOfWeek + "</span>"));
-      
-    });
-
-    /*$(document).ready(function () {
-        var levelval = $('#DicBaMesalPro table tr:nth-child(2) .level').text();
-        //console.log(levelval);
-        $("#DicBaMesalPro input").each(function () {
-            // console.log($(this).val())
-            if (levelval == $(this).val()) {
-                //console.log("hi")
-                // $(this).attr("checked");
-                this.setAttribute("checked", "checked");
-                this.checked = true;
-            }
-        });
-    });*/
-</script>

@@ -5,9 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using ManageYourSelfMVC.Help;
 using System.Data;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace ManageYourSelfMVC.Controllers
 {
+    [Models.Filtering.Filter]
     public class TaskController : Controller
     {
         // GET: Task
@@ -15,25 +18,26 @@ namespace ManageYourSelfMVC.Controllers
         Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
         Models.MyData.MyDataTransfer T = new Models.MyData.MyDataTransfer();
         Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
-        int UserId = 0;
+        int UserId = Models.staticClass.staticClass.UserId;
         public TaskController()
         {
             //if(System.Web.HttpContext.Current.Session["UserId"])
-            object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
-            if (UserId1 == null || UserId1 == "")
-            {
-                UserId = 0;
-            }
-            else
-            {
-                UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
-            }
+            //object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
+            //if (UserId1 == null || UserId1 == "")
+            //{
+            //    UserId = 0;
+            //}
+            //else
+            //{
+            //    UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
+            //}
         }
         #endregion
-        public ActionResult ListTaskAnjamnashode(string typeTask)
+        public ActionResult ListTaskAnjamnashode(string typeTask,List<string> MyData)
         {
-            List<ViewModels.TaskVM> ListTaskVM = T.ListTask(typeTask, UserId);
-            return PartialView(ListTaskVM);
+
+            List<ViewModels.TaskVM> ListTaskVM = T.ListTask(typeTask, UserId, MyData);
+            return Json(ListTaskVM,JsonRequestBehavior.AllowGet);
             // return Json(ListTaskVM, JsonRequestBehavior.AllowGet);
         }
         public JsonResult CreateTask(Models.DomainModels.Task T)
@@ -46,6 +50,7 @@ namespace ManageYourSelfMVC.Controllers
                     Models.DomainModels.Task NewTask = new Models.DomainModels.Task();
                     NewTask.Name = parts[i];
                     NewTask.Olaviat = T.Olaviat;
+                    NewTask.Rate = T.Rate;
                     NewTask.DarsadPishraft = 0;
                     NewTask.DateStart = Utility.Utility.ConvertDateToSqlFormat(Utility.Utility.shamsi_date());
                     NewTask.DateEnd = Utility.Utility.ConvertDateToSqlFormat(T.DateEnd);
@@ -68,6 +73,7 @@ namespace ManageYourSelfMVC.Controllers
                 T.IsCheck = false;
                 T.UserId = UserId;
                 T.Olaviat = T.Olaviat;
+                T.Rate = T.Rate;
                 T.CatId = T.CatId;
                 DB.Tasks.Add(T);
                 DB.SaveChanges();
@@ -95,13 +101,44 @@ namespace ManageYourSelfMVC.Controllers
             }
             return PartialView(V);
         }
+        [HttpPost]
         public ActionResult EditTask(int TaskId)
         {
-            ViewModels.VM_Public V = new ViewModels.VM_Public();
-            int s = TaskId;
-            V.Task = T.FindTask(TaskId);
-            V.ListCat = DB.Cats.Where(q => q.UserId == UserId && q.Code == 2).OrderBy(q => q.Order).ToList();
-            return PartialView(V);
+            ViewModels.VM_Public T = new ViewModels.VM_Public();
+            Models.DomainModels.Task task = new Models.DomainModels.Task();
+            List<Models.DomainModels.Cat> lstcat = new List<Models.DomainModels.Cat>();
+
+            // ViewModels.Task.Task T = new ViewModels.Task.Task();
+            var oldTask = DB.Tasks.SingleOrDefault(q => q.TaskId == TaskId);
+            task.CatId = oldTask.CatId;
+            task.DarsadPishraft = oldTask.DarsadPishraft;
+            task.DateEnd = oldTask.DateEnd;
+            task.DateStart = oldTask.DateStart;
+            task.IsActive = oldTask.IsActive;
+            task.IsCheck = oldTask.IsCheck;
+            task.Name = oldTask.Name;
+            task.Olaviat = oldTask.Olaviat;
+            task.Rate = oldTask.Rate;
+            task.TaskId = oldTask.TaskId;
+            
+            T.Task = task;
+
+           
+            List<Models.DomainModels.Cat> lst = DB.Cats.Where(q => q.UserId == UserId && q.Code == 2).OrderBy(q => q.Order).ToList();
+            foreach (var item in lst)
+            {
+                Models.DomainModels.Cat C = new Models.DomainModels.Cat();
+                C.CatId = item.CatId;
+                C.Code = item.Code;
+                C.Dsc = item.Dsc;
+                C.Order = item.Order;
+                C.Title = item.Title;
+                lstcat.Add(C);
+            }
+            T.ListCat = lstcat;
+
+
+            return Json(T,JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeTodayTask(int CatId)
         {
@@ -232,6 +269,7 @@ namespace ManageYourSelfMVC.Controllers
                     newTask.DarsadPishraft = (NewTask.DarsadPishraft == null ? OldTask.DarsadPishraft : NewTask.DarsadPishraft);
                     newTask.Name = parts[i];
                     newTask.Olaviat = (NewTask.Olaviat == null ? OldTask.Olaviat : NewTask.Olaviat);
+                    newTask.Rate = (NewTask.Rate == null ? OldTask.Rate : NewTask.Rate);
                     newTask.CatId = (NewTask.CatId == null ? OldTask.CatId : NewTask.CatId);
                     newTask.UserId = UserId;
                     DB.Tasks.Add(newTask);
@@ -252,6 +290,7 @@ namespace ManageYourSelfMVC.Controllers
                 OldTask.DarsadPishraft = (NewTask.DarsadPishraft == null ? OldTask.DarsadPishraft : NewTask.DarsadPishraft);
                 OldTask.Name = (NewTask.Name == null ? OldTask.Name : NewTask.Name);
                 OldTask.Olaviat = (NewTask.Olaviat == null ? OldTask.Olaviat : NewTask.Olaviat);
+                OldTask.Rate = (NewTask.Rate == null ? OldTask.Rate : NewTask.Rate);
                 OldTask.CatId = (NewTask.CatId == null ? OldTask.CatId : NewTask.CatId);
 
                 DB.SaveChanges();
@@ -266,7 +305,31 @@ namespace ManageYourSelfMVC.Controllers
            
 
         }
+        public JsonResult DeleteTask(int Id)
+        {
+            try
+            {
+                var OldTask = DB.Tasks.SingleOrDefault(q => q.TaskId == Id);
+                DB.Tasks.Remove(OldTask);
+                if (DB.SaveChanges() > 0)
+                {
 
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+   
+                throw new ArgumentException("خطا در حذف",ex);
+               // return Json(ex.ToString(), JsonRequestBehavior.AllowGet);
+            }
+         
+          
+        }
         public JsonResult TaskToday()
         {
             string res = "";
@@ -346,6 +409,166 @@ namespace ManageYourSelfMVC.Controllers
                 Error.message = ex.InnerException.Message;
                 Error.result = false;
                 //throw new ArgumentException(ex.InnerException.Message);
+                return Json(Error, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+        [HttpPost]
+        public ActionResult ListTaskAnjamShode(string today) {
+            ViewModels.Task.Task task = new ViewModels.Task.Task();
+            ViewModels.ErrorMessage Error = new ViewModels.ErrorMessage();
+            Error.result = false;
+            Error.message = string.Empty;
+            try
+            {
+                // ViewModels.Task.ListTaskFuture T = new ViewModels.Task.ListTaskFuture();
+                // ViewModels.VM_Public V = new ViewModels.VM_Public();
+                List<ViewModels.Task.ListTaskFuture> lstT = new List<ViewModels.Task.ListTaskFuture>();
+                // DataTable DT = U.Select("exec [PersianToEnglish] " + UserId.ToString());
+                DataTable DT = U.Select(@"
+select * from 
+(
+select 
+Task.TaskId
+,Task.Name
+,Task.Rate
+,Task.DateStart
+,Task.DateEnd
+,isnull(Task.Olaviat,0) Olaviat
+,isnull(Cat.CatId,0) CatId
+,isnull(Cat.Title,N'بدون عنوان') Title
+from task left join Cat 
+on task.CatId=Cat.CatId
+where Task.IsCheck=1 
+and Task.IsActive=1
+and Task.UserId=" + UserId + @"
+and Task.DateEnd=cast("+ today + @" as nvarchar) 
+
+union All
+
+
+select   RoutineJob.RoutineJobId as taskId,Job,[Rate],[Date],[Date],[Order],0 as CatId,N'تکراری' as Title
+from RoutineJob inner join RoutineJobHa
+on RoutineJob.RoutineJobId=RoutineJobHa.RoutineJobId 
+where 
+ UserId=" + UserId + @"
+and [Date]=cast(" + today + @" as nvarchar) 
+) as tbl
+order by Title,Rate desc
+ ");
+
+                foreach (DataRow item in DT.Rows)
+                {
+                    ViewModels.Task.ListTaskFuture T = new ViewModels.Task.ListTaskFuture();
+                    T.CatId = int.Parse(item["CatId"].ToString());
+                    T.TaskId = int.Parse(item["TaskId"].ToString());
+                    T.Olaviat = int.Parse(item["Olaviat"].ToString());
+                    T.Name = item["Name"].ToString();
+                    T.DateStart = item["DateStart"].ToString();
+                    T.DateEnd = item["DateEnd"].ToString();
+                    T.Title = item["Title"].ToString();
+                    T.Rate= int.Parse(item["Rate"].ToString());
+
+                    lstT.Add(T);
+                }
+                task.lstListTaskFuture = lstT;
+
+                DataTable DT2 = U.Select(@"
+select top 30
+DateEnd,sum(Rate)  as Rate
+from
+(
+select  
+DateEnd,Rate
+from Task
+where IsCheck=1
+and IsActive=1
+and UserId=" + UserId + @"
+union All
+select  [Date],[Rate]
+from RoutineJob inner join RoutineJobHa
+on RoutineJob.RoutineJobId=RoutineJobHa.RoutineJobId 
+where 
+UserId=" + UserId + @"
+) as tbl
+group by DateEnd
+order by DateEnd desc
+
+ ");
+
+                List<ViewModels.Task.RateTaskDays> lstR = new List<ViewModels.Task.RateTaskDays>();
+                foreach (DataRow item in DT2.Rows)
+                {
+                    ViewModels.Task.RateTaskDays R = new ViewModels.Task.RateTaskDays();
+                    R.Rate = int.Parse(item["Rate"].ToString());
+                    R.DateEnd = item["DateEnd"].ToString();
+
+                    lstR.Add(R);
+                }
+                task.lstRateTaskDays = lstR;
+
+                return Json(task, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Error.message = ex.ToString();
+                Error.result = false;
+                //throw new ArgumentException(ex.InnerException.Message);
+                return Json(Error, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+        [HttpPost]
+        public ActionResult SearchTask(string Name)
+        {
+            ViewModels.Task.Task task = new ViewModels.Task.Task();
+            ViewModels.ErrorMessage Error = new ViewModels.ErrorMessage();
+            Error.result = false;
+            Error.message = string.Empty;
+            try
+            {
+                List<ViewModels.Task.ListTaskFuture> lstT = new List<ViewModels.Task.ListTaskFuture>();
+    
+                DataTable DT = U.Select(@"
+select 
+Task.TaskId
+,Task.Name
+,Task.Rate
+,Task.DateStart
+,Task.DateEnd
+,isnull(Task.Olaviat,0) Olaviat
+,isnull(Cat.CatId,0) CatId
+,isnull(Cat.Title,N'بدون عنوان') Title
+from task left join Cat 
+on task.CatId=Cat.CatId
+where 
+Task.Name like N'%"+Name+ @"%'
+and Task.UserId=" + UserId + @"
+order by DateEnd desc,isnull(Olaviat,0)
+ ");
+
+                foreach (DataRow item in DT.Rows)
+                {
+                    ViewModels.Task.ListTaskFuture T = new ViewModels.Task.ListTaskFuture();
+                    T.CatId = int.Parse(item["CatId"].ToString());
+                    T.TaskId = int.Parse(item["TaskId"].ToString());
+                    T.Olaviat = int.Parse(item["Olaviat"].ToString());
+
+                    T.Name = item["Name"].ToString();
+                    T.DateStart = item["DateStart"].ToString();
+                    T.DateEnd = item["DateEnd"].ToString();
+                    T.Title = item["Title"].ToString();
+                    T.Rate = int.Parse(item["Rate"].ToString());
+
+                    lstT.Add(T);
+                }
+                task.lstListTaskFuture = lstT;
+                return Json(task, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Error.message = ex.ToString();
+                Error.result = false;
                 return Json(Error, JsonRequestBehavior.AllowGet);
 
             }
@@ -763,6 +986,121 @@ order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
 
             }
         }
+        //upload gile 
+        [HttpPost]
+        public ActionResult UploadFiles()
+        {
+            // Checking no of files injected in Request object  
+            if (Request.Files.Count > 0)
+            {
+                try
+                {
+                    //  Get all files from Request object  
+                    HttpFileCollectionBase files = Request.Files;
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        //string path = AppDomain.CurrentDomain.BaseDirectory + "Uploads/";  
+                        //string filename = Path.GetFileName(Request.Files[i].FileName);  
 
+                        HttpPostedFileBase file = files[i];
+                        string fname;
+
+                        // Checking for Internet Explorer  
+                        if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                        {
+                            string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                            fname = testfiles[testfiles.Length - 1];
+                        }
+                        else
+                        {
+                            fname = file.FileName;
+                        }
+
+                        // Get the complete folder path and store the file inside it.  
+                        fname = Path.Combine(Server.MapPath("~/Uploads/"), fname);
+                        Models.DomainModels.TaskImage img = new Models.DomainModels.TaskImage();
+                        img.TaskId = 11871;
+                        img.img = Models.Help.Utility.ConvertToByte(file);
+                        img.Name = file.FileName;
+                        DB.TaskImages.Add(img);
+
+                      
+
+                        DB.SaveChanges();
+                        file.SaveAs(fname);
+                    }
+                    // Returns message that successfully uploaded  
+                    return Json("File Uploaded Successfully!");
+                }
+                catch (Exception ex)
+                {
+                    return Json("Error occurred. Error details: " + ex.Message);
+                }
+            }
+            else
+            {
+                return Json("No files selected.");
+            }
+        }
+       
+        public JsonResult ImageUpload(ViewModels.TaskImage.TaskImageVM model)
+        {
+            int TaskImageId = 0;
+            var file = model.ImageFile;
+            byte[] imagebyte = null;
+            if (file != null)
+            {
+                BinaryReader reader = new BinaryReader(file.InputStream);
+                imagebyte = reader.ReadBytes(file.ContentLength);
+
+                Models.DomainModels.TaskImage img = new Models.DomainModels.TaskImage();
+                img.img = imagebyte;
+                img.Name = file.FileName;
+                img.TaskId = 11871;
+                DB.TaskImages.Add(img);
+                DB.SaveChanges();
+                TaskImageId=img.TaskImageId;
+            }
+            return Json(TaskImageId, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ImageRetrieve(int imgID)
+        {
+          var img=  DB.TaskImages.SingleOrDefault(q => q.TaskImageId == imgID);
+            return File(img.img, "image/jpg");
+        }
+        public ActionResult Document(int imgID)
+        {
+           
+            var obj = DB.TaskImages.SingleOrDefault(q => q.TaskImageId == imgID);
+            FileContentResult File = new FileContentResult(obj.img,"jpg");
+            var imag = new MemoryStream(obj.img);
+           
+            string[] stringParts = obj.Name.Split(new char[] { '.' });
+            string strType = stringParts[1];
+            Response.Clear();
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Response.AddHeader("content-disposition", "attachment; filename=" + obj.Name);
+       
+            var asciiCode = System.Text.Encoding.ASCII.GetString(obj.img);
+            var datas = Convert.FromBase64String(asciiCode.Substring(asciiCode.IndexOf(',') + 1));
+            //Set the content type as file extension type
+            Response.ContentType = strType;
+            //Write the file content
+            this.Response.BinaryWrite(datas);
+            this.Response.End();
+            return new FileStreamResult(Response.OutputStream, obj.Name);
+        }
+        public ActionResult RenderImageBytes(int id) {
+            var img = DB.TaskImages.SingleOrDefault(q => q.TaskImageId == id);
+            ViewModels.TaskImage.TaskImageVM V = new ViewModels.TaskImage.TaskImageVM();
+            V.imgByte = img.img;
+            return PartialView(V);
+        }
+        public FileContentResult GetImage(int id) {
+         var res=   DB.TaskImages.SingleOrDefault(q => q.TaskImageId == id);
+            byte[] byteArray = res.img;
+            return new FileContentResult(byteArray, "image/jpeg");
+        }
     }
 }

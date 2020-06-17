@@ -12,28 +12,29 @@ using System.Web.Script.Serialization;
 
 namespace ManageYourSelfMVC.Controllers
 {
+    [Models.Filtering.Filter]
     public class DictionaryController : Controller
     {
         #region Initial
         Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
         Models.MyData.MyDataTransfer T = new Models.MyData.MyDataTransfer();
         Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
-        int UserId = 0;
+        int UserId = Models.staticClass.staticClass.UserId;// 0;
         public DictionaryController()
         {
             //if(System.Web.HttpContext.Current.Session["UserId"])
-            object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
-            if (UserId1 == null || UserId1 == "")
-            {
-                UserId = 0;
-            }
-            else
-            {
-                UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
-            }
+            //object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
+            //if (UserId1 == null || UserId1 == "")
+            //{
+            //    UserId = 0;
+            //}
+            //else
+            //{
+            //    UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
+            //}
         }
         #endregion
-        [Security.CustomAthorize(Roles = "Karbari")]
+     
         public ActionResult MainDictionary()
         {
             return View();

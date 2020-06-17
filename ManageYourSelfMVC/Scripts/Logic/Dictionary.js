@@ -1,10 +1,11 @@
 ﻿//************************************Dictionary*****************************************************
 var _wordId=0
 //-------------execute List When Click on Tab
-$("ul li a[href='#MenuDicBaMesalPro']").on("click", function () {
+function MenuDicBaMesalPro(){
     ListDictionaryHamrahBaExamplePro();
     ShowLevel();
-});
+}
+
 $("ul li a[href='#MenuDicBaMesalProUnSuccess']").on("click", function () {
     ListDictionaryHamrahBaExampleProUnSuccess();
     ShowLevel();
@@ -135,8 +136,7 @@ function ListDictionaryHamrahBaExamplePro(str) {
         success: function (data) {
 
             $("#DicBaMesalPro").html(data);
-            // CheckedInput();
-            // RefreshListWithCheckedCheckbox();
+            DateRefreshShow()
         },
         error: function (error) {
             alert('Dictionary/ListWordExampleDiv' + error);
@@ -228,7 +228,7 @@ function MakeSoundStr(txt) {
 }
 
 function MakeSoundExample(thiss) {
-     debugger
+     
     //  console.log(thiss)
     // var str = $(thiss).parent().text();
     var str = ($(thiss).parent().parent().find(".ExampleSound")).text()
@@ -1000,6 +1000,7 @@ function ListWordExampleDivChk(MyArray)
          success: function (data) {
 
              $("#DicBaMesalPro").html(data);
+             DateRefreshShow()
        
          },
          error: function (error) {
@@ -1083,7 +1084,7 @@ function CreateNewExample(WordId) {
 
 }
 function ShouldExecute() {
-
+   
     ShowLevel();
     //BadGheleghtarinWord();
     //LessMoroor();
@@ -1192,6 +1193,17 @@ function showTheWord(eng) {
     $("#showTheWord span").remove()
     $("#showTheWord").append("<span>"+eng+"</span>")
 }
+function DateRefreshShow(){
+    $("#DicBaMesalPro table tr .dateCol").each(function () {
+
+        var date=$(this).text().trim()
+
+        
+        $(this).empty()
+        $(this).append("<span>"+calDayOfWeek(date)+" - </span><span>"+foramtDate(date)+"</span><span> - "+showDays(todayShamsy(), foramtDate(date))+"</span>")
+    })
+}
+
 $(document).ready(function () {
     //----------function ListDictionary()
     $("#SeachInTblDicList").on("keyup", function () {

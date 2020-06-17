@@ -102,7 +102,15 @@ function BindTimes() {
     CreateSTime(0, "0", "StartJobTime");
     CreateSTime(1, "1", "EndJobTime")
 }
-function CalMinute(T) {
+function CalMinute(thiss) {
+    
+    if ($(thiss).is("input")) {
+    
+        var res = $(thiss).val()
+         res = res.replace(/\:/g, "")
+        // res = res.replace(/-/g, "")
+        $(thiss).val(res.slice(0, 2) + ":" + res.slice(2, 4))
+    }
     var T1 = $(".T_StartTime input").val();
     var T2 = $(".T_EndTime input").val();
     T1 = T1.replace(":", "")
@@ -126,11 +134,34 @@ function CalMinute(T) {
     // alert(minutes);
 
     // --output:--
-
+   
     $(".T_MinTime input").val(minutes);
 
 
 }
+//function ConvertToTime(thiss) {
+//    debugger
+//    var res = $(thiss).val()
+//    res = res.replace(/:/g, "")
+//    res = res.replace(/-/g, "")
+//    if (res.slice(0, 1) > 2) {
+//        $(thiss).val("--:--")
+//    }
+//    else {
+//        switch (res.length) {
+//            case 1: $(thiss).val(res + "-:--")
+//                break;
+//           case 2: $(thiss).val(res + ":--")
+//               break;
+//            case 3: $(thiss).val(res.slice(0,2) + ":" + res.slice(2,1)+"-")
+//                break;
+//            case 4: $(thiss).val(res.slice(0,2) + ":"+res.slice(1,2))
+//                break;
+//            default: $(thiss).val("--:--")
+//                break;
+//        }
+//    }
+//}
 function SaveInKarkard() {
    var JobId=$("#SelectJob  option:selected").attr("JobId")
     var StartTime=$(".T_StartTime input").val()

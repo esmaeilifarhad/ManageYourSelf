@@ -2,98 +2,62 @@
     ViewBag.Title = "Sport";
     Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
 }
+<style>
+    .ListSportCatId table tr td {
+        padding: 5px;
+    }
 
+    .tedad {
+        cursor: pointer;
+    }
+</style>
 <link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
-@*<script src="~/Scripts/Bootstrap_v3.3.7.js"></script>*@
-<br />
+
 <div class="MyDictionary">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist" style="font-family:'Morvarid';">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#MenuSportCrud">ثبت ورزش</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#MenuSportArchieve">آرشیو</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#MasterData">MasterData</a>
-        </li>
-        <li class="nav-item">
-            <a href="/Client/ListNav">کاربردی</a>
-        </li>
+    <ul class="nav nav-tabs" style="font-family:'Morvarid';">
+        <li class="active"><a data-toggle="tab" href="#home">ورزش</a></li>
+        <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+        <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+        <li><a href="/Client/ListNav">کاربری</a></li>
     </ul>
-    <!-- Tab panes -->
-    <div class="tab-content" style="font-family:BNazanin">
-        <!--ورزش-->
-        <div id="MenuSportCrud" class="tab-pane">
-            <br />
-            <div class="row">
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="row" style="font-family:BNazanin">
                 <div class="col-sm-12 ListSportChk"></div>
                 <div class="col-sm-12 ListSportCatId"></div>
             </div>
         </div>
-        <!--MenuDicNRecords-->
-        <div id="MenuSportArchieve" class="tab-pane">
-            <br />
-            <div class="row" style="font-family:BNazanin">
-                <div class="col-sm-3" id="ShowLevel"></div>
-            </div>
+        <div id="menu1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
-        <!--MasterData-->
-        <div id="MasterData" class="tab-pane fade">
-            <div class="row">
-                <div class="col-sm-12 ListMasterData"></div>
-            </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <h3>Menu 3</h3>
+            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
         </div>
     </div>
 
-    <!--Modal Start-->
-    @*<div>
-        <!--  Modal Master -->
-        <div class="modal fade" id="MasterModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header" style="direction:ltr">
-                        <br>
-                        <h4 class="modal-title HeaderModal"></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body BodyModal">
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
-                        <span> </span>
-                        <button type="button" class="btn btn-primary btnSave" data-dismiss="modal">ثبت</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-   
-</div>
 
 
-<!--************************************Logic Scripts*********************************************-->
+    <!--************************************Dictionary*********************************************-->
+    <!--Persian DatePicker-->
+    <script>
+        $(document).ready(function () {
 
-@*<script src="~/Scripts/Logic/Sport.js"></script>*@
-
-<!--************************************Dictionary*********************************************-->
-<!--Persian DatePicker-->
-<script>
-    $(document).ready(function () {
-        
-        intervalSport();
-        kamaDatepicker('PersianDatePicker', {
-            nextButtonIcon: "timeir_next.png"
-               , previousButtonIcon: "timeir_prev.png"
-               , forceFarsiDigits: true
-               , markToday: true
-               , markHolidays: true
-               , highlightSelectedDay: true
-               , sync: true
+            intervalSport();
+            kamaDatepicker('PersianDatePicker', {
+                nextButtonIcon: "timeir_next.png"
+                   , previousButtonIcon: "timeir_prev.png"
+                   , forceFarsiDigits: true
+                   , markToday: true
+                   , markHolidays: true
+                   , highlightSelectedDay: true
+                   , sync: true
+            });
         });
-    });
-</script>
+    </script>

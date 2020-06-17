@@ -7,30 +7,32 @@ using System.Web.Mvc;
 
 namespace ManageYourSelfMVC.Controllers
 {
+    [Models.Filtering.Filter]
     public class SportController : Controller
     {
         #region Initial
         Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
         Models.MyData.MyDataTransfer T = new Models.MyData.MyDataTransfer();
         Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
-        int UserId = 0;
+        int UserId = Models.staticClass.staticClass.UserId;// 0;
         public SportController()
         {
             //if(System.Web.HttpContext.Current.Session["UserId"])
-            object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
-            if (UserId1 == null)
-            {
-                UserId = 0;
-            }
-            else
-            {
-                UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
-            }
+            //object UserId1 = System.Web.HttpContext.Current.Session["UserId"];
+            //if (UserId1 == null)
+            //{
+            //    UserId = 0;
+            //}
+            //else
+            //{
+            //    UserId = (int)System.Web.HttpContext.Current.Session["UserId"];
+            //}
         }
         #endregion
 
         #region Sport
-        [Security.CustomAthorize(Roles = "Karbari")]
+        // [Security.CustomAthorize(Roles = "Karbari")]
+       
         public ActionResult MainSport()
         {
             return View();
@@ -64,7 +66,7 @@ SELECT  [CatId]
                     lstCat.Add(C);
                 }
                 v.ListCat = lstCat;
-                return PartialView(v);
+                return Json(v,JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -75,6 +77,7 @@ SELECT  [CatId]
 
             }
         }
+        [HttpPost]
         public ActionResult ListSportFilter(int _CatId)
         {
             List<ViewModels.VMSport> lstV = new List<ViewModels.VMSport>();
@@ -97,7 +100,7 @@ SELECT  [CatId]
                 //  V.lstCat = DB.Cats.Where(q => q.Code == 1 && q.UserId == UserId).ToList();
                 lstV.Add(V);
             }
-            return PartialView(lstV);
+            return Json(lstV,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult List()

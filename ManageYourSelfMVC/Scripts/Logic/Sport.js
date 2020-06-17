@@ -1,14 +1,6 @@
-﻿//--Execute All List when click Tab
-$("ul li a[href='#Sport']").on("click", function () {
-    RefreshSport();
-});
-//------Create Post
-$("#MasterModal .btnSave").on("click", function () {
-    var NameOperator = $("#MasterModal .BodyModal div").attr("Name");
-
-    if (NameOperator == "CreateSport")
-        CreateSportPost();
-});
+﻿$(document).ready(function(){
+    GetData()
+})
 //------Update Post
 $("#MasterModal .btnSave").on("click", function () {
     var NameOperator = $("#MasterModal .BodyModal div").attr("Name");
@@ -16,110 +8,152 @@ $("#MasterModal .btnSave").on("click", function () {
         UpdateSportPost();
 });
 //***************************************************
-//------------------------
-$("ul li a[href='#MenuSportCrud']").on("click", function () {
-    ListSportChk();
-});
-function ListSportChk() {
-    var urll = "/Sport/ListSportChk";
-    $.ajax({
-        type: "Get",
-        contentType: "application/json;charset=utf-8",
-        dataType: "html",
-        url: urll,
-        success: function (result) {
-            if (result.result == false) {
-                alert(result.message)
-            }
-            else {
-                $(".ListSportChk").html(result);
-            }
 
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    })
+async function GetData(){
+    
+    var objListSportChk={}
+    objListSportChk.url="/Sport/ListSportChk"
+    objListSportChk.dataType="json"
+    objListSportChk.type="post"
+    //var res=await service(obj);
+    var results = await Promise.all([
+        service(objListSportChk)
+    ]);
+    var ListSportChk = results[0]
+    showListSportChk(ListSportChk)
+   
+    
 
 }
 $(".ListSportChk").on("click", "input", function () {
-    ListSportFilter();
+   // ListSportFilter();
 });
-function ListSportFilter() {
-    var CatId;
-    $(".ListSportChk .Categories  input:checked").each(function () {
-        CatId = $(this).val();
-    });
+async function ListSportFilter(CatId) {
    
+   // $(".saveData input[name='Tedad']").val();
+    var obj={}
+    obj.url="/Sport/ListSportFilter"
+    obj.dataType="json"
+    obj.type="post"
+    obj.data={_CatId:CatId}
+    //var res=await service(obj);
+    var results = await Promise.all([
+        service(obj)
+    ]);
+    
+    var resListSportFilter = results[0]
+    showListSportFilter(resListSportFilter,CatId)
+    
 
-    var urll = "/Sport/ListSportFilter?_CatId=" + CatId;
-    $.ajax({
-        type: "Get",
-        contentType: "application/json;charset=utf-8",
-        dataType: "html",
-        url: urll,
-        success: function (data) {
-            $(".ListSportCatId").html(data);
-            ColorAvgMax();
-            findRotbeh();
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    })
 }
 $("body").on("click", ".SaveNewSport", function () {
     SaveNewSport();
 });
-function SaveNewSport()
+async function SaveNewSport(CatId)
 {
-    var Date = $("#bd-root-PersianDatePickerSport input[name='DateEnd']").val();
-    var Tedad = $("#MenuSportCrud input[name='Tedad']").val();
-    var CatId;
-    $(".ListSportChk .Categories  input:checked").each(function () {
-        CatId = $(this).val();
-    });
-    //--
-    $.ajax(
-      {
-          type: 'POST',
-          contentType: "application/json;charset=utf-8",
-          dataType: "json",
-          url: "/Sport/CreateNewSport",
-          data: JSON.stringify({
-              Date: Date,
-              Tedad: Tedad,
-              CatId: CatId
-          }),
-          success: function (result) {
-              if (result != "")
-              alert(result);
-              ListSportFilter();
-          },
-          error: function (error) {
-              console.log(error);
-          }
-      });
-
-}
-$("body").on("click", ".DeleteSport", function () {
-  
-    var res = confirm("آیا حذف انجام شود؟");
-    if (res == true) {
-        var SportId = $(this).attr("SportId");
-        DeleteSport(SportId);
+    $.LoadingOverlay("show");
+    var Date = $("#bd-root-PersianDatePickerSport2 input[name='DateEnd']").val();
+    Date=convertDateToslashless(Date)
+    var Tedad = $(".saveData input[name='Tedad']").val();
+    debugger
+    var obj={}
+    obj.url="/Sport/CreateNewSport"
+    obj.dataType="json"
+    obj.type="post"
+    obj.data={
+        Date: Date,
+        Tedad: Tedad,
+        CatId: CatId
     }
-    ListSportFilter()
-});
+    var results = await Promise.all([
+        service(obj)
+    ]);
+    
+    var res = results[0]
+    ListSportFilter(CatId)
+
+    $.LoadingOverlay("hide");
+   
+}
+
 function intervalSport() {
     
    
     setInterval(function () {
-        ListSportFilter();
+      //  ListSportFilter();
     },300000);
 }
 //------------------------
+function showListSportChk(ListSportChk){  
+    var catData= ListSportChk.ListCat
+    var countCol=3
+    $.LoadingOverlay("show");
+    var showRateTaskDays="<div style='font-size:11px'>"+
+        "<input type='button' value='جدید' onclick='CreateMasterDataGet()'/>"+
+        "<table class='table-bordered'>"  
+    for (let index = 0; index < catData.length; index++) {
+        
+        if(index%countCol==0)
+        {
+            showRateTaskDays+="<tr><td><input onclick='ListSportFilter("+catData[index].CatId+")' type='radio' value="+catData[index].CatId+" name='rdbSport'></td><td>"+catData[index].Title+"</td><td><input type='button' value='ویرایش' onclick='EditMasterData("+catData[index].CatId+")'></td>"
+        }
+        else
+        {  
+            showRateTaskDays+="<td><input  onclick='ListSportFilter("+catData[index].CatId+")' type='radio' value="+catData[index].CatId+" name='rdbSport'></td><td>"+catData[index].Title+"</td><td><input type='button' value='ویرایش' onclick='EditMasterData("+catData[index].CatId+")'></td>"
+        } 
+        if(index%countCol==(countCol-1))
+        {
+            showRateTaskDays+="</tr>"
+        }
+    }
+    showRateTaskDays+="</table></div>" 
+    $(".ListSportChk").empty()
+    $(".ListSportChk").append(showRateTaskDays)
+    $.LoadingOverlay("hide"); 
+   
+}
+function showListSportFilter(resListSportFilter,CatId){
+$.LoadingOverlay("show");
+var showRateTaskDays="<div style='font-size:11px'><table class='table-bordered'>"  
+var oldDate=""
+for (let index = 0; index < resListSportFilter.length; index++) {
+    //فقط بار اول اجرا میشود
+    if( oldDate=="")
+    {
+        showRateTaskDays+="<tr>"
+        showRateTaskDays+="<td>"+resListSportFilter[index].Title+"</td>"+
+          "<td>"+foramtDate(resListSportFilter[index].Date)+"   "+calDayOfWeek(resListSportFilter[index].Date)+"</td>"+
+       
+          "<td class='tedad' onclick='DeleteSport({Date:"+resListSportFilter[index].Date+",Title:\""+resListSportFilter[index].Title+"\",SportId:"+resListSportFilter[index].SportId+",CatId:"+resListSportFilter[index].CatId+",Tedad:"+resListSportFilter[index].Tedad+"})'>"+resListSportFilter[index].Tedad+"</td>"
+      
+    }
+    if(resListSportFilter[index].Date!=oldDate && oldDate!="")
+    {
+        showRateTaskDays+="</tr><tr>"
+        showRateTaskDays+="<td>"+resListSportFilter[index].Title+"</td>"+
+           "<td>"+foramtDate(resListSportFilter[index].Date)+"   "+calDayOfWeek(resListSportFilter[index].Date)+"</td>"+
+           "<td class='tedad' onclick='DeleteSport({Date:"+resListSportFilter[index].Date+",Title:\""+resListSportFilter[index].Title+"\",SportId:"+resListSportFilter[index].SportId+",CatId:"+resListSportFilter[index].CatId+",Tedad:"+resListSportFilter[index].Tedad+"})'>"+resListSportFilter[index].Tedad+"</td>" 
+    }
+    if(resListSportFilter[index].Date==oldDate && oldDate!="")
+    {
+        showRateTaskDays+= "<td class='tedad' onclick='DeleteSport({Date:"+resListSportFilter[index].Date+",Title:\""+resListSportFilter[index].Title+"\",SportId:"+resListSportFilter[index].SportId+",CatId:"+resListSportFilter[index].CatId+",Tedad:"+resListSportFilter[index].Tedad+"})'>"+resListSportFilter[index].Tedad+"</td>"
+    }
+    if(index==resListSportFilter.length-1)
+    {
+        showRateTaskDays+="</tr>"
+    }
+    oldDate=resListSportFilter[index].Date
+}
+showRateTaskDays+="</table></div>" 
+$(".ListSportCatId").empty()
 
+$(".ListSportCatId").append(showRateTaskDays)
+$.LoadingOverlay("hide"); 
+    
+    ColorAvgMax(CatId)
+colorSum()
+findRotbeh()
+}
 function ListSport() {
 
     var urll = "/Sport/List";
@@ -268,24 +302,35 @@ function UpdateSportPost() {
            }
        });
 }
-function DeleteSport(Id) {
-    $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/Sport/Delete",
+function DeleteSport(obj) {
+   
+    var res = confirm("آیا حذف انجام شود؟"+"\n"+obj.Title+"\n تاریخ : "+foramtDate(obj.Date)+"\n تعداد : "+obj.Tedad);
 
-           data: JSON.stringify({ Id: Id }),
-           success: function (result) {
-               if (result == true) {
-                   RefreshSport();
+    if (res == true) {
+        $.LoadingOverlay("show"); 
+
+        $.ajax(
+           {
+               type: 'POST',
+               contentType: "application/json;charset=utf-8",
+               dataType: "json",
+               url: "/Sport/Delete",
+
+               data: JSON.stringify({ Id: obj.SportId }),
+               success: function (result) {
+                   if (result == true) {
+                       $.LoadingOverlay("hide"); 
+                      // RefreshSport();
+                       ListSportFilter(obj.CatId)
+                   }
+                  
+                   else {
+                       $.LoadingOverlay("hide"); 
+                       alert("خطا در ثبت");
+                   }
                }
-               else {
-                   alert("خطا در ثبت");
-               }
-           }
-       });
+           });
+    }
        } 
 function RefreshSport() {
     ListSport();
@@ -293,32 +338,20 @@ function RefreshSport() {
     ShowPivotSportOrder();
     ShowPivotGroupingSets();
 }
-//--------------------------Events
-//--Create Get
-$(".ListSport").on("click", "input[name='CreateSport']", function () {
-    CreateSportGet();
-});
-//--Delete
-$(".ListSport").on("click", ".fa-remove", function () {
-    var res = confirm("آیا حذف انجام شود؟");
-    if (res == true) {
-        var Id = $(this).attr("catid");
-        DeleteSport(Id);
-    }
-});
-//--Edit
+
 $(".ListSport").on("click", ".fa-edit", function () {
     var Id = $(this).attr("catid");
     EditSport(Id);
 });
 //----------
-function ColorAvgMax()
+function ColorAvgMax(CatId)
 {
+    
     var MaxNum = 0;
     var MinNum = 1000000;
     var AvgNum = 0;
     var CountNum = 0;
-    $(".SportPivot .DeleteSport").each(function () {
+    $(".ListSportCatId table tr .tedad").each(function () {
         var y = parseInt($(this).text());
         AvgNum = AvgNum + y
         CountNum = CountNum + 1
@@ -332,14 +365,14 @@ function ColorAvgMax()
         }
 
     })
-    $(".SportPivot .DeleteSport").each(function () {
+    $(".ListSportCatId table tr .tedad").each(function () {
       
         var y = parseInt($(this).text());
         if (y > (AvgNum / CountNum)) {
             this.setAttribute("style", "color:green")
         }
         if (y < (AvgNum / CountNum)) {
-            this.setAttribute("style", "color:pink")
+            this.setAttribute("style", "color:red")
         }
         if (y == MaxNum) {
             //MaxNum=y;
@@ -351,19 +384,89 @@ function ColorAvgMax()
         }
 
     })
-    // alert("Ave : " + (AvgNum / CountNum));
-   // console.log($(this))
-    $("#tt").remove();
-    $(".ListSportChk").append("<P id='tt'>  میانگین :   " + (AvgNum / CountNum)+"</p>");
+    var sum=0
+    $(".ListSportCatId table tr").each(function () {
+        sum=0
+        $(this).find(".tedad").each(function () {
+            
+            sum += parseInt($(this).text());
+        })
+
+        $(this).append("<td class='sum' style='font-size:13px;background-color:yellow'>"+sum+"</td>")
+    })
+
+    $(".ListSportChk .saveData").empty();
+   
+    var table = "<table class='table-bordered saveData'>"+
+        "<tr style='text-align:center'><td style='color:blue'>بهترین</td><td>میانگین</td><td>بدترین</td></tr>"+
+        "<tr style='text-align:center'><td>" + MaxNum + "</td><td>" + (AvgNum / CountNum).toFixed(1) + "</td><td>" + MinNum + "</td></tr>" +
+   
+          "<tr><td> <input type='number' value="+ (AvgNum / CountNum).toFixed(0)+" placeholder='تعداد' name='Tedad'></td>"+
+          "<td><input type='text' name='DateEnd' class='PersianDatePickerSport2' value=" + todayShamsy() + " autocomplete='off'  ></td>" +
+          "<td><input type='button' class='btn btn-danger' value='Save' style='color:forestgreen' onclick='SaveNewSport("+CatId+")'></td></tr>"+
+        
+        "<table>"
+    $(".ListSportChk").append(table);
+    $(".saveData input[name='Tedad']").focus()
     //$(".ListSportChk").append("<li>Prepended item</li>");
+    kamaDatepicker('PersianDatePickerSport2', {
+        nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+                   , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+                   , forceFarsiDigits: true
+                   , markToday: true
+                   , markHolidays: true
+                   , highlightSelectedDay: true
+                   , sync: true
+    });
+
+}
+function colorSum(){
+    var MaxNum = 0;
+    var MinNum = 1000000;
+    var AvgNum = 0;
+    var CountNum = 0;
+    $(".ListSportCatId table tr .sum").each(function () {
+        var y = parseInt($(this).text());
+        AvgNum = AvgNum + y
+        CountNum = CountNum + 1
+        if (y > MaxNum) {
+            MaxNum = y;
+            //this.setAttribute("style","color:blue")
+        }
+        if (y < MinNum) {
+            MinNum = y;
+            //this.setAttribute("style","color:blue")
+        }
+
+    })
+    $(".ListSportCatId table tr .sum").each(function () {
+      
+        var y = parseInt($(this).text());
+        if (y > (AvgNum / CountNum)) {
+            this.setAttribute("style", "background-color:green;color:white")
+        }
+        if (y < (AvgNum / CountNum)) {
+            this.setAttribute("style", "background-color:red;color:white")
+        }
+        if (y == MaxNum) {
+            //MaxNum=y;
+            this.setAttribute("style", "background-color:blue;color:white")
+        }
+        if (y == MinNum) {
+            //MaxNum=y;
+            this.setAttribute("style", "background-color:gray;color:white")
+        }
+
+    })
 }
 function findRotbeh()
 {
+    
     var i = 0
     //var arraySport = new Array();
     //arraySport
     arraySport = [];
-    $(".DeleteSport").each(function () {
+    $(".tedad").each(function () {
         arraySport.push(parseInt($(this)[0].textContent));
         //console.log($(this)[0].textContent);
         //i = i + 1
@@ -376,16 +479,19 @@ function findRotbeh()
         return parseInt(b) - parseInt(a)  ;
     });
 
-    console.log(arraySport);
-    $(".DeleteSport").each(function () {
+   // console.log(arraySport);
+    $(".tedad").each(function () {
         for (i = 0; i < arraySport.length; ++i) {
             //console.log(arraySport[i]);
             if (arraySport[i] == $(this)[0].textContent) {
-                $(this).append("<span>" + (i + 1) + "/" + arraySport.length + "</span>")
+                $(this).append(" - <span style='color:black'>" + (i + 1) + "/" + arraySport.length + "</span>")
                // console.log(arraySport[i] + " - " + (i + 1) + "/" + arraySport.length)
                 break;
             }
         }
     });
+
+   
+
 }
 

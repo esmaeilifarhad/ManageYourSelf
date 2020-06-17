@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ManageYourSelfMVC.ViewModels
 {
-    public class VMPublic
+    public class VMPublic:Models.DomainModels.RoutineJob
     {
         public int RoutineJobId { get; set; }
         public int RoozDailySplit { get; set; }
