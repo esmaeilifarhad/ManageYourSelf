@@ -54,7 +54,17 @@ function CreateMojoodyBankGet() {
            contentType: "application/json;charset=utf-8",
            dataType: "html",
            url: "/DakhloKharj/CreateMojoodyBank",
-           success: function (result) {
+            success: function (result) {
+
+                var tablebutt = "<table class='table' style='font-size: 9px;'>"
+                tablebutt += "<tr>" +
+                    "<td><input type='button' style='background-color:green' value='ذخیره' onclick='CreateMojoodyBankPost()'/> | " +
+                    "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                    "</tr>"
+                tablebutt += "</table>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(tablebutt);
+
                $(".BodyModal").html(result);
                $("#MasterModal").modal();
            },
@@ -185,7 +195,19 @@ function CreateTypeHazinehGet() {
            contentType: "application/json;charset=utf-8",
            dataType: "html",
            url: "/DakhloKharj/CreateTypeHazineh",
-           success: function (result) {
+            success: function (result) {
+
+                var tablebutt = "<table class='table' style='font-size: 9px;'>"
+                tablebutt += "<tr>" +
+                    "<td><input type='button' style='background-color:green' value='ذخیره' onclick='CreateTypeHazinehPost()'/> | " +
+                    "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                    "</tr>"
+                tablebutt += "</table>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(tablebutt);
+
+
+
                $(".BodyModal").html(result);
                $("#MasterModal").modal();
            },
@@ -251,24 +273,6 @@ function UpdateTypeHazineh() {
        });
 }
 //---------------------------------------------------Events
-////--Delete
-//$(".ListTypeHazineh").on("click", ".fa-remove", function () {
-//    var res = confirm("آیا حذف انجام شود؟");
-//    if (res == true) {
-//        var TypeHazinehId = $(this).attr("TypeHazinehId");
-//        DeleteTypeHazineh(TypeHazinehId);
-//    }
-//});
-////--Create Get
-//$(".ListTypeHazineh").on("click", "input[name='CreateTypeHazineh']", function () {
-//    CreateTypeHazinehGet();
-//});
-////--Edit
-//$(".ListTypeHazineh").on("click", ".fa-edit", function () {
-//    var TypeHazinehId = $(this).attr("TypeHazinehId");
-//    EditTypeHazineh(TypeHazinehId);
-//});
-
 
 //***************************************************Daramad
 function ListDaramd(MojoodyBankId) {
@@ -282,6 +286,17 @@ function ListDaramd(MojoodyBankId) {
         dataType: "html",
         url: urll,
         success: function (data) {
+
+            var tablebutt = "<table class='table' style='font-size: 9px;'>"
+            tablebutt += "<tr>" +
+                "<td> " +
+                "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                "</tr>"
+            tablebutt += "</table>"
+            $(".modal-footer").empty();
+            $(".modal-footer").append(tablebutt);
+
+
             $(".ListDaramad").html(data);
             $(".BodyModal").html(data);
             $("#MasterModal").modal();
@@ -298,7 +313,17 @@ function CreateDaramdGet(MojoodyBankId) {
            contentType: "application/json;charset=utf-8",
            dataType: "html",
            url: "/DakhloKharj/CreateDaramad?MojoodyBankId=" + MojoodyBankId,
-           success: function (result) {
+            success: function (result) {
+
+                var tablebutt = "<table class='table' style='font-size: 9px;'>"
+                tablebutt += "<tr>" +
+                    "<td><input type='button' style='background-color:green' value='ذخیره' onclick='CreateDaramadPost()()'/> | " +
+                    "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                    "</tr>"
+                tablebutt += "</table>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(tablebutt);
+
                $(".BodyModal").html(result);
                $("#MasterModal").modal();
            },
@@ -438,7 +463,18 @@ function EditMojoodyBankBalance(MojoodyBankId) {
            contentType: "application/json;charset=utf-8",
            dataType: "html",
            url: "/DakhloKharj/EditMojoodyBankBalance?MojoodyBankId=" + MojoodyBankId,
-           success: function (result) {
+            success: function (result) {
+
+
+                var tablebutt = "<table class='table' style='font-size: 9px;'>"
+                tablebutt += "<tr>" +
+                    "<td><input type='button' style='background-color:green' value='ذخیره' onclick='UpdateMojoodyBankBalance()'/> | " +
+                    "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                    "</tr>"
+                tablebutt += "</table>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(tablebutt);
+
                $(".BodyModal").html(result);
                $("#MasterModal").modal();
            },
@@ -477,7 +513,18 @@ function EditMojoodyBankExchange(MojoodyBankId) {
            contentType: "application/json;charset=utf-8",
            dataType: "html",
            url: "/DakhloKharj/EditMojoodyBankExchange?MojoodyBankId=" + MojoodyBankId,
-           success: function (result) {
+            success: function (result) {
+
+
+                var tablebutt = "<table class='table' style='font-size: 9px;'>"
+                tablebutt += "<tr>" +
+                    "<td><input type='button' style='background-color:green' value='ذخیره' onclick='UpdateMojoodyBankExchange()'/> | " +
+                    "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+                    "</tr>"
+                tablebutt += "</table>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(tablebutt);
+
                $(".BodyModal").html(result);
                $("#MasterModal").modal();
            },

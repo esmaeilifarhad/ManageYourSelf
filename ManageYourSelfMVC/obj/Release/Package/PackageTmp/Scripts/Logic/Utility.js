@@ -243,7 +243,7 @@ function SeparateThreeDigits(str) {
 
 }
 function removeComma(str) {
-
+    if (str == undefined) return
     var noCommas = str.replace(/,/g, '')
     return noCommas
 }

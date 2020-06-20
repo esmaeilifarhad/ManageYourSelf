@@ -93,9 +93,7 @@ function ListTaskFutureChk() {
     })
 
 }
-
 //----------------------
-
 $("#menuTiming").on("click", "input[name='chkTomarrow']", function () {
 
     if ($("input[name='chkTomarrow']").prop('checked') == true) {
@@ -129,6 +127,9 @@ $("body").on("click", ".Ta", function () {
 })
 //------ListTaskAnjamNashode
 $("#menu4 input[name='task']").on("click", function () {
+
+    debugger
+    ListTimingForListTask(0)
     //console.log($("input[type='radio'][name='task']:checked").val())
     var ValOfRadio = $("input[type='radio'][name='task']:checked").val();
     var typeTask;
@@ -147,6 +148,7 @@ $("#menu4 input[name='task']").on("click", function () {
             break;
     }
     ListTask(typeTask)
+
 });
 //ShowCreateTask
 $("Body").on("click", ".CreateNewTask", function () {
@@ -767,7 +769,6 @@ function UpdateTask(TaskId) {
             }
         });
 }
-
 async function ListTask(typeTask) {
 
 
@@ -847,29 +848,7 @@ async function ListTask(typeTask) {
     eachColorTask();
     $.LoadingOverlay("hide");
 
-    // showListSportChk(ListSportChk)
 
-    /*
-        var urll = "/Task/ListTaskAnjamnashode";
-        $.ajax({
-            type: 'Post',
-            data: JSON.stringify({typeTask:typeTask,MyData: MyArray }),
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            url: urll,
-            success: function (data) {
-                
-                $(".ListTask").html(data);
-                eachColorTask();
-                $.LoadingOverlay("hide");
-            },
-            error: function (error) {
-                $(".ListTask").html("<p>دسترسی ندارید</p>");
-                $.LoadingOverlay("hide");
-                // console.log(error);
-            }
-        })
-        */
 }
 function TimingTask(TaskId) {
     var urll = "/Task/TimingTask?TaskId=" + TaskId;
@@ -946,6 +925,25 @@ function ListTiming(x) {
             }
         })
     }
+}
+async function ListTimingForListTask(x) {
+
+    $.LoadingOverlay("show");
+    
+    var objListTaskAnjamnashode = {}
+    objListTaskAnjamnashode.url = "/Task/ListTimingForListTask";
+    objListTaskAnjamnashode.dataType = "json"
+    objListTaskAnjamnashode.type = "post"
+
+    objListTaskAnjamnashode.data = { x: 0 }
+
+
+    var results = await Promise.all([
+        service(objListTaskAnjamnashode)
+    ]);
+    var ListTaskAnjamnashode = results[0]
+    debugger
+    $.LoadingOverlay("hide");
 }
 function ListTaskGeneral() {
     var urll = "/Task/ListTaskGeneral";

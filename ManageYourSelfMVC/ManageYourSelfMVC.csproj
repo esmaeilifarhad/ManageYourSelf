@@ -1423,9 +1423,12 @@
     <Compile Include="ViewModels\Saham\SahamVM.cs" />
     <Compile Include="ViewModels\TaskImage\TaskImageVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />
+    <Compile Include="ViewModels\Task\ITiming.cs" />
     <Compile Include="ViewModels\Task\ListTaskFuture.cs" />
     <Compile Include="ViewModels\Task\RateTaskDays.cs" />
     <Compile Include="ViewModels\Task\Task.cs" />
+    <Compile Include="ViewModels\Task\ITask.cs" />
+    <Compile Include="ViewModels\Task\VMTask.cs" />
     <Compile Include="ViewModels\UserRegisterVm.cs" />
     <Compile Include="ViewModels\UserVM.cs" />
     <Compile Include="ViewModels\VDataCard.cs" />
@@ -1635,7 +1638,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1812</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1812/</IISUrl>
+          <IISUrl>http://localhost:1813/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

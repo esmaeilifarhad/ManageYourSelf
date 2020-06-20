@@ -803,7 +803,47 @@ SELECT  [CatId]
             //return Json(Error, JsonRequestBehavior.AllowGet);
             // return PartialView(V);
         }
+        [HttpPost]
+        public ActionResult ListTimingForListTask(int x)
+        {
+            ViewModels.ErrorMessage Error = new ViewModels.ErrorMessage();
+            Error.result = false;
+            Error.message = string.Empty;
+            try
+            {
+               
+                if (x == 0)
+                {
+                    Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
+                    DataTable DT = U.Select(@"select * 
+from Timing  inner join Task 
+on Timing.TaskId=Task.TaskId
+inner join ManageTime
+on Timing.ManageTimeId=ManageTime.ManageTimeId
+where IsCheck=0 and UserId="+ UserId +@"
+order by DateEnd,Value,Olaviat");
 
+                    foreach (DataRow item in DT.Rows)
+                    {
+                      
+                        
+                    }
+                }
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Error.message = ex.InnerException.Message;
+                Error.result = false;
+                //throw new ArgumentException(ex.InnerException.Message);
+                return Json(Error, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+            //return Json(Error, JsonRequestBehavior.AllowGet);
+            // return PartialView(V);
+        }
         [HttpPost]
         public ActionResult DeleteTiming()
         {
