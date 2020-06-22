@@ -170,7 +170,7 @@ async function GetCompareToAvg(SortBy) {
 
 async    function ShowLastPositiveAlMinus(ListObj)
 {
-    debugger
+    
     var table = "<table class='table-bordered table-responsive'>"+
       "<tr><th>نماد</th><th>تعداد</th><th>تعداد مثبت</th><th>تعداد منفی</th><th>مجموع درصد ها</th><th>Rate</th><th>رهاورد</th><th>جزئیات</th></tr>"
     for (var i = 0; i <  ListObj.lstNamadVM.length; i++) {

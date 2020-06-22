@@ -22,10 +22,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2020 04:28:25</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.dll">
-      <publishTime>06/18/2020 11:41:40</publishTime>
+      <publishTime>06/22/2020 15:58:04</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.pdb">
-      <publishTime>06/18/2020 11:41:40</publishTime>
+      <publishTime>06/22/2020 15:58:04</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>03/21/2020 04:28:28</publishTime>
@@ -271,7 +271,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2020 04:28:11</publishTime>
     </File>
     <File Include="MyTemplate/MasterTemplate/css/style.css">
-      <publishTime>03/25/2020 01:04:19</publishTime>
+      <publishTime>06/22/2020 15:55:33</publishTime>
     </File>
     <File Include="MyTemplate/MasterTemplate/img/about-bg.jpg">
       <publishTime>03/21/2020 04:28:12</publishTime>
@@ -3034,10 +3034,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2020 12:41:59</publishTime>
     </File>
     <File Include="Scripts/Logic/DakhloKharj.js">
-      <publishTime>06/18/2020 09:05:12</publishTime>
+      <publishTime>06/22/2020 15:13:38</publishTime>
     </File>
     <File Include="Scripts/Logic/Dictionary.js">
-      <publishTime>03/30/2020 14:56:10</publishTime>
+      <publishTime>06/20/2020 12:55:04</publishTime>
     </File>
     <File Include="Scripts/Logic/Gold.js">
       <publishTime>03/21/2020 04:28:13</publishTime>
@@ -3052,7 +3052,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2020 04:28:13</publishTime>
     </File>
     <File Include="Scripts/Logic/MasterData.js">
-      <publishTime>05/03/2020 07:38:22</publishTime>
+      <publishTime>06/20/2020 12:55:04</publishTime>
     </File>
     <File Include="Scripts/Logic/Public.js">
       <publishTime>03/21/2020 04:28:13</publishTime>
@@ -3061,10 +3061,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2020 12:39:40</publishTime>
     </File>
     <File Include="Scripts/Logic/Saham.js">
-      <publishTime>05/06/2020 07:23:39</publishTime>
+      <publishTime>06/20/2020 12:55:04</publishTime>
     </File>
     <File Include="Scripts/Logic/Services.js">
-      <publishTime>04/26/2020 23:56:10</publishTime>
+      <publishTime>06/22/2020 12:07:12</publishTime>
     </File>
     <File Include="Scripts/Logic/Setting - Copy.js">
       <publishTime>03/21/2020 04:28:13</publishTime>
@@ -3076,7 +3076,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2020 04:28:13</publishTime>
     </File>
     <File Include="Scripts/Logic/Sport.js">
-      <publishTime>04/02/2020 00:15:45</publishTime>
+      <publishTime>06/20/2020 12:55:02</publishTime>
     </File>
     <File Include="Scripts/Logic/StopWatch.js">
       <publishTime>05/13/2020 13:29:11</publishTime>
@@ -3088,10 +3088,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2020 04:28:13</publishTime>
     </File>
     <File Include="Scripts/Logic/Task.js">
-      <publishTime>06/18/2020 09:28:30</publishTime>
+      <publishTime>06/22/2020 10:33:59</publishTime>
     </File>
     <File Include="Scripts/Logic/Utility.js">
-      <publishTime>06/18/2020 09:01:06</publishTime>
+      <publishTime>06/20/2020 12:55:04</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>03/21/2020 04:28:21</publishTime>
@@ -3238,7 +3238,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2020 04:28:21</publishTime>
     </File>
     <File Include="Views/Client/ListNav.cshtml">
-      <publishTime>05/31/2020 12:53:01</publishTime>
+      <publishTime>06/21/2020 13:21:58</publishTime>
     </File>
     <File Include="Views/Client/MainHome.cshtml">
       <publishTime>03/21/2020 04:28:21</publishTime>
@@ -3268,7 +3268,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2020 04:28:21</publishTime>
     </File>
     <File Include="Views/DakhloKharj/ListDaramad.cshtml">
-      <publishTime>06/18/2020 08:51:24</publishTime>
+      <publishTime>06/22/2020 11:26:24</publishTime>
     </File>
     <File Include="Views/DakhloKharj/ListMojoodyBank.cshtml">
       <publishTime>03/21/2020 04:28:21</publishTime>
@@ -3514,7 +3514,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2020 04:28:22</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutBizPage.cshtml">
-      <publishTime>05/20/2020 15:39:56</publishTime>
+      <publishTime>06/21/2020 13:28:35</publishTime>
     </File>
     <File Include="Views/Sport/Create.cshtml">
       <publishTime>03/21/2020 04:28:22</publishTime>

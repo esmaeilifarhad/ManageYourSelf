@@ -145,35 +145,45 @@ namespace ManageYourSelfMVC.Controllers
         }
         #endregion
         #region Daramad
-        public ActionResult ListDaramad(int MojoodyBankId = 0)
+      
+        public ActionResult ListDaramad(string firstDate, int MojoodyBankId)
         {
             List<ViewModels.DaramadVM> lstDaramadVM = new List<ViewModels.DaramadVM>();
-            string toDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat();
-            string firstDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().Substring(0,6) + "01";
 
-            var res = DB.Daramads.Where(q => q.MojoodyBank.UserId == UserId && q.MojoodyBankId==MojoodyBankId).
+            string toDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat();
+            //   firstDate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().Substring(0,6) + "01";
+
+            var res = DB.Daramads.Where(q => q.MojoodyBank.UserId == UserId && q.MojoodyBankId == MojoodyBankId).
                 OrderBy(q => q.MojoodyBankId).
                 ThenByDescending(q => q.Date).
-                ThenByDescending(q=>q.DaramadId).AsEnumerable().
-                Where(q=> int.Parse(q.Date) >= int.Parse(firstDate) &&
-                int.Parse(q.Date) <= int.Parse(toDate)).
-                ToList();
+                ThenByDescending(q => q.DaramadId).Take(20).ToList();
+                //.AsEnumerable().
+                //Where(q=> int.Parse(q.Date) >= int.Parse(firstDate) &&
+                //int.Parse(q.Date) <= int.Parse(toDate)).
+                //ToList();
+
+          
             foreach (var item in res)
             {
+                ManageYourSelfMVC.Models.DomainModels.TypeHazineh t = new Models.DomainModels.TypeHazineh();
+                t.name = item.TypeHazineh.name;
                 ViewModels.DaramadVM V = new ViewModels.DaramadVM();
-                V.lstTypeHazineh = DB.TypeHazinehs.Where(q => q.TypeHazinehId == item.TypeHazinehId).ToList();
-                V.lstMojoodyBank = DB.MojoodyBanks.Where(q => q.MojoodyBankId == item.MojoodyBankId).ToList();
+              //  V.lstTypeHazineh = DB.TypeHazinehs.Where(q => q.TypeHazinehId == item.TypeHazinehId).ToList();
+             //   V.lstMojoodyBank = DB.MojoodyBanks.Where(q => q.MojoodyBankId == item.MojoodyBankId).ToList();
                 V.Rial = item.Rial;
                 V.After = item.After;
                 V.Before = item.Before;
                 V.DaramadId = item.DaramadId;
-                //V.DaramadORHazineh = item.DaramadORHazineh;
-                V.Date = item.Date.ConvertDateToSlash(); ;
+                V.MojoodyBankName = item.MojoodyBank.MojoodyName;
+                V.DaramadORHazineh = item.DaramadORHazineh;
+                V.TypeHazineh = t;
+                V.Date = item.Date.ConvertDateToSlash(); 
                 V.Description = item.Description;
                 V.MojoodyBankId = item.MojoodyBankId;
                 lstDaramadVM.Add(V);
             }
-            return PartialView(lstDaramadVM);
+
+            return Json(lstDaramadVM,JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult CreateDaramad(Models.DomainModels.Daramad New)

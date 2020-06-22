@@ -103,7 +103,7 @@ function EditMasterData(Id) {
        });
 }
 function UpdateMasterDataPost(CatId) {
-    debugger
+    
     $.LoadingOverlay("show");
     //var CatId = $("#MasterModal div[name='UpdateMaterData'] table").attr("CatId");
     var Title = $("#MasterModal input[name='Title']").val();

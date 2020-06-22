@@ -7,5 +7,8 @@ namespace ManageYourSelfMVC.ViewModels.Task
 {
     public interface ITiming
     {
+         int TimingId { get; set; }
+        string Label { get; set; }
+        int Value { get; set; }
     }
 }

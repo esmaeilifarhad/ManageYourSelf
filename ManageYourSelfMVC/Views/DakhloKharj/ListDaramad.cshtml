@@ -4,10 +4,16 @@
         text-align: center;
     }
 </style>
-@*<br>
-<input type="button" name="CreateDaramad" value="جدید" class="btn btn-info" />
-<br>*@
+
+
 <div class="table-responsive">
+    <table>
+        <tr>
+            <td><input type="text" name="DateStart" autocomplete="off" placeholder="شروع" value="todayShamsy8char()" /></td>
+            <td><input type="text" name="DateEnd" autocomplete="off" placeholder="پایان" /></td>
+            <td><input type="button" value="جستجو"  /></td>
+        </tr>
+    </table>
     <table class="table Daramad" style="direction:rtl; text-align: center;font-size:11px">
         <thead>
             <tr>
@@ -57,6 +63,16 @@
         </tbody>
     </table>
 </div>
+<script>
+    $(document).ready(function () {
+        var today = foramtDate(todayShamsy8char())
+        $("input[name='DateStart']").val(today)
+        $("input[name='DateEnd']").val(today)
+    })
+    
+</script>
+
+
 
 
 

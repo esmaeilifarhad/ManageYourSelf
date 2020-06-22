@@ -1,4 +1,4 @@
-﻿var _MojoodyBankId=0;
+﻿var _MojoodyBankId = 0;
 //--Execute All List when click Tab
 $("ul li a[href='#MojoodyBank']").on("click", function () {
     RefreshListMojoodyBank()
@@ -13,10 +13,10 @@ function ListMojoodyBank() {
         url: urll,
         success: function (data) {
             $(".ListMojoodyBank").html(data);
-           // 
+            // 
             $("#footer #MojoodyBank div").remove()
             $("#footer #MojoodyBank").append(data)
-           // $("#footer #MojoodyBank").append("<h1>farhad</h1>")
+            // $("#footer #MojoodyBank").append("<h1>farhad</h1>")
         },
         error: function (error) {
             console.log(error);
@@ -24,36 +24,36 @@ function ListMojoodyBank() {
     })
 }
 function CreateMojoodyBankPost() {
-   
+
     var MojoodyName = $("#MasterModal input[name='MojoodyName']").val();
     $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/CreateMojoodyBank",
-           data: JSON.stringify({ MojoodyName: MojoodyName }),
-           success: function (result) {
-               if (result == true) {
-                   RefreshListMojoodyBank();
-               }
-               else {
-                   alert("خطا در ثبت");
-               }
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       });
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/CreateMojoodyBank",
+            data: JSON.stringify({ MojoodyName: MojoodyName }),
+            success: function (result) {
+                if (result == true) {
+                    RefreshListMojoodyBank();
+                }
+                else {
+                    alert("خطا در ثبت");
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 }
 function CreateMojoodyBankGet() {
- 
+
     $.ajax(
-       {
-           type: 'get',
-           contentType: "application/json;charset=utf-8",
-           dataType: "html",
-           url: "/DakhloKharj/CreateMojoodyBank",
+        {
+            type: 'get',
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: "/DakhloKharj/CreateMojoodyBank",
             success: function (result) {
 
                 var tablebutt = "<table class='table' style='font-size: 9px;'>"
@@ -65,71 +65,71 @@ function CreateMojoodyBankGet() {
                 $(".modal-footer").empty();
                 $(".modal-footer").append(tablebutt);
 
-               $(".BodyModal").html(result);
-               $("#MasterModal").modal();
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       }
-       );
+                $(".BodyModal").html(result);
+                $("#MasterModal").modal();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        }
+    );
 }
 function EditMojoodyBank(MojoodyBankId) {
     $.ajax(
-       {
-           type: 'get',
-           contentType: "application/json;charset=utf-8",
-           dataType: "html",
-           url: "/DakhloKharj/EditMojoodyBank?MojoodyBankId=" + MojoodyBankId,
-           success: function (result) {
-               $(".BodyModal").html(result);
-               $("#MasterModal").modal();
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       });
+        {
+            type: 'get',
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: "/DakhloKharj/EditMojoodyBank?MojoodyBankId=" + MojoodyBankId,
+            success: function (result) {
+                $(".BodyModal").html(result);
+                $("#MasterModal").modal();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 }
 function UpdateMojoodyBank() {
- 
+
     var MojoodyName = $("#MasterModal input[name='MojoodyName']").val();
     var MojoodyBankId = $("#MasterModal div[name='EditMojoodyBank'] table").attr("MojoodyBankId");
     $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/UpdateMojoodyBank",
-           data: JSON.stringify({ MojoodyName: MojoodyName, MojoodyBankId: MojoodyBankId }),
-           success: function (result) {
-               RefreshListMojoodyBank();
-               $('#MasterModal').modal('hide');
-           }
-       });
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/UpdateMojoodyBank",
+            data: JSON.stringify({ MojoodyName: MojoodyName, MojoodyBankId: MojoodyBankId }),
+            success: function (result) {
+                RefreshListMojoodyBank();
+                $('#MasterModal').modal('hide');
+            }
+        });
 }
 function DeleteMojoodyBank(MojoodyBankId) {
     var res = confirm("آیا حذف انجام شود؟");
     if (res == true) {
 
-   
 
-    $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/DeleteMojoodyBank",
 
-           data: JSON.stringify({ MojoodyBankId: MojoodyBankId }),
-           success: function (result) {
-               if (result == true) {
-                   RefreshListMojoodyBank();
-               }
-               else {
-                   alert("خطا در ثبت");
-               }
-           }
-       });
+        $.ajax(
+            {
+                type: 'POST',
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                url: "/DakhloKharj/DeleteMojoodyBank",
+
+                data: JSON.stringify({ MojoodyBankId: MojoodyBankId }),
+                success: function (result) {
+                    if (result == true) {
+                        RefreshListMojoodyBank();
+                    }
+                    else {
+                        alert("خطا در ثبت");
+                    }
+                }
+            });
     }
 }
 function RefreshListMojoodyBank() {
@@ -166,35 +166,35 @@ function DeleteTypeHazineh(TypeHazinehId) {
     var res = confirm("آیا حذف انجام شود؟");
     if (res == true) {
         $.ajax(
-           {
-               type: 'POST',
-               contentType: "application/json;charset=utf-8",
-               dataType: "json",
-               url: "/DakhloKharj/DeleteTypeHazineh",
+            {
+                type: 'POST',
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                url: "/DakhloKharj/DeleteTypeHazineh",
 
-               data: JSON.stringify({ TypeHazinehId: TypeHazinehId }),
-               success: function (result) {
-                   if (result == true) {
-                       RefreshListMojoodyBank();
-                   }
-                   else {
-                       alert("خطا در ثبت");
-                   }
-               },
-               error: function (result) {
-                   alert(result);
-               }
-           });
+                data: JSON.stringify({ TypeHazinehId: TypeHazinehId }),
+                success: function (result) {
+                    if (result == true) {
+                        RefreshListMojoodyBank();
+                    }
+                    else {
+                        alert("خطا در ثبت");
+                    }
+                },
+                error: function (result) {
+                    alert(result);
+                }
+            });
     }
 }
 function CreateTypeHazinehGet() {
 
     $.ajax(
-       {
-           type: 'get',
-           contentType: "application/json;charset=utf-8",
-           dataType: "html",
-           url: "/DakhloKharj/CreateTypeHazineh",
+        {
+            type: 'get',
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: "/DakhloKharj/CreateTypeHazineh",
             success: function (result) {
 
                 var tablebutt = "<table class='table' style='font-size: 9px;'>"
@@ -208,85 +208,171 @@ function CreateTypeHazinehGet() {
 
 
 
-               $(".BodyModal").html(result);
-               $("#MasterModal").modal();
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       }
-       );
+                $(".BodyModal").html(result);
+                $("#MasterModal").modal();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        }
+    );
 }
 function CreateTypeHazinehPost() {
     var name = $("#MasterModal input[name='name']").val();
     var DaramadOrKharj = $("#MasterModal  input[type='radio'][name='TypeHazineh']:checked").val();
     $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/CreateTypeHazineh",
-           data: JSON.stringify({ name: name, DaramadOrKharj: DaramadOrKharj }),
-           success: function (result) {
-               if (result == true) {
-                   RefreshListMojoodyBank();
-               }
-               else {
-                   alert("خطا در ثبت");
-               }
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       });
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/CreateTypeHazineh",
+            data: JSON.stringify({ name: name, DaramadOrKharj: DaramadOrKharj }),
+            success: function (result) {
+                if (result == true) {
+                    RefreshListMojoodyBank();
+                }
+                else {
+                    alert("خطا در ثبت");
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 }
 function EditTypeHazineh(TypeHazinehId) {
     $.ajax(
-       {
-           type: 'get',
-           contentType: "application/json;charset=utf-8",
-           dataType: "html",
-           url: "/DakhloKharj/EditTypeHazineh?TypeHazinehId=" + TypeHazinehId,
-           success: function (result) {
-               $(".BodyModal").html(result);
-               $("#MasterModal").modal();
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       });
+        {
+            type: 'get',
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: "/DakhloKharj/EditTypeHazineh?TypeHazinehId=" + TypeHazinehId,
+            success: function (result) {
+                $(".BodyModal").html(result);
+                $("#MasterModal").modal();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 }
 function UpdateTypeHazineh() {
     var TypeHazinehId = $("#MasterModal div[name='EditTypeHazineh'] table").attr("TypeHazinehId");
     var name = $("#MasterModal input[name='name']").val();
     var DaramadOrKharj = $("#MasterModal  input[type='radio'][name='TypeHazineh']:checked").val();
     $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/UpdateTypeHazineh",
-           data: JSON.stringify({ name: name, DaramadOrKharj: DaramadOrKharj, TypeHazinehId: TypeHazinehId }),
-           success: function (result) {
-               RefreshListMojoodyBank();
-           }
-       });
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/UpdateTypeHazineh",
+            data: JSON.stringify({ name: name, DaramadOrKharj: DaramadOrKharj, TypeHazinehId: TypeHazinehId }),
+            success: function (result) {
+                RefreshListMojoodyBank();
+            }
+        });
 }
 //---------------------------------------------------Events
 
 //***************************************************Daramad
-function ListDaramd(MojoodyBankId) {
-    
-    _MojoodyBankId = (MojoodyBankId == undefined ? _MojoodyBankId : MojoodyBankId)
-    
-    var urll = "/DakhloKharj/ListDaramad?MojoodyBankId=" + _MojoodyBankId
-    $.ajax({
-        type: "Get",
-        contentType: "application/json;charset=utf-8",
-        dataType: "html",
-        url: urll,
-        success: function (data) {
+async function ListDaramd(MojoodyBankId) {
 
+ 
+       
+       
+   
+
+  
+
+    var firstDate =""
+
+    const m = moment();
+    m.add(-10, 'day')
+    var newDate = m.format('jYYYY/jM/jD')
+    firstDate = convertDateToslashless(newDate)
+
+    _MojoodyBankId = (MojoodyBankId == undefined ? _MojoodyBankId : MojoodyBankId)
+
+
+    var obj = {}
+    obj.url = "/DakhloKharj/ListDaramad"
+    obj.dataType = "json"
+    obj.type = "post"
+
+    // var time = CurrentTime()
+    // var date = todayShamsy8char()
+    obj.data = { firstDate: firstDate, MojoodyBankId: _MojoodyBankId }
+    var results = await Promise.all([
+        service(obj)
+    ]);
+
+    var ListObj = results[0]
+
+    var tablebutt = "<tr>" +
+        "<td><input type='button'  class='btn btn-danger' value='بستن' onclick='closeModal()'/></td>" +
+        "</tr>"
+    tablebutt += "</table>"
+
+    $(".modal-footer").empty();
+    $(".modal-footer").append(tablebutt);
+
+    var table = " <table>"+
+       "<tr>"+
+        " <td><input type='text' name='DateStart' autocomplete='off' placeholder='شروع' value=" + foramtDate(todayShamsy8char())+"  /></td>"+
+        " <td><input type='text' name='DateEnd' autocomplete='off' placeholder='پایان' value=" + foramtDate(todayShamsy8char()) +" /></td>"+
+       " <td><input type='button' value='جستجو' /></td>"+
+       " </tr >"+
+   " </table >" +
+        "<table class='table table-responsive'>" +
+        "<tr><th>بانک</th><th>نوع هزینه</th><th>تاریخ</th><th>پرداخت | دریافت</th><th>توضیحات</th><th>ریال</th><th>قبل</th><th>بعد</th></tr>"
+    for (var i = 0; i < ListObj.length; i++) {
+
+        table += "<tr>" +
+            "<td>" + ListObj[i].MojoodyBankName + "</td>" +
+            "<td>" + ListObj[i].TypeHazineh.name + "</td>" +
+            "<td>" + ListObj[i].Date + "</td>"
+        if (ListObj[i].DaramadORHazineh == true) {
+            table += "<td style='color:green'>دریافت</td>"
+        }
+        else {
+
+            table += "<td style='color:red'>پرداخت</td>"
+        }
+        table += "<td>" + ListObj[i].Description + "</td>" +
+            "<td>" + SeparateThreeDigits(ListObj[i].Rial) + "</td>" +
+            "<td>" + SeparateThreeDigits(ListObj[i].Before) + "</td>" +
+            "<td>" + SeparateThreeDigits(ListObj[i].After) + "</td>" +
+            "<td><span style='color:green' class='fa fa-edit pointer' onclick='EditDaramad("+ListObj[i].DaramadId+")'></span></td>"+
+            "<td><span style='color:red' class='fa fa-remove pointer' onclick='DeleteDaramad("+ListObj[i].DaramadId+")'></span></td>"+
+            "</tr >"
+    }
+
+    table += "</table>"
+
+
+    //var tablebutt = "<tr>" +
+    //    "<td><input type='button' class='btn btn-success' value='ویرایش' onclick='UpdateBook(" + ListObj.BookId + ")'/> | " +
+    //    "<input type='button'  class='btn btn-danger' value='بستن' onclick='closeModal()'/></td>" +
+    //    "</tr>"
+    //tablebutt += "</table>"
+
+    //$(".modal-footer").empty();
+    //$(".modal-footer").append(tablebutt);
+
+    $(".BodyModal").empty();
+    $(".BodyModal").append(table);
+    $("#MasterModal").modal();
+
+    /*
+    var urll = "/DakhloKharj/ListDaramad"
+    $.ajax({
+        type: "post",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        url: urll,
+        data: { Datee: Datee, MojoodyBankId: _MojoodyBankId},
+        success: function (data) {
+            debugger
             var tablebutt = "<table class='table' style='font-size: 9px;'>"
             tablebutt += "<tr>" +
                 "<td> " +
@@ -305,14 +391,15 @@ function ListDaramd(MojoodyBankId) {
             console.log(error);
         }
     })
+    */
 }
-function CreateDaramdGet(MojoodyBankId) { 
+function CreateDaramdGet(MojoodyBankId) {
     $.ajax(
-       {
-           type: 'get',
-           contentType: "application/json;charset=utf-8",
-           dataType: "html",
-           url: "/DakhloKharj/CreateDaramad?MojoodyBankId=" + MojoodyBankId,
+        {
+            type: 'get',
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: "/DakhloKharj/CreateDaramad?MojoodyBankId=" + MojoodyBankId,
             success: function (result) {
 
                 var tablebutt = "<table class='table' style='font-size: 9px;'>"
@@ -324,86 +411,86 @@ function CreateDaramdGet(MojoodyBankId) {
                 $(".modal-footer").empty();
                 $(".modal-footer").append(tablebutt);
 
-               $(".BodyModal").html(result);
-               $("#MasterModal").modal();
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       }
-       );
+                $(".BodyModal").html(result);
+                $("#MasterModal").modal();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        }
+    );
 }
 function CreateDaramadPost() {
-    
+
     var MojoodyBankId = $("#MasterModal .MYSelect option:selected").val();
     _MojoodyBankId = (MojoodyBankId == undefined ? _MojoodyBankId : MojoodyBankId)
-        var TypeHazinehId = $("#MasterModal .SelectlstTypeHazineh option:selected").val();
-        var Rial = $("#MasterModal input[name='Rial']").val();
+    var TypeHazinehId = $("#MasterModal .SelectlstTypeHazineh option:selected").val();
+    var Rial = $("#MasterModal input[name='Rial']").val();
 
-        Rial = parseInt(removeComma(Rial))
+    Rial = parseInt(removeComma(Rial))
 
-        var Description = $("#MasterModal input[name='Description']").val();
-        var Date = $("#MasterModal input[name='Date']").val();
-  //  var DaramadOrKharj = $("#MasterModal  input[type='radio'][name='TypeHazineh']:checked").val();
+    var Description = $("#MasterModal input[name='Description']").val();
+    var Date = $("#MasterModal input[name='Date']").val();
+    //  var DaramadOrKharj = $("#MasterModal  input[type='radio'][name='TypeHazineh']:checked").val();
     $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/CreateDaramad",
-           data: JSON.stringify({ MojoodyBankId: MojoodyBankId, TypeHazinehId: TypeHazinehId, Rial: Rial, Description: Description, Date:Date }),
-           success: function (result) {
-           
-                   RefreshListMojoodyBank();
-                   //$("#MasterModal").hide();
-                   $('#MasterModal').modal('hide');
-            
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       });
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/CreateDaramad",
+            data: JSON.stringify({ MojoodyBankId: MojoodyBankId, TypeHazinehId: TypeHazinehId, Rial: Rial, Description: Description, Date: Date }),
+            success: function (result) {
+
+                RefreshListMojoodyBank();
+                //$("#MasterModal").hide();
+                $('#MasterModal').modal('hide');
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 }
 function DeleteDaramad(DaramadId) {
     $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/DeleteDaramad",
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/DeleteDaramad",
 
-           data: JSON.stringify({ DaramadId: DaramadId }),
-           success: function (result) {
-               if (result == true) {
-                   RefreshListMojoodyBank();
-               }
-               else {
-                   alert("خطا در ثبت");
-               }
-           },
-           error: function (result) {
-               alert(result);
-           }
-       });
+            data: JSON.stringify({ DaramadId: DaramadId }),
+            success: function (result) {
+                if (result == true) {
+                    RefreshListMojoodyBank();
+                }
+                else {
+                    alert("خطا در ثبت");
+                }
+            },
+            error: function (result) {
+                alert(result);
+            }
+        });
 }
 function EditDaramad(DaramadId) {
     $.ajax(
-       {
-           type: 'get',
-           contentType: "application/json;charset=utf-8",
-           dataType: "html",
-           url: "/DakhloKharj/EditDaramad?DaramadId=" + DaramadId,
-           success: function (result) {
-               $(".BodyModal").html(result);
-               $("#MasterModal").modal();
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       });
+        {
+            type: 'get',
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: "/DakhloKharj/EditDaramad?DaramadId=" + DaramadId,
+            success: function (result) {
+                $(".BodyModal").html(result);
+                $("#MasterModal").modal();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 }
 function UpdateDaramad(DaramadId) {
-    
+
     var MojoodyBankId = $("#MasterModal #MojoodyBank option:selected").val();
     var TypeHazinehId = $("#MasterModal .SelectlstTypeHazineh option:selected").val();
     var Rial = $("#MasterModal input[name='Rial']").val();
@@ -413,27 +500,27 @@ function UpdateDaramad(DaramadId) {
     var Date = $("#MasterModal input[name='Date']").val();
 
     $.ajax(
-      {
-          type: 'POST',
-          contentType: "application/json;charset=utf-8",
-          dataType: "json",
-          url: "/DakhloKharj/UpdateDaramad",
-          data: JSON.stringify({ MojoodyBankId: MojoodyBankId, TypeHazinehId: TypeHazinehId, Rial: Rial, Description: Description, Date: Date,DaramadId:DaramadId }),
-          success: function (result) {
-              //if (result == true) {
-              RefreshListMojoodyBank();
-              $('#MasterModal').modal('hide');
-              //}
-              //else {
-              //    alert("خطا در ثبت");
-              //}
-          },
-          error: function (error) {
-              console.log(error);
-          }
-      });
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/UpdateDaramad",
+            data: JSON.stringify({ MojoodyBankId: MojoodyBankId, TypeHazinehId: TypeHazinehId, Rial: Rial, Description: Description, Date: Date, DaramadId: DaramadId }),
+            success: function (result) {
+                //if (result == true) {
+                RefreshListMojoodyBank();
+                $('#MasterModal').modal('hide');
+                //}
+                //else {
+                //    alert("خطا در ثبت");
+                //}
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 
-    
+
 
 }
 //--------------------------Events
@@ -458,11 +545,11 @@ function UpdateDaramad(DaramadId) {
 function EditMojoodyBankBalance(MojoodyBankId) {
     _MojoodyBankId = (MojoodyBankId == undefined ? _MojoodyBankId : MojoodyBankId)
     $.ajax(
-       {
-           type: 'get',
-           contentType: "application/json;charset=utf-8",
-           dataType: "html",
-           url: "/DakhloKharj/EditMojoodyBankBalance?MojoodyBankId=" + MojoodyBankId,
+        {
+            type: 'get',
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: "/DakhloKharj/EditMojoodyBankBalance?MojoodyBankId=" + MojoodyBankId,
             success: function (result) {
 
 
@@ -475,13 +562,13 @@ function EditMojoodyBankBalance(MojoodyBankId) {
                 $(".modal-footer").empty();
                 $(".modal-footer").append(tablebutt);
 
-               $(".BodyModal").html(result);
-               $("#MasterModal").modal();
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       });
+                $(".BodyModal").html(result);
+                $("#MasterModal").modal();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 }
 function UpdateMojoodyBankBalance() {
     var FalseRial = $("#MasterModal input[name='FalseRial']").val();
@@ -493,26 +580,26 @@ function UpdateMojoodyBankBalance() {
     var MojoodyBankId = $("#MasterModal div[name='EditMojoodyBankBalance'] table").attr("MojoodyBankId");
     _MojoodyBankId = (MojoodyBankId == undefined ? _MojoodyBankId : MojoodyBankId)
     $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/UpdateMojoodyBankBalance?MojoodyBankId=" + MojoodyBankId + "&&FalseRial=" + FalseRial + "&&OkRial=" + OkRial,
-           //data: JSON.stringify({ MojoodyName: MojoodyName, MojoodyBankId: MojoodyBankId }),
-           success: function (result) {
-               RefreshListMojoodyBank();
-               $('#MasterModal').modal('hide');
-           }
-       });
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/UpdateMojoodyBankBalance?MojoodyBankId=" + MojoodyBankId + "&&FalseRial=" + FalseRial + "&&OkRial=" + OkRial,
+            //data: JSON.stringify({ MojoodyName: MojoodyName, MojoodyBankId: MojoodyBankId }),
+            success: function (result) {
+                RefreshListMojoodyBank();
+                $('#MasterModal').modal('hide');
+            }
+        });
 }
 //***************************************************Exchange
 function EditMojoodyBankExchange(MojoodyBankId) {
     $.ajax(
-       {
-           type: 'get',
-           contentType: "application/json;charset=utf-8",
-           dataType: "html",
-           url: "/DakhloKharj/EditMojoodyBankExchange?MojoodyBankId=" + MojoodyBankId,
+        {
+            type: 'get',
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            url: "/DakhloKharj/EditMojoodyBankExchange?MojoodyBankId=" + MojoodyBankId,
             success: function (result) {
 
 
@@ -525,13 +612,13 @@ function EditMojoodyBankExchange(MojoodyBankId) {
                 $(".modal-footer").empty();
                 $(".modal-footer").append(tablebutt);
 
-               $(".BodyModal").html(result);
-               $("#MasterModal").modal();
-           },
-           error: function (error) {
-               console.log(error);
-           }
-       });
+                $(".BodyModal").html(result);
+                $("#MasterModal").modal();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 }
 function UpdateMojoodyBankExchange() {
     var Rial = $("#MasterModal input[name='Rial']").val();
@@ -541,16 +628,16 @@ function UpdateMojoodyBankExchange() {
     var MojoodyBankIdDestination = $("#MasterModal .MYSelect option:selected").val();
     _MojoodyBankId = (MojoodyBankIdDestination == undefined ? _MojoodyBankId : MojoodyBankIdDestination)
     $.ajax(
-       {
-           type: 'POST',
-           contentType: "application/json;charset=utf-8",
-           dataType: "json",
-           url: "/DakhloKharj/UpdateMojoodyBankExchange?MojoodyBankIdSource=" + MojoodyBankIdSource + "&&MojoodyBankIdDestination=" + MojoodyBankIdDestination + "&&Rial=" + Rial + "&&Date=" + Date,
-           //data: JSON.stringify({ MojoodyName: MojoodyName, MojoodyBankId: MojoodyBankId }),
-           success: function (result) {
-               RefreshListMojoodyBank();
-           }
-       });
+        {
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            url: "/DakhloKharj/UpdateMojoodyBankExchange?MojoodyBankIdSource=" + MojoodyBankIdSource + "&&MojoodyBankIdDestination=" + MojoodyBankIdDestination + "&&Rial=" + Rial + "&&Date=" + Date,
+            //data: JSON.stringify({ MojoodyName: MojoodyName, MojoodyBankId: MojoodyBankId }),
+            success: function (result) {
+                RefreshListMojoodyBank();
+            }
+        });
 }
 //****************************************************Report
 function Rpt_ListGroupHazine() {

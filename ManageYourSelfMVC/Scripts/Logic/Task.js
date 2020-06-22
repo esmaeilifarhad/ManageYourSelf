@@ -128,8 +128,7 @@ $("body").on("click", ".Ta", function () {
 //------ListTaskAnjamNashode
 $("#menu4 input[name='task']").on("click", function () {
 
-    debugger
-    ListTimingForListTask(0)
+  
     //console.log($("input[type='radio'][name='task']:checked").val())
     var ValOfRadio = $("input[type='radio'][name='task']:checked").val();
     var typeTask;
@@ -436,7 +435,7 @@ function ListTaskAnjamShode(date) {
                 if (result.lstListTaskFuture.length > 0) {
                     var table = "<span>" + calDayOfWeek(result.lstListTaskFuture[0].DateEnd) + "    </span>" +
                         "<span>" + foramtDate(result.lstListTaskFuture[0].DateEnd) + "</span>" +
-                        "<table class='table-bordered' style='font-size: 9px;'>"
+                        "<table class='table-bordered' style='position: relative;z-index: 15;font-size: 9px;text-align: center;color:white;background-image: linear-gradient(to left, #405dc5, #010b17);'>"
                     table += "<tr>" +
                         "<th>ردیف</th>" +
                         "<th>گروه</th>" +
@@ -451,7 +450,7 @@ function ListTaskAnjamShode(date) {
                         table += "<tr>" +
                             "<td>" + (index + 1) + "</td>" +
                             "<td>" + result.lstListTaskFuture[index].Title + "</td>" +
-                            "<td>" + result.lstListTaskFuture[index].Name + "</td>" +
+                            "<td style='text-align: justify;padding: 5px;'>" + result.lstListTaskFuture[index].Name + "</td>" +
                             "<td>" + result.lstListTaskFuture[index].Rate + "</td>" +
                             "<td><input value='ویرایش' type='button' onclick=' EditTask(" + result.lstListTaskFuture[index].TaskId + ")'/></td>" +
                             "<td><input value='حذف' type='button' onclick='DeleteTask({Id:" + result.lstListTaskFuture[index].TaskId + "})'/></td>" +
@@ -465,7 +464,7 @@ function ListTaskAnjamShode(date) {
                     $(".ShowSumRate").append("<button type='button' class='btn' style='background-color: #4430c5;color:white'>" + sum + "</button>")
 
                 }
-                var showRateTaskDays = "<div style='font-size:11px'><table class='table-bordered'>"
+                var showRateTaskDays = "<div style='font-size:11px'><table  style='position: relative;z-index: 15;background-image: linear-gradient(to left, rgba(0, 0, 0, 0), #fea);' class='table-bordered'>"
                 for (let index = 0; index < result.lstRateTaskDays.length; index++) {
 
                     if (index % 5 == 0) {
@@ -685,6 +684,8 @@ function ChangeTodayTaskPost(CatId) {
             success: function (result) {
                 $("#MasterModal").modal("toggle");
                 ListTaskGeneral();
+                ListTask("anjamnashode");
+               
                 RefreshTask();
                 if (result.result == false) {
                     alert("ChangeTodayTaskPost() : " + result.message)
@@ -771,6 +772,9 @@ function UpdateTask(TaskId) {
 }
 async function ListTask(typeTask) {
 
+    
+    ListTimingForListTask(0)
+    ListTaskAnjamShode();
 
     var MyArray = [];
     var lvl = '';
@@ -927,6 +931,8 @@ function ListTiming(x) {
     }
 }
 async function ListTimingForListTask(x) {
+    var d = new Date();
+    var currentHour = d.getHours();
 
     $.LoadingOverlay("show");
     
@@ -942,7 +948,51 @@ async function ListTimingForListTask(x) {
         service(objListTaskAnjamnashode)
     ]);
     var ListTaskAnjamnashode = results[0]
-    debugger
+    var table ="<table class='table table-responsive' style='position: relative;z-index: 15;font-size:9px;text-align: center;background-image: linear-gradient(to left, #ded4ab, #dae6f3);'>"+
+        "<tr>"+
+        "<th>تغییر اولیت</th>"+
+        "<th>اولویت</th>"+
+        "<th>عنوان</th>"+
+         "<th>Rate</th>"+
+         "<th>تاریخ</th>"+
+          "<th>ساعت</th>"+
+           "<th>زمان</th>"+
+            "<th>حذف</th>"+
+             "<th>ویرایش</th>"+
+              "<th>انجام</th>"+
+        "</tr>"
+    for (var i = 0; i < ListTaskAnjamnashode.length; i++) {
+        
+        if (currentHour == ListTaskAnjamnashode[i].Value && todayShamsy8char()==ListTaskAnjamnashode[i].DateEnd)
+        {
+            table+="<tr style='color: white; background-color: #981313;'>"
+            
+        }
+        else
+        {
+            table+="<tr>"
+            
+        }
+
+       
+        table+= "<td><input type='button' style='background-color:green' class='fa fa-sort-up pointer' onclick='TaskUpLevel("+ListTaskAnjamnashode[i].TaskId+")'/><input type='button' style='background-color:red' class='fa fa-sort-down pointer' onclick='TaskDownLevel("+ListTaskAnjamnashode[i].TaskId+")'/></td>"+
+            "<td style='white-space: nowrap;'>"+ListTaskAnjamnashode[i].Olaviat+"</td>"+
+        "<td style='text-align:right'>"+ListTaskAnjamnashode[i].Name.substring(0,40)+" ... </td>"+
+         "<td>"+ListTaskAnjamnashode[i].Rate+"</td>"+
+            "<td>" + foramtDate(ListTaskAnjamnashode[i].DateEnd) +"<br/>"+ calDayOfWeek(ListTaskAnjamnashode[i].DateEnd)+ "</td>"+
+             "<td style='white-space: nowrap;'>"+ListTaskAnjamnashode[i].Label+"</td>"+
+             "<td><span class='fa fa-calendar pointer' onclick='TimingTask("+ListTaskAnjamnashode[i].TaskId+")'></span></td>"+
+             "<td><span class='fa fa-remove pointer' onclick='removeTimeTask("+ListTaskAnjamnashode[i].TaskId+")'></span></td>"+
+             
+  
+        "<td><span class='fa fa-edit pointer' onclick='EditTask("+ListTaskAnjamnashode[i].TaskId+")' style='display: inline;'></span></td>"+
+         "<td><input type='checkbox' class='pointer' onclick='UpdateTask2({TaskId:"+ListTaskAnjamnashode[i].TaskId+",IsCheck:true})'/></td>"+
+        "</tr>"
+    }
+    table+="</table>"
+    $(".ListTaskTiming").empty();
+    $(".ListTaskTiming").append(table);
+    
     $.LoadingOverlay("hide");
 }
 function ListTaskGeneral() {
@@ -1125,7 +1175,7 @@ async function changeToAnjamShode() {
 
             ListTask("anjamnashode");
 
-            ListTaskAnjamShode();
+           
 
             $.LoadingOverlay("hide");
             // resolve("finish")
@@ -1157,7 +1207,7 @@ async function transferDate(str) {
 
         if (count == i) {
             ListTask("anjamnashode");
-            ListTaskAnjamShode();
+           
             $.LoadingOverlay("hide");
             // resolve("finish")
         }
@@ -1167,7 +1217,7 @@ async function transferDate(str) {
 }
 
 function UpdateTask2(obj) {
-
+    
     return new Promise(resolve => {
         $.ajax(
             {
@@ -1177,7 +1227,7 @@ function UpdateTask2(obj) {
                 url: "/Task/UpdateTask",
                 data: JSON.stringify({ TaskId: obj.TaskId, DateEnd: obj.DateEnd, IsCheck: obj.IsCheck }),
                 success: function (result) {
-
+                    ListTask("anjamnashode")
                     resolve(result)
 
                 },
@@ -1285,5 +1335,5 @@ function RefreshTask() {
     ListTaskGeneral();
     ListTaslLevelHigh();
     ListTiming(0);
-    ListTaskAnjamShode();
+  
 }

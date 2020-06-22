@@ -527,7 +527,7 @@ function EditWord(WordId) {
     })
 }
 function EditExample(ExampleId,wordId) {
-    debugger
+    
     _wordId=wordId
     var Word = ""
     var urll = "/Dictionary/EditExample?ExampleId=" + ExampleId;

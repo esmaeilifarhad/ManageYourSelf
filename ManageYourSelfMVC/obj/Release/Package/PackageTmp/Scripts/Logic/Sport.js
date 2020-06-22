@@ -55,7 +55,7 @@ async function SaveNewSport(CatId)
     var Date = $("#bd-root-PersianDatePickerSport2 input[name='DateEnd']").val();
     Date=convertDateToslashless(Date)
     var Tedad = $(".saveData input[name='Tedad']").val();
-    debugger
+    
     var obj={}
     obj.url="/Sport/CreateNewSport"
     obj.dataType="json"

@@ -33,11 +33,11 @@ namespace ManageYourSelfMVC.Controllers
             //}
         }
         #endregion
-        public ActionResult ListTaskAnjamnashode(string typeTask,List<string> MyData)
+        public ActionResult ListTaskAnjamnashode(string typeTask, List<string> MyData)
         {
 
             List<ViewModels.TaskVM> ListTaskVM = T.ListTask(typeTask, UserId, MyData);
-            return Json(ListTaskVM,JsonRequestBehavior.AllowGet);
+            return Json(ListTaskVM, JsonRequestBehavior.AllowGet);
             // return Json(ListTaskVM, JsonRequestBehavior.AllowGet);
         }
         public JsonResult CreateTask(Models.DomainModels.Task T)
@@ -61,7 +61,7 @@ namespace ManageYourSelfMVC.Controllers
                     DB.Tasks.Add(NewTask);
                     DB.SaveChanges();
                 }
-              
+
             }
             else
             {
@@ -84,18 +84,18 @@ namespace ManageYourSelfMVC.Controllers
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult CreateTaskView(int CatId=0)
+        public ActionResult CreateTaskView(int CatId = 0)
         {
             ViewModels.VM_Public V = new ViewModels.VM_Public();
             if (CatId == 0)
             {
-                V.Cat = DB.Cats.SingleOrDefault(q => q.CatId == CatId); 
+                V.Cat = DB.Cats.SingleOrDefault(q => q.CatId == CatId);
                 V.ListCat = DB.Cats.Where(q => q.UserId == UserId && q.Code == 2).OrderBy(q => q.Order).ToList();
-                V.Currentdate =  Utility.Utility.shamsi_date().ConvertDateToSqlFormat().ConvertDateToSlash();
+                V.Currentdate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().ConvertDateToSlash();
             }
             else
             {
-                V.Cat=DB.Cats.SingleOrDefault(q =>  q.CatId == CatId);
+                V.Cat = DB.Cats.SingleOrDefault(q => q.CatId == CatId);
                 V.ListCat = DB.Cats.Where(q => q.UserId == UserId && q.Code == 2).OrderBy(q => q.Order).ToList();
                 V.Currentdate = Utility.Utility.shamsi_date().ConvertDateToSqlFormat().ConvertDateToSlash();
             }
@@ -120,10 +120,10 @@ namespace ManageYourSelfMVC.Controllers
             task.Olaviat = oldTask.Olaviat;
             task.Rate = oldTask.Rate;
             task.TaskId = oldTask.TaskId;
-            
+
             T.Task = task;
 
-           
+
             List<Models.DomainModels.Cat> lst = DB.Cats.Where(q => q.UserId == UserId && q.Code == 2).OrderBy(q => q.Order).ToList();
             foreach (var item in lst)
             {
@@ -138,7 +138,7 @@ namespace ManageYourSelfMVC.Controllers
             T.ListCat = lstcat;
 
 
-            return Json(T,JsonRequestBehavior.AllowGet);
+            return Json(T, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeTodayTask(int CatId)
         {
@@ -148,7 +148,7 @@ namespace ManageYourSelfMVC.Controllers
             return PartialView(V);
         }
         [HttpPost]
-        public ActionResult ChangeTodayTask(int CatId, string DateEnd,bool chkIsTransfer)
+        public ActionResult ChangeTodayTask(int CatId, string DateEnd, bool chkIsTransfer)
         {
             ViewModels.ErrorMessage Error = new ViewModels.ErrorMessage();
             Error.result = false;
@@ -160,13 +160,13 @@ namespace ManageYourSelfMVC.Controllers
                 List<Models.DomainModels.Task> res;
                 if (chkIsTransfer == true)
                 {
-                    res = DB.Tasks.Where(q => q.CatId == CatId && q.IsCheck==false).ToList();
+                    res = DB.Tasks.Where(q => q.CatId == CatId && q.IsCheck == false).ToList();
                 }
                 else
                 {
-                     res = DB.Tasks.Where(q => q.CatId == CatId && q.DateEnd == V.CurrentDate6Char).ToList();
+                    res = DB.Tasks.Where(q => q.CatId == CatId && q.DateEnd == V.CurrentDate6Char && q.IsCheck == false).ToList();
                 }
-               
+
                 foreach (var item in res)
                 {
                     var old = DB.Tasks.SingleOrDefault(q => q.TaskId == item.TaskId);
@@ -246,10 +246,10 @@ namespace ManageYourSelfMVC.Controllers
         [HttpPost]
         public JsonResult UpdateTask(Models.DomainModels.Task NewTask)
         {
-            string[] parts=new string[0];
+            string[] parts = new string[0];
             if (NewTask.Name != null)
             {
-                 parts = NewTask.Name.Split(new string[] { "@@" }, StringSplitOptions.None);
+                parts = NewTask.Name.Split(new string[] { "@@" }, StringSplitOptions.None);
 
             }
             if (parts.Length > 1)
@@ -260,7 +260,7 @@ namespace ManageYourSelfMVC.Controllers
                 for (int i = 0; i < parts.Length; i++)
                 {
 
-                   
+
                     Models.DomainModels.Task newTask = new Models.DomainModels.Task();
                     newTask.IsActive = (NewTask.IsActive == null ? OldTask.IsActive : NewTask.IsActive);
                     newTask.IsCheck = (NewTask.IsCheck == null ? OldTask.IsCheck : NewTask.IsCheck);
@@ -302,7 +302,7 @@ namespace ManageYourSelfMVC.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
 
 
-           
+
 
         }
         public JsonResult DeleteTask(int Id)
@@ -323,12 +323,12 @@ namespace ManageYourSelfMVC.Controllers
             }
             catch (Exception ex)
             {
-   
-                throw new ArgumentException("خطا در حذف",ex);
-               // return Json(ex.ToString(), JsonRequestBehavior.AllowGet);
+
+                throw new ArgumentException("خطا در حذف", ex);
+                // return Json(ex.ToString(), JsonRequestBehavior.AllowGet);
             }
-         
-          
+
+
         }
         public JsonResult TaskToday()
         {
@@ -414,7 +414,8 @@ namespace ManageYourSelfMVC.Controllers
             }
         }
         [HttpPost]
-        public ActionResult ListTaskAnjamShode(string today) {
+        public ActionResult ListTaskAnjamShode(string today)
+        {
             ViewModels.Task.Task task = new ViewModels.Task.Task();
             ViewModels.ErrorMessage Error = new ViewModels.ErrorMessage();
             Error.result = false;
@@ -442,7 +443,7 @@ on task.CatId=Cat.CatId
 where Task.IsCheck=1 
 and Task.IsActive=1
 and Task.UserId=" + UserId + @"
-and Task.DateEnd=cast("+ today + @" as nvarchar) 
+and Task.DateEnd=cast(" + today + @" as nvarchar) 
 
 union All
 
@@ -467,7 +468,7 @@ order by Title,Rate desc
                     T.DateStart = item["DateStart"].ToString();
                     T.DateEnd = item["DateEnd"].ToString();
                     T.Title = item["Title"].ToString();
-                    T.Rate= int.Parse(item["Rate"].ToString());
+                    T.Rate = int.Parse(item["Rate"].ToString());
 
                     lstT.Add(T);
                 }
@@ -528,7 +529,7 @@ order by DateEnd desc
             try
             {
                 List<ViewModels.Task.ListTaskFuture> lstT = new List<ViewModels.Task.ListTaskFuture>();
-    
+
                 DataTable DT = U.Select(@"
 select 
 Task.TaskId
@@ -542,7 +543,7 @@ Task.TaskId
 from task left join Cat 
 on task.CatId=Cat.CatId
 where 
-Task.Name like N'%"+Name+ @"%'
+Task.Name like N'%" + Name + @"%'
 and Task.UserId=" + UserId + @"
 order by DateEnd desc,isnull(Olaviat,0)
  ");
@@ -580,8 +581,8 @@ order by DateEnd desc,isnull(Olaviat,0)
             Error.message = string.Empty;
             try
             {
-               // ViewModels.Task.ListTaskFuture T = new ViewModels.Task.ListTaskFuture();
-               // ViewModels.VM_Public V = new ViewModels.VM_Public();
+                // ViewModels.Task.ListTaskFuture T = new ViewModels.Task.ListTaskFuture();
+                // ViewModels.VM_Public V = new ViewModels.VM_Public();
                 List<ViewModels.Task.ListTaskFuture> lstT = new List<ViewModels.Task.ListTaskFuture>();
                 // DataTable DT = U.Select("exec [PersianToEnglish] " + UserId.ToString());
                 DataTable DT = U.Select(@"
@@ -616,12 +617,12 @@ order by DateEnd,isnull(Olaviat,0)
                 {
                     ViewModels.Task.ListTaskFuture T = new ViewModels.Task.ListTaskFuture();
                     T.CatId = int.Parse(item["CatId"].ToString());
-                    T.TaskId =int.Parse(item["TaskId"].ToString());
+                    T.TaskId = int.Parse(item["TaskId"].ToString());
                     T.Olaviat = int.Parse(item["Olaviat"].ToString());
-                    T.IsHolyDay = int.Parse(item["IsHolyDay"].ToString());
-                    T.HafteChandom = int.Parse(item["HafteChandom"].ToString());
-                    T.MaheChandom = int.Parse(item["MaheChandom"].ToString());
-                    T.SaleChandom = int.Parse(item["SaleChandom"].ToString());
+                    //T.IsHolyDay = int.Parse(item["IsHolyDay"].ToString());
+                    //T.HafteChandom = int.Parse(item["HafteChandom"].ToString());
+                    //T.MaheChandom = int.Parse(item["MaheChandom"].ToString());
+                    //T.SaleChandom = int.Parse(item["SaleChandom"].ToString());
 
                     T.Name = item["Name"].ToString();
                     T.DateStart = item["DateStart"].ToString();
@@ -647,11 +648,11 @@ order by DateEnd,isnull(Olaviat,0)
             string str = string.Empty;
             if (MyData != null)
             {
-                 str = MyData[0].TrimEnd(',');
+                str = MyData[0].TrimEnd(',');
 
                 string[] ids = str.Split(',');
             }
-                ViewModels.ErrorMessage Error = new ViewModels.ErrorMessage();
+            ViewModels.ErrorMessage Error = new ViewModels.ErrorMessage();
             Error.result = false;
             Error.message = string.Empty;
             try
@@ -695,10 +696,10 @@ order by DateEnd,isnull(Olaviat,0)
                     T.CatId = int.Parse(item["CatId"].ToString());
                     T.TaskId = int.Parse(item["TaskId"].ToString());
                     T.Olaviat = int.Parse(item["Olaviat"].ToString());
-                    T.IsHolyDay = int.Parse(item["IsHolyDay"].ToString());
-                    T.HafteChandom = int.Parse(item["HafteChandom"].ToString());
-                    T.MaheChandom = int.Parse(item["MaheChandom"].ToString());
-                    T.SaleChandom = int.Parse(item["SaleChandom"].ToString());
+                    //T.IsHolyDay = int.Parse(item["IsHolyDay"].ToString());
+                    //T.HafteChandom = int.Parse(item["HafteChandom"].ToString());
+                    //T.MaheChandom = int.Parse(item["MaheChandom"].ToString());
+                    //T.SaleChandom = int.Parse(item["SaleChandom"].ToString());
 
                     T.Name = item["Name"].ToString();
                     T.DateStart = item["DateStart"].ToString();
@@ -742,7 +743,7 @@ SELECT  [CatId]
 
                 foreach (DataRow item in DT.Rows)
                 {
-                    Models.DomainModels.Cat C= new Models.DomainModels.Cat();
+                    Models.DomainModels.Cat C = new Models.DomainModels.Cat();
                     C.CatId = int.Parse(item["CatId"].ToString());
                     C.Title = item["Title"].ToString();
                     lstCat.Add(C);
@@ -772,7 +773,7 @@ SELECT  [CatId]
                     string firestDate = CurrentDate.Substring(0, 4) + "01";
 
                     Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
-                    DataTable DT = U.Select(@"exec SP_ManageTime " + CurrentDate+","+UserId);
+                    DataTable DT = U.Select(@"exec SP_ManageTime " + CurrentDate + "," + UserId);
                     V.Timing = DT;
                 }
                 if (x == 1)
@@ -806,30 +807,40 @@ SELECT  [CatId]
         [HttpPost]
         public ActionResult ListTimingForListTask(int x)
         {
+            Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
+            List<ViewModels.Task.VMTask> lstVMTask = new List<ViewModels.Task.VMTask>();
             ViewModels.ErrorMessage Error = new ViewModels.ErrorMessage();
             Error.result = false;
             Error.message = string.Empty;
             try
             {
-               
-                if (x == 0)
-                {
-                    Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
-                    DataTable DT = U.Select(@"select * 
+
+
+              
+                DataTable DT = U.Select(@"select * 
 from Timing  inner join Task 
 on Timing.TaskId=Task.TaskId
 inner join ManageTime
 on Timing.ManageTimeId=ManageTime.ManageTimeId
-where IsCheck=0 and UserId="+ UserId +@"
+where IsCheck=0 and UserId=" + UserId + @"
 order by DateEnd,Value,Olaviat");
 
-                    foreach (DataRow item in DT.Rows)
-                    {
-                      
-                        
-                    }
+                foreach (DataRow item in DT.Rows)
+                {
+                    ViewModels.Task.VMTask V = new ViewModels.Task.VMTask();
+                    V.DateEnd= item["DateEnd"].ToString();
+                    V.Name = item["Name"].ToString();
+                    V.TaskId=int.Parse(item["TaskId"].ToString());
+                    V.Rate = int.Parse(item["Rate"].ToString());
+                    V.Olaviat = int.Parse(item["Olaviat"].ToString());
+                    V.TimingId= int.Parse(item["TimingId"].ToString());
+                    V.Label= item["Label"].ToString();
+                    V.Value= int.Parse(item["Value"].ToString());
+                    lstVMTask.Add(V);
+
                 }
-                return Json(false, JsonRequestBehavior.AllowGet);
+
+                return Json(lstVMTask, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -917,9 +928,9 @@ order by DateEnd,Value,Olaviat");
                 var OldTask = DB.Tasks.SingleOrDefault(q => q.TaskId == TaskId);
                 if (OldTask.Olaviat == null)
                 {
-                    OldTask.Olaviat=0;
+                    OldTask.Olaviat = 0;
                 }
-                OldTask.Olaviat = OldTask.Olaviat+1;
+                OldTask.Olaviat = OldTask.Olaviat + 1;
                 DB.SaveChanges();
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
@@ -1064,7 +1075,7 @@ order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
                         img.Name = file.FileName;
                         DB.TaskImages.Add(img);
 
-                      
+
 
                         DB.SaveChanges();
                         file.SaveAs(fname);
@@ -1082,7 +1093,7 @@ order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
                 return Json("No files selected.");
             }
         }
-       
+
         public JsonResult ImageUpload(ViewModels.TaskImage.TaskImageVM model)
         {
             int TaskImageId = 0;
@@ -1099,29 +1110,29 @@ order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
                 img.TaskId = 11871;
                 DB.TaskImages.Add(img);
                 DB.SaveChanges();
-                TaskImageId=img.TaskImageId;
+                TaskImageId = img.TaskImageId;
             }
             return Json(TaskImageId, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ImageRetrieve(int imgID)
         {
-          var img=  DB.TaskImages.SingleOrDefault(q => q.TaskImageId == imgID);
+            var img = DB.TaskImages.SingleOrDefault(q => q.TaskImageId == imgID);
             return File(img.img, "image/jpg");
         }
         public ActionResult Document(int imgID)
         {
-           
+
             var obj = DB.TaskImages.SingleOrDefault(q => q.TaskImageId == imgID);
-            FileContentResult File = new FileContentResult(obj.img,"jpg");
+            FileContentResult File = new FileContentResult(obj.img, "jpg");
             var imag = new MemoryStream(obj.img);
-           
+
             string[] stringParts = obj.Name.Split(new char[] { '.' });
             string strType = stringParts[1];
             Response.Clear();
             Response.ClearContent();
             Response.ClearHeaders();
             Response.AddHeader("content-disposition", "attachment; filename=" + obj.Name);
-       
+
             var asciiCode = System.Text.Encoding.ASCII.GetString(obj.img);
             var datas = Convert.FromBase64String(asciiCode.Substring(asciiCode.IndexOf(',') + 1));
             //Set the content type as file extension type
@@ -1131,14 +1142,16 @@ order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
             this.Response.End();
             return new FileStreamResult(Response.OutputStream, obj.Name);
         }
-        public ActionResult RenderImageBytes(int id) {
+        public ActionResult RenderImageBytes(int id)
+        {
             var img = DB.TaskImages.SingleOrDefault(q => q.TaskImageId == id);
             ViewModels.TaskImage.TaskImageVM V = new ViewModels.TaskImage.TaskImageVM();
             V.imgByte = img.img;
             return PartialView(V);
         }
-        public FileContentResult GetImage(int id) {
-         var res=   DB.TaskImages.SingleOrDefault(q => q.TaskImageId == id);
+        public FileContentResult GetImage(int id)
+        {
+            var res = DB.TaskImages.SingleOrDefault(q => q.TaskImageId == id);
             byte[] byteArray = res.img;
             return new FileContentResult(byteArray, "image/jpeg");
         }

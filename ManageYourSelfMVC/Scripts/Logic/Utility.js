@@ -230,7 +230,7 @@ function baghyMandeDay() {
 
 }
 function splitString(str, char) {
-
+    
     if (str == null) return ""
     return str.split(char)
 }

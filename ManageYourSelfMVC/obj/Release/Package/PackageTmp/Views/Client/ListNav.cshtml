@@ -30,6 +30,10 @@
         font-size: 12px;
         text-align: center;
     }
+
+    .ListTaskTiming table td {
+    padding:3px;
+    }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
@@ -293,6 +297,7 @@
                     </table>
                 </div>
                 <div class="ListTaskAnjamShode"></div>
+                <div class="ListTaskTiming"></div>
             </div>
         </div>
         <div class="row">
@@ -302,7 +307,7 @@
                 <button type="button" class="btn btn-danger" onclick="transferDate('0101')">یکم ماه بعد</button>
                 <button type="button" class="btn btn-success" onclick="transferDate('30')">ماه بعد</button>
             </div>
-            <div class="ShowSumRate" style="left:10px;bottom:0;width: 41px;position: fixed;font-family:'B Nazanin';z-index:5">
+            <div class="ShowSumRate" style="left:10px;bottom:0;width: 41px;position: fixed;font-family:'B Nazanin';z-index:25">
 
             </div>
             <div class="col-sm-12 ListTask"></div>
@@ -620,7 +625,7 @@
         });
         $("ul li a[href='#menu4']").on("click", function () {
             ListTask("anjamnashode");
-
+            ListTimingForListTask(0)
             ListTaskFutureChk();
             ListTaskAnjamShode();
             $(".PersianDatePickerEditTaskS").val(foramtDate(todayShamsy8char()))

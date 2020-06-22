@@ -7,7 +7,7 @@
          dataType: "html",
          url: "/Task/ListTaskFutureChkPost",
          success: function (result) {
-             debugger
+             
              if (result.result == false) {
                  alert(result.message)
              }
@@ -17,7 +17,7 @@
 
          },
          error: function (error) {
-             debugger
+             
              $(".ListTaskFuture").html("<p>موردی برای مشاهده وجود ندارد</p>")
          }
      });

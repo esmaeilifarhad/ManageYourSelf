@@ -1423,11 +1423,15 @@
     <Compile Include="ViewModels\Saham\SahamVM.cs" />
     <Compile Include="ViewModels\TaskImage\TaskImageVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />
+    <Compile Include="ViewModels\Task\Class1.cs" />
+    <Compile Include="ViewModels\Task\Interface1.cs" />
+    <Compile Include="ViewModels\Task\Interface2.cs" />
     <Compile Include="ViewModels\Task\ITiming.cs" />
     <Compile Include="ViewModels\Task\ListTaskFuture.cs" />
     <Compile Include="ViewModels\Task\RateTaskDays.cs" />
     <Compile Include="ViewModels\Task\Task.cs" />
     <Compile Include="ViewModels\Task\ITask.cs" />
+    <Compile Include="ViewModels\Task\test.cs" />
     <Compile Include="ViewModels\Task\VMTask.cs" />
     <Compile Include="ViewModels\UserRegisterVm.cs" />
     <Compile Include="ViewModels\UserVM.cs" />

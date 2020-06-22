@@ -40,8 +40,6 @@ namespace ManageYourSelfMVC.Controllers
         {
             return View();
         }
-        
-
         [HttpGet]
         // [Security.CustomAthorize(Roles = "Karbari")]
         [Models.Filtering.Filter]
