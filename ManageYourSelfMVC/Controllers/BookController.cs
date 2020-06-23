@@ -29,13 +29,13 @@ namespace ManageYourSelfMVC.Controllers
             vmB.BookId = book.BookId;
             return Json(vmB, JsonRequestBehavior.AllowGet);
             */
-            DataTable DT = U.Select(@"exec findBookDsc "+ UserId +" ");
+            DataTable DT = U.Select(@"exec findBookDsc " + UserId + " ");
             ViewModels.Book.VMBook vmB = new ViewModels.Book.VMBook();
             foreach (DataRow item in DT.Rows)
             {
                 Models.DomainModels.Cat C = new Models.DomainModels.Cat();
                 vmB.dsc = item["dsc"].ToString();
-                vmB.BookId =int.Parse(item["BookId"].ToString());
+                vmB.BookId = int.Parse(item["BookId"].ToString());
                 if (item["RepeatedNumber"].ToString() == "")
                 {
                     vmB.RepeatedNumber = 0;
@@ -44,12 +44,12 @@ namespace ManageYourSelfMVC.Controllers
                 {
                     vmB.RepeatedNumber = int.Parse(item["RepeatedNumber"].ToString());
                 }
-                vmB.date= item["date"].ToString();
-                vmB.time= item["time"].ToString();
+                vmB.date = item["date"].ToString();
+                vmB.time = item["time"].ToString();
             }
             return Json(vmB, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult CreateBook(string dsc,string time,string date)
+        public ActionResult CreateBook(string dsc, string time, string date)
         {
             Models.DomainModels.Book B = new Models.DomainModels.Book();
             B.dsc = dsc;
@@ -64,14 +64,15 @@ namespace ManageYourSelfMVC.Controllers
         }
         public ActionResult DeleteBook(int BookId)
         {
-           var oldBook= DB.Books.SingleOrDefault(q => q.BookId == BookId);
+            var oldBook = DB.Books.SingleOrDefault(q => q.BookId == BookId);
             DB.Books.Remove(oldBook);
             DB.SaveChanges();
 
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult EditBook(int BookId) {
+        public ActionResult EditBook(int BookId)
+        {
             ViewModels.Book.VMBook B = new ViewModels.Book.VMBook();
             var oldBook = DB.Books.SingleOrDefault(q => q.BookId == BookId);
             B.date = oldBook.date;
@@ -80,17 +81,64 @@ namespace ManageYourSelfMVC.Controllers
             B.RepeatedNumber = oldBook.RepeatedNumber;
             B.time = oldBook.time;
             B.BookId = oldBook.BookId;
-         
+
 
 
             return Json(B, JsonRequestBehavior.AllowGet);
         }
         public ActionResult UpdateBook(int BookId, string dsc)
         {
+
+
             var oldBook = DB.Books.SingleOrDefault(q => q.BookId == BookId);
-            oldBook.dsc = dsc;
-            DB.SaveChanges();
+            string[] parts = new string[0];
+            if (dsc != null)
+            {
+                parts = dsc.Split(new string[] { "@@" }, StringSplitOptions.None);
+
+            }
+            if (parts.Length > 1)
+            {
+                for (int i = 0; i < parts.Length; i++)
+                {
+
+
+                    Models.DomainModels.Book newBook = new Models.DomainModels.Book();
+                    newBook.dsc = parts[i];
+                    newBook.UserId = oldBook.UserId;
+                    newBook.date = oldBook.date;
+                    newBook.time = oldBook.time;
+                    newBook.RepeatedNumber = 0;
+                    newBook.Order = oldBook.Order;
+                    DB.Books.Add(newBook);
+                    DB.SaveChanges();
+                }
+                DB.Books.Remove(oldBook);
+                DB.SaveChanges();
+
+            }
+            else
+            {
+               // var oldBook = DB.Books.SingleOrDefault(q => q.BookId == BookId);
+                oldBook.dsc = dsc;
+                DB.SaveChanges();
+
+            }
+
             return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult inreaseRepeatedNumber(int BookId)
+        {
+            var oldBook = DB.Books.SingleOrDefault(q => q.BookId == BookId);
+            oldBook.RepeatedNumber=oldBook.RepeatedNumber + 1;
+            if (DB.SaveChanges() > 0)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

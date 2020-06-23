@@ -26,9 +26,9 @@ async function GetBook(){
         spanSmoke+="<span class='smoke'>"+res[i]+"</span>"
        // console.log(res[i])
     }
-    var DateTime = "<span  class='smoke'>" + foramtDate(ListObj.date) + "</span>" +
+    var DateTime = "<span  class='smoke'>" + foramtDate(ListObj.date) + "</span>" + "<span  class='smoke' style='color:yellow'>" + showDays(todayShamsy(),foramtDate(ListObj.date))+"</span>"+
         "<span  class='smoke'>" + foramtTime(ListObj.time) + "</span>"
-    var RepeatedNumber = "<span  class='smoke'>  " + ListObj.RepeatedNumber + " - </span>"
+    var RepeatedNumber = "<span class='smoke'><input type='checkbox' onclick='inreaseRepeatedNumber(" + ListObj.BookId+")'/></span>"+"<span  class='smoke'>  " + ListObj.RepeatedNumber + " - </span>"
     $(".smokyText").append(RepeatedNumber+spanSmoke + DateTime +inputs)
 }
 async function ShowBookForm(){
@@ -92,9 +92,7 @@ async function EditBook(BookId) {
         service(obj)
     ]);
     var ListObj = results[0]
-
-
-    var table = "<table>" +
+    var table = "<input type='checkbox' onclick='inreaseRepeatedNumber(" + ListObj.BookId +")'/> Readed<table>" +
         "<tr><td><textarea name='BookName' rows='4' cols='55' autocomplete='off'>" + ListObj.dsc+"</textarea></td></tr>" +
         "</table>"
     var tablebutt = "<tr>" +
@@ -123,4 +121,16 @@ async function UpdateBook(BookId) {
     var ListObj = results[0]
     showAlert("با موفقیت ویرایش شد")
     $("#MasterModal").modal("toggle");
+}
+async function inreaseRepeatedNumber(BookId) {
+    var obj = {}
+    obj.url = "/Book/inreaseRepeatedNumber"
+    obj.dataType = "json"
+    obj.type = "post"
+    obj.data = { BookId: BookId}
+    var results = await Promise.all([
+        service(obj)
+    ]);
+    var ListObj = results[0]
+    
 }
