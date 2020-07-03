@@ -1116,8 +1116,10 @@ function GetlLevelByJqueryAndAppend() {
     })
 
 }
-function ShowAndHiddenExample(id) {
+function ShowAndHiddenExample(id,eng) {
+   
     
+    //-----------
     var res = $(".examples_" + id).attr("hidden");
     if (res == "hidden") {
         $(".examples_" + id).attr("hidden", false);
@@ -1126,7 +1128,14 @@ function ShowAndHiddenExample(id) {
         $(".examples_" + id).attr("hidden", true);
     }
 
+    
+    var eng = eng.toLowerCase();
+    $(".examples_" + id +" .ExampleSound").each(function () {
 
+        $(this).html($(this).html().replace(
+            new RegExp(eng, 'g'), '<span style="color:red">' + eng + '</span>'
+        ));
+    });
 }
 function ShowAndHiddenPersian(id) {
     var eng=$(".per_" + id).parent().prev().text()

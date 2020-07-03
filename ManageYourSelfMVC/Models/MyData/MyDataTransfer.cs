@@ -276,7 +276,7 @@ Label
                     T.Name = item["Name"].ToString();
                     T.TaskId = int.Parse(item["TaskId"].ToString());
                     T.Olaviat = int.Parse(item["Olaviat"].ToString());
-                    T.Rate = int.Parse(item["Rate"].ToString());
+                    T.Rate =(item["Rate"]==null?0:int.Parse(item["Rate"].ToString()));
                     T.Label = item["Label"].ToString();
                     T.Title = item["Title"].ToString();
                     lstTaskVM.Add(T);

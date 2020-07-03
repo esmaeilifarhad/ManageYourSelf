@@ -52,7 +52,9 @@
         <li class="nav-item">
             <a class="nav-link" href="/Sport/MainSport">MainSport</a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" onclick="GetBooks()" href="#Book">کتاب</a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#MojoodyBank">موجودی</a>
         </li>
@@ -114,6 +116,10 @@
         <div class="row"><div class="col-sm-12 ListDaramad"></div></div>
         <div class="row"><div class="col-sm-12 ListTypeHazineh"></div></div>
         <div class="row"><div class="col-sm-12 Rpt_ListGroupHazine"></div></div>
+    </div>
+    <!--کتاب-->
+    <div id="Book" class="tab-pane fade">
+        <div class="row"><div class="col-sm-12 ListBook"></div></div>
     </div>
     <!--هزینه های مهم-->
     <div id="menu2" class="tab-pane fade">
@@ -217,8 +223,8 @@
                     <div class="col-sm-12 TopBestKarkard  table-responsive">
                     </div>
                 </div>
-                
-                
+
+
             </div>
             <div class="col-sm-4  table-responsive">
                 <div class="row">
@@ -292,7 +298,7 @@
                             <td>تاریخ</td>
                             <td><input type="text" name="DateEnd" class="PersianDatePickerEditTaskS" autocomplete="off" onchange="ListTaskAnjamShode()" /></td>
 
-                            <td><input placeholder="search" type="text" autocomplete="off" onchange="SearchTask(this)" /></td>
+                            <td><input placeholder="search" type="text" autocomplete="off" onkeyup="SearchTask(this)" /></td>
                         </tr>
                     </table>
                 </div>

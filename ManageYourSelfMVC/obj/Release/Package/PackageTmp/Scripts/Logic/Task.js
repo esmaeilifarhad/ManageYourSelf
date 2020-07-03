@@ -345,7 +345,9 @@ function removeTimeTask(TaskId) {
 function SearchTask(thiss) {
     //  console.log(thiss)
     var Name = $(thiss).val()
-    $.LoadingOverlay("show");
+    if (Name.length<=2) return
+    
+   // $.LoadingOverlay("show");
     $.ajax(
         {
             type: 'Post',
@@ -399,7 +401,7 @@ function SearchTask(thiss) {
                 $(".ListTaskAnjamShode").append(table)
 
 
-                $.LoadingOverlay("hide");
+               // $.LoadingOverlay("hide");
             }
         });
 
@@ -506,7 +508,7 @@ async function DeleteTask(obj) {
     var ListtObjEditTask = results[0]
 
     $.LoadingOverlay("hide");
-    var res2 = await customConfirm({ title: "<p>" + ListtObjEditTask.Task.Name + "</p>", text: "آیا حذف انجام شود ؟", cancelButtonText: "خیر", confirmButtonText: "بلی" })
+    var res2 = await customConfirm({ title: "<p style='font-size:10px;font-weight:100'>" + ListtObjEditTask.Task.Name + "</p>", text: "آیا حذف انجام شود ؟", cancelButtonText: "خیر", confirmButtonText: "بلی" })
 
     // var result = confirm("آیا حذف انجام شود");
     if (res2.value == true) {

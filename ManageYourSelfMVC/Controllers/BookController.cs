@@ -49,6 +49,10 @@ namespace ManageYourSelfMVC.Controllers
             }
             return Json(vmB, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetBooks() {
+          var books=  DB.Books.OrderBy(q => q.RepeatedNumber).Select(q=>new { q.RepeatCount,q.RepeatedNumber,q.BookId,q.date,q.dsc}).ToList();
+            return Json(books, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CreateBook(string dsc, string time, string date)
         {
             Models.DomainModels.Book B = new Models.DomainModels.Book();
@@ -130,7 +134,7 @@ namespace ManageYourSelfMVC.Controllers
         public ActionResult inreaseRepeatedNumber(int BookId)
         {
             var oldBook = DB.Books.SingleOrDefault(q => q.BookId == BookId);
-            oldBook.RepeatedNumber=oldBook.RepeatedNumber + 1;
+            oldBook.RepeatedNumber=(oldBook.RepeatedNumber==null?0: oldBook.RepeatedNumber) + 1;
             if (DB.SaveChanges() > 0)
             {
                 return Json(true, JsonRequestBehavior.AllowGet);

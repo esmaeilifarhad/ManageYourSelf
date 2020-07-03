@@ -38,11 +38,11 @@
                     <td><button style='color:green' class='btn btn-success pointer LevelEngDown' data_id="@item.id"></button></td>
                     @if (item.HasExample > 0)
                     {
-                        <td><span class="fa fa-eye ShowExample pointer" style='color:green' onclick="ShowAndHiddenExample(@item.id)" data_id="@item.id"></span></td>
+                        <td><span class="fa fa-eye ShowExample pointer" style='color:green' onclick="ShowAndHiddenExample(@item.id,'@item.eng')" data_id="@item.id"></span></td>
                     }
                     else
                     {
-                        <td><span class="fa fa-eye-slash ShowExample pointer" style='color:yellow' onclick="ShowAndHiddenExample(@item.id)" data_id="@item.id"></span></td>
+                        <td><span class="fa fa-eye-slash ShowExample pointer" style='color:yellow' onclick="ShowAndHiddenExample(@item.id,'@item.eng')" data_id="@item.id"></span></td>
                     }
                     <td><span style='color:dodgerblue' class='fa fa-list-alt btnExa pointer' data_id="@item.id"></span></td>
 
