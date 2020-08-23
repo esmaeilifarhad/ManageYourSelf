@@ -122,6 +122,7 @@ Pass you dates to this function like this:  showDays('1/1/2014','12/25/2014')
 }
 //980809|13980809  =>1398/08/09  input parameter
 function foramtDate(str) {
+    
     str = str.toString()
 
     if (str == undefined) {
@@ -412,5 +413,12 @@ function customConfirm(obj) {
             resolve(result)
         })
     });
+}
+function SelectDate(n) {
+    
+    const m = moment();
+            m.add(n, 'day')
+    var newDate = m.format('jYYYY/jM/jD')
+    return newDate
 }
 

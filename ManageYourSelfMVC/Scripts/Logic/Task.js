@@ -128,13 +128,13 @@ $("body").on("click", ".Ta", function () {
 //------ListTaskAnjamNashode
 $("#menu4 input[name='task']").on("click", function () {
 
-  
+
     //console.log($("input[type='radio'][name='task']:checked").val())
     var ValOfRadio = $("input[type='radio'][name='task']:checked").val();
     var typeTask;
     switch (ValOfRadio) {
         case "anjamshode":
-            typeTask = "anjamshode";
+            typeTask = "anjamshode"; return
             break;
         case "anjamnashode":
             typeTask = "anjamnashode";
@@ -345,9 +345,9 @@ function removeTimeTask(TaskId) {
 function SearchTask(thiss) {
     //  console.log(thiss)
     var Name = $(thiss).val()
-    if (Name.length<=2) return
-    
-   // $.LoadingOverlay("show");
+    if (Name.length <= 2) return
+
+    // $.LoadingOverlay("show");
     $.ajax(
         {
             type: 'Post',
@@ -401,7 +401,7 @@ function SearchTask(thiss) {
                 $(".ListTaskAnjamShode").append(table)
 
 
-               // $.LoadingOverlay("hide");
+                // $.LoadingOverlay("hide");
             }
         });
 
@@ -572,8 +572,11 @@ async function EditTask(TaskId) {
         }
 
     }
+
+
+
     table += "</select>"
-    table += "<tr><td>عنوان</td><td><textarea name='Name' rows='4' cols='50' autocomplete='off'>" + ListtObjEditTask.Task.Name + "</textarea></td></tr>" +
+    table += "<tr><td>عنوان</td><td><div class='form-group'><textarea name='Name' rows='4'  class='form-control' autocomplete='off'>" + ListtObjEditTask.Task.Name + "</textarea></div></td></tr>" +
         "<tr><td>درصد پیشرفت</td><td><input type='number' name='DarsadPishraft'  value=" + ListtObjEditTask.Task.DarsadPishraft + " min='0' max='100' autocomplete='off'  ></td></tr>" +
         "<tr><td>اولویت</td><td><input type='number' name='Olaviat'   value=" + ListtObjEditTask.Task.Olaviat + " min='0' max='5' autocomplete='off'  ></td></tr>" +
         "<tr><td>Rate</td><td><input type='number' name='Rate'   value=" + ListtObjEditTask.Task.Rate + "  min='0' max='5' autocomplete='off'  ></td></tr>"
@@ -687,7 +690,7 @@ function ChangeTodayTaskPost(CatId) {
                 $("#MasterModal").modal("toggle");
                 ListTaskGeneral();
                 ListTask("anjamnashode");
-               
+
                 RefreshTask();
                 if (result.result == false) {
                     alert("ChangeTodayTaskPost() : " + result.message)
@@ -774,7 +777,7 @@ function UpdateTask(TaskId) {
 }
 async function ListTask(typeTask) {
 
-    
+
     ListTimingForListTask(0)
     ListTaskAnjamShode();
 
@@ -825,7 +828,7 @@ async function ListTask(typeTask) {
         "         <th>حذف</th>" +
         "     </tr>"
     for (let index = 0; index < ListTaskAnjamnashode.length; index++) {
-        
+
         table += "<tr>" +
             "<td><input Data_id=" + ListTaskAnjamnashode[index].TaskId + " class='AnjamShode'  type='checkbox'/></td>" +
             "<td class='Olaviat'>" + ListTaskAnjamnashode[index].Olaviat + "</td>" +
@@ -834,14 +837,14 @@ async function ListTask(typeTask) {
             "<td><input type='button' style='background-color:red' class='fa fa-sort-down pointer  ' onclick='TaskDownLevel(" + ListTaskAnjamnashode[index].TaskId + ")'  Data_id='@item.TaskId'/></td>" +
             "<td>" + ListTaskAnjamnashode[index].Title + "</td>" +
             "<td style='text-align: right!important;'>" + ListTaskAnjamnashode[index].Name + "</td>" +
-            "<td>" + foramtDate(ListTaskAnjamnashode[index].DateStart) +"<br/>"+ calDayOfWeek(ListTaskAnjamnashode[index].DateStart)+"</td>" +
+            "<td>" + foramtDate(ListTaskAnjamnashode[index].DateStart) + "<br/>" + calDayOfWeek(ListTaskAnjamnashode[index].DateStart) + "</td>" +
             "<td>" + foramtDate(ListTaskAnjamnashode[index].DateEnd) + "<br/>" + calDayOfWeek(ListTaskAnjamnashode[index].DateEnd) + "</td>" +
             "<td>" + ListTaskAnjamnashode[index].DarsadPishraft + "</td>" +
             "<td>" + ListTaskAnjamnashode[index].Gozashteh + "</td>" +
             "<td>" + ListTaskAnjamnashode[index].MandehRooz + "</td>" +
             "<td>" + ListTaskAnjamnashode[index].Label + "</td>" +
             "<td><span class='fa fa-calendar pointer calendarTask' onclick='TimingTask(" + ListTaskAnjamnashode[index].TaskId + ")' Data_id=" + ListTaskAnjamnashode[index].TaskId + "></span>" +
-            "</br>"+
+            "</br>" +
             "<span class='fa fa-remove pointer' onclick='removeTimeTask(" + ListTaskAnjamnashode[index].TaskId + ")'></span></td>" +
             "<td><span class='fa fa-edit pointer'     Data_id=" + ListTaskAnjamnashode[index].TaskId + "></span></td>" +
             "<td><span class='fa fa-remove pointer'   Data_id=" + ListTaskAnjamnashode[index].TaskId + " onclick=' DeleteTask({Id:" + ListTaskAnjamnashode[index].TaskId + "})'></span></td>" +
@@ -937,7 +940,7 @@ async function ListTimingForListTask(x) {
     var currentHour = d.getHours();
 
     $.LoadingOverlay("show");
-    
+
     var objListTaskAnjamnashode = {}
     objListTaskAnjamnashode.url = "/Task/ListTimingForListTask";
     objListTaskAnjamnashode.dataType = "json"
@@ -950,51 +953,52 @@ async function ListTimingForListTask(x) {
         service(objListTaskAnjamnashode)
     ]);
     var ListTaskAnjamnashode = results[0]
-    var table ="<table class='table table-responsive' style='position: relative;z-index: 15;font-size:9px;text-align: center;background-image: linear-gradient(to left, #ded4ab, #dae6f3);'>"+
-        "<tr>"+
-        "<th>تغییر اولیت</th>"+
-        "<th>اولویت</th>"+
-        "<th>عنوان</th>"+
-         "<th>Rate</th>"+
-         "<th>تاریخ</th>"+
-          "<th>ساعت</th>"+
-           "<th>زمان</th>"+
-            "<th>حذف</th>"+
-             "<th>ویرایش</th>"+
-              "<th>انجام</th>"+
+    var table = "<table class='table table-responsive' style='position: relative;z-index: 15;font-size:9px;text-align: center;background-image: linear-gradient(to left, #ded4ab, #dae6f3);'>" +
+        "<tr>" +
+        "<th>تغییر اولیت</th>" +
+        "<th>اولویت</th>" +
+        "<th>عنوان</th>" +
+        "<th>Rate</th>" +
+        "<th>تاریخ</th>" +
+        "<th>ساعت</th>" +
+        "<th>زمان</th>" +
+        "<th>حذف</th>" +
+        "<th>ویرایش</th>" +
+        "<th>انجام</th>" +
         "</tr>"
     for (var i = 0; i < ListTaskAnjamnashode.length; i++) {
-        
-        if (currentHour == ListTaskAnjamnashode[i].Value && todayShamsy8char()==ListTaskAnjamnashode[i].DateEnd)
-        {
-            table+="<tr style='color: white; background-color: #981313;'>"
-            
+
+        if (currentHour == ListTaskAnjamnashode[i].Value && todayShamsy8char() == ListTaskAnjamnashode[i].DateEnd) {
+            table += "<tr style='color: white; background-color: #981313;'>"
+
         }
-        else
-        {
-            table+="<tr>"
-            
+        else {
+            if (todayShamsy8char() != ListTaskAnjamnashode[i].DateEnd)
+                table += "<tr style='color: #4873d4;'>"
+            else
+                table += "<tr>"
+
         }
 
-       
-        table+= "<td><input type='button' style='background-color:green' class='fa fa-sort-up pointer' onclick='TaskUpLevel("+ListTaskAnjamnashode[i].TaskId+")'/><input type='button' style='background-color:red' class='fa fa-sort-down pointer' onclick='TaskDownLevel("+ListTaskAnjamnashode[i].TaskId+")'/></td>"+
-            "<td style='white-space: nowrap;'>"+ListTaskAnjamnashode[i].Olaviat+"</td>"+
-        "<td style='text-align:right'>"+ListTaskAnjamnashode[i].Name.substring(0,40)+" ... </td>"+
-         "<td>"+ListTaskAnjamnashode[i].Rate+"</td>"+
-            "<td>" + foramtDate(ListTaskAnjamnashode[i].DateEnd) +"<br/>"+ calDayOfWeek(ListTaskAnjamnashode[i].DateEnd)+ "</td>"+
-             "<td style='white-space: nowrap;'>"+ListTaskAnjamnashode[i].Label+"</td>"+
-             "<td><span class='fa fa-calendar pointer' onclick='TimingTask("+ListTaskAnjamnashode[i].TaskId+")'></span></td>"+
-             "<td><span class='fa fa-remove pointer' onclick='removeTimeTask("+ListTaskAnjamnashode[i].TaskId+")'></span></td>"+
-             
-  
-        "<td><span class='fa fa-edit pointer' onclick='EditTask("+ListTaskAnjamnashode[i].TaskId+")' style='display: inline;'></span></td>"+
-         "<td><input type='checkbox' class='pointer' onclick='UpdateTask2({TaskId:"+ListTaskAnjamnashode[i].TaskId+",IsCheck:true})'/></td>"+
-        "</tr>"
+
+        table += "<td><input type='button' style='background-color:green' class='fa fa-sort-up pointer' onclick='TaskUpLevel(" + ListTaskAnjamnashode[i].TaskId + ")'/><input type='button' style='background-color:red' class='fa fa-sort-down pointer' onclick='TaskDownLevel(" + ListTaskAnjamnashode[i].TaskId + ")'/></td>" +
+            "<td style='white-space: nowrap;'>" + ListTaskAnjamnashode[i].Olaviat + "</td>" +
+            "<td style='text-align:right'>" + ListTaskAnjamnashode[i].Name.substring(0, 40) + " ... </td>" +
+            "<td>" + ListTaskAnjamnashode[i].Rate + "</td>" +
+            "<td>" + foramtDate(ListTaskAnjamnashode[i].DateEnd) + "<br/>" + calDayOfWeek(ListTaskAnjamnashode[i].DateEnd) + "</td>" +
+            "<td style='white-space: nowrap;'>" + ListTaskAnjamnashode[i].Label + "</td>" +
+            "<td><span class='fa fa-calendar pointer' onclick='TimingTask(" + ListTaskAnjamnashode[i].TaskId + ")'></span></td>" +
+            "<td><span class='fa fa-remove pointer' onclick='removeTimeTask(" + ListTaskAnjamnashode[i].TaskId + ")'></span></td>" +
+
+
+            "<td><span class='fa fa-edit pointer' onclick='EditTask(" + ListTaskAnjamnashode[i].TaskId + ")' style='display: inline;'></span></td>" +
+            "<td><input type='checkbox' class='pointer' onclick='UpdateTask2({TaskId:" + ListTaskAnjamnashode[i].TaskId + ",IsCheck:true})'/></td>" +
+            "</tr>"
     }
-    table+="</table>"
+    table += "</table>"
     $(".ListTaskTiming").empty();
     $(".ListTaskTiming").append(table);
-    
+
     $.LoadingOverlay("hide");
 }
 function ListTaskGeneral() {
@@ -1177,7 +1181,7 @@ async function changeToAnjamShode() {
 
             ListTask("anjamnashode");
 
-           
+
 
             $.LoadingOverlay("hide");
             // resolve("finish")
@@ -1186,6 +1190,166 @@ async function changeToAnjamShode() {
     })
 
 }
+//نمایش از تاریخ تا تاریخ برای حذف
+
+async function ShowStDateEndDate() {
+
+    var obj = {}
+    obj.url = "/Task/FirstDateTask"
+    obj.dataType = "json"
+    obj.type = "post"
+    //obj.data={TedadRooz:TedadRooz}
+    var results = await Promise.all([
+        service(obj)
+    ]);
+    var ListObj = results[0]
+    var Yesterday = foramtDate(convertDateToslashless(SelectDate(-1)))
+    
+
+    table = "<table class='table'>" +
+        "<tr>" +
+        "<th>از تاریخ</th>" +
+        "<th>تا تاریخ</th>" +
+        "<th></th>" +
+        "</tr > " +
+        "<tr > " +
+        "<td><input type='text' name='DateS'  autocomplete='off' value='" +foramtDate(ListObj.DateEnd)+"' placeholder=''></td>" +
+        "<td><input type='text' name='DateE'  autocomplete='off' value='" + Yesterday +"' placeholder=''></td>" +
+        "<td><input type='button'  value='جستجو' class='btn btn-danger' onclick='ListTaskDateToDate({Date1:\""+Yesterday + "\",Date2:\"" + foramtDate(ListObj.DateEnd)+"\"})'></td>" +
+        "</tr > "+
+    "</table > "
+    $(".ShowStDateEndDate").empty()
+    $(".ShowStDateEndDate").append(table)
+   
+}
+async function ListTaskDateToDate(objDate) {
+    var DateS = $("input[name='DateS']").val()
+    var DateE = $("input[name='DateE']").val()
+    
+    $.LoadingOverlay("show");
+    var obj = {}
+    obj.url = "/Task/ListTaskDateToDate"
+    obj.dataType = "json"
+    obj.type = "post"
+    obj.data = { Date1: convertDateToslashless(DateS), Date2: convertDateToslashless(DateE)}
+    var results = await Promise.all([
+        service(obj)
+    ]);
+    var ListObj = results[0]
+    
+    var table ="<table><tr><td><input type='button' value='حذف' onclick='RemoveAllTask()'/></td></tr></table>"
+    table += "<table id='tblListTaskDateToDate' class='table-bordered table-responsive table-striped' " +
+        " style='direction: rtl; text-align: center;font-size:11px'>" +
+
+        "     <tr>" +
+        "         <th><input   type='checkbox' onclick='selectAllchk(this)' /></th>" +
+        "         <th>اولویت</th>" +
+        "         <th>Rate</th>" +
+        "         <th>بالا</th>" +
+        "         <th>پایین</th>" +
+
+        "         <th>عنوان وظیف</th>" +
+        "         <th>تاریخ شروع</th>" +
+        "         <th>تاریخ پایان</th>" +
+        
+        "         <th>زمان بندی</th>" +
+        "         <th>ویرایش</th>" +
+        "         <th>حذف</th>" +
+        "     </tr>"
+    for (let index = 0; index < ListObj.length; index++) {
+
+        table += "<tr>" +
+            "<td><input Data_id=" + ListObj[index].TaskId + " class='AnjamShode'  type='checkbox'/></td>" +
+            "<td class='Olaviat'>" + ListObj[index].Olaviat + "</td>" +
+            "<td >" + ListObj[index].Rate + "</td>" +
+            "<td><input type='button' style='background-color:green' class='fa fa-sort-up pointer ' onclick='TaskUpLevel(" + ListObj[index].TaskId + ")' Data_id='@item.TaskId'/></td>" +
+            "<td><input type='button' style='background-color:red' class='fa fa-sort-down pointer  ' onclick='TaskDownLevel(" + ListObj[index].TaskId + ")'  Data_id='@item.TaskId'/></td>" +
+      
+            "<td style='text-align: right!important;'>" + ListObj[index].Name + "</td>" +
+            "<td>" + foramtDate(ListObj[index].DateStart) + "<br/>" + calDayOfWeek(ListObj[index].DateStart) + "</td>" +
+            "<td>" + foramtDate(ListObj[index].DateEnd) + "<br/>" + calDayOfWeek(ListObj[index].DateEnd) + "</td>" +
+          
+            "<td><span class='fa fa-calendar pointer calendarTask' onclick='TimingTask(" + ListObj[index].TaskId + ")' Data_id=" + ListObj[index].TaskId + "></span>" +
+            "</br>" +
+            "<span class='fa fa-remove pointer' onclick='removeTimeTask(" + ListObj[index].TaskId + ")'></span></td>" +
+            "<td><span class='fa fa-edit pointer'     onclick='EditTask(" + ListObj[index].TaskId + ")'></span></td>" +
+            "<td><span class='fa fa-remove pointer'   Data_id=" + ListObj[index].TaskId + " onclick=' DeleteTask({Id:" + ListObj[index].TaskId + "})'></span></td>" +
+            "</tr>"
+    }
+    table += "</table>"
+
+
+    $(".ListTask").empty();
+    $(".ListTask").append(table);
+   
+    $.LoadingOverlay("hide");
+
+}
+async function RemoveAllTask() {
+    
+    var arrayTaskId=[]
+    $.LoadingOverlay("show");
+    var objData = {}
+    var count = $("#tblListTaskDateToDate tr td .AnjamShode").length
+    var i = 0;
+    $("#tblListTaskDateToDate tr td .AnjamShode").each(async function () {
+        i += 1;
+        if ($(this).is(':checked')) {
+            // checked
+          //  obj.IsCheck = true
+            objData.TaskId = $(this).attr("Data_id")
+            arrayTaskId.push(objData.TaskId)
+            
+           // var x = await UpdateTask2(obj)
+
+        }
+        else {
+            // unchecked
+
+        }
+        
+        if (count == i) {
+            
+
+            var obj = {}
+            obj.url = "/Task/RemoveAllTask"
+            obj.dataType = "json"
+            obj.type = "post"
+            obj.data = { TasKIds: arrayTaskId }
+            var results = await Promise.all([
+                service(obj)
+            ]);
+            var ListObj = results[0]
+            alert("تعداد "+ListObj+" رکورد حذف گردید")
+            
+            ListTaskDateToDate()
+
+            $.LoadingOverlay("hide");
+            // resolve("finish")
+        }
+
+    })
+   
+}
+async function selectAllchk(s) {
+    
+    var res = $(s)[0].checked;
+   // var count=0
+    if (res == true) {
+        $("#tblListTaskDateToDate  tr td .AnjamShode").each(function () {
+
+            this.checked = true
+        })
+
+    }
+    else {
+        $("#tblListTaskDateToDate  tr td .AnjamShode").each(function () {
+            this.checked =  false
+        })
+    }
+
+}
+
 //انتقال به فردا
 async function transferDate(str) {
     $.LoadingOverlay("show");
@@ -1209,7 +1373,7 @@ async function transferDate(str) {
 
         if (count == i) {
             ListTask("anjamnashode");
-           
+
             $.LoadingOverlay("hide");
             // resolve("finish")
         }
@@ -1219,7 +1383,7 @@ async function transferDate(str) {
 }
 
 function UpdateTask2(obj) {
-    
+
     return new Promise(resolve => {
         $.ajax(
             {
@@ -1337,5 +1501,5 @@ function RefreshTask() {
     ListTaskGeneral();
     ListTaslLevelHigh();
     ListTiming(0);
-  
+
 }

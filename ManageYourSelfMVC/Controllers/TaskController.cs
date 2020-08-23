@@ -356,7 +356,7 @@ namespace ManageYourSelfMVC.Controllers
                 List<Models.DomainModels.Cat> lstC = new List<Models.DomainModels.Cat>();
                 // DataTable DT = U.Select("exec [PersianToEnglish] " + UserId.ToString());
                 DataTable DT = U.Select(@"
-  select Tbl.CatId,isnull(Title,N'تعریف نشده') Title from Cat right join
+  select Tbl.CatId,isnull(Title,N'تعریف نشده') Title from [5069_ManageYourSelf].[5069_Esmaeili].Cat right join
   (
   select isnull(CatId,0) CatId 
   from [5069_ManageYourSelf].[dbo].[Task] 
@@ -438,7 +438,7 @@ Task.TaskId
 ,isnull(Task.Olaviat,0) Olaviat
 ,isnull(Cat.CatId,0) CatId
 ,isnull(Cat.Title,N'بدون عنوان') Title
-from task left join Cat 
+from task left join [5069_ManageYourSelf].[5069_Esmaeili].Cat 
 on task.CatId=Cat.CatId
 where Task.IsCheck=1 
 and Task.IsActive=1
@@ -449,7 +449,7 @@ union All
 
 
 select   RoutineJob.RoutineJobId as taskId,Job,[Rate],[Date],[Date],[Order],0 as CatId,N'تکراری' as Title
-from RoutineJob inner join RoutineJobHa
+from [5069_ManageYourSelf].[5069_Esmaeili].RoutineJob inner join [5069_ManageYourSelf].[5069_Esmaeili].RoutineJobHa
 on RoutineJob.RoutineJobId=RoutineJobHa.RoutineJobId 
 where 
  UserId=" + UserId + @"
@@ -487,7 +487,7 @@ and IsActive=1
 and UserId=" + UserId + @"
 union All
 select  [Date],[Rate]
-from RoutineJob inner join RoutineJobHa
+from [5069_ManageYourSelf].[5069_Esmaeili].RoutineJob inner join [5069_ManageYourSelf].[5069_Esmaeili].RoutineJobHa
 on RoutineJob.RoutineJobId=RoutineJobHa.RoutineJobId 
 where 
 UserId=" + UserId + @"
@@ -540,7 +540,7 @@ Task.TaskId
 ,isnull(Task.Olaviat,0) Olaviat
 ,isnull(Cat.CatId,0) CatId
 ,isnull(Cat.Title,N'بدون عنوان') Title
-from task left join Cat 
+from task left join [5069_ManageYourSelf].[5069_Esmaeili].Cat 
 on task.CatId=Cat.CatId
 where 
 Task.Name like N'%" + Name + @"%'
@@ -600,11 +600,11 @@ Task.TaskId
 ,Taghvim.HafteChandom
 ,SUBSTRING(Taghvim.DayDate,5,2) MaheChandom
 ,SUBSTRING(Taghvim.DayDate,1,4) SaleChandom
-from task left join Cat 
+from task left join [5069_ManageYourSelf].[5069_Esmaeili].Cat 
 on task.CatId=Cat.CatId
-left join Timing
+left join [5069_ManageYourSelf].[5069_Esmaeili].Timing
 on Task.TaskId=Timing.TaskId
-left join ManageTime
+left join [5069_ManageYourSelf].[5069_Esmaeili].ManageTime
 on ManageTime.ManageTimeId=Timing.ManageTimeId
 left join Taghvim on Task.DateEnd=Taghvim.DayDate
 where Task.IsCheck=0 
@@ -676,11 +676,11 @@ Task.TaskId
 ,Taghvim.HafteChandom
 ,SUBSTRING(Taghvim.DayDate,5,2) MaheChandom
 ,SUBSTRING(Taghvim.DayDate,1,4) SaleChandom
-from task left join Cat 
+from task left join [5069_ManageYourSelf].[5069_Esmaeili].Cat 
 on task.CatId=Cat.CatId
-left join Timing
+left join [5069_ManageYourSelf].[5069_Esmaeili].Timing
 on Task.TaskId=Timing.TaskId
-left join ManageTime
+left join [5069_ManageYourSelf].[5069_Esmaeili].ManageTime
 on ManageTime.ManageTimeId=Timing.ManageTimeId
 left join Taghvim on Task.DateEnd=Taghvim.DayDate
 where Task.IsCheck=0 
@@ -773,7 +773,7 @@ SELECT  [CatId]
                     string firestDate = CurrentDate.Substring(0, 4) + "01";
 
                     Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
-                    DataTable DT = U.Select(@"exec SP_ManageTime " + CurrentDate + "," + UserId);
+                    DataTable DT = U.Select(@"exec [5069_ManageYourSelf].[5069_Esmaeili].SP_ManageTime " + CurrentDate + "," + UserId);
                     V.Timing = DT;
                 }
                 if (x == 1)
@@ -786,7 +786,7 @@ SELECT  [CatId]
                     string firestDate = CurrentDate.Substring(0, 4) + "01";
                     // ViewModels.VMPivot V = new ViewModels.VMPivot();
                     Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
-                    DataTable DT = U.Select(@"exec SP_ManageTime " + CurrentDate + "," + UserId);
+                    DataTable DT = U.Select(@"exec [5069_ManageYourSelf].[5069_Esmaeili].SP_ManageTime " + CurrentDate + "," + UserId);
                     V.Timing = DT;
                 }
                 return PartialView(V);
@@ -816,11 +816,11 @@ SELECT  [CatId]
             {
 
 
-              
+
                 DataTable DT = U.Select(@"select * 
-from Timing  inner join Task 
-on Timing.TaskId=Task.TaskId
-inner join ManageTime
+from [5069_ManageYourSelf].[5069_Esmaeili].Timing  inner join Task 
+on [5069_ManageYourSelf].[5069_Esmaeili].Timing.TaskId=Task.TaskId
+inner join [5069_ManageYourSelf].[5069_Esmaeili].ManageTime
 on Timing.ManageTimeId=ManageTime.ManageTimeId
 where IsCheck=0 and UserId=" + UserId + @"
 order by DateEnd,Value,Olaviat");
@@ -828,14 +828,14 @@ order by DateEnd,Value,Olaviat");
                 foreach (DataRow item in DT.Rows)
                 {
                     ViewModels.Task.VMTask V = new ViewModels.Task.VMTask();
-                    V.DateEnd= item["DateEnd"].ToString();
+                    V.DateEnd = item["DateEnd"].ToString();
                     V.Name = item["Name"].ToString();
-                    V.TaskId=int.Parse(item["TaskId"].ToString());
+                    V.TaskId = int.Parse(item["TaskId"].ToString());
                     V.Rate = int.Parse(item["Rate"].ToString());
                     V.Olaviat = int.Parse(item["Olaviat"].ToString());
-                    V.TimingId= int.Parse(item["TimingId"].ToString());
-                    V.Label= item["Label"].ToString();
-                    V.Value= int.Parse(item["Value"].ToString());
+                    V.TimingId = int.Parse(item["TimingId"].ToString());
+                    V.Label = item["Label"].ToString();
+                    V.Value = int.Parse(item["Value"].ToString());
                     lstVMTask.Add(V);
 
                 }
@@ -992,11 +992,13 @@ Task.TaskId
 ,Taghvim.HafteChandom
 ,SUBSTRING(Taghvim.DayDate,5,2) MaheChandom
 ,SUBSTRING(Taghvim.DayDate,1,4) SaleChandom
-from task left join Cat 
+
+from task left join [5069_ManageYourSelf].[5069_Esmaeili].Cat 
 on task.CatId=Cat.CatId
-left join Timing
+left join [5069_ManageYourSelf].[5069_Esmaeili].Timing
 on Task.TaskId=Timing.TaskId
-left join ManageTime
+left join [5069_ManageYourSelf].[5069_Esmaeili].ManageTime
+
 on ManageTime.ManageTimeId=Timing.ManageTimeId
 left join Taghvim on Task.DateEnd=Taghvim.DayDate
 where Task.IsCheck=0 
@@ -1154,6 +1156,53 @@ order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
             var res = DB.TaskImages.SingleOrDefault(q => q.TaskImageId == id);
             byte[] byteArray = res.img;
             return new FileContentResult(byteArray, "image/jpeg");
+        }
+        public ActionResult FirstDateTask()
+        {
+            Models.DomainModels.Task T = new Models.DomainModels.Task();
+            var z = DB.Tasks.OrderBy(q => q.DateEnd).Select(q => new { q.DateEnd, q.Name }).First();
+
+            return Json(z, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ListTaskDateToDate(string Date1, string Date2)
+        {
+            var lstTask = DB.Tasks.Where(q => q.DateEnd.
+              CompareTo(Date1) >= 0 && q.DateEnd.CompareTo(Date2) <= 0).OrderBy(q=>q.DateEnd).ToList();
+
+            List<ViewModels.Task.ListTaskFuture> lstT = new List<ViewModels.Task.ListTaskFuture>();
+            foreach (var item in lstTask)
+            {
+
+                ViewModels.Task.ListTaskFuture T = new ViewModels.Task.ListTaskFuture();
+                T.CatId = item.CatId == null ? 0 : (int)item.CatId;
+                T.TaskId = item.TaskId;
+                T.Olaviat = item.Olaviat == null ? 0 : (int)item.Olaviat;
+                T.Name = item.Name;
+                T.DateStart = item.DateStart;
+                T.DateEnd = item.DateEnd;
+                //  T.Title = item.ti;
+                T.Rate = item.Rate == null ? 0 : (int)item.Rate;
+
+                lstT.Add(T);
+
+            }
+
+            // var vw_Letters = db.vw_Letters.AsNoTracking().Where(x => x.RecPersianDate.CompareTo(fromDate) >= 0 && x.RecPersianDate.CompareTo(toDate) <= 0).ToList();
+
+            return Json(lstT, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult RemoveAllTask(int[] TasKIds)
+        {
+
+           // users.Where(user => ids.Contains(user.id ?? 0));
+
+            DB.Tasks.RemoveRange(DB.Tasks.Where(x=> TasKIds.Contains(x.TaskId)));
+           var res= DB.SaveChanges();
+
+            //DB.Tasks.RemoveRange(TaslIds);
+            //DB.SaveChanges();
+
+            return Json(res,JsonRequestBehavior.AllowGet);
         }
     }
 }

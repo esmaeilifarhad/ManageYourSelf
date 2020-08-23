@@ -270,7 +270,7 @@ group by left(DayDate,6)
         {
             List<ViewModels.Karkard.VMKarkard> lstV = new List<ViewModels.Karkard.VMKarkard>();
 
-            DataTable DT = U.Select(@"exec TopBestKarkard "+ UserId + ","+ today + ","+ Offset + ","+ FETCH + "");
+            DataTable DT = U.Select(@"exec [5069_ManageYourSelf].[5069_Esmaeili].TopBestKarkard " + UserId + ","+ today + ","+ Offset + ","+ FETCH + "");
             /*DataTable DT = U.Select(@"
 select top 30 
 ROW_NUMBER() OVER(ORDER BY  sum(SpendTimeMinute) desc) AS Row,

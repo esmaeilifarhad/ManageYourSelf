@@ -1,0 +1,1315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ManageYourSelfModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="dsc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="RepeatCount" Type="Int32" />
+    <Property Name="date" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="time" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="RepeatedNumber" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Book_Users" FromRole="Book" ToRole="Users" />
+    <NavigationProperty Name="TitleTbls" Relationship="Self.FK_TitleTbl_Book" FromRole="Book" ToRole="TitleTbl" />
+  </EntityType>
+  <EntityType Name="Cat">
+    <Key>
+      <PropertyRef Name="CatId" />
+    </Key>
+    <Property Name="CatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="Int32" Nullable="false" />
+    <Property Name="Dsc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Order" Type="Int32" />
+    <Property Name="test" Type="Int32" />
+    <NavigationProperty Name="Sports" Relationship="Self.FK_Sport_Cat" FromRole="Cat" ToRole="Sport" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Cat" FromRole="Cat" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="ContentTbl">
+    <Key>
+      <PropertyRef Name="ContentId" />
+    </Key>
+    <Property Name="ContentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TitleId" Type="Int32" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="TitleTbl" Relationship="Self.FK_ContentTbl_TitleTbl" FromRole="ContentTbl" ToRole="TitleTbl" />
+  </EntityType>
+  <EntityType Name="LogTBL">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="dsc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ManageTime">
+    <Key>
+      <PropertyRef Name="ManageTimeId" />
+    </Key>
+    <Property Name="ManageTimeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Timings" Relationship="Self.FK_Timing_ManageTime" FromRole="ManageTime" ToRole="Timing" />
+  </EntityType>
+  <EntityType Name="Mazaya">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MazayaId" Type="Int32" Nullable="false" />
+    <Property Name="MazayaName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsMazaya" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Namad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Namad1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CodeSherkat" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tseAdrs" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="RahavardId" Type="Int32" />
+    <Property Name="NamadSahih" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="tseId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NamadDetails" Relationship="Self.FK_NamadDetail_Namad" FromRole="Namad" ToRole="NamadDetail" />
+  </EntityType>
+  <EntityType Name="NamadDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NamadId" Type="Int32" />
+    <Property Name="ShamsyDate" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Hajm" Type="Int64" />
+    <Property Name="TedadMoamelat" Type="Int64" />
+    <Property Name="DarsadGheymatPayany" Type="Double" />
+    <Property Name="GheymatPayany" Type="Int64" />
+    <NavigationProperty Name="Namad" Relationship="Self.FK_NamadDetail_Namad" FromRole="NamadDetail" ToRole="Namad" />
+  </EntityType>
+  <EntityType Name="RoutineJob">
+    <Key>
+      <PropertyRef Name="RoutineJobId" />
+    </Key>
+    <Property Name="RoutineJobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoozDaily" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Job" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Rate" Type="Int32" />
+    <Property Name="Order" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_RoutineJob_Users" FromRole="RoutineJob" ToRole="Users" />
+    <NavigationProperty Name="RoutineJobHas" Relationship="Self.FK_RoutineJobHa_RoutineJob" FromRole="RoutineJob" ToRole="RoutineJobHa" />
+  </EntityType>
+  <EntityType Name="RoutineJobHa">
+    <Key>
+      <PropertyRef Name="RoutineJobHa1" />
+    </Key>
+    <Property Name="RoutineJobHa1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoutineJobId" Type="Int32" Nullable="false" />
+    <Property Name="IsCheck" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RoutineJob" Relationship="Self.FK_RoutineJobHa_RoutineJob" FromRole="RoutineJobHa" ToRole="RoutineJob" />
+  </EntityType>
+  <EntityType Name="Seyed">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Sport">
+    <Key>
+      <PropertyRef Name="SportId" />
+    </Key>
+    <Property Name="SportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tedad" Type="Int32" Nullable="false" />
+    <Property Name="Set" Type="Int32" />
+    <NavigationProperty Name="Cat" Relationship="Self.FK_Sport_Cat" FromRole="Sport" ToRole="Cat" />
+  </EntityType>
+  <EntityType Name="StoreHoghogh">
+    <Key>
+      <PropertyRef Name="StoreHoghoghId" />
+    </Key>
+    <Property Name="StoreHoghoghId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonelId" Type="Int32" Nullable="false" />
+    <Property Name="SHdate" Type="Int32" Nullable="false" />
+    <Property Name="MazayaId" Type="Int32" Nullable="false" />
+    <Property Name="MazRyialMah" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskImage">
+    <Key>
+      <PropertyRef Name="TaskImageId" />
+    </Key>
+    <Property Name="TaskImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="img" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="TaskId" Type="Int32" />
+    <NavigationProperty Name="Task" Relationship="Self.FK_TaskImage_Task" FromRole="TaskImage" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Timing">
+    <Key>
+      <PropertyRef Name="TimingId" />
+    </Key>
+    <Property Name="TimingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <Property Name="ManageTimeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ManageTime" Relationship="Self.FK_Timing_ManageTime" FromRole="Timing" ToRole="ManageTime" />
+    <NavigationProperty Name="Task" Relationship="Self.FK_Timing_Task" FromRole="Timing" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="TitleTbl">
+    <Key>
+      <PropertyRef Name="TitleId" />
+    </Key>
+    <Property Name="BookId" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TitleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_TitleTbl_Book" FromRole="TitleTbl" ToRole="Book" />
+    <NavigationProperty Name="ContentTbls" Relationship="Self.FK_ContentTbl_TitleTbl" FromRole="TitleTbl" ToRole="ContentTbl" />
+  </EntityType>
+  <EntityType Name="C__EFMigrationsHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BaseDaramadData">
+    <Key>
+      <PropertyRef Name="BaseDaramadDataId" />
+    </Key>
+    <Property Name="BaseDaramadDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Category_Users" FromRole="Category" ToRole="Users" />
+    <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Category" FromRole="Category" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="Daramad">
+    <Key>
+      <PropertyRef Name="DaramadId" />
+    </Key>
+    <Property Name="DaramadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rial" Type="Int32" Nullable="false" />
+    <Property Name="MojoodyBankId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TypeHazinehId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Before" Type="Int32" />
+    <Property Name="After" Type="Int32" />
+    <Property Name="DaramadORHazineh" Type="Boolean" />
+    <NavigationProperty Name="MojoodyBank" Relationship="Self.FK_Daramad_MojoodyBank" FromRole="Daramad" ToRole="MojoodyBank" />
+    <NavigationProperty Name="TypeHazineh" Relationship="Self.FK_Daramad_TypeHazineh" FromRole="Daramad" ToRole="TypeHazineh" />
+  </EntityType>
+  <EntityType Name="DataCard">
+    <Key>
+      <PropertyRef Name="DataCardId" />
+    </Key>
+    <Property Name="DataCardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="personelid" Type="Int32" Nullable="false" />
+    <Property Name="DateCard" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="I" Type="Int32" Nullable="false" />
+    <Property Name="O" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DaysExercise">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateExercise" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="WordId" Type="Int32" />
+    <Property Name="Succ_OR_UnSucc" Type="Boolean" />
+    <NavigationProperty Name="dic_tbl" Relationship="Self.FK_DaysExercise_dic_tbl" FromRole="DaysExercise" ToRole="dic_tbl" />
+  </EntityType>
+  <EntityType Name="dic_tbl">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="per" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Phonetic" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="level" Type="Int32" Nullable="false" />
+    <Property Name="date_s" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_refresh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="timeword" Type="Int32" />
+    <Property Name="id_month" Type="Int32" />
+    <Property Name="SuccessCount" Type="Int32" />
+    <Property Name="UnSuccessCount" Type="Int32" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDateM" Type="DateTime" Precision="0" />
+    <Property Name="DateRefreshM" Type="DateTime" Precision="0" />
+    <Property Name="IsArchieve" Type="Boolean" />
+    <NavigationProperty Name="DaysExercises" Relationship="Self.FK_DaysExercise_dic_tbl" FromRole="dic_tbl" ToRole="DaysExercise" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dic_tbl_Users" FromRole="dic_tbl" ToRole="Users" />
+    <NavigationProperty Name="example_tbl" Relationship="Self.FK_example_tbl_dic_tbl" FromRole="dic_tbl" ToRole="example_tbl" />
+  </EntityType>
+  <EntityType Name="example_tbl">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_dic_tbl" Type="Int32" Nullable="false" />
+    <Property Name="example" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="dic_tbl" Relationship="Self.FK_example_tbl_dic_tbl" FromRole="example_tbl" ToRole="dic_tbl" />
+  </EntityType>
+  <EntityType Name="HolyDay">
+    <Key>
+      <PropertyRef Name="HolyDayId" />
+    </Key>
+    <Property Name="HolyDayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HolyDayRooz" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="IODayly">
+    <Key>
+      <PropertyRef Name="IOId" />
+    </Key>
+    <Property Name="IOId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="STime" Type="Int32" />
+    <Property Name="ETime" Type="Int32" />
+    <Property Name="IOType" Type="Int32" />
+    <Property Name="DayDate" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="GridShow" Type="Boolean" />
+    <Property Name="Mohasebe" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Job_Category" FromRole="Job" ToRole="Category" />
+    <NavigationProperty Name="KarKards" Relationship="Self.FK_KarKard_Job" FromRole="Job" ToRole="KarKard" />
+    <NavigationProperty Name="PercentJobs" Relationship="Self.FK_PercentJob_Job" FromRole="Job" ToRole="PercentJob" />
+  </EntityType>
+  <EntityType Name="KarKard">
+    <Key>
+      <PropertyRef Name="KarkardId" />
+    </Key>
+    <Property Name="KarkardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int32" />
+    <Property Name="DayDate" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SpendTimeMinute" Type="Int32" Nullable="false" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="MiladyDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Job" Relationship="Self.FK_KarKard_Job" FromRole="KarKard" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="Kharj">
+    <Key>
+      <PropertyRef Name="KharjId" />
+    </Key>
+    <Property Name="KharjId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rial" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateKharj" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="KharjTypeId" Type="Int32" />
+    <NavigationProperty Name="KharjType" Relationship="Self.FK_Kharj_KharjType" FromRole="Kharj" ToRole="KharjType" />
+  </EntityType>
+  <EntityType Name="KharjType">
+    <Key>
+      <PropertyRef Name="KharjTypeId" />
+    </Key>
+    <Property Name="KharjTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="Kharjs" Relationship="Self.FK_Kharj_KharjType" FromRole="KharjType" ToRole="Kharj" />
+    <NavigationProperty Name="User" Relationship="Self.FK_KharjType_Users" FromRole="KharjType" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="MasterData">
+    <Key>
+      <PropertyRef Name="MasterDataId" />
+    </Key>
+    <Property Name="MasterDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="WeightDate" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="Personelid" Type="Int32" />
+    <Property Name="PersonelName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Order" Type="Int32" />
+    <Property Name="IsCascade" Type="Boolean" />
+    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Menuha">
+    <Key>
+      <PropertyRef Name="MenuhaId" />
+    </Key>
+    <Property Name="MenuhaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MenuId" Type="Int32" Nullable="false" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MojoodyBank">
+    <Key>
+      <PropertyRef Name="MojoodyBankId" />
+    </Key>
+    <Property Name="MojoodyBankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MojoodyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Rial" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Daramads" Relationship="Self.FK_Daramad_MojoodyBank" FromRole="MojoodyBank" ToRole="Daramad" />
+  </EntityType>
+  <EntityType Name="MVCHomeHeaderThree">
+    <Key>
+      <PropertyRef Name="MVCHomeHeaderThreeId" />
+    </Key>
+    <Property Name="MVCHomeHeaderThreeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Header" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Matn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PercentJob">
+    <Key>
+      <PropertyRef Name="PercentId" />
+    </Key>
+    <Property Name="PercentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int32" Nullable="false" />
+    <Property Name="PercentValue" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Job" Relationship="Self.FK_PercentJob_Job" FromRole="PercentJob" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="PlayersId" />
+    </Key>
+    <Property Name="PlayersId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsHozoor" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PlayerScores" Relationship="Self.FK_PlayerScore_Players" FromRole="Players" ToRole="PlayerScore" />
+  </EntityType>
+  <EntityType Name="PlayerScore">
+    <Key>
+      <PropertyRef Name="PlayerScoreId" />
+    </Key>
+    <Property Name="PlayerScoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="PlayerId" Type="Int32" Nullable="false" />
+    <Property Name="Score" Type="Int32" />
+    <NavigationProperty Name="Player" Relationship="Self.FK_PlayerScore_Players" FromRole="PlayerScore" ToRole="Players" />
+    <NavigationProperty Name="User" Relationship="Self.FK_PlayerScore_Users" FromRole="PlayerScore" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="SettingId" />
+    </Key>
+    <Property Name="SettingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Value" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="SliderPhoto">
+    <Key>
+      <PropertyRef Name="SliderPhotoId" />
+    </Key>
+    <Property Name="SliderPhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhotoImg" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Header" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Matn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Taghvim">
+    <Key>
+      <PropertyRef Name="DayDate" />
+    </Key>
+    <Property Name="DayDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsHolyDay" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="RoozHafte" Type="Int32" Nullable="false" />
+    <Property Name="ChandShanbeh" Type="String" MaxLength="15" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="HafteChandom" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateStart" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateEnd" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsCheck" Type="Boolean" />
+    <Property Name="DarsadPishraft" Type="Int32" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Olaviat" Type="Int32" />
+    <Property Name="CatId" Type="Int32" />
+    <Property Name="Rate" Type="Int32" />
+    <NavigationProperty Name="Cat" Relationship="Self.FK_Task_Cat" FromRole="Task" ToRole="Cat" />
+    <NavigationProperty Name="TaskImages" Relationship="Self.FK_TaskImage_Task" FromRole="Task" ToRole="TaskImage" />
+    <NavigationProperty Name="Timings" Relationship="Self.FK_Timing_Task" FromRole="Task" ToRole="Timing" />
+    <NavigationProperty Name="Task1" Relationship="Self.FK_Task_Task" FromRole="Task" ToRole="Task1" />
+    <NavigationProperty Name="Task2" Relationship="Self.FK_Task_Task" FromRole="Task1" ToRole="Task" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Task_Users" FromRole="Task" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="TypeHazineh">
+    <Key>
+      <PropertyRef Name="TypeHazinehId" />
+    </Key>
+    <Property Name="TypeHazinehId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DaramadOrKharj" Type="Boolean" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="Daramads" Relationship="Self.FK_Daramad_TypeHazineh" FromRole="TypeHazineh" ToRole="Daramad" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Name="UserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_UserRole_Role" FromRole="UserRole" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserRole_Users" FromRole="UserRole" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_Book_Users" FromRole="Users" ToRole="Book" />
+    <NavigationProperty Name="RoutineJobs" Relationship="Self.FK_RoutineJob_Users" FromRole="Users" ToRole="RoutineJob" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK_Category_Users" FromRole="Users" ToRole="Category" />
+    <NavigationProperty Name="dic_tbl" Relationship="Self.FK_dic_tbl_Users" FromRole="Users" ToRole="dic_tbl" />
+    <NavigationProperty Name="KharjTypes" Relationship="Self.FK_KharjType_Users" FromRole="Users" ToRole="KharjType" />
+    <NavigationProperty Name="PlayerScores" Relationship="Self.FK_PlayerScore_Users" FromRole="Users" ToRole="PlayerScore" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Users" FromRole="Users" ToRole="Task" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Users" FromRole="Users" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="back_MasterData">
+    <Key>
+      <PropertyRef Name="MasterDataId" />
+    </Key>
+    <Property Name="MasterDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="WeightDate" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="Personelid" Type="Int32" />
+    <Property Name="PersonelName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="example_tbl_backup_980122">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="id_dic_tbl" />
+      <PropertyRef Name="example" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_dic_tbl" Type="Int32" Nullable="false" />
+    <Property Name="example" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dic_tbl_LOG">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="per" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="level" Type="Int32" />
+    <Property Name="date_s" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_refresh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="timeword" Type="Int32" />
+    <Property Name="id_month" Type="Int32" />
+    <Property Name="minuteWord" Type="Int32" />
+    <Property Name="HostName_TrgLog" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LoginName_TrgLog" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LogStatus_TrgLog" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TimeDate_TrgLog" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Book_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TitleTbl_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="TitleTbl" Type="Self.TitleTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="TitleTbl">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sport_Cat">
+    <End Role="Cat" Type="Self.Cat" Multiplicity="1" />
+    <End Role="Sport" Type="Self.Sport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat">
+        <PropertyRef Name="CatId" />
+      </Principal>
+      <Dependent Role="Sport">
+        <PropertyRef Name="CatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Cat">
+    <End Role="Cat" Type="Self.Cat" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat">
+        <PropertyRef Name="CatId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="CatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentTbl_TitleTbl">
+    <End Role="TitleTbl" Type="Self.TitleTbl" Multiplicity="0..1" />
+    <End Role="ContentTbl" Type="Self.ContentTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TitleTbl">
+        <PropertyRef Name="TitleId" />
+      </Principal>
+      <Dependent Role="ContentTbl">
+        <PropertyRef Name="TitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Timing_ManageTime">
+    <End Role="ManageTime" Type="Self.ManageTime" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Timing" Type="Self.Timing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ManageTime">
+        <PropertyRef Name="ManageTimeId" />
+      </Principal>
+      <Dependent Role="Timing">
+        <PropertyRef Name="ManageTimeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NamadDetail_Namad">
+    <End Role="Namad" Type="Self.Namad" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="NamadDetail" Type="Self.NamadDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Namad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NamadDetail">
+        <PropertyRef Name="NamadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoutineJob_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="RoutineJob" Type="Self.RoutineJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RoutineJob">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoutineJobHa_RoutineJob">
+    <End Role="RoutineJob" Type="Self.RoutineJob" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RoutineJobHa" Type="Self.RoutineJobHa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoutineJob">
+        <PropertyRef Name="RoutineJobId" />
+      </Principal>
+      <Dependent Role="RoutineJobHa">
+        <PropertyRef Name="RoutineJobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskImage_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+    <End Role="TaskImage" Type="Self.TaskImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="TaskImage">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Timing_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Timing" Type="Self.Timing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="Timing">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Daramad_MojoodyBank">
+    <End Role="MojoodyBank" Type="Self.MojoodyBank" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Daramad" Type="Self.Daramad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MojoodyBank">
+        <PropertyRef Name="MojoodyBankId" />
+      </Principal>
+      <Dependent Role="Daramad">
+        <PropertyRef Name="MojoodyBankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Daramad_TypeHazineh">
+    <End Role="TypeHazineh" Type="Self.TypeHazineh" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Daramad" Type="Self.Daramad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeHazineh">
+        <PropertyRef Name="TypeHazinehId" />
+      </Principal>
+      <Dependent Role="Daramad">
+        <PropertyRef Name="TypeHazinehId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DaysExercise_dic_tbl">
+    <End Role="dic_tbl" Type="Self.dic_tbl" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DaysExercise" Type="Self.DaysExercise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dic_tbl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DaysExercise">
+        <PropertyRef Name="WordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dic_tbl_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="dic_tbl" Type="Self.dic_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="dic_tbl">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_example_tbl_dic_tbl">
+    <End Role="dic_tbl" Type="Self.dic_tbl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="example_tbl" Type="Self.example_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dic_tbl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="example_tbl">
+        <PropertyRef Name="id_dic_tbl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KarKard_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="KarKard" Type="Self.KarKard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="KarKard">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PercentJob_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PercentJob" Type="Self.PercentJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="PercentJob">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kharj_KharjType">
+    <End Role="KharjType" Type="Self.KharjType" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Kharj" Type="Self.Kharj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KharjType">
+        <PropertyRef Name="KharjTypeId" />
+      </Principal>
+      <Dependent Role="Kharj">
+        <PropertyRef Name="KharjTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KharjType_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="KharjType" Type="Self.KharjType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="KharjType">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerScore_Players">
+    <End Role="Players" Type="Self.Player" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PlayerScore" Type="Self.PlayerScore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="PlayersId" />
+      </Principal>
+      <Dependent Role="PlayerScore">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerScore_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PlayerScore" Type="Self.PlayerScore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PlayerScore">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="Task1" Type="Self.Task" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="Task1">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Cats" EntityType="Self.Cat" />
+    <EntitySet Name="ContentTbls" EntityType="Self.ContentTbl" />
+    <EntitySet Name="LogTBLs" EntityType="Self.LogTBL" />
+    <EntitySet Name="ManageTimes" EntityType="Self.ManageTime" />
+    <EntitySet Name="Mazayas" EntityType="Self.Mazaya" />
+    <EntitySet Name="Namads" EntityType="Self.Namad" />
+    <EntitySet Name="NamadDetails" EntityType="Self.NamadDetail" />
+    <EntitySet Name="RoutineJobs" EntityType="Self.RoutineJob" />
+    <EntitySet Name="RoutineJobHas" EntityType="Self.RoutineJobHa" />
+    <EntitySet Name="Seyeds" EntityType="Self.Seyed" />
+    <EntitySet Name="Sports" EntityType="Self.Sport" />
+    <EntitySet Name="StoreHoghoghs" EntityType="Self.StoreHoghogh" />
+    <EntitySet Name="TaskImages" EntityType="Self.TaskImage" />
+    <EntitySet Name="Timings" EntityType="Self.Timing" />
+    <EntitySet Name="TitleTbls" EntityType="Self.TitleTbl" />
+    <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+    <EntitySet Name="BaseDaramadDatas" EntityType="Self.BaseDaramadData" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Daramads" EntityType="Self.Daramad" />
+    <EntitySet Name="DataCards" EntityType="Self.DataCard" />
+    <EntitySet Name="DaysExercises" EntityType="Self.DaysExercise" />
+    <EntitySet Name="dic_tbl" EntityType="Self.dic_tbl" />
+    <EntitySet Name="example_tbl" EntityType="Self.example_tbl" />
+    <EntitySet Name="HolyDays" EntityType="Self.HolyDay" />
+    <EntitySet Name="IODaylies" EntityType="Self.IODayly" />
+    <EntitySet Name="Jobs" EntityType="Self.Job" />
+    <EntitySet Name="KarKards" EntityType="Self.KarKard" />
+    <EntitySet Name="Kharjs" EntityType="Self.Kharj" />
+    <EntitySet Name="KharjTypes" EntityType="Self.KharjType" />
+    <EntitySet Name="MasterDatas" EntityType="Self.MasterData" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="Menuhas" EntityType="Self.Menuha" />
+    <EntitySet Name="MojoodyBanks" EntityType="Self.MojoodyBank" />
+    <EntitySet Name="MVCHomeHeaderThrees" EntityType="Self.MVCHomeHeaderThree" />
+    <EntitySet Name="PercentJobs" EntityType="Self.PercentJob" />
+    <EntitySet Name="Players" EntityType="Self.Player" />
+    <EntitySet Name="PlayerScores" EntityType="Self.PlayerScore" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Settings" EntityType="Self.Setting" />
+    <EntitySet Name="SliderPhotoes" EntityType="Self.SliderPhoto" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Taghvims" EntityType="Self.Taghvim" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <EntitySet Name="TypeHazinehs" EntityType="Self.TypeHazineh" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="back_MasterData" EntityType="Self.back_MasterData" />
+    <EntitySet Name="example_tbl_backup_980122" EntityType="Self.example_tbl_backup_980122" />
+    <EntitySet Name="dic_tbl_LOG" EntityType="Self.dic_tbl_LOG" />
+    <AssociationSet Name="FK_Book_Users" Association="Self.FK_Book_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TitleTbl_Book" Association="Self.FK_TitleTbl_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="TitleTbl" EntitySet="TitleTbls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sport_Cat" Association="Self.FK_Sport_Cat">
+      <End Role="Cat" EntitySet="Cats" />
+      <End Role="Sport" EntitySet="Sports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Cat" Association="Self.FK_Task_Cat">
+      <End Role="Cat" EntitySet="Cats" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentTbl_TitleTbl" Association="Self.FK_ContentTbl_TitleTbl">
+      <End Role="TitleTbl" EntitySet="TitleTbls" />
+      <End Role="ContentTbl" EntitySet="ContentTbls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Timing_ManageTime" Association="Self.FK_Timing_ManageTime">
+      <End Role="ManageTime" EntitySet="ManageTimes" />
+      <End Role="Timing" EntitySet="Timings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NamadDetail_Namad" Association="Self.FK_NamadDetail_Namad">
+      <End Role="Namad" EntitySet="Namads" />
+      <End Role="NamadDetail" EntitySet="NamadDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoutineJob_Users" Association="Self.FK_RoutineJob_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RoutineJob" EntitySet="RoutineJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoutineJobHa_RoutineJob" Association="Self.FK_RoutineJobHa_RoutineJob">
+      <End Role="RoutineJob" EntitySet="RoutineJobs" />
+      <End Role="RoutineJobHa" EntitySet="RoutineJobHas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskImage_Task" Association="Self.FK_TaskImage_Task">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="TaskImage" EntitySet="TaskImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Timing_Task" Association="Self.FK_Timing_Task">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="Timing" EntitySet="Timings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_Users" Association="Self.FK_Category_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Category" Association="Self.FK_Job_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Job" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Daramad_MojoodyBank" Association="Self.FK_Daramad_MojoodyBank">
+      <End Role="MojoodyBank" EntitySet="MojoodyBanks" />
+      <End Role="Daramad" EntitySet="Daramads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Daramad_TypeHazineh" Association="Self.FK_Daramad_TypeHazineh">
+      <End Role="TypeHazineh" EntitySet="TypeHazinehs" />
+      <End Role="Daramad" EntitySet="Daramads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DaysExercise_dic_tbl" Association="Self.FK_DaysExercise_dic_tbl">
+      <End Role="dic_tbl" EntitySet="dic_tbl" />
+      <End Role="DaysExercise" EntitySet="DaysExercises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dic_tbl_Users" Association="Self.FK_dic_tbl_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="dic_tbl" EntitySet="dic_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_example_tbl_dic_tbl" Association="Self.FK_example_tbl_dic_tbl">
+      <End Role="dic_tbl" EntitySet="dic_tbl" />
+      <End Role="example_tbl" EntitySet="example_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KarKard_Job" Association="Self.FK_KarKard_Job">
+      <End Role="Job" EntitySet="Jobs" />
+      <End Role="KarKard" EntitySet="KarKards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PercentJob_Job" Association="Self.FK_PercentJob_Job">
+      <End Role="Job" EntitySet="Jobs" />
+      <End Role="PercentJob" EntitySet="PercentJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kharj_KharjType" Association="Self.FK_Kharj_KharjType">
+      <End Role="KharjType" EntitySet="KharjTypes" />
+      <End Role="Kharj" EntitySet="Kharjs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KharjType_Users" Association="Self.FK_KharjType_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="KharjType" EntitySet="KharjTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerScore_Players" Association="Self.FK_PlayerScore_Players">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="PlayerScore" EntitySet="PlayerScores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerScore_Users" Association="Self.FK_PlayerScore_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PlayerScore" EntitySet="PlayerScores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Task" Association="Self.FK_Task_Task">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="Task1" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Users" Association="Self.FK_Task_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Users" Association="Self.FK_UserRole_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <FunctionImport Name="CompareToAvg">
+      <Parameter Name="SortBy" Mode="In" Type="String" />
+      <Parameter Name="today" Mode="In" Type="String" />
+      <Parameter Name="yesterday" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CreateTeam" ReturnType="Collection(ManageYourSelfModel1.CreateTeam_Result)" />
+    <FunctionImport Name="findBookDsc" ReturnType="Collection(ManageYourSelfModel1.findBookDsc_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="LastPositiveAlMinus">
+      <Parameter Name="TedadRooz" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ListGroupHazine" ReturnType="Collection(ManageYourSelfModel1.ListGroupHazine_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+      <Parameter Name="DaramadOrKharj" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ListVoteToPlayers" />
+    <FunctionImport Name="PersianToEnglish" ReturnType="Collection(ManageYourSelfModel1.PersianToEnglish_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ManageTime" ReturnType="Collection(ManageYourSelfModel1.SP_ManageTime_Result)">
+      <Parameter Name="Date" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TopBestKarkard" ReturnType="Collection(ManageYourSelfModel1.TopBestKarkard_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="CurentDate" Mode="In" Type="String" />
+      <Parameter Name="Offset" Mode="In" Type="Int32" />
+      <Parameter Name="FETCH" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="c" ReturnType="Collection(ManageYourSelfModel1.c_Result)">
+      <Parameter Name="eng_word" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CreateLogTbl" />
+    <FunctionImport Name="CreateTaghvimShamsy">
+      <Parameter Name="FirstDayOneToSeven" Mode="In" Type="Int32" />
+      <Parameter Name="FirstDate" Mode="In" Type="Int32" />
+      <Parameter Name="LastDate" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DarsadKarkard" ReturnType="Collection(ManageYourSelfModel1.DarsadKarkard_Result)">
+      <Parameter Name="Sdate" Mode="In" Type="String" />
+      <Parameter Name="Edate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertExample">
+      <Parameter Name="IdWord" Mode="In" Type="Int32" />
+      <Parameter Name="example" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="KarkardHaftegy" />
+    <FunctionImport Name="KarkardHaftegyrowwHafteChand" />
+    <FunctionImport Name="KarkardHaftegyST" ReturnType="Collection(ManageYourSelfModel1.KarkardHaftegyST_Result)" />
+    <FunctionImport Name="order_by_CountLevel" />
+    <FunctionImport Name="ProgreadReadWordDaily" />
+    <FunctionImport Name="ProgreadReadWordDailyRoozBeRooz">
+      <Parameter Name="SDate" Mode="In" Type="Int32" />
+      <Parameter Name="EDate" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Show_Karkard" />
+    <FunctionImport Name="Show_Karkard961004" />
+    <FunctionImport Name="ShowKarkadPivot">
+      <Parameter Name="Sdate" Mode="In" Type="String" />
+      <Parameter Name="Edate" Mode="In" Type="String" />
+      <Parameter Name="RoozHafte" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ShowKarkadPivotDateToDate">
+      <Parameter Name="Sdate" Mode="In" Type="String" />
+      <Parameter Name="Edate" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ShowKarkadPivotDateToDate970519">
+      <Parameter Name="Sdate" Mode="In" Type="String" />
+      <Parameter Name="Edate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ShowKarkadPivotDateToDate970618">
+      <Parameter Name="Sdate" Mode="In" Type="String" />
+      <Parameter Name="Edate" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ShowKarkadPivotNotParam" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ManageYourSelfModel1.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ManageYourSelfModel1.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="update_add_timeword">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="addTime" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="update_level">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="level" Mode="In" Type="Int32" />
+      <Parameter Name="date_refresh" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateExample">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="id_dic_tbl" Mode="In" Type="Int32" />
+      <Parameter Name="example" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateTaghvimSetHafteChandom" />
+  </EntityContainer>
+  <ComplexType Name="CreateTeam_Result">
+    <Property Type="String" Name="TeamName" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Score" Nullable="true" />
+    <Property Type="Double" Name="AVGScore" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="findBookDsc_Result">
+    <Property Type="Int32" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Order" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="dsc" Nullable="true" />
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="Int32" Name="RepeatCount" Nullable="true" />
+    <Property Type="String" Name="date" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="time" Nullable="true" MaxLength="250" />
+    <Property Type="Int32" Name="RepeatedNumber" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListGroupHazine_Result">
+    <Property Type="Int32" Name="TypeHazinehId" Nullable="true" />
+    <Property Type="String" Name="Datee" Nullable="true" MaxLength="6" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Rial" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="PersianToEnglish_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="eng" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="per" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Phonetic" Nullable="true" MaxLength="70" />
+    <Property Type="Int32" Name="level" Nullable="false" />
+    <Property Type="String" Name="date_s" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="level1" Nullable="false" />
+    <Property Type="String" Name="date_refresh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="time" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="timeword" Nullable="true" />
+    <Property Type="Int32" Name="id_month" Nullable="true" />
+    <Property Type="Int32" Name="SuccessCount" Nullable="true" />
+    <Property Type="Int32" Name="UnSuccessCount" Nullable="true" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateM" Nullable="true" />
+    <Property Type="DateTime" Name="DateRefreshM" Nullable="true" />
+    <Property Type="Int32" Name="Column1" Nullable="false" />
+    <Property Type="Int32" Name="Column2" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_ManageTime_Result">
+    <Property Type="Int32" Name="Value" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" />
+    <Property Type="String" Name="Col1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="TopBestKarkard_Result">
+    <Property Type="Int64" Name="Row" Nullable="true" />
+    <Property Type="String" Name="DayDate" Nullable="false" MaxLength="8" />
+    <Property Type="Int32" Name="SpendTimeMinute" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="c_Result">
+    <Property Type="String" Name="eng" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="per" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="level" Nullable="false" />
+    <Property Type="String" Name="date_s" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="date_refresh" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="DarsadKarkard_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Timee" Nullable="true" />
+    <Property Type="Double" Name="TimeeH" Nullable="true" />
+    <Property Type="Decimal" Name="D" Nullable="true" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="KarkardHaftegyST_Result">
+    <Property Type="Int32" Name="HafteChandom" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="SpendTimeMinute" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

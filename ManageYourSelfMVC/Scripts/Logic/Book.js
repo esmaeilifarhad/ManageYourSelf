@@ -1,10 +1,14 @@
 ﻿$(document).ready(function () {
+
     GetBook()
     setInterval(async function () {
         GetBook()
     }, 30000);
 })
 async function GetBook() {
+    
+    var ShowFooterAlert = localStorage.getItem("ShowFooterAlert");
+    if (ShowFooterAlert=='false') return
     var obj = {}
     obj.url = "/Book/GetBook"
     obj.dataType = "json"
@@ -170,3 +174,4 @@ async function inreaseRepeatedNumber(BookId) {
     var ListObj = results[0]
     GetBooks()
 }
+

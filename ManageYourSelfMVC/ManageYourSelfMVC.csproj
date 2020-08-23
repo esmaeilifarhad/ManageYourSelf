@@ -173,6 +173,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\DomainModels\Model2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DomainModels\Model2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.cs</LastGenOutput>
+    </Content>
     <Content Include="MyTemplate\MasterTemplate\contactform\contactform.js" />
     <Content Include="MyTemplate\MasterTemplate\contactform\Readme.txt" />
     <Content Include="MyTemplate\MasterTemplate\css\scss-files.txt" />
@@ -293,6 +303,13 @@
     <Content Include="fonts\BNaznnBd.woff2" />
     <Content Include="fonts\Far_Morvarid.ttf" />
     <Content Include="fonts\Far_Morvarid.woff" />
+    <EntityDeploy Include="Models\DomainModels\Model2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DomainModels\Model2.edmx.diagram">
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\fe.pubxml" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -1195,94 +1212,100 @@
     <Compile Include="Models\CheckAccess\UserRoleAccess.cs" />
     <Compile Include="Models\Connection\ConnectionString.cs" />
     <Compile Include="Models\DomainModels\back_MasterData.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\BaseDaramadData.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Book.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Cat.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Category.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\ContentTbl.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\CreateTeam_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\c_Result.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\C__EFMigrationsHistory.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Daramad.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\DarsadKarkard_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\DataCard.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\DaysExercise.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\dic_tbl.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\dic_tbl_LOG.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\example_tbl.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\example_tbl_backup_980122.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\findBookDsc_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\HolyDay.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\IODayly.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Job.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\KarKard.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\KarkardHaftegyST_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Kharj.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\KharjType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\ListGroupHazine_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\LogTBL.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\ManageTime.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\MasterData.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Mazaya.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Menu.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Menuha.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1299,89 +1322,107 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DomainModels\Model2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\Model2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\Model2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\DomainModels\MojoodyBank.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\MVCHomeHeaderThree.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Namad.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\NamadDetail.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\PercentJob.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\PersianToEnglish_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Player.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\PlayerScore.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\RoutineJob.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\RoutineJobHa.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Setting.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Seyed.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\SliderPhoto.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Sport.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\SP_ManageTime_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\StoreHoghogh.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Taghvim.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Task.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\TaskImage.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\Timing.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\TitleTbl.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\TopBestKarkard_Result.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\TypeHazineh.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\User.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\UserRole.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Filtering\Filter.cs" />
     <Compile Include="Models\Filtering\FilterSaham.cs" />
@@ -1408,11 +1449,13 @@
     <Compile Include="ViewModels\DictionaryVM.cs" />
     <Compile Include="ViewModels\Dictionary\VMDictionary.cs" />
     <Compile Include="ViewModels\ErrorMessage.cs" />
+    <Compile Include="ViewModels\ExcelFiles.cs" />
     <Compile Include="ViewModels\HazineMohem\VMHazineMohem.cs" />
     <Compile Include="ViewModels\HomeClientVM.cs" />
     <Compile Include="ViewModels\Karkard\VMKarkard.cs" />
     <Compile Include="ViewModels\ListNavVM.cs" />
     <Compile Include="ViewModels\MenuVm.cs" />
+    <Compile Include="ViewModels\NamadDetail.cs" />
     <Compile Include="ViewModels\PercentJob\VMPercentJob.cs" />
     <Compile Include="ViewModels\PersonelModel.cs" />
     <Compile Include="ViewModels\PlayerScoreVM.cs" />
@@ -1605,6 +1648,7 @@
     <Content Include="Views\Task\RenderImageBytes.cshtml" />
     <Content Include="Views\Saham\MainSaham.cshtml" />
     <Content Include="Views\Shared\SahamMasterPage.cshtml" />
+    <Content Include="Views\Saham\ShowMessage2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

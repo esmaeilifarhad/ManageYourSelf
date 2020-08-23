@@ -409,35 +409,44 @@ namespace ManageYourSelfMVC.Models.Help
         }
         public static string RoozToDate(string OldDate)
         {
-            string Rooz = string.Empty;
-            System.Globalization.PersianCalendar calendar = new System.Globalization.PersianCalendar();
-            string DatePersian = Utility.ConvertDateToSqlFormat(Utility.shamsi_date());
-            string DateRefresh = Utility.ConvertDateToSqlFormat(OldDate);
-            //-------------------------------------------------------------------------------------
-            int year_new =  int.Parse(DatePersian.Substring(0, 4));
-            int month_new = int.Parse(DatePersian.Substring(4, 2));
-            int day_new = int.Parse(DatePersian.Substring(6, 2));
+            try
+            {
+                string Rooz = string.Empty;
+                System.Globalization.PersianCalendar calendar = new System.Globalization.PersianCalendar();
+                string DatePersian = Utility.ConvertDateToSqlFormat(Utility.shamsi_date());
+                string DateRefresh = Utility.ConvertDateToSqlFormat(OldDate);
+                //-------------------------------------------------------------------------------------
+                int year_new = int.Parse(DatePersian.Substring(0, 4));
+                int month_new = int.Parse(DatePersian.Substring(4, 2));
+                int day_new = int.Parse(DatePersian.Substring(6, 2));
 
-            int year_old =  int.Parse(DateRefresh.Substring(0, 4));
-            int month_old = int.Parse(DateRefresh.Substring(4, 2));
-            int day_old = int.Parse(DateRefresh.Substring(6, 2));
-            //-----------------------------------------------------------------------------------
+                int year_old = int.Parse(DateRefresh.Substring(0, 4));
+                int month_old = int.Parse(DateRefresh.Substring(4, 2));
+                int day_old = int.Parse(DateRefresh.Substring(6, 2));
+                //-----------------------------------------------------------------------------------
 
-            DateTime dt1 = calendar.ToDateTime(year_old, month_old, day_old, 0, 0, 0, 0);
-            DateTime dt2 = calendar.ToDateTime(year_new, month_new, day_new, 0, 0, 0, 0);
-            TimeSpan ts = dt1.Subtract(dt2);
-            int days = ts.Days;
-            //if (days < 0)
-            //{
-            //    days = days * (-1);
-            //}
-            //else
-            //{
-            //    days = 0;
-            //}
-            Rooz = days.ToString();
+                DateTime dt1 = calendar.ToDateTime(year_old, month_old, day_old, 0, 0, 0, 0);
+                DateTime dt2 = calendar.ToDateTime(year_new, month_new, day_new, 0, 0, 0, 0);
+                TimeSpan ts = dt1.Subtract(dt2);
+                int days = ts.Days;
+                //if (days < 0)
+                //{
+                //    days = days * (-1);
+                //}
+                //else
+                //{
+                //    days = 0;
+                //}
+                Rooz = days.ToString();
 
-            return Rooz;
+                return Rooz;
+            }
+            catch (Exception ex)
+            {
+
+                throw new ArgumentException(ex.Message);
+            }
+           
         }
         public static string RoozFromDate(string OldDate)
         {

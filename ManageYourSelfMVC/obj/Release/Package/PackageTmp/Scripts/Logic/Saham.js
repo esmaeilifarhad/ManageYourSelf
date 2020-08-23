@@ -633,11 +633,167 @@ function getDateFromLocalStorage(){
     var DateForUpToDateSaham = localStorage.getItem("DateForUpToDateSaham");
     $("input[name='DateForUpToDateSaham']").val(DateForUpToDateSaham);
    // localStorage.setItem("DateForUpToDateSaham", DateForUpToDateSaham);
-
+    ShamsyDateCount()
 
 }
 function DateForUpToDateSahamChange(thiss){
     
     localStorage.setItem("DateForUpToDateSaham",  thiss.value);
    
+}
+async function ShamsyDateCount() {
+    $.LoadingOverlay("show");
+
+    var obj = {}
+    obj.url = "/Saham/ShamsyDateCount"
+    obj.dataType = "json"
+    obj.type = "post"
+    //obj.data = { TedadRooz: TedadRooz }
+    var results = await Promise.all([
+        service(obj)
+    ]);
+    var ListObj = results[0]
+
+    var table = "<table class='table table-responsive'>" +
+        "<tr><th>تاریخ</th><th>تعداد</th></tr>"
+    for (var i = 0; i < ListObj.lstNamadVM.length; i++) {
+        table += "<tr>" +
+            "<td>" + ListObj.lstNamadVM[i].ShamsyDate + "</td>" +
+            "<td>" + ListObj.lstNamadVM[i].Tedad + "</td>" +
+            "</tr>"
+
+    }
+    table += "</table>"
+
+    $(".ShamsyDateCount").empty();
+    $(".ShamsyDateCount").append(table);
+
+
+    $.LoadingOverlay("hide");
+}
+function UploaderFile() {
+    $.LoadingOverlay("show");
+    // Checking whether FormData is available in browser  
+    if (window.FormData !== undefined) {
+
+        var fileUpload = $("#fileInput").get(0);
+        var files = fileUpload.files;
+
+        // Create FormData object  
+        var fileData = new FormData();
+
+        // Looping over all files and add it to FormData object  
+        for (var i = 0; i < files.length; i++) {
+            fileData.append(files[i].name, files[i]);
+        }
+
+        // Adding one more key to FormData object  
+        //  fileData.append('username','Manas');  
+
+        $.ajax({
+            url: '/Saham/UploadFiles',
+            type: "POST",
+            contentType: false, // Not to set any content header  
+            processData: false, // Not to process data  
+            data: fileData,
+            success: function (result) {
+                ShamsyDateCount();
+                alert(result);
+                $.LoadingOverlay("hide");
+              //  Sheet();
+            },
+            error: function (err) {
+                console.log(err.statusText)
+                alert(err.statusText);
+            }
+        });
+    } else {
+        alert("FormData is not supported.");
+    }
+
+}
+//async function Sheet() {
+//    var obj = {}
+//    obj.url = "/Saham/Sheet"
+//    obj.dataType = "json"
+//    obj.type = "post"
+//    // obj.data={TaskId:TaskId}
+
+//    var results = await Promise.all([
+//        service(obj)
+//    ]);
+//    var ListObj = results[0]
+//    var message=""
+//    for (var i = 0; i < ListObj.length; i++) {
+//        message += "<p>" + ListObj[i].FileName+"</p>"
+//    }
+
+
+
+//    var tablebutt = "<table class='table' style='font-size: 9px;'>"
+//    tablebutt += "<tr>" +
+//        "<td><input type='button'  class='btn btn-danger' value='بستن' onclick='closeModal()'/></td>" +
+//        "</tr>"
+//    tablebutt += "</table>"
+
+//    $(".modal-footer").empty();
+//    $(".modal-footer").append(tablebutt);
+//    $(".BodyModal").empty();
+//    $(".BodyModal").append(message);
+//    $("#MasterModal").modal();
+//    SheetName()
+
+
+    
+//}
+//async function SheetName() {
+//    var obj = {}
+//    obj.url = "/Saham/SheetName"
+//    obj.dataType = "json"
+//    obj.type = "post"
+//    // obj.data={TaskId:TaskId}
+
+//    var results = await Promise.all([
+//        service(obj)
+//    ]);
+//    var ListObj = results[0]
+//    
+
+//    var obj = {}
+//    obj.url = "/Saham/ExcelToDataTable"
+//    obj.dataType = "json"
+//    obj.type = "post"
+//    // obj.data={TaskId:TaskId}
+
+//    var results = await Promise.all([
+//        service(obj)
+//    ]);
+//    var ListObj = results[0]
+//    
+    
+//    //var message = ""
+//    //for (var i = 0; i < ListObj.length; i++) {
+//    //    message += "<p>" + ListObj[i].FileName + "</p>"
+//    //}
+
+
+
+//    //var tablebutt = "<table class='table' style='font-size: 9px;'>"
+//    //tablebutt += "<tr>" +
+//    //    "<td><input type='button'  class='btn btn-danger' value='بستن' onclick='closeModal()'/></td>" +
+//    //    "</tr>"
+//    //tablebutt += "</table>"
+
+//    //$(".modal-footer").empty();
+//    //$(".modal-footer").append(tablebutt);
+//    //$(".BodyModal").empty();
+//    //$(".BodyModal").append(message);
+//    //$("#MasterModal").modal();
+
+
+
+//    
+//}
+function closeModal() {
+    $("#MasterModal").modal("toggle");
 }

@@ -1,6 +1,7 @@
 ﻿//--Execute All List when click Tab
 $("ul li a[href='#Setting']").on("click", function () {
     ListHolyDay();
+    ListSetting();
 });
 //***************************************************HolyDay
 function ListHolyDay() {
@@ -133,4 +134,31 @@ $(".ListHolyDay").on("click", ".fa-edit", function () {
     var HolyDayId = $(this).attr("HolyDayId");
     EditHolyDay(HolyDayId);
 });
+
+function ListSetting() {
+
+    var ShowFooterAlert = localStorage.getItem("ShowFooterAlert");
+    
+    
+        var table = "<table class='table'>" 
+    if (ShowFooterAlert == 'true')
+        table += "<tr><td>نمایش فوتر</td><td>نمایش : <input type='radio' name='rdbShowFooter' value=true onclick='changeRdbFooter(true)' checked/>عدم نمایش : <input type='radio' name='rdbShowFooter' value=false onclick='changeRdbFooter(false)'/></td><tr>"
+    else
+        table += "<tr><td>نمایش فوتر</td><td>نمایش : <input type='radio' name='rdbShowFooter' value=true onclick='changeRdbFooter(true)'/>عدم نمایش : <input type='radio' name='rdbShowFooter' value=false checked onclick='changeRdbFooter(false)'/></td><tr>"
+    table+="</table>"
+    $("#Setting .Setting").empty()
+    $("#Setting .Setting").append(table)
+
+    
+    
+}
+function changeRdbFooter(status) {
+    
+    if (status == true) {
+        localStorage.setItem("ShowFooterAlert", "true");
+    }
+    else {
+        localStorage.setItem("ShowFooterAlert", "false");
+    }
+}
 

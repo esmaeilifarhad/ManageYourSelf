@@ -706,7 +706,7 @@ where example like '%" + str + @"%'
         {
             List<ViewModels.Dictionary.VMDictionary> lstV = new List<ViewModels.Dictionary.VMDictionary>();
 
-            DataTable DT = U.Select("exec [PersianToEnglish] " + UserId.ToString());
+            DataTable DT = U.Select("exec [5069_ManageYourSelf].[5069_Esmaeili].[PersianToEnglish] " + UserId.ToString());
             /*     DataTable DT = U.Select(@"
 
      select * from dic_tbl D
@@ -784,7 +784,7 @@ where example like '%" + str + @"%'
         {
             List<ViewModels.Dictionary.VMDictionary> lstV = new List<ViewModels.Dictionary.VMDictionary>();
 
-            DataTable DT = U.Select("exec [PersianToEnglish] " + UserId.ToString());
+            DataTable DT = U.Select("exec [5069_ManageYourSelf].[5069_Esmaeili].[PersianToEnglish] " + UserId.ToString());
             /* DataTable DT = U.Select(@"
 
  select * from dic_tbl D

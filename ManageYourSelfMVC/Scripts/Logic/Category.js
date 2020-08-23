@@ -398,7 +398,7 @@ async function SumMounthKarkard() {
         service(obj)
     ]);
     var ListObj = results[0]
-    var table ="<table  class='table table-bordered'>"
+    var table ="<h3>گزارش ماهانه</h3><table  class='table table-bordered'>"
     for (var i = 0; i < ListObj.length; i++) {
         
         table += "<tr>"

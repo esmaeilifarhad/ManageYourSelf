@@ -29,7 +29,7 @@ namespace ManageYourSelfMVC.Controllers
             vmB.BookId = book.BookId;
             return Json(vmB, JsonRequestBehavior.AllowGet);
             */
-            DataTable DT = U.Select(@"exec findBookDsc " + UserId + " ");
+            DataTable DT = U.Select(@"exec [5069_ManageYourSelf].[5069_Esmaeili].findBookDsc " + UserId + " ");
             ViewModels.Book.VMBook vmB = new ViewModels.Book.VMBook();
             foreach (DataRow item in DT.Rows)
             {

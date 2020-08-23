@@ -180,37 +180,39 @@ namespace ManageYourSelfMVC.Models.MyData
         public List<ViewModels.TaskVM> ListTask(string typeTask, int UserId, List<string> MyData)
         {
             #region ListTask
-            /*
-       A circular reference was detected while serializing an object of type 'System.Data.Entity.DynamicProxies
-       Its because it is trying to load child objects and it may be creating some circular loop that will never ending( a=>b, b=>c, c=>d, d=>a)
-       you can turn it off only for that particular moment as following.So dbcontext will not load customers child objects unless Include method is called on your object
-       db.Configuration.ProxyCreationEnabled = false;
-       User ma = db.user.First(x => x.u_id == id);
-       return Json(ma, JsonRequestBehavior.AllowGet);
-       */
-            DB.Configuration.ProxyCreationEnabled = false;
-
-            string str = string.Empty;
-            if (MyData != null)
+            try
             {
-                str = MyData[0].TrimEnd(',');
+                /*
+     A circular reference was detected while serializing an object of type 'System.Data.Entity.DynamicProxies
+     Its because it is trying to load child objects and it may be creating some circular loop that will never ending( a=>b, b=>c, c=>d, d=>a)
+     you can turn it off only for that particular moment as following.So dbcontext will not load customers child objects unless Include method is called on your object
+     db.Configuration.ProxyCreationEnabled = false;
+     User ma = db.user.First(x => x.u_id == id);
+     return Json(ma, JsonRequestBehavior.AllowGet);
+     */
+                DB.Configuration.ProxyCreationEnabled = false;
 
-                string[] ids = str.Split(',');
-            }
-
-
-            List<ViewModels.TaskVM> lstTaskVM = new List<ViewModels.TaskVM>();
-            //-------------------------------------------------------------------
-
-            if (typeTask == "anjamnashode")
-            {
-                Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
-                DataTable DT;
-                if (str == "")
+                string str = string.Empty;
+                if (MyData != null)
                 {
-                    DT = U.SelectWhere(
+                    str = MyData[0].TrimEnd(',');
 
-                       @"
+                    string[] ids = str.Split(',');
+                }
+
+
+                List<ViewModels.TaskVM> lstTaskVM = new List<ViewModels.TaskVM>();
+                //-------------------------------------------------------------------
+
+                if (typeTask == "anjamnashode")
+                {
+                    Models.ADO.UIDSConnection U = new Models.ADO.UIDSConnection();
+                    DataTable DT;
+                    if (str == "")
+                    {
+                        DT = U.SelectWhere(
+
+                           @"
   select 
 DarsadPishraft,
 Title,
@@ -224,19 +226,19 @@ T.TaskId,
 isnull(Olaviat,0) Olaviat,
 Label
    from Task T left join
-  timing g on T.TaskId=g.TaskId
-  left join ManageTime M 
+  [5069_ManageYourSelf].[5069_Esmaeili].timing g on T.TaskId=g.TaskId
+  left join [5069_ManageYourSelf].[5069_Esmaeili].ManageTime M 
   on g.ManageTimeId=M.ManageTimeId
-    left join Cat on T.CatId=Cat.CatId
+    left join [5069_ManageYourSelf].[5069_Esmaeili].Cat on T.CatId=Cat.CatId
   where IsCheck=0 and IsActive=1 and T.UserId=@UserId
   order by DateEnd asc,Olaviat asc,isnull(Label,'23:59 - 24:00') asc
 ", new string[] { "UserId" }, new string[] { UserId.ToString() });
-                }
-                else
-                {
-                    DT = U.SelectWhere(
+                    }
+                    else
+                    {
+                        DT = U.SelectWhere(
 
-                       @"
+                           @"
   select 
 DarsadPishraft,
 Title,
@@ -251,135 +253,142 @@ isnull(Olaviat,0) Olaviat,
 Label
 
    from Task T left join
-  timing g on T.TaskId=g.TaskId
-  left join ManageTime M 
+  [5069_ManageYourSelf].[5069_Esmaeili].timing g on T.TaskId=g.TaskId
+  left join [5069_ManageYourSelf].[5069_Esmaeili].ManageTime M 
   on g.ManageTimeId=M.ManageTimeId
-    left join Cat on T.CatId=Cat.CatId
+    left join [5069_ManageYourSelf].[5069_Esmaeili].Cat on T.CatId=Cat.CatId
   where IsCheck=0 and IsActive=1 and T.UserId=@UserId
  and T.CatId in (" + str + @")
   order by DateEnd asc,Olaviat asc,Value asc
 
 ", new string[] { "UserId" }, new string[] { UserId.ToString() });
+                    }
+
+
+                    foreach (DataRow item in DT.Rows)
+                    {
+                        ViewModels.TaskVM T = new ViewModels.TaskVM();
+                        T.DarsadPishraft = int.Parse(item["DarsadPishraft"].ToString());
+                        T.DateEnd = item["DateEnd"].ToString();
+                        T.DateStart = item["DateStart"].ToString();
+                        T.Gozashteh = int.Parse(Models.Help.Utility.RoozFromDate(T.DateStart));
+                        T.IsActive = (bool)item["IsActive"];
+                        T.IsCheck = (bool)item["IsCheck"];
+                        T.MandehRooz = int.Parse(Models.Help.Utility.RoozToDate(T.DateEnd));// int.Parse(item["MandehRooz"].ToString());
+                        T.Name = item["Name"].ToString();
+                        T.TaskId = int.Parse(item["TaskId"].ToString());
+                        T.Olaviat = int.Parse(item["Olaviat"].ToString());
+                        T.Rate = (item["Rate"] == null ? 0 : int.Parse(item["Rate"].ToString()));
+                        T.Label = item["Label"].ToString();
+                        T.Title = item["Title"].ToString();
+                        lstTaskVM.Add(T);
+                    }
+
                 }
-
-
-                foreach (DataRow item in DT.Rows)
+                //---------------
+                /*
+                if (typeTask == "anjamnashode")
                 {
-                    ViewModels.TaskVM T = new ViewModels.TaskVM();
-                    T.DarsadPishraft = int.Parse(item["DarsadPishraft"].ToString());
-                    T.DateEnd = item["DateEnd"].ToString();
-                    T.DateStart = item["DateStart"].ToString();
-                    T.Gozashteh = int.Parse(Models.Help.Utility.RoozFromDate(T.DateStart));
-                    T.IsActive = (bool)item["IsActive"];
-                    T.IsCheck = (bool)item["IsCheck"];
-                    T.MandehRooz = int.Parse(Models.Help.Utility.RoozToDate(T.DateEnd));// int.Parse(item["MandehRooz"].ToString());
-                    T.Name = item["Name"].ToString();
-                    T.TaskId = int.Parse(item["TaskId"].ToString());
-                    T.Olaviat = int.Parse(item["Olaviat"].ToString());
-                    T.Rate =(item["Rate"]==null?0:int.Parse(item["Rate"].ToString()));
-                    T.Label = item["Label"].ToString();
-                    T.Title = item["Title"].ToString();
-                    lstTaskVM.Add(T);
-                }
+                    var Objects = (from T in DB.Tasks
+                                   where (T.IsCheck == false && T.IsActive == true) && T.UserId==UserId
+                                   select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck ,T.Olaviat} 
+                            ).AsEnumerable().Select(x => new {x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).ToList().OrderBy(q => q.DateEnd).ThenBy(q=>q.Olaviat);
 
+                    foreach (var item in Objects)
+                    {
+                        ViewModels.TaskVM T = new ViewModels.TaskVM();
+                        T.DarsadPishraft = item.DarsadPishraft;
+                        T.DateEnd = item.DateEnd;
+                        T.DateStart = item.DateStart;
+                        T.Gozashteh = item.RoozGozashteh;
+                        T.IsActive = item.IsActive;
+                        T.IsCheck = item.IsCheck;
+                        T.MandehRooz = item.Rooz;
+                        T.Name = item.onvan;
+                        T.TaskId = item.TaskId;
+                        T.Olaviat = item.Olaviat;
+                        lstTaskVM.Add(T);
+                    }
+                }
+                */
+                if (typeTask == "anjamshode")
+                {
+                    var Objects = (from T in DB.Tasks
+                                   where (T.IsCheck == true && T.IsActive == true) && T.UserId == UserId
+                                   select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck, T.Olaviat }
+                            ).AsEnumerable().Select(x => new { x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).OrderBy(x => x.Rooz).ToList().OrderByDescending(q => q.DateStart);
+
+                    foreach (var item in Objects)
+                    {
+                        ViewModels.TaskVM T = new ViewModels.TaskVM();
+                        T.DarsadPishraft = item.DarsadPishraft;
+                        T.DateEnd = item.DateEnd;
+                        T.DateStart = item.DateStart;
+                        T.Gozashteh = item.RoozGozashteh;
+                        T.IsActive = item.IsActive;
+                        T.IsCheck = item.IsCheck;
+                        T.MandehRooz = item.Rooz;
+                        T.Name = item.onvan;
+                        T.TaskId = item.TaskId;
+                        T.Olaviat = item.Olaviat;
+                        lstTaskVM.Add(T);
+                    }
+                }
+                if (typeTask == "gheirefal")
+                {
+                    var Objects = (from T in DB.Tasks
+                                   where (T.IsActive == false) && T.UserId == UserId
+                                   select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck, T.Olaviat }
+                            ).AsEnumerable().Select(x => new { x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).OrderBy(x => x.Rooz).ToList().OrderByDescending(q => q.DateStart);
+
+                    foreach (var item in Objects)
+                    {
+                        ViewModels.TaskVM T = new ViewModels.TaskVM();
+                        T.DarsadPishraft = item.DarsadPishraft;
+                        T.DateEnd = item.DateEnd;
+                        T.DateStart = item.DateStart;
+                        T.Gozashteh = item.RoozGozashteh;
+                        T.IsActive = item.IsActive;
+                        T.IsCheck = item.IsCheck;
+                        T.MandehRooz = item.Rooz;
+                        T.Name = item.onvan;
+                        T.TaskId = item.TaskId;
+                        T.Olaviat = item.Olaviat;
+                        lstTaskVM.Add(T);
+                    }
+                }
+                if (typeTask == "koly")
+                {
+                    var Objects = (from T in DB.Tasks
+                                   where T.UserId == UserId
+                                   // where (T.IsCheck == false && T.IsActive == true)
+                                   select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck, T.Olaviat }
+                            ).AsEnumerable().Select(x => new { x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).OrderBy(x => x.Rooz).ToList().OrderBy(q => q.DateStart);
+
+                    foreach (var item in Objects)
+                    {
+                        ViewModels.TaskVM T = new ViewModels.TaskVM();
+                        T.DarsadPishraft = item.DarsadPishraft;
+                        T.DateEnd = item.DateEnd;
+                        T.DateStart = item.DateStart;
+                        T.Gozashteh = item.RoozGozashteh;
+                        T.IsActive = item.IsActive;
+                        T.IsCheck = item.IsCheck;
+                        T.MandehRooz = item.Rooz;
+                        T.Name = item.onvan;
+                        T.TaskId = item.TaskId;
+                        T.Olaviat = item.Olaviat;
+                        lstTaskVM.Add(T);
+                    }
+                }
+                return lstTaskVM;
             }
-            //---------------
-            /*
-            if (typeTask == "anjamnashode")
+            catch (Exception ex)
             {
-                var Objects = (from T in DB.Tasks
-                               where (T.IsCheck == false && T.IsActive == true) && T.UserId==UserId
-                               select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck ,T.Olaviat} 
-                        ).AsEnumerable().Select(x => new {x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).ToList().OrderBy(q => q.DateEnd).ThenBy(q=>q.Olaviat);
 
-                foreach (var item in Objects)
-                {
-                    ViewModels.TaskVM T = new ViewModels.TaskVM();
-                    T.DarsadPishraft = item.DarsadPishraft;
-                    T.DateEnd = item.DateEnd;
-                    T.DateStart = item.DateStart;
-                    T.Gozashteh = item.RoozGozashteh;
-                    T.IsActive = item.IsActive;
-                    T.IsCheck = item.IsCheck;
-                    T.MandehRooz = item.Rooz;
-                    T.Name = item.onvan;
-                    T.TaskId = item.TaskId;
-                    T.Olaviat = item.Olaviat;
-                    lstTaskVM.Add(T);
-                }
+                throw new ArgumentException(ex.Message);
             }
-            */
-            if (typeTask == "anjamshode")
-            {
-                var Objects = (from T in DB.Tasks
-                               where (T.IsCheck == true && T.IsActive == true) && T.UserId == UserId
-                               select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck, T.Olaviat }
-                        ).AsEnumerable().Select(x => new { x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).OrderBy(x => x.Rooz).ToList().OrderByDescending(q => q.DateStart);
-
-                foreach (var item in Objects)
-                {
-                    ViewModels.TaskVM T = new ViewModels.TaskVM();
-                    T.DarsadPishraft = item.DarsadPishraft;
-                    T.DateEnd = item.DateEnd;
-                    T.DateStart = item.DateStart;
-                    T.Gozashteh = item.RoozGozashteh;
-                    T.IsActive = item.IsActive;
-                    T.IsCheck = item.IsCheck;
-                    T.MandehRooz = item.Rooz;
-                    T.Name = item.onvan;
-                    T.TaskId = item.TaskId;
-                    T.Olaviat = item.Olaviat;
-                    lstTaskVM.Add(T);
-                }
-            }
-            if (typeTask == "gheirefal")
-            {
-                var Objects = (from T in DB.Tasks
-                               where (T.IsActive == false) && T.UserId == UserId
-                               select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck, T.Olaviat }
-                        ).AsEnumerable().Select(x => new { x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).OrderBy(x => x.Rooz).ToList().OrderByDescending(q => q.DateStart);
-
-                foreach (var item in Objects)
-                {
-                    ViewModels.TaskVM T = new ViewModels.TaskVM();
-                    T.DarsadPishraft = item.DarsadPishraft;
-                    T.DateEnd = item.DateEnd;
-                    T.DateStart = item.DateStart;
-                    T.Gozashteh = item.RoozGozashteh;
-                    T.IsActive = item.IsActive;
-                    T.IsCheck = item.IsCheck;
-                    T.MandehRooz = item.Rooz;
-                    T.Name = item.onvan;
-                    T.TaskId = item.TaskId;
-                    T.Olaviat = item.Olaviat;
-                    lstTaskVM.Add(T);
-                }
-            }
-            if (typeTask == "koly")
-            {
-                var Objects = (from T in DB.Tasks
-                               where T.UserId == UserId
-                               // where (T.IsCheck == false && T.IsActive == true)
-                               select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck, T.Olaviat }
-                        ).AsEnumerable().Select(x => new { x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).OrderBy(x => x.Rooz).ToList().OrderBy(q => q.DateStart);
-
-                foreach (var item in Objects)
-                {
-                    ViewModels.TaskVM T = new ViewModels.TaskVM();
-                    T.DarsadPishraft = item.DarsadPishraft;
-                    T.DateEnd = item.DateEnd;
-                    T.DateStart = item.DateStart;
-                    T.Gozashteh = item.RoozGozashteh;
-                    T.IsActive = item.IsActive;
-                    T.IsCheck = item.IsCheck;
-                    T.MandehRooz = item.Rooz;
-                    T.Name = item.onvan;
-                    T.TaskId = item.TaskId;
-                    T.Olaviat = item.Olaviat;
-                    lstTaskVM.Add(T);
-                }
-            }
-            return lstTaskVM;
+          
         }
         public int HasExample(int WordId)
         {

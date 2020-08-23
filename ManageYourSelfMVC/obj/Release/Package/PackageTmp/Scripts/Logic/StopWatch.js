@@ -140,7 +140,7 @@ function CalMinute(thiss) {
 
 }
 //function ConvertToTime(thiss) {
-//    debugger
+//    
 //    var res = $(thiss).val()
 //    res = res.replace(/:/g, "")
 //    res = res.replace(/-/g, "")

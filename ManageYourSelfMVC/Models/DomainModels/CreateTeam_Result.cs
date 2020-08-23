@@ -16,5 +16,6 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public string TeamName { get; set; }
         public string PlayerName { get; set; }
         public Nullable<int> Score { get; set; }
+        public Nullable<double> AVGScore { get; set; }
     }
 }

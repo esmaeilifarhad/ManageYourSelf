@@ -372,7 +372,7 @@ async function ListDaramd(MojoodyBankId) {
         url: urll,
         data: { Datee: Datee, MojoodyBankId: _MojoodyBankId},
         success: function (data) {
-            debugger
+            
             var tablebutt = "<table class='table' style='font-size: 9px;'>"
             tablebutt += "<tr>" +
                 "<td> " +

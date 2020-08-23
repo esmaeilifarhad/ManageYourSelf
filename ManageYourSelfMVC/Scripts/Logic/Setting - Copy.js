@@ -1,6 +1,8 @@
 ﻿//--Execute All List when click Tab
 $("ul li a[href='#Setting']").on("click", function () {
+    
     ListHolyDay();
+    ListSetting();
 });
 //***************************************************HolyDay
 function ListHolyDay() {
@@ -134,4 +136,9 @@ $(".ListHolyDay").on("click", ".fa-edit", function () {
     var HolyDayId = $(this).attr("HolyDayId");
     EditHolyDay(HolyDayId);
 });
+//--------------------
+function ListSetting() {
+    
+    localStorage.setItem("ShowFooterAlert", "true");
+}
 

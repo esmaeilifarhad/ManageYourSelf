@@ -19,5 +19,8 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public string dsc { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> RepeatCount { get; set; }
+        public string date { get; set; }
+        public string time { get; set; }
+        public Nullable<int> RepeatedNumber { get; set; }
     }
 }

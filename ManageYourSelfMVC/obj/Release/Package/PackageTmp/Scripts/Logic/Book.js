@@ -5,6 +5,9 @@
     }, 30000);
 })
 async function GetBook() {
+    
+    var ShowFooterAlert = localStorage.getItem("ShowFooterAlert");
+    if (ShowFooterAlert=='false') return
     var obj = {}
     obj.url = "/Book/GetBook"
     obj.dataType = "json"

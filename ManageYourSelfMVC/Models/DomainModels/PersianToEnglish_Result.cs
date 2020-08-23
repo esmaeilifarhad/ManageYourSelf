@@ -19,6 +19,7 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public string Phonetic { get; set; }
         public int level { get; set; }
         public string date_s { get; set; }
+        public int level1 { get; set; }
         public string date_refresh { get; set; }
         public string time { get; set; }
         public Nullable<int> timeword { get; set; }

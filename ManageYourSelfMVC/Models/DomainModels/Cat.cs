@@ -27,6 +27,7 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public string Dsc { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> Order { get; set; }
+        public Nullable<int> test { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sport> Sports { get; set; }

@@ -16,12 +16,12 @@ namespace ManageYourSelfMVC.Models.Connection
         /// <summary>
         /// سرور موجود در برتینا
         /// </summary>
-        public static string _ConnectionString = @"Data Source=185.88.153.14,1430;Initial Catalog=5069_ManageYourSelf;User ID=5069_Esmaeili;Password=861130928; MultipleActiveResultSets=True";
+        //public static string _ConnectionString = @"Data Source=185.88.153.14,1430;Initial Catalog=5069_ManageYourSelf;User ID=5069_Esmaeili;Password=861130928; MultipleActiveResultSets=True";
         /// <summary>
-        /// سرکار کوروش
+        /// سرکار 
         /// </summary>
-        //public static string _ConnectionString = @"Data Source=ESMAEILII-PC\SA;Initial Catalog=5069_ManageYourSelf;Integrated Security=True";
- 
+        public static string _ConnectionString = @"Data Source=.;Initial Catalog=5069_ManageYourSelf;Integrated Security=True;MultipleActiveResultSets=True";
+
         public static string _ConnectionStringPersonnelGsystem = @"Data Source=192.168.87.200;Initial Catalog=PersonnelGSystem;User ID=SharePoint;Password=$HareP0int; MultipleActiveResultSets=True";
     }
 }

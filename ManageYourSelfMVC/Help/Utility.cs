@@ -110,12 +110,21 @@ public static class Utility
     }
     public static string ConvertDateToSlash(this string str)
     {
-        string Result = string.Empty;
-        string Yaer = str.Substring(0, 4);
-        string Moth = str.Substring(4, 2);
-        string Dayy = str.Substring(6, 2);
-        Result = (string.Format("{0}/{1}/{2}", Yaer, Moth, Dayy));
-        return Result;
+        try
+        {
+            string Result = string.Empty;
+            string Yaer = str.Substring(0, 4);
+            string Moth = str.Substring(4, 2);
+            string Dayy = str.Substring(6, 2);
+            Result = (string.Format("{0}/{1}/{2}", Yaer, Moth, Dayy));
+            return Result;
+        }
+        catch (Exception ex )
+        {
+
+            throw new ArgumentException(ex.Message);
+        }
+       
     }
 
     public static string Rial(string str)

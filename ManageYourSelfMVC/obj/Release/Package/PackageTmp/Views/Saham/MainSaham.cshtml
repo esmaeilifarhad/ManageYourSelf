@@ -42,41 +42,43 @@
             box-shadow: 0 10px 20px rgba(0,0,0,.5);
             max-width: 100%;
         }
+
     .myActive {
-     background: blue!important;
-     z-index:10!important;
+        background: blue !important;
+        z-index: 10 !important;
     }
 
-        .tablinks li a {
-            color: white;
-        }
+    .tablinks li a {
+        color: white;
+    }
 
-            .tablinks li a:hover {
-                background-color:  rgba(0, 0, 0, 0.0) !important;
-                border-color:none;
-            }
+        .tablinks li a:hover {
+            background-color: rgba(0, 0, 0, 0.0) !important;
+            border-color: none;
+        }
 
     .nav > li > a:focus, .nav > li > a:hover {
         text-decoration: none !important;
         background-color: rgba(0, 0, 0, 0.0) !important;
-         border-color:none !important;
+        border-color: none !important;
     }
-    .nav-tabs>li>a:hover {
-    border-color:rgba(0, 0, 0, 0) !important;
-}
+
+    .nav-tabs > li > a:hover {
+        border-color: rgba(0, 0, 0, 0) !important;
+    }
 </style>
 <script>
     $(document).ready(function () {
         $(".tablinks ul li").click(function () {
-            
+
             $(".tablinks ul").each(function () {
                 $(this).find("li").removeClass("myActive")
-              
+
             })
             $(this).addClass("myActive")
         })
     })
-   
+
 </script>
 <link href="~/Content/Bootstrap_v3.3.7.css" rel="stylesheet" />
 @*<div id="LinkSaham" class="btn-group-toggle" style="left:0px;bottom: 10px;width: 30px;position: fixed;font-family:'B Nazanin';direction:ltr">
@@ -113,17 +115,18 @@
                 <input type="radio" name="LastPositiveAlMinus" onclick="GetLastPositiveAlMinus(2)" />   <label>دو روز آخر مثبت</label>
                 <input type="radio" name="LastPositiveAlMinus" onclick="GetLastPositiveAlMinus(3)" />  <label>سه روز آخر مثبت</label>
             </div>
-            <div class="col-sm-12 LastPositiveAlMinus"></div>
         </div>
+        <div class="col-sm-12 LastPositiveAlMinus"></div>
     </div>
+
     <div id="menu2" class="tab-pane fade">
         <div class="row" style="font-family:BNazanin">
-            <div  class="col-sm-6">
+            <div class="col-sm-6">
                 <br>
                 <p>لطفا فایل جیسون مربوطه را در اینجا قرار دهید</p>
-             
+
                 <p><a target="_blank" href="https://tse.ir/MarketWatch.html">سایت tse</a></p>
-                <p><input type="button" onclick="InsertTseJsonToDB()" value="ذخیره"/><input type="number" onchange="DateForUpToDateSahamChange(this)" onkeyup="DateForUpToDateSahamChange(this)" name="DateForUpToDateSaham" value="ذخیره" /></p>
+                <p><input type="button" onclick="InsertTseJsonToDB()" value="ذخیره" /><input type="number" onchange="DateForUpToDateSahamChange(this)" onkeyup="DateForUpToDateSahamChange(this)" name="DateForUpToDateSaham" value="ذخیره" /></p>
                 @*<a href="https://tse.ir/MarketWatch.html">سایت tse</a>*@
                 <textarea name="tseJson" rows="15" cols="60" style="direction: ltr;">var lst=[]
 $("#main-table table tbody tr").each(function(){
@@ -162,8 +165,23 @@ lst.push(obj)
 var myJsonString = JSON.stringify(lst);
 console.log(myJsonString)</textarea>
             </div>
-            <div class="col-sm-6"></div>
+            <div class="col-sm-4">
+
+                <h2>Basic File Upload</h2>
+                <input id="fileInput" type="file" multiple>
+                <input type="button" onclick="UploaderFile()" value="Upload file" />
+
+            </div>
+            <div class="col-sm-2 ShamsyDateCount">
+
+
+
+            </div>
+
+
         </div>
+
+
     </div>
 </div>
 
