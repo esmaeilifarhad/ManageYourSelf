@@ -1,0 +1,9 @@
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.exe.config
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.exe
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.pdb
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\obj\Debug\WinService.csprojAssemblyReference.cache
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\obj\Debug\WinService.csproj.CoreCompileInputs.cache
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\obj\Debug\WinService.exe
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\obj\Debug\WinService.pdb
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\obj\Debug\WinService.ProjectInstaller.resources
+C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\obj\Debug\WinService.csproj.GenerateResource.cache

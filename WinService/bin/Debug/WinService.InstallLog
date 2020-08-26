@@ -1,0 +1,15 @@
+﻿Installing assembly 'C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.InstallLog
+   assemblypath = C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.exe
+   logtoconsole = 
+Installing service MyWindowsService...
+Service MyWindowsService has been successfully installed.
+Creating EventLog source MyWindowsService in log Application...
+Committing assembly 'C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.InstallLog
+   assemblypath = C:\Users\f.esmaeili\OneDrive\project\ManageYourSelfMVC\ManageYourSelfMVC980524\WinService\bin\Debug\WinService.exe
+   logtoconsole = 

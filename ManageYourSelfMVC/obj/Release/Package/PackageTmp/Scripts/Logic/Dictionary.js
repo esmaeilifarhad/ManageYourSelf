@@ -1214,6 +1214,7 @@ function DateRefreshShow(){
 }
 
 $(document).ready(function () {
+    
     //----------function ListDictionary()
     $("#SeachInTblDicList").on("keyup", function () {
         var value = $(this).val().toLowerCase();

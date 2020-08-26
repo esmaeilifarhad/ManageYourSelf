@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     GetBook()
     setInterval(async function () {
         GetBook()
@@ -173,3 +174,4 @@ async function inreaseRepeatedNumber(BookId) {
     var ListObj = results[0]
     GetBooks()
 }
+

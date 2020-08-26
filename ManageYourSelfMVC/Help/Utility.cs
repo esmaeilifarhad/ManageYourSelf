@@ -102,16 +102,27 @@ public static class Utility
 
     public static string ConvertDateToDateFormat(this string DateSlash)
     {
-        string Year = DateSlash.Substring(0, 4);
-        string Month = DateSlash.Substring(4, 2);
-        string Day = DateSlash.Substring(6, 2);
-        string strNew = Year + '/' + Month + '/' + Day;
-        return strNew;
+        if (DateSlash.Length == 8)
+        {
+            string Year = DateSlash.Substring(0, 4);
+            string Month = DateSlash.Substring(4, 2);
+            string Day = DateSlash.Substring(6, 2);
+            string strNew = Year + '/' + Month + '/' + Day;
+            return strNew;
+        }
+        else
+        {
+            return null;
+        }
     }
     public static string ConvertDateToSlash(this string str)
     {
         try
         {
+            if (str.Length != 8)
+            {
+                return "";
+            }
             string Result = string.Empty;
             string Yaer = str.Substring(0, 4);
             string Moth = str.Substring(4, 2);

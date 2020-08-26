@@ -409,8 +409,13 @@ namespace ManageYourSelfMVC.Models.Help
         }
         public static string RoozToDate(string OldDate)
         {
+            
             try
             {
+                if (OldDate.Length != 8)
+                {
+                    return "0";
+                }
                 string Rooz = string.Empty;
                 System.Globalization.PersianCalendar calendar = new System.Globalization.PersianCalendar();
                 string DatePersian = Utility.ConvertDateToSqlFormat(Utility.shamsi_date());
@@ -450,6 +455,10 @@ namespace ManageYourSelfMVC.Models.Help
         }
         public static string RoozFromDate(string OldDate)
         {
+            if (OldDate.Length != 8)
+            { 
+                return "0"; 
+            }
             string Rooz = string.Empty;
             System.Globalization.PersianCalendar calendar = new System.Globalization.PersianCalendar();
             string DatePersian = Utility.ConvertDateToSqlFormat(Utility.shamsi_date());

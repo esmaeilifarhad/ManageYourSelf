@@ -37,7 +37,18 @@ namespace ManageYourSelfMVC.Models.MyData
             var Objects = (from T in DB.Tasks
                                // where (T.IsCheck == false && T.IsActive == true)
                            select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck }
-                    ).AsEnumerable().Select(x => new { x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Help.Utility.RoozToDate(x.DateEnd)) }).OrderBy(x => x.Rooz).ToList().OrderByDescending(q => q.DateStart);
+                    ).AsEnumerable().Select(x => new { 
+                        x.IsCheck,
+                        x.IsActive, x.TaskId,
+                        onvan = x.Name,
+                        DateStart = x.DateStart.ConvertDateToDateFormat(),
+                        DateEnd = x.DateEnd.ConvertDateToDateFormat(),
+                        x.DarsadPishraft,
+                        RoozGozashteh = int.Parse(Help.Utility.RoozFromDate(x.DateStart)),
+                        Rooz = int.Parse(Help.Utility.RoozToDate(x.DateEnd)) }).
+                        OrderBy(x => x.Rooz)
+                        .ToList().
+                        OrderByDescending(q => q.DateStart);
             List<ViewModels.TaskVM> lstTaskVM = new List<ViewModels.TaskVM>();
             foreach (var item in Objects)
             {
@@ -285,32 +296,6 @@ Label
                     }
 
                 }
-                //---------------
-                /*
-                if (typeTask == "anjamnashode")
-                {
-                    var Objects = (from T in DB.Tasks
-                                   where (T.IsCheck == false && T.IsActive == true) && T.UserId==UserId
-                                   select new { T.TaskId, T.Name, T.DateStart, T.DateEnd, T.DarsadPishraft, T.IsActive, T.IsCheck ,T.Olaviat} 
-                            ).AsEnumerable().Select(x => new {x.Olaviat, x.IsCheck, x.IsActive, x.TaskId, onvan = x.Name, DateStart = x.DateStart.ConvertDateToDateFormat(), DateEnd = x.DateEnd.ConvertDateToDateFormat(), x.DarsadPishraft, RoozGozashteh = int.Parse(Models.Help.Utility.RoozFromDate(x.DateStart)), Rooz = int.Parse(Models.Help.Utility.RoozToDate(x.DateEnd)) }).ToList().OrderBy(q => q.DateEnd).ThenBy(q=>q.Olaviat);
-
-                    foreach (var item in Objects)
-                    {
-                        ViewModels.TaskVM T = new ViewModels.TaskVM();
-                        T.DarsadPishraft = item.DarsadPishraft;
-                        T.DateEnd = item.DateEnd;
-                        T.DateStart = item.DateStart;
-                        T.Gozashteh = item.RoozGozashteh;
-                        T.IsActive = item.IsActive;
-                        T.IsCheck = item.IsCheck;
-                        T.MandehRooz = item.Rooz;
-                        T.Name = item.onvan;
-                        T.TaskId = item.TaskId;
-                        T.Olaviat = item.Olaviat;
-                        lstTaskVM.Add(T);
-                    }
-                }
-                */
                 if (typeTask == "anjamshode")
                 {
                     var Objects = (from T in DB.Tasks

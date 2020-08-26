@@ -921,6 +921,12 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
     <Parameter Name="Date" Type="nvarchar" Mode="In" />
     <Parameter Name="UserId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="TopBestKarkard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="CurentDate" Type="varchar" Mode="In" />
+    <Parameter Name="Offset" Type="int" Mode="In" />
+    <Parameter Name="FETCH" Type="int" Mode="In" />
+  </Function>
   <Function Name="f_M_Kara_ConvertIntToChareForTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_M_Kara_ConvertIntToChareForTime" ReturnType="varchar">
     <Parameter Name="time" Type="int" Mode="In" />
   </Function>

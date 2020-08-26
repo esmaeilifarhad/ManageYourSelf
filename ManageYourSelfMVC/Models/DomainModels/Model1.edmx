@@ -926,6 +926,12 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <Parameter Name="Date" Type="nvarchar" Mode="In" />
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="TopBestKarkard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="5069_Esmaeili">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="CurentDate" Type="varchar" Mode="In" />
+          <Parameter Name="Offset" Type="int" Mode="In" />
+          <Parameter Name="FETCH" Type="int" Mode="In" />
+        </Function>
         <Function Name="f_M_Kara_ConvertIntToChareForTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_M_Kara_ConvertIntToChareForTime" ReturnType="varchar">
           <Parameter Name="time" Type="int" Mode="In" />
         </Function>
@@ -1263,7 +1269,37 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
     <edmx:ConceptualModels>
       <Schema Namespace="ManageYourSelfModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ManageYourSelfEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="c">
+          <FunctionImport Name="CompareToAvg">
+            <Parameter Name="SortBy" Mode="In" Type="String" />
+            <Parameter Name="today" Mode="In" Type="String" />
+            <Parameter Name="yesterday" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateTeam" ReturnType="Collection(ManageYourSelfModel.CreateTeam_Result)" />
+          <FunctionImport Name="findBookDsc" ReturnType="Collection(ManageYourSelfModel.findBookDsc_Result)">
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LastPositiveAlMinus">
+          <Parameter Name="TedadRooz" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListGroupHazine" ReturnType="Collection(ManageYourSelfModel.ListGroupHazine_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="DaramadOrKharj" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListVoteToPlayers" />
+          <FunctionImport Name="PersianToEnglish" ReturnType="Collection(ManageYourSelfModel.PersianToEnglish_Result)">
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ManageTime" ReturnType="Collection(ManageYourSelfModel.SP_ManageTime_Result)">
+            <Parameter Name="Date" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TopBestKarkard" ReturnType="Collection(ManageYourSelfModel.TopBestKarkard_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="CurentDate" Mode="In" Type="String" />
+            <Parameter Name="Offset" Mode="In" Type="Int32" />
+            <Parameter Name="FETCH" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="c" ReturnType="Collection(ManageYourSelfModel.c_Result)">
           <Parameter Name="eng_word" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CreateLogTbl" />
@@ -1296,27 +1332,21 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
             <Parameter Name="Edate" Mode="In" Type="String" />
             <Parameter Name="RoozHafte" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ShowKarkadPivotNotParam" />
-          <FunctionImport Name="update_add_timeword">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="addTime" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="update_level">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="level" Mode="In" Type="Int32" />
-            <Parameter Name="date_refresh" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="UpdateExample">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="id_dic_tbl" Mode="In" Type="Int32" />
-            <Parameter Name="example" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="UpdateTaghvimSetHafteChandom" />
           <FunctionImport Name="ShowKarkadPivotDateToDate">
             <Parameter Name="Sdate" Mode="In" Type="String" />
             <Parameter Name="Edate" Mode="In" Type="String" />
             <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ShowKarkadPivotDateToDate970519">
+            <Parameter Name="Sdate" Mode="In" Type="String" />
+            <Parameter Name="Edate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ShowKarkadPivotDateToDate970618">
+            <Parameter Name="Sdate" Mode="In" Type="String" />
+            <Parameter Name="Edate" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ShowKarkadPivotNotParam" />
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -1347,43 +1377,21 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="CreateTeam" ReturnType="Collection(ManageYourSelfModel.CreateTeam_Result)" />
-          <FunctionImport Name="ListVoteToPlayers" />
-          <FunctionImport Name="ShowKarkadPivotDateToDate970519">
-            <Parameter Name="Sdate" Mode="In" Type="String" />
-            <Parameter Name="Edate" Mode="In" Type="String" />
+          <FunctionImport Name="update_add_timeword">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="addTime" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ShowKarkadPivotDateToDate970618">
-            <Parameter Name="Sdate" Mode="In" Type="String" />
-            <Parameter Name="Edate" Mode="In" Type="String" />
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <FunctionImport Name="update_level">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="level" Mode="In" Type="Int32" />
+            <Parameter Name="date_refresh" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SP_ManageTime" ReturnType="Collection(ManageYourSelfModel.SP_ManageTime_Result)" >
-            <Parameter Name="Date" Mode="In" Type="String" />
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <FunctionImport Name="UpdateExample">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id_dic_tbl" Mode="In" Type="Int32" />
+            <Parameter Name="example" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ListGroupHazine" ReturnType="Collection(ManageYourSelfModel.ListGroupHazine_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
-            <Parameter Name="DaramadOrKharj" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="PersianToEnglish" ReturnType="Collection(ManageYourSelfModel.PersianToEnglish_Result)">
-          <Parameter Name="UserId" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="CompareToAvg">
-            <Parameter Name="SortBy" Mode="In" Type="String" />
-            <Parameter Name="today" Mode="In" Type="String" />
-            <Parameter Name="yesterday" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="ProgressNamad">
-            <Parameter Name="Sdate" Mode="In" Type="String" />
-            <Parameter Name="Edate" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="LastPositiveAlMinus">
-          <Parameter Name="TedadRooz" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="findBookDsc" ReturnType="Collection(ManageYourSelfModel.findBookDsc_Result)">
-          <Parameter Name="UserId" Mode="In" Type="String" />
-          </FunctionImport>
+          <FunctionImport Name="UpdateTaghvimSetHafteChandom" />
           <EntitySet Name="Books" EntityType="ManageYourSelfModel.Book" />
           <EntitySet Name="Cats" EntityType="ManageYourSelfModel.Cat" />
           <EntitySet Name="ContentTbls" EntityType="ManageYourSelfModel.ContentTbl" />
@@ -1545,7 +1553,67 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
             <End Role="User" EntitySet="Users" />
             <End Role="UserRole" EntitySet="UserRoles" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
+        <ComplexType Name="CreateTeam_Result">
+          <Property Type="String" Name="TeamName" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Score" Nullable="true" />
+          <Property Type="Double" Name="AVGScore" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="findBookDsc_Result">
+          <Property Type="Int32" Name="BookId" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Order" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="dsc" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="RepeatCount" Nullable="true" />
+          <Property Type="String" Name="date" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="time" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="RepeatedNumber" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListGroupHazine_Result">
+          <Property Type="Int32" Name="TypeHazinehId" Nullable="true" />
+          <Property Type="String" Name="Datee" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Rial" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PersianToEnglish_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="eng" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="per" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Phonetic" Nullable="true" MaxLength="70" />
+          <Property Type="Int32" Name="level" Nullable="false" />
+          <Property Type="String" Name="date_s" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="level1" Nullable="false" />
+          <Property Type="String" Name="date_refresh" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="time" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="timeword" Nullable="true" />
+          <Property Type="Int32" Name="id_month" Nullable="true" />
+          <Property Type="Int32" Name="SuccessCount" Nullable="true" />
+          <Property Type="Int32" Name="UnSuccessCount" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDateM" Nullable="true" />
+          <Property Type="DateTime" Name="DateRefreshM" Nullable="true" />
+          <Property Type="Int32" Name="Column1" Nullable="false" />
+          <Property Type="Int32" Name="Column2" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_ManageTime_Result">
+          <Property Type="Int32" Name="Value" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Col1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TopBestKarkard_Result">
+          <Property Type="Int64" Name="Row" Nullable="true" />
+          <Property Type="String" Name="DayDate" Nullable="false" MaxLength="8" />
+          <Property Type="Int32" Name="SpendTimeMinute" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="c_Result">
+          <Property Type="String" Name="eng" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="per" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="level" Nullable="false" />
+          <Property Type="String" Name="date_s" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="date_refresh" Nullable="true" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="DarsadKarkard_Result">
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Timee" Nullable="true" />
@@ -1567,49 +1635,6 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="CreateTeam_Result">
-          <Property Type="String" Name="TeamName" Nullable="true" MaxLength="1" />
-          <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Score" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="SP_ManageTime_Result">
-          <Property Type="Int32" Name="Value" Nullable="true" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="Col1" Nullable="true" MaxLength="250" />
-        </ComplexType>
-        <ComplexType Name="ListGroupHazine_Result">
-          <Property Type="Int32" Name="TypeHazinehId" Nullable="true" />
-          <Property Type="String" Name="Datee" Nullable="true" MaxLength="4" />
-          <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Rial" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="PersianToEnglish_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="String" Name="eng" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="per" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Phonetic" Nullable="true" MaxLength="70" />
-          <Property Type="Int32" Name="level" Nullable="false" />
-          <Property Type="String" Name="date_s" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="date_refresh" Nullable="true" MaxLength="63" />
-          <Property Type="String" Name="time" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="timeword" Nullable="true" />
-          <Property Type="Int32" Name="id_month" Nullable="true" />
-          <Property Type="Int32" Name="SuccessCount" Nullable="true" />
-          <Property Type="Int32" Name="UnSuccessCount" Nullable="true" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="DateTime" Name="CreateDateM" Nullable="true" />
-          <Property Type="DateTime" Name="DateRefreshM" Nullable="true" />
-          <Property Type="Int32" Name="Column1" Nullable="false" />
-          <Property Type="Int32" Name="Column2" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="findBookDsc_Result">
-          <Property Type="Int32" Name="BookId" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="Order" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="dsc" Nullable="true" />
-          <Property Type="Int32" Name="UserId" Nullable="true" />
-          <Property Type="Int32" Name="RepeatCount" Nullable="true" />
         </ComplexType>
         <EntityType Name="Book">
           <Key>
@@ -2546,13 +2571,103 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ManageYourSelfModelStoreContainer" CdmEntityContainer="ManageYourSelfEntities">
-          <FunctionImportMapping FunctionImportName="c" FunctionName="ManageYourSelfModel.Store.c" />
+          <FunctionImportMapping FunctionImportName="CompareToAvg" FunctionName="ManageYourSelfModel.Store.CompareToAvg" />
+          <FunctionImportMapping FunctionImportName="CreateTeam" FunctionName="ManageYourSelfModel.Store.CreateTeam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageYourSelfModel.CreateTeam_Result">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="AVGScore" ColumnName="AVGScore" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="findBookDsc" FunctionName="ManageYourSelfModel.Store.findBookDsc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageYourSelfModel.findBookDsc_Result">
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="dsc" ColumnName="dsc" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RepeatCount" ColumnName="RepeatCount" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="RepeatedNumber" ColumnName="RepeatedNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LastPositiveAlMinus" FunctionName="ManageYourSelfModel.Store.LastPositiveAlMinus" />
+          <FunctionImportMapping FunctionImportName="ListGroupHazine" FunctionName="ManageYourSelfModel.Store.ListGroupHazine">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageYourSelfModel.ListGroupHazine_Result">
+                <ScalarProperty Name="TypeHazinehId" ColumnName="TypeHazinehId" />
+                <ScalarProperty Name="Datee" ColumnName="Datee" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Rial" ColumnName="Rial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListVoteToPlayers" FunctionName="ManageYourSelfModel.Store.ListVoteToPlayers" />
+          <FunctionImportMapping FunctionImportName="PersianToEnglish" FunctionName="ManageYourSelfModel.Store.PersianToEnglish">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageYourSelfModel.PersianToEnglish_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="eng" ColumnName="eng" />
+                <ScalarProperty Name="per" ColumnName="per" />
+                <ScalarProperty Name="Phonetic" ColumnName="Phonetic" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="date_s" ColumnName="date_s" />
+                <ScalarProperty Name="level1" ColumnName="level1" />
+                <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="timeword" ColumnName="timeword" />
+                <ScalarProperty Name="id_month" ColumnName="id_month" />
+                <ScalarProperty Name="SuccessCount" ColumnName="SuccessCount" />
+                <ScalarProperty Name="UnSuccessCount" ColumnName="UnSuccessCount" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDateM" ColumnName="CreateDateM" />
+                <ScalarProperty Name="DateRefreshM" ColumnName="DateRefreshM" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ManageTime" FunctionName="ManageYourSelfModel.Store.SP_ManageTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageYourSelfModel.SP_ManageTime_Result">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Col1" ColumnName="Col1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TopBestKarkard" FunctionName="ManageYourSelfModel.Store.TopBestKarkard">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageYourSelfModel.TopBestKarkard_Result">
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="DayDate" ColumnName="DayDate" />
+                <ScalarProperty Name="SpendTimeMinute" ColumnName="SpendTimeMinute" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="c" FunctionName="ManageYourSelfModel.Store.c">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageYourSelfModel.c_Result">
+                <ScalarProperty Name="eng" ColumnName="eng" />
+                <ScalarProperty Name="per" ColumnName="per" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="date_s" ColumnName="date_s" />
+                <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CreateLogTbl" FunctionName="ManageYourSelfModel.Store.CreateLogTbl" />
           <FunctionImportMapping FunctionImportName="CreateTaghvimShamsy" FunctionName="ManageYourSelfModel.Store.CreateTaghvimShamsy" />
           <FunctionImportMapping FunctionImportName="DarsadKarkard" FunctionName="ManageYourSelfModel.Store.DarsadKarkard">
@@ -2583,12 +2698,10 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           <FunctionImportMapping FunctionImportName="Show_Karkard" FunctionName="ManageYourSelfModel.Store.Show_Karkard" />
           <FunctionImportMapping FunctionImportName="Show_Karkard961004" FunctionName="ManageYourSelfModel.Store.Show_Karkard961004" />
           <FunctionImportMapping FunctionImportName="ShowKarkadPivot" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivot" />
-          <FunctionImportMapping FunctionImportName="ShowKarkadPivotNotParam" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotNotParam" />
-          <FunctionImportMapping FunctionImportName="update_add_timeword" FunctionName="ManageYourSelfModel.Store.update_add_timeword" />
-          <FunctionImportMapping FunctionImportName="update_level" FunctionName="ManageYourSelfModel.Store.update_level" />
-          <FunctionImportMapping FunctionImportName="UpdateExample" FunctionName="ManageYourSelfModel.Store.UpdateExample" />
-          <FunctionImportMapping FunctionImportName="UpdateTaghvimSetHafteChandom" FunctionName="ManageYourSelfModel.Store.UpdateTaghvimSetHafteChandom" />
           <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate" />
+          <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970519" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970519" />
+          <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970618" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970618" />
+          <FunctionImportMapping FunctionImportName="ShowKarkadPivotNotParam" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotNotParam" />
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ManageYourSelfModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ManageYourSelfModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ManageYourSelfModel.Store.sp_dropdiagram" />
@@ -2613,74 +2726,10 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ManageYourSelfModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ManageYourSelfModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="CreateTeam" FunctionName="ManageYourSelfModel.Store.CreateTeam">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ManageYourSelfModel.CreateTeam_Result">
-                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
-                <ScalarProperty Name="Score" ColumnName="Score" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListVoteToPlayers" FunctionName="ManageYourSelfModel.Store.ListVoteToPlayers" />
-          <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970519" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970519" />
-          <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970618" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970618" />
-          <FunctionImportMapping FunctionImportName="SP_ManageTime" FunctionName="ManageYourSelfModel.Store.SP_ManageTime">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ManageYourSelfModel.SP_ManageTime_Result">
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Col1" ColumnName="Col1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListGroupHazine" FunctionName="ManageYourSelfModel.Store.ListGroupHazine">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ManageYourSelfModel.ListGroupHazine_Result">
-                <ScalarProperty Name="TypeHazinehId" ColumnName="TypeHazinehId" />
-                <ScalarProperty Name="Datee" ColumnName="Datee" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Rial" ColumnName="Rial" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PersianToEnglish" FunctionName="ManageYourSelfModel.Store.PersianToEnglish">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ManageYourSelfModel.PersianToEnglish_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="eng" ColumnName="eng" />
-                <ScalarProperty Name="per" ColumnName="per" />
-                <ScalarProperty Name="Phonetic" ColumnName="Phonetic" />
-                <ScalarProperty Name="level" ColumnName="level" />
-                <ScalarProperty Name="date_s" ColumnName="date_s" />
-                <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
-                <ScalarProperty Name="time" ColumnName="time" />
-                <ScalarProperty Name="timeword" ColumnName="timeword" />
-                <ScalarProperty Name="id_month" ColumnName="id_month" />
-                <ScalarProperty Name="SuccessCount" ColumnName="SuccessCount" />
-                <ScalarProperty Name="UnSuccessCount" ColumnName="UnSuccessCount" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CreateDateM" ColumnName="CreateDateM" />
-                <ScalarProperty Name="DateRefreshM" ColumnName="DateRefreshM" />
-                <ScalarProperty Name="Column1" ColumnName="Column1" />
-                <ScalarProperty Name="Column2" ColumnName="Column2" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CompareToAvg" FunctionName="ManageYourSelfModel.Store.CompareToAvg" />
-          <FunctionImportMapping FunctionImportName="LastPositiveAlMinus" FunctionName="ManageYourSelfModel.Store.LastPositiveAlMinus" />
-          <FunctionImportMapping FunctionImportName="findBookDsc" FunctionName="ManageYourSelfModel.Store.findBookDsc">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ManageYourSelfModel.findBookDsc_Result">
-                <ScalarProperty Name="BookId" ColumnName="BookId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="dsc" ColumnName="dsc" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RepeatCount" ColumnName="RepeatCount" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="update_add_timeword" FunctionName="ManageYourSelfModel.Store.update_add_timeword" />
+          <FunctionImportMapping FunctionImportName="update_level" FunctionName="ManageYourSelfModel.Store.update_level" />
+          <FunctionImportMapping FunctionImportName="UpdateExample" FunctionName="ManageYourSelfModel.Store.UpdateExample" />
+          <FunctionImportMapping FunctionImportName="UpdateTaghvimSetHafteChandom" FunctionName="ManageYourSelfModel.Store.UpdateTaghvimSetHafteChandom" />
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="ManageYourSelfModel.Book">
               <MappingFragment StoreEntitySet="Book">
@@ -3233,7 +3282,7 @@ warning 6013: The table/view '5069_ManageYourSelf.dbo.ShowSumLastPercantage' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

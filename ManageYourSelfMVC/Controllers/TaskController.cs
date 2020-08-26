@@ -661,7 +661,41 @@ order by DateEnd,isnull(Olaviat,0)
                 // ViewModels.VM_Public V = new ViewModels.VM_Public();
                 List<ViewModels.Task.ListTaskFuture> lstT = new List<ViewModels.Task.ListTaskFuture>();
                 // DataTable DT = U.Select("exec [PersianToEnglish] " + UserId.ToString());
-                DataTable DT = U.Select(@"
+                DataTable DT;
+                if (str == "")
+                {
+                     DT = U.Select(@"
+select 
+Task.TaskId
+,Task.Name
+,Task.DateStart
+,Task.DateEnd
+,isnull(Task.Olaviat,0) Olaviat
+,Cat.CatId
+,Cat.Title
+,ManageTime.Label
+,Taghvim.IsHolyDay
+,Taghvim.ChandShanbeh
+,Taghvim.HafteChandom
+,SUBSTRING(Taghvim.DayDate,5,2) MaheChandom
+,SUBSTRING(Taghvim.DayDate,1,4) SaleChandom
+from task left join [5069_ManageYourSelf].[5069_Esmaeili].Cat 
+on task.CatId=Cat.CatId
+left join [5069_ManageYourSelf].[5069_Esmaeili].Timing
+on Task.TaskId=Timing.TaskId
+left join [5069_ManageYourSelf].[5069_Esmaeili].ManageTime
+on ManageTime.ManageTimeId=Timing.ManageTimeId
+left join Taghvim on Task.DateEnd=Taghvim.DayDate
+where Task.IsCheck=0 
+and Task.IsActive=1
+--and Cat.CatId in (" + str + @")
+and Task.UserId=" + UserId + @"
+order by DateEnd,isnull(Olaviat,0)
+ ");
+                }
+                else
+                {
+                     DT = U.Select(@"
 select 
 Task.TaskId
 ,Task.Name
@@ -689,6 +723,8 @@ and Cat.CatId in (" + str + @")
 and Task.UserId=" + UserId + @"
 order by DateEnd,isnull(Olaviat,0)
  ");
+                }
+
 
                 foreach (DataRow item in DT.Rows)
                 {
@@ -1167,7 +1203,7 @@ order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
         public ActionResult ListTaskDateToDate(string Date1, string Date2)
         {
             var lstTask = DB.Tasks.Where(q => q.DateEnd.
-              CompareTo(Date1) >= 0 && q.DateEnd.CompareTo(Date2) <= 0).OrderBy(q=>q.DateEnd).ToList();
+              CompareTo(Date1) >= 0 && q.DateEnd.CompareTo(Date2) <= 0).OrderBy(q => q.DateEnd).ToList();
 
             List<ViewModels.Task.ListTaskFuture> lstT = new List<ViewModels.Task.ListTaskFuture>();
             foreach (var item in lstTask)
@@ -1194,15 +1230,15 @@ order by isnull(Olaviat,0),Label,Cat.[Order],Cat.Title,Task.DateEnd
         public ActionResult RemoveAllTask(int[] TasKIds)
         {
 
-           // users.Where(user => ids.Contains(user.id ?? 0));
+            // users.Where(user => ids.Contains(user.id ?? 0));
 
-            DB.Tasks.RemoveRange(DB.Tasks.Where(x=> TasKIds.Contains(x.TaskId)));
-           var res= DB.SaveChanges();
+            DB.Tasks.RemoveRange(DB.Tasks.Where(x => TasKIds.Contains(x.TaskId)));
+            var res = DB.SaveChanges();
 
             //DB.Tasks.RemoveRange(TaslIds);
             //DB.SaveChanges();
 
-            return Json(res,JsonRequestBehavior.AllowGet);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
     }
 }

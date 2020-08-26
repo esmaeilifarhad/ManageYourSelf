@@ -1,7 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ManageYourSelfModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="ManageYourSelfEntities" annotation:LazyLoadingEnabled="true">
-    <FunctionImport Name="c">
+    <FunctionImport Name="CompareToAvg">
+      <Parameter Name="SortBy" Mode="In" Type="String" />
+      <Parameter Name="today" Mode="In" Type="String" />
+      <Parameter Name="yesterday" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CreateTeam" ReturnType="Collection(ManageYourSelfModel.CreateTeam_Result)" />
+    <FunctionImport Name="findBookDsc" ReturnType="Collection(ManageYourSelfModel.findBookDsc_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="LastPositiveAlMinus">
+      <Parameter Name="TedadRooz" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ListGroupHazine" ReturnType="Collection(ManageYourSelfModel.ListGroupHazine_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+      <Parameter Name="DaramadOrKharj" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ListVoteToPlayers" />
+    <FunctionImport Name="PersianToEnglish" ReturnType="Collection(ManageYourSelfModel.PersianToEnglish_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ManageTime" ReturnType="Collection(ManageYourSelfModel.SP_ManageTime_Result)">
+      <Parameter Name="Date" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TopBestKarkard" ReturnType="Collection(ManageYourSelfModel.TopBestKarkard_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="CurentDate" Mode="In" Type="String" />
+      <Parameter Name="Offset" Mode="In" Type="Int32" />
+      <Parameter Name="FETCH" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="c" ReturnType="Collection(ManageYourSelfModel.c_Result)">
       <Parameter Name="eng_word" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="CreateLogTbl" />
@@ -34,27 +64,21 @@
       <Parameter Name="Edate" Mode="In" Type="String" />
       <Parameter Name="RoozHafte" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="ShowKarkadPivotNotParam" />
-    <FunctionImport Name="update_add_timeword">
-      <Parameter Name="id" Mode="In" Type="Int32" />
-      <Parameter Name="addTime" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="update_level">
-      <Parameter Name="id" Mode="In" Type="Int32" />
-      <Parameter Name="level" Mode="In" Type="Int32" />
-      <Parameter Name="date_refresh" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="UpdateExample">
-      <Parameter Name="id" Mode="In" Type="Int32" />
-      <Parameter Name="id_dic_tbl" Mode="In" Type="Int32" />
-      <Parameter Name="example" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="UpdateTaghvimSetHafteChandom" />
     <FunctionImport Name="ShowKarkadPivotDateToDate">
       <Parameter Name="Sdate" Mode="In" Type="String" />
       <Parameter Name="Edate" Mode="In" Type="String" />
       <Parameter Name="UserId" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="ShowKarkadPivotDateToDate970519">
+      <Parameter Name="Sdate" Mode="In" Type="String" />
+      <Parameter Name="Edate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ShowKarkadPivotDateToDate970618">
+      <Parameter Name="Sdate" Mode="In" Type="String" />
+      <Parameter Name="Edate" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ShowKarkadPivotNotParam" />
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -85,43 +109,21 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
-    <FunctionImport Name="CreateTeam" ReturnType="Collection(ManageYourSelfModel.CreateTeam_Result)" />
-    <FunctionImport Name="ListVoteToPlayers" />
-    <FunctionImport Name="ShowKarkadPivotDateToDate970519">
-      <Parameter Name="Sdate" Mode="In" Type="String" />
-      <Parameter Name="Edate" Mode="In" Type="String" />
+    <FunctionImport Name="update_add_timeword">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="addTime" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="ShowKarkadPivotDateToDate970618">
-      <Parameter Name="Sdate" Mode="In" Type="String" />
-      <Parameter Name="Edate" Mode="In" Type="String" />
-      <Parameter Name="UserId" Mode="In" Type="String" />
+    <FunctionImport Name="update_level">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="level" Mode="In" Type="Int32" />
+      <Parameter Name="date_refresh" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="SP_ManageTime" ReturnType="Collection(ManageYourSelfModel.SP_ManageTime_Result)">
-      <Parameter Name="Date" Mode="In" Type="String" />
-      <Parameter Name="UserId" Mode="In" Type="String" />
+    <FunctionImport Name="UpdateExample">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="id_dic_tbl" Mode="In" Type="Int32" />
+      <Parameter Name="example" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="ListGroupHazine" ReturnType="Collection(ManageYourSelfModel.ListGroupHazine_Result)">
-      <Parameter Name="UserId" Mode="In" Type="String" />
-      <Parameter Name="DaramadOrKharj" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="PersianToEnglish" ReturnType="Collection(ManageYourSelfModel.PersianToEnglish_Result)">
-      <Parameter Name="UserId" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="CompareToAvg">
-      <Parameter Name="SortBy" Mode="In" Type="String" />
-      <Parameter Name="today" Mode="In" Type="String" />
-      <Parameter Name="yesterday" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="ProgressNamad">
-      <Parameter Name="Sdate" Mode="In" Type="String" />
-      <Parameter Name="Edate" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="LastPositiveAlMinus">
-      <Parameter Name="TedadRooz" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="findBookDsc" ReturnType="Collection(ManageYourSelfModel.findBookDsc_Result)">
-      <Parameter Name="UserId" Mode="In" Type="String" />
-    </FunctionImport>
+    <FunctionImport Name="UpdateTaghvimSetHafteChandom" />
     <EntitySet Name="Books" EntityType="ManageYourSelfModel.Book" />
     <EntitySet Name="Cats" EntityType="ManageYourSelfModel.Cat" />
     <EntitySet Name="ContentTbls" EntityType="ManageYourSelfModel.ContentTbl" />
@@ -284,6 +286,66 @@
       <End Role="UserRole" EntitySet="UserRoles" />
     </AssociationSet>
   </EntityContainer>
+  <ComplexType Name="CreateTeam_Result">
+    <Property Type="String" Name="TeamName" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Score" Nullable="true" />
+    <Property Type="Double" Name="AVGScore" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="findBookDsc_Result">
+    <Property Type="Int32" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Order" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="dsc" Nullable="true" />
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="Int32" Name="RepeatCount" Nullable="true" />
+    <Property Type="String" Name="date" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="time" Nullable="true" MaxLength="250" />
+    <Property Type="Int32" Name="RepeatedNumber" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ListGroupHazine_Result">
+    <Property Type="Int32" Name="TypeHazinehId" Nullable="true" />
+    <Property Type="String" Name="Datee" Nullable="true" MaxLength="6" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Rial" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="PersianToEnglish_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="eng" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="per" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Phonetic" Nullable="true" MaxLength="70" />
+    <Property Type="Int32" Name="level" Nullable="false" />
+    <Property Type="String" Name="date_s" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="level1" Nullable="false" />
+    <Property Type="String" Name="date_refresh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="time" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="timeword" Nullable="true" />
+    <Property Type="Int32" Name="id_month" Nullable="true" />
+    <Property Type="Int32" Name="SuccessCount" Nullable="true" />
+    <Property Type="Int32" Name="UnSuccessCount" Nullable="true" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateM" Nullable="true" />
+    <Property Type="DateTime" Name="DateRefreshM" Nullable="true" />
+    <Property Type="Int32" Name="Column1" Nullable="false" />
+    <Property Type="Int32" Name="Column2" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_ManageTime_Result">
+    <Property Type="Int32" Name="Value" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" />
+    <Property Type="String" Name="Col1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="TopBestKarkard_Result">
+    <Property Type="Int64" Name="Row" Nullable="true" />
+    <Property Type="String" Name="DayDate" Nullable="false" MaxLength="8" />
+    <Property Type="Int32" Name="SpendTimeMinute" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="c_Result">
+    <Property Type="String" Name="eng" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="per" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="level" Nullable="false" />
+    <Property Type="String" Name="date_s" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="date_refresh" Nullable="true" MaxLength="50" />
+  </ComplexType>
   <ComplexType Name="DarsadKarkard_Result">
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Timee" Nullable="true" />
@@ -305,49 +367,6 @@
     <Property Type="Int32" Name="ID" Nullable="false" />
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="CreateTeam_Result">
-    <Property Type="String" Name="TeamName" Nullable="true" MaxLength="1" />
-    <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="Score" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="SP_ManageTime_Result">
-    <Property Type="Int32" Name="Value" Nullable="true" />
-    <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="Col1" Nullable="true" MaxLength="250" />
-  </ComplexType>
-  <ComplexType Name="ListGroupHazine_Result">
-    <Property Type="Int32" Name="TypeHazinehId" Nullable="true" />
-    <Property Type="String" Name="Datee" Nullable="true" MaxLength="4" />
-    <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="Rial" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="PersianToEnglish_Result">
-    <Property Type="Int32" Name="id" Nullable="false" />
-    <Property Type="String" Name="eng" Nullable="false" MaxLength="255" />
-    <Property Type="String" Name="per" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Phonetic" Nullable="true" MaxLength="70" />
-    <Property Type="Int32" Name="level" Nullable="false" />
-    <Property Type="String" Name="date_s" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="date_refresh" Nullable="true" MaxLength="63" />
-    <Property Type="String" Name="time" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="timeword" Nullable="true" />
-    <Property Type="Int32" Name="id_month" Nullable="true" />
-    <Property Type="Int32" Name="SuccessCount" Nullable="true" />
-    <Property Type="Int32" Name="UnSuccessCount" Nullable="true" />
-    <Property Type="Int32" Name="UserId" Nullable="false" />
-    <Property Type="DateTime" Name="CreateDateM" Nullable="true" />
-    <Property Type="DateTime" Name="DateRefreshM" Nullable="true" />
-    <Property Type="Int32" Name="Column1" Nullable="false" />
-    <Property Type="Int32" Name="Column2" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="findBookDsc_Result">
-    <Property Type="Int32" Name="BookId" Nullable="false" />
-    <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="Order" Nullable="true" MaxLength="10" />
-    <Property Type="String" Name="dsc" Nullable="true" />
-    <Property Type="Int32" Name="UserId" Nullable="true" />
-    <Property Type="Int32" Name="RepeatCount" Nullable="true" />
   </ComplexType>
   <EntityType Name="Book">
     <Key>

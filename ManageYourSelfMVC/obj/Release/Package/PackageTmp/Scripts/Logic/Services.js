@@ -62,8 +62,11 @@
                 resolve(data)
             },
             error: function (a) {
-                
+                console.log("Start Service.js Service Error ...................");
                 console.log(a);
+                console.log("End Service.js Service Error ......................");
+                alert("خطا در اجرای سرویس باید مشخص شود که از قطعی اینترنت یا نه");
+                $.LoadingOverlay("hide");
             }
         });
     })

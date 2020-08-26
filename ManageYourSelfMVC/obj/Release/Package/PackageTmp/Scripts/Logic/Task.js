@@ -572,8 +572,11 @@ async function EditTask(TaskId) {
         }
 
     }
+
+
+
     table += "</select>"
-    table += "<tr><td>عنوان</td><td><textarea name='Name' rows='4' cols='50' autocomplete='off'>" + ListtObjEditTask.Task.Name + "</textarea></td></tr>" +
+    table += "<tr><td>عنوان</td><td><div class='form-group'><textarea name='Name' rows='4'  class='form-control' autocomplete='off'>" + ListtObjEditTask.Task.Name + "</textarea></div></td></tr>" +
         "<tr><td>درصد پیشرفت</td><td><input type='number' name='DarsadPishraft'  value=" + ListtObjEditTask.Task.DarsadPishraft + " min='0' max='100' autocomplete='off'  ></td></tr>" +
         "<tr><td>اولویت</td><td><input type='number' name='Olaviat'   value=" + ListtObjEditTask.Task.Olaviat + " min='0' max='5' autocomplete='off'  ></td></tr>" +
         "<tr><td>Rate</td><td><input type='number' name='Rate'   value=" + ListtObjEditTask.Task.Rate + "  min='0' max='5' autocomplete='off'  ></td></tr>"
@@ -772,6 +775,7 @@ function UpdateTask(TaskId) {
             }
         });
 }
+//نمایش لیست وظایف
 async function ListTask(typeTask) {
 
 
@@ -802,12 +806,12 @@ async function ListTask(typeTask) {
         service(objListTaskAnjamnashode)
     ]);
     var ListTaskAnjamnashode = results[0]
-
-    var table = "<table class='table-bordered table-responsive table-striped TblTask' " +
+       
+    var table = "<input style='cursor:pointer' type='button' value='انجام' onclick='changeToAnjamShode()'/><input style='cursor:pointer' type = 'button' value = 'حذف' onclick = 'RemoveAllTask()' /><table  id='tblListTaskDateToDate' class='table-bordered table-responsive table-striped TblTask' " +
         " style='direction: rtl; text-align: center;font-size:11px'>" +
 
         "     <tr>" +
-        "         <th><input type='button' value='انجام' onclick='changeToAnjamShode()'/></th>" +
+        "         <th><input   type='checkbox' onclick='selectAllchk(this)' /></th>" +
         "         <th>اولویت</th>" +
         "         <th>Rate</th>" +
         "         <th>بالا</th>" +
@@ -1188,9 +1192,6 @@ async function changeToAnjamShode() {
 
 }
 //نمایش از تاریخ تا تاریخ برای حذف
-
-
-
 async function ShowStDateEndDate() {
 
     var obj = {}
@@ -1224,7 +1225,7 @@ async function ShowStDateEndDate() {
 async function ListTaskDateToDate(objDate) {
     var DateS = $("input[name='DateS']").val()
     var DateE = $("input[name='DateE']").val()
-    debugger
+    
     $.LoadingOverlay("show");
     var obj = {}
     obj.url = "/Task/ListTaskDateToDate"
@@ -1271,7 +1272,7 @@ async function ListTaskDateToDate(objDate) {
             "<td><span class='fa fa-calendar pointer calendarTask' onclick='TimingTask(" + ListObj[index].TaskId + ")' Data_id=" + ListObj[index].TaskId + "></span>" +
             "</br>" +
             "<span class='fa fa-remove pointer' onclick='removeTimeTask(" + ListObj[index].TaskId + ")'></span></td>" +
-            "<td><span class='fa fa-edit pointer'     Data_id=" + ListObj[index].TaskId + "></span></td>" +
+            "<td><span class='fa fa-edit pointer'     onclick='EditTask(" + ListObj[index].TaskId + ")'></span></td>" +
             "<td><span class='fa fa-remove pointer'   Data_id=" + ListObj[index].TaskId + " onclick=' DeleteTask({Id:" + ListObj[index].TaskId + "})'></span></td>" +
             "</tr>"
     }
@@ -1285,11 +1286,16 @@ async function ListTaskDateToDate(objDate) {
 
 }
 async function RemoveAllTask() {
-    
+    debugger
     var arrayTaskId=[]
-    $.LoadingOverlay("show");
+   
     var objData = {}
     var count = $("#tblListTaskDateToDate tr td .AnjamShode").length
+    var countChecked = $("#tblListTaskDateToDate tr td .AnjamShode").filter(':checked').length
+    if (countChecked == 0) {
+        alert("لطفا یک مورد را انتخاب نمایید")
+        return
+    }
     var i = 0;
     $("#tblListTaskDateToDate tr td .AnjamShode").each(async function () {
         i += 1;
@@ -1308,7 +1314,7 @@ async function RemoveAllTask() {
         }
         
         if (count == i) {
-            
+            $.LoadingOverlay("show");
 
             var obj = {}
             obj.url = "/Task/RemoveAllTask"
@@ -1321,8 +1327,9 @@ async function RemoveAllTask() {
             var ListObj = results[0]
             alert("تعداد "+ListObj+" رکورد حذف گردید")
             
-            ListTaskDateToDate()
-
+           // ListTaskDateToDate()
+            ShowStDateEndDate()
+            ListTask("anjamnashode");
             $.LoadingOverlay("hide");
             // resolve("finish")
         }

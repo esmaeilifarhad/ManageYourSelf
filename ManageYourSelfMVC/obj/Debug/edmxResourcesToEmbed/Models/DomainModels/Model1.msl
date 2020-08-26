@@ -1,7 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ManageYourSelfModelStoreContainer" CdmEntityContainer="ManageYourSelfEntities">
-    <FunctionImportMapping FunctionImportName="c" FunctionName="ManageYourSelfModel.Store.c" />
+    <FunctionImportMapping FunctionImportName="CompareToAvg" FunctionName="ManageYourSelfModel.Store.CompareToAvg" />
+    <FunctionImportMapping FunctionImportName="CreateTeam" FunctionName="ManageYourSelfModel.Store.CreateTeam">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.CreateTeam_Result">
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="AVGScore" ColumnName="AVGScore" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="findBookDsc" FunctionName="ManageYourSelfModel.Store.findBookDsc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.findBookDsc_Result">
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="dsc" ColumnName="dsc" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RepeatCount" ColumnName="RepeatCount" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="RepeatedNumber" ColumnName="RepeatedNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LastPositiveAlMinus" FunctionName="ManageYourSelfModel.Store.LastPositiveAlMinus" />
+    <FunctionImportMapping FunctionImportName="ListGroupHazine" FunctionName="ManageYourSelfModel.Store.ListGroupHazine">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.ListGroupHazine_Result">
+          <ScalarProperty Name="TypeHazinehId" ColumnName="TypeHazinehId" />
+          <ScalarProperty Name="Datee" ColumnName="Datee" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Rial" ColumnName="Rial" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListVoteToPlayers" FunctionName="ManageYourSelfModel.Store.ListVoteToPlayers" />
+    <FunctionImportMapping FunctionImportName="PersianToEnglish" FunctionName="ManageYourSelfModel.Store.PersianToEnglish">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.PersianToEnglish_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="eng" ColumnName="eng" />
+          <ScalarProperty Name="per" ColumnName="per" />
+          <ScalarProperty Name="Phonetic" ColumnName="Phonetic" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="date_s" ColumnName="date_s" />
+          <ScalarProperty Name="level1" ColumnName="level1" />
+          <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="timeword" ColumnName="timeword" />
+          <ScalarProperty Name="id_month" ColumnName="id_month" />
+          <ScalarProperty Name="SuccessCount" ColumnName="SuccessCount" />
+          <ScalarProperty Name="UnSuccessCount" ColumnName="UnSuccessCount" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreateDateM" ColumnName="CreateDateM" />
+          <ScalarProperty Name="DateRefreshM" ColumnName="DateRefreshM" />
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_ManageTime" FunctionName="ManageYourSelfModel.Store.SP_ManageTime">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.SP_ManageTime_Result">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Col1" ColumnName="Col1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TopBestKarkard" FunctionName="ManageYourSelfModel.Store.TopBestKarkard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.TopBestKarkard_Result">
+          <ScalarProperty Name="Row" ColumnName="Row" />
+          <ScalarProperty Name="DayDate" ColumnName="DayDate" />
+          <ScalarProperty Name="SpendTimeMinute" ColumnName="SpendTimeMinute" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="c" FunctionName="ManageYourSelfModel.Store.c">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ManageYourSelfModel.c_Result">
+          <ScalarProperty Name="eng" ColumnName="eng" />
+          <ScalarProperty Name="per" ColumnName="per" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="date_s" ColumnName="date_s" />
+          <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="CreateLogTbl" FunctionName="ManageYourSelfModel.Store.CreateLogTbl" />
     <FunctionImportMapping FunctionImportName="CreateTaghvimShamsy" FunctionName="ManageYourSelfModel.Store.CreateTaghvimShamsy" />
     <FunctionImportMapping FunctionImportName="DarsadKarkard" FunctionName="ManageYourSelfModel.Store.DarsadKarkard">
@@ -32,12 +122,10 @@
     <FunctionImportMapping FunctionImportName="Show_Karkard" FunctionName="ManageYourSelfModel.Store.Show_Karkard" />
     <FunctionImportMapping FunctionImportName="Show_Karkard961004" FunctionName="ManageYourSelfModel.Store.Show_Karkard961004" />
     <FunctionImportMapping FunctionImportName="ShowKarkadPivot" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivot" />
-    <FunctionImportMapping FunctionImportName="ShowKarkadPivotNotParam" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotNotParam" />
-    <FunctionImportMapping FunctionImportName="update_add_timeword" FunctionName="ManageYourSelfModel.Store.update_add_timeword" />
-    <FunctionImportMapping FunctionImportName="update_level" FunctionName="ManageYourSelfModel.Store.update_level" />
-    <FunctionImportMapping FunctionImportName="UpdateExample" FunctionName="ManageYourSelfModel.Store.UpdateExample" />
-    <FunctionImportMapping FunctionImportName="UpdateTaghvimSetHafteChandom" FunctionName="ManageYourSelfModel.Store.UpdateTaghvimSetHafteChandom" />
     <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate" />
+    <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970519" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970519" />
+    <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970618" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970618" />
+    <FunctionImportMapping FunctionImportName="ShowKarkadPivotNotParam" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotNotParam" />
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ManageYourSelfModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ManageYourSelfModel.Store.sp_creatediagram" />
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ManageYourSelfModel.Store.sp_dropdiagram" />
@@ -62,74 +150,10 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ManageYourSelfModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ManageYourSelfModel.Store.sp_upgraddiagrams" />
-    <FunctionImportMapping FunctionImportName="CreateTeam" FunctionName="ManageYourSelfModel.Store.CreateTeam">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ManageYourSelfModel.CreateTeam_Result">
-          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
-          <ScalarProperty Name="Score" ColumnName="Score" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ListVoteToPlayers" FunctionName="ManageYourSelfModel.Store.ListVoteToPlayers" />
-    <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970519" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970519" />
-    <FunctionImportMapping FunctionImportName="ShowKarkadPivotDateToDate970618" FunctionName="ManageYourSelfModel.Store.ShowKarkadPivotDateToDate970618" />
-    <FunctionImportMapping FunctionImportName="SP_ManageTime" FunctionName="ManageYourSelfModel.Store.SP_ManageTime">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ManageYourSelfModel.SP_ManageTime_Result">
-          <ScalarProperty Name="Value" ColumnName="Value" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Col1" ColumnName="Col1" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ListGroupHazine" FunctionName="ManageYourSelfModel.Store.ListGroupHazine">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ManageYourSelfModel.ListGroupHazine_Result">
-          <ScalarProperty Name="TypeHazinehId" ColumnName="TypeHazinehId" />
-          <ScalarProperty Name="Datee" ColumnName="Datee" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="Rial" ColumnName="Rial" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="PersianToEnglish" FunctionName="ManageYourSelfModel.Store.PersianToEnglish">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ManageYourSelfModel.PersianToEnglish_Result">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="eng" ColumnName="eng" />
-          <ScalarProperty Name="per" ColumnName="per" />
-          <ScalarProperty Name="Phonetic" ColumnName="Phonetic" />
-          <ScalarProperty Name="level" ColumnName="level" />
-          <ScalarProperty Name="date_s" ColumnName="date_s" />
-          <ScalarProperty Name="date_refresh" ColumnName="date_refresh" />
-          <ScalarProperty Name="time" ColumnName="time" />
-          <ScalarProperty Name="timeword" ColumnName="timeword" />
-          <ScalarProperty Name="id_month" ColumnName="id_month" />
-          <ScalarProperty Name="SuccessCount" ColumnName="SuccessCount" />
-          <ScalarProperty Name="UnSuccessCount" ColumnName="UnSuccessCount" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="CreateDateM" ColumnName="CreateDateM" />
-          <ScalarProperty Name="DateRefreshM" ColumnName="DateRefreshM" />
-          <ScalarProperty Name="Column1" ColumnName="Column1" />
-          <ScalarProperty Name="Column2" ColumnName="Column2" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="CompareToAvg" FunctionName="ManageYourSelfModel.Store.CompareToAvg" />
-    <FunctionImportMapping FunctionImportName="LastPositiveAlMinus" FunctionName="ManageYourSelfModel.Store.LastPositiveAlMinus" />
-    <FunctionImportMapping FunctionImportName="findBookDsc" FunctionName="ManageYourSelfModel.Store.findBookDsc">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ManageYourSelfModel.findBookDsc_Result">
-          <ScalarProperty Name="BookId" ColumnName="BookId" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Order" ColumnName="Order" />
-          <ScalarProperty Name="dsc" ColumnName="dsc" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="RepeatCount" ColumnName="RepeatCount" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="update_add_timeword" FunctionName="ManageYourSelfModel.Store.update_add_timeword" />
+    <FunctionImportMapping FunctionImportName="update_level" FunctionName="ManageYourSelfModel.Store.update_level" />
+    <FunctionImportMapping FunctionImportName="UpdateExample" FunctionName="ManageYourSelfModel.Store.UpdateExample" />
+    <FunctionImportMapping FunctionImportName="UpdateTaghvimSetHafteChandom" FunctionName="ManageYourSelfModel.Store.UpdateTaghvimSetHafteChandom" />
     <EntitySetMapping Name="Books">
       <EntityTypeMapping TypeName="ManageYourSelfModel.Book">
         <MappingFragment StoreEntitySet="Book">

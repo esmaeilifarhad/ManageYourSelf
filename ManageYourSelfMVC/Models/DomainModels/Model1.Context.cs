@@ -77,13 +77,114 @@ namespace ManageYourSelfMVC.Models.DomainModels
         public virtual DbSet<example_tbl_backup_980122> example_tbl_backup_980122 { get; set; }
         public virtual DbSet<dic_tbl_LOG> dic_tbl_LOG { get; set; }
     
-        public virtual int c(string eng_word)
+        public virtual int CompareToAvg(string sortBy, string today, string yesterday)
+        {
+            var sortByParameter = sortBy != null ?
+                new ObjectParameter("SortBy", sortBy) :
+                new ObjectParameter("SortBy", typeof(string));
+    
+            var todayParameter = today != null ?
+                new ObjectParameter("today", today) :
+                new ObjectParameter("today", typeof(string));
+    
+            var yesterdayParameter = yesterday != null ?
+                new ObjectParameter("yesterday", yesterday) :
+                new ObjectParameter("yesterday", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompareToAvg", sortByParameter, todayParameter, yesterdayParameter);
+        }
+    
+        public virtual ObjectResult<CreateTeam_Result> CreateTeam()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CreateTeam_Result>("CreateTeam");
+        }
+    
+        public virtual ObjectResult<findBookDsc_Result> findBookDsc(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<findBookDsc_Result>("findBookDsc", userIdParameter);
+        }
+    
+        public virtual int LastPositiveAlMinus(Nullable<int> tedadRooz)
+        {
+            var tedadRoozParameter = tedadRooz.HasValue ?
+                new ObjectParameter("TedadRooz", tedadRooz) :
+                new ObjectParameter("TedadRooz", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LastPositiveAlMinus", tedadRoozParameter);
+        }
+    
+        public virtual ObjectResult<ListGroupHazine_Result> ListGroupHazine(string userId, Nullable<int> daramadOrKharj)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var daramadOrKharjParameter = daramadOrKharj.HasValue ?
+                new ObjectParameter("DaramadOrKharj", daramadOrKharj) :
+                new ObjectParameter("DaramadOrKharj", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListGroupHazine_Result>("ListGroupHazine", userIdParameter, daramadOrKharjParameter);
+        }
+    
+        public virtual int ListVoteToPlayers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ListVoteToPlayers");
+        }
+    
+        public virtual ObjectResult<PersianToEnglish_Result> PersianToEnglish(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PersianToEnglish_Result>("PersianToEnglish", userIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_ManageTime_Result> SP_ManageTime(string date, string userId)
+        {
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ManageTime_Result>("SP_ManageTime", dateParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<TopBestKarkard_Result> TopBestKarkard(Nullable<int> userId, string curentDate, Nullable<int> offset, Nullable<int> fETCH)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var curentDateParameter = curentDate != null ?
+                new ObjectParameter("CurentDate", curentDate) :
+                new ObjectParameter("CurentDate", typeof(string));
+    
+            var offsetParameter = offset.HasValue ?
+                new ObjectParameter("Offset", offset) :
+                new ObjectParameter("Offset", typeof(int));
+    
+            var fETCHParameter = fETCH.HasValue ?
+                new ObjectParameter("FETCH", fETCH) :
+                new ObjectParameter("FETCH", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TopBestKarkard_Result>("TopBestKarkard", userIdParameter, curentDateParameter, offsetParameter, fETCHParameter);
+        }
+    
+        public virtual ObjectResult<c_Result> c(string eng_word)
         {
             var eng_wordParameter = eng_word != null ?
                 new ObjectParameter("eng_word", eng_word) :
                 new ObjectParameter("eng_word", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("c", eng_wordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<c_Result>("c", eng_wordParameter);
         }
     
         public virtual int CreateLogTbl()
@@ -199,63 +300,6 @@ namespace ManageYourSelfMVC.Models.DomainModels
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ShowKarkadPivot", sdateParameter, edateParameter, roozHafteParameter);
         }
     
-        public virtual int ShowKarkadPivotNotParam()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ShowKarkadPivotNotParam");
-        }
-    
-        public virtual int update_add_timeword(Nullable<int> id, Nullable<int> addTime)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            var addTimeParameter = addTime.HasValue ?
-                new ObjectParameter("addTime", addTime) :
-                new ObjectParameter("addTime", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_add_timeword", idParameter, addTimeParameter);
-        }
-    
-        public virtual int update_level(Nullable<int> id, Nullable<int> level, string date_refresh)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            var levelParameter = level.HasValue ?
-                new ObjectParameter("level", level) :
-                new ObjectParameter("level", typeof(int));
-    
-            var date_refreshParameter = date_refresh != null ?
-                new ObjectParameter("date_refresh", date_refresh) :
-                new ObjectParameter("date_refresh", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_level", idParameter, levelParameter, date_refreshParameter);
-        }
-    
-        public virtual int UpdateExample(Nullable<int> id, Nullable<int> id_dic_tbl, string example)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            var id_dic_tblParameter = id_dic_tbl.HasValue ?
-                new ObjectParameter("id_dic_tbl", id_dic_tbl) :
-                new ObjectParameter("id_dic_tbl", typeof(int));
-    
-            var exampleParameter = example != null ?
-                new ObjectParameter("example", example) :
-                new ObjectParameter("example", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateExample", idParameter, id_dic_tblParameter, exampleParameter);
-        }
-    
-        public virtual int UpdateTaghvimSetHafteChandom()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateTaghvimSetHafteChandom");
-        }
-    
         public virtual int ShowKarkadPivotDateToDate(string sdate, string edate, string userId)
         {
             var sdateParameter = sdate != null ?
@@ -271,6 +315,41 @@ namespace ManageYourSelfMVC.Models.DomainModels
                 new ObjectParameter("UserId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ShowKarkadPivotDateToDate", sdateParameter, edateParameter, userIdParameter);
+        }
+    
+        public virtual int ShowKarkadPivotDateToDate970519(string sdate, string edate)
+        {
+            var sdateParameter = sdate != null ?
+                new ObjectParameter("Sdate", sdate) :
+                new ObjectParameter("Sdate", typeof(string));
+    
+            var edateParameter = edate != null ?
+                new ObjectParameter("Edate", edate) :
+                new ObjectParameter("Edate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ShowKarkadPivotDateToDate970519", sdateParameter, edateParameter);
+        }
+    
+        public virtual int ShowKarkadPivotDateToDate970618(string sdate, string edate, string userId)
+        {
+            var sdateParameter = sdate != null ?
+                new ObjectParameter("Sdate", sdate) :
+                new ObjectParameter("Sdate", typeof(string));
+    
+            var edateParameter = edate != null ?
+                new ObjectParameter("Edate", edate) :
+                new ObjectParameter("Edate", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ShowKarkadPivotDateToDate970618", sdateParameter, edateParameter, userIdParameter);
+        }
+    
+        public virtual int ShowKarkadPivotNotParam()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ShowKarkadPivotNotParam");
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -376,127 +455,56 @@ namespace ManageYourSelfMVC.Models.DomainModels
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<CreateTeam_Result> CreateTeam()
+        public virtual int update_add_timeword(Nullable<int> id, Nullable<int> addTime)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CreateTeam_Result>("CreateTeam");
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var addTimeParameter = addTime.HasValue ?
+                new ObjectParameter("addTime", addTime) :
+                new ObjectParameter("addTime", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_add_timeword", idParameter, addTimeParameter);
         }
     
-        public virtual int ListVoteToPlayers()
+        public virtual int update_level(Nullable<int> id, Nullable<int> level, string date_refresh)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ListVoteToPlayers");
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var levelParameter = level.HasValue ?
+                new ObjectParameter("level", level) :
+                new ObjectParameter("level", typeof(int));
+    
+            var date_refreshParameter = date_refresh != null ?
+                new ObjectParameter("date_refresh", date_refresh) :
+                new ObjectParameter("date_refresh", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_level", idParameter, levelParameter, date_refreshParameter);
         }
     
-        public virtual int ShowKarkadPivotDateToDate970519(string sdate, string edate)
+        public virtual int UpdateExample(Nullable<int> id, Nullable<int> id_dic_tbl, string example)
         {
-            var sdateParameter = sdate != null ?
-                new ObjectParameter("Sdate", sdate) :
-                new ObjectParameter("Sdate", typeof(string));
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
     
-            var edateParameter = edate != null ?
-                new ObjectParameter("Edate", edate) :
-                new ObjectParameter("Edate", typeof(string));
+            var id_dic_tblParameter = id_dic_tbl.HasValue ?
+                new ObjectParameter("id_dic_tbl", id_dic_tbl) :
+                new ObjectParameter("id_dic_tbl", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ShowKarkadPivotDateToDate970519", sdateParameter, edateParameter);
+            var exampleParameter = example != null ?
+                new ObjectParameter("example", example) :
+                new ObjectParameter("example", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateExample", idParameter, id_dic_tblParameter, exampleParameter);
         }
     
-        public virtual int ShowKarkadPivotDateToDate970618(string sdate, string edate, string userId)
+        public virtual int UpdateTaghvimSetHafteChandom()
         {
-            var sdateParameter = sdate != null ?
-                new ObjectParameter("Sdate", sdate) :
-                new ObjectParameter("Sdate", typeof(string));
-    
-            var edateParameter = edate != null ?
-                new ObjectParameter("Edate", edate) :
-                new ObjectParameter("Edate", typeof(string));
-    
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ShowKarkadPivotDateToDate970618", sdateParameter, edateParameter, userIdParameter);
-        }
-    
-        public virtual ObjectResult<SP_ManageTime_Result> SP_ManageTime(string date, string userId)
-        {
-            var dateParameter = date != null ?
-                new ObjectParameter("Date", date) :
-                new ObjectParameter("Date", typeof(string));
-    
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ManageTime_Result>("SP_ManageTime", dateParameter, userIdParameter);
-        }
-    
-        public virtual ObjectResult<ListGroupHazine_Result> ListGroupHazine(string userId, Nullable<int> daramadOrKharj)
-        {
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            var daramadOrKharjParameter = daramadOrKharj.HasValue ?
-                new ObjectParameter("DaramadOrKharj", daramadOrKharj) :
-                new ObjectParameter("DaramadOrKharj", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListGroupHazine_Result>("ListGroupHazine", userIdParameter, daramadOrKharjParameter);
-        }
-    
-        public virtual ObjectResult<PersianToEnglish_Result> PersianToEnglish(string userId)
-        {
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PersianToEnglish_Result>("PersianToEnglish", userIdParameter);
-        }
-    
-        public virtual int CompareToAvg(string sortBy, string today, string yesterday)
-        {
-            var sortByParameter = sortBy != null ?
-                new ObjectParameter("SortBy", sortBy) :
-                new ObjectParameter("SortBy", typeof(string));
-    
-            var todayParameter = today != null ?
-                new ObjectParameter("today", today) :
-                new ObjectParameter("today", typeof(string));
-    
-            var yesterdayParameter = yesterday != null ?
-                new ObjectParameter("yesterday", yesterday) :
-                new ObjectParameter("yesterday", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CompareToAvg", sortByParameter, todayParameter, yesterdayParameter);
-        }
-    
-        public virtual int ProgressNamad(string sdate, string edate)
-        {
-            var sdateParameter = sdate != null ?
-                new ObjectParameter("Sdate", sdate) :
-                new ObjectParameter("Sdate", typeof(string));
-    
-            var edateParameter = edate != null ?
-                new ObjectParameter("Edate", edate) :
-                new ObjectParameter("Edate", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProgressNamad", sdateParameter, edateParameter);
-        }
-    
-        public virtual int LastPositiveAlMinus(Nullable<int> tedadRooz)
-        {
-            var tedadRoozParameter = tedadRooz.HasValue ?
-                new ObjectParameter("TedadRooz", tedadRooz) :
-                new ObjectParameter("TedadRooz", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LastPositiveAlMinus", tedadRoozParameter);
-        }
-    
-        public virtual ObjectResult<findBookDsc_Result> findBookDsc(string userId)
-        {
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<findBookDsc_Result>("findBookDsc", userIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateTaghvimSetHafteChandom");
         }
     }
 }

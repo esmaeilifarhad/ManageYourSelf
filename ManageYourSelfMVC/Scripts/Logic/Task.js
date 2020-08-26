@@ -23,6 +23,7 @@ $("ul li a[href='#menuTaskFuture']").on("click", function () {
     ListTaskFutureChk();
 });
 function ListTaskFutureChkPost(MyArray) {
+    
     $.ajax(
         {
             type: 'Post',
@@ -775,6 +776,7 @@ function UpdateTask(TaskId) {
             }
         });
 }
+//نمایش لیست وظایف
 async function ListTask(typeTask) {
 
 
@@ -805,12 +807,12 @@ async function ListTask(typeTask) {
         service(objListTaskAnjamnashode)
     ]);
     var ListTaskAnjamnashode = results[0]
-
-    var table = "<table class='table-bordered table-responsive table-striped TblTask' " +
+       
+    var table = "<input style='cursor:pointer' type='button' value='انجام' onclick='changeToAnjamShode()'/><input style='cursor:pointer' type = 'button' value = 'حذف' onclick = 'RemoveAllTask()' /><table  id='tblListTaskDateToDate' class='table-bordered table-responsive table-striped TblTask' " +
         " style='direction: rtl; text-align: center;font-size:11px'>" +
 
         "     <tr>" +
-        "         <th><input type='button' value='انجام' onclick='changeToAnjamShode()'/></th>" +
+        "         <th><input   type='checkbox' onclick='selectAllchk(this)' /></th>" +
         "         <th>اولویت</th>" +
         "         <th>Rate</th>" +
         "         <th>بالا</th>" +
@@ -1043,10 +1045,12 @@ $(".ListTaskFutureChk").on("click", "input", function () {
         ListTask("anjamnashode")
     }
     else {
+        
         ListTaskFutureChkPost(MyArray);
     }
 });
 function RefreshChk() {
+    
     var MyArray = [];
     var lvl = '';
     $(".ListTaskFutureChk .Categories input:checked").each(function () {
@@ -1191,7 +1195,6 @@ async function changeToAnjamShode() {
 
 }
 //نمایش از تاریخ تا تاریخ برای حذف
-
 async function ShowStDateEndDate() {
 
     var obj = {}
@@ -1288,9 +1291,14 @@ async function ListTaskDateToDate(objDate) {
 async function RemoveAllTask() {
     
     var arrayTaskId=[]
-    $.LoadingOverlay("show");
+   
     var objData = {}
     var count = $("#tblListTaskDateToDate tr td .AnjamShode").length
+    var countChecked = $("#tblListTaskDateToDate tr td .AnjamShode").filter(':checked').length
+    if (countChecked == 0) {
+        alert("لطفا یک مورد را انتخاب نمایید")
+        return
+    }
     var i = 0;
     $("#tblListTaskDateToDate tr td .AnjamShode").each(async function () {
         i += 1;
@@ -1309,7 +1317,7 @@ async function RemoveAllTask() {
         }
         
         if (count == i) {
-            
+            $.LoadingOverlay("show");
 
             var obj = {}
             obj.url = "/Task/RemoveAllTask"
@@ -1322,8 +1330,9 @@ async function RemoveAllTask() {
             var ListObj = results[0]
             alert("تعداد "+ListObj+" رکورد حذف گردید")
             
-            ListTaskDateToDate()
-
+           // ListTaskDateToDate()
+            ShowStDateEndDate()
+            ListTask("anjamnashode");
             $.LoadingOverlay("hide");
             // resolve("finish")
         }
@@ -1352,6 +1361,7 @@ async function selectAllchk(s) {
 
 //انتقال به فردا
 async function transferDate(str) {
+    
     $.LoadingOverlay("show");
     var obj = {}
     var count = $(".TblTask tr td .AnjamShode").length

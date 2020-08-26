@@ -295,7 +295,7 @@ function todayShamsy8char() {
     return today
 }
 function NewOldDate(str) {
-
+    debugger
     const m = moment();
     switch (str) {
         case "1"://فردا
@@ -316,7 +316,7 @@ function NewOldDate(str) {
             }
             else {
                 month += 1
-                return (year) + "" + ((month) < 7 ? "0" + month : month) + "01"
+                return (year) + "" + ((month) < 10 ? "0" + month : month) + "01"
             }
 
             break;
