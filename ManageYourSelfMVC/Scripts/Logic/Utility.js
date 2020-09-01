@@ -329,6 +329,15 @@ function NewOldDate(str) {
             newDate = convertDateToslashless(newDate)
             return newDate
             break;
+        case "07"://جمعه
+            debugger
+            var dayOfWeek = calDayOfWeeknumber(todayShamsy8char())
+            dayOfWeek = 6 - dayOfWeek
+            m.add(dayOfWeek, 'day')
+            var newDate = m.format('jYYYY/jM/jD')
+            newDate = convertDateToslashless(newDate)
+            return newDate
+            break;
         case "30"://ماه بعد
             
             var isKabise = IsKabise(todayShamsy8char())

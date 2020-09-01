@@ -295,7 +295,7 @@ function todayShamsy8char() {
     return today
 }
 function NewOldDate(str) {
-
+    debugger
     const m = moment();
     switch (str) {
         case "1"://فردا
@@ -316,7 +316,7 @@ function NewOldDate(str) {
             }
             else {
                 month += 1
-                return (year) + "" + ((month) < 7 ? "0" + month : month) + "01"
+                return (year) + "" + ((month) < 10 ? "0" + month : month) + "01"
             }
 
             break;
@@ -324,6 +324,15 @@ function NewOldDate(str) {
  
             var dayOfWeek = calDayOfWeeknumber(todayShamsy8char())
             dayOfWeek=7 - dayOfWeek
+            m.add(dayOfWeek, 'day')
+            var newDate = m.format('jYYYY/jM/jD')
+            newDate = convertDateToslashless(newDate)
+            return newDate
+            break;
+        case "07"://جمعه
+            debugger
+            var dayOfWeek = calDayOfWeeknumber(todayShamsy8char())
+            dayOfWeek = 6 - dayOfWeek
             m.add(dayOfWeek, 'day')
             var newDate = m.format('jYYYY/jM/jD')
             newDate = convertDateToslashless(newDate)

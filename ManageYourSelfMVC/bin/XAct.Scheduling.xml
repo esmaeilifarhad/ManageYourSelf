@@ -1,0 +1,964 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XAct.Scheduling</name>
+    </assembly>
+    <members>
+        <member name="T:XAct.Scheduling.ScheduledTaskExecutionLog">
+            <summary>
+            An entity to record the execution of tasks.
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ScheduledTaskExecutionLog.#ctor">
+            <summary>
+            Initializes a new instance of the 
+            <see cref="T:XAct.Scheduling.ScheduledTaskExecutionLog"/> class.
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskExecutionLog.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskExecutionLog.ScheduledTaskFK">
+            <summary>
+            Gets or sets the Id of the <see cref="T:XAct.Scheduling.ScheduledTask"/> this record describes.
+            </summary>
+            <value>
+            The scheduled task fk.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskExecutionLog.Timestamp">
+            <summary>
+            Gets or sets the Concurrency timestamp.
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskExecutionLog.DurationTicks">
+            <summary>
+            Gets or sets the Duration of the Task.
+            </summary>
+            <value>
+            The duration.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskExecutionLog.Duration">
+            <summary>
+            Gets the duration.
+            </summary>
+            <value>
+            The duration.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskExecutionLog.ResultStatus">
+            <summary>
+            Gets or sets the trace level.
+            (1=Error, 2=Warning, 3=Info, 4=Verbose.
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskExecutionLog.Summary">
+            <summary>
+            Gets or sets an optional (no need to write anything if everything was fine).
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskExecutionLog.CreatedOnUtc">
+            <summary>
+            Gets the date this entity was created, expressed in UTC.
+            <para>Member defined in <see cref="T:XAct.IHasDateTimeTrackabilityUtc"/>.</para>
+            </summary>
+            <internal>
+            There are many arguments for wanting variables of a certain
+            type to be grouped together by Type (DateCreated, DateUpdated,DateDeleted)
+            and it's very very tempting...but in the long run, I can't see
+            it being right decision to go against the whole nomenclature of C#
+            just to give better Intellisense in VS...
+            </internal>
+            <internal>
+            As to why its Nullable: sometimes the contract is applied to items
+            that are not Entities themselves, but pointers to objects that are not known
+            if they are
+            </internal>
+            <internal>
+            The value is Nullable due to SQL Server.
+            There are times where one needs to create an Entity, before knowing the Create
+            date. In such cases, it is *NOT* appropriate to set it to UtcNow, nor DateTime.Empty,
+            as SQL Server cannot store dates prior to Gregorian calendar.
+            </internal>
+        </member>
+        <member name="T:XAct.Scheduling.ScheduledTaskMetadata">
+            <summary>
+            Optional values to set into the context
+            for the <see cref="P:XAct.Scheduling.ScheduledTaskMetadata.ScheduledTask"/> to use.
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ScheduledTaskMetadata.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:XAct.Scheduling.ScheduledTaskMetadata"/> class.
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.Timestamp">
+            <summary>
+            Gets or sets the datastore concurrency check timestamp.
+            <para>
+            Note that this is filled in when persisted in the db --
+            so it's usable to determine whether to generate the
+            Guid <c>Id</c>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.ScheduledTaskFK">
+            <summary>
+            Gets or sets the Id of the
+            <see cref="P:XAct.Scheduling.ScheduledTaskMetadata.ScheduledTask"/>
+            this <see cref="T:XAct.Scheduling.ScheduledTaskMetadata"/> is associated to.
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.ScheduledTask">
+            <summary>
+            Gets or sets the scheduled task 
+            this metadata element belongs to.
+            </summary>
+            <value>
+            The scheduled task.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.Enabled">
+            <summary>
+            Gets or sets a value indicating whether this object is enabled.
+            <para>Member defined in<see cref="T:XAct.IHasEnabled"/></para>
+            </summary>
+            <value>
+              <c>true</c> if enabled; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.Key">
+            <summary>
+            Gets or sets the key.
+            <para>Member defined in<see cref="T:XAct.IHasKey"/></para>
+            </summary>
+            <value>
+            The key.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.IsAMethodArgument">
+            <summary>
+            Gets or sets a value indicating whether this 
+            metadata is to be treated as an argument
+            intended when invoking the ScheduledTask's
+            MethodInfo.
+            <para>
+            If so, ensure the arguments are in the right <see cref="P:XAct.Scheduling.ScheduledTaskMetadata.Order"/>
+            </para>
+            </summary>
+            <value>
+              <c>true</c> if [is method argument]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.Order">
+            <summary>
+            Gets or sets an integer hint of the item's order.
+            <para>
+            Member defined in <see cref="T:XAct.IHasOrder"/>.
+            </para>
+            </summary>
+            <value>
+            The order.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.SerializationMethod">
+            <summary>
+            Gets or sets the serialization method.
+            <para>
+            Member defined in the <see cref="T:XAct.IHasSerializedTypeValueAndMethod"/> contract.
+            </para>
+            </summary>
+            <value>
+            The serialization method.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.SerializedValueType">
+            <summary>
+            Gets or sets the Assembly qualified name of the Value that is serialized.
+            <para>
+            Member defined in the <see cref="T:XAct.IHasSerializedTypeValueAndMethod"/> contract.
+            </para>
+            </summary>
+            <value>
+            The type.
+            </value>
+            <internal>8/16/2011: Sky</internal>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.SerializedValue">
+            <summary>
+            Gets or sets the serialized value.
+            <para>
+            Member defined in the <see cref="T:XAct.IHasSerializedTypeValueAndMethod"/> contract.
+            </para>
+            </summary>
+            <value>
+            The value.
+            </value>
+            <internal>8/16/2011: Sky</internal>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskMetadata.Description">
+            <summary>
+            Gets or sets the description of this trigger.
+            <para>Member defined in<see cref="T:XAct.IHasDescriptionReadOnly"/></para>
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="T:XAct.Scheduling.ScheduledTaskSummary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskSummary.Scheduled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTaskSummary.LastTimeRun">
+            <summary>
+            Gets or sets the last time run.
+            </summary>
+            <para>
+            Not sure how I can record this, as we don't know when the scheduler invokes the job...
+            </para>
+        </member>
+        <member name="T:XAct.Scheduling.Implementations.SchedulingManagementService">
+            <summary>
+            Implementation of the 
+            <see cref="T:XAct.Scheduling.ISchedulingManagementService"/>
+            to manage <see cref="T:XAct.Scheduling.ScheduledTask"/>s
+            </summary>
+        </member>
+        <member name="T:XAct.Scheduling.ISchedulingManagementService">
+            <summary>
+            Contract for a service to manage <see cref="T:XAct.Scheduling.ScheduledTask"/>s.
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingManagementService.Initialize(System.Guid)">
+            <summary>
+            Initializes the specified application tennant identifier.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingManagementService.GetSchedules(System.Guid,System.String)">
+            <summary>
+            Gets the schedules within the group, or all if no group specified.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="group">The group.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingManagementService.GetSchedule(System.Guid,System.Guid)">
+            <summary>
+            Gets the specified schedule.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingManagementService.GetSchedule(System.Guid,System.String,System.String)">
+            <summary>
+            Gets the specified schedule.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="name">The task's required name.</param>
+            <param name="group">The task's optional grouping name.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingManagementService.AddScheduledTask(System.Guid,XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Adds the scheduled task, and starts it.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="scheduledTask">The scheduled task.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingManagementService.DeleteScheduledTask(System.Guid,System.Guid)">
+            <summary>
+            Deletes the scheduled task, and removes it from the scheduler.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="id">The identifier.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingManagementService.DeleteScheduledTask(System.Guid,System.String,System.String)">
+            <summary>
+            Deletes the scheduled task, and removes it from the scheduler.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="name">The task's required name.</param>
+            <param name="group">The task's optional grouping name.</param>
+        </member>
+        <member name="P:XAct.Scheduling.ISchedulingManagementService.Scheduler">
+            <summary>
+            Gets the singleton scheduler that this service manages.
+            </summary>
+            <value>
+            The scheduler.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ISchedulingManagementService.Configuration">
+            <summary>
+            Gets the singleton configuration for this service.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingManagementService.Initialize(System.Guid)">
+            <summary>
+            Initializes this instance.
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingManagementService.#ctor(XAct.Environment.IEnvironmentService,XAct.Environment.IApplicationTennantService,XAct.Domain.Repositories.IRepositoryService,XAct.Scheduling.ISchedulingManagementServiceConfiguration,XAct.Scheduling.ISchedulerController)">
+            <summary>
+            Initializes a new instance of the <see cref="T:XAct.Scheduling.Implementations.SchedulingManagementService"/> class.
+            </summary>
+            <param name="environmentService">The environment service.</param>
+            <param name="applicationTennantService">The application tennant service.</param>
+            <param name="repositoryService">The repository service.</param>
+            <param name="quartzSchedulingManagementServiceConfiguration">The quartz scheduling management service configuration.</param>
+            <param name="schedulerController">The scheduler controller.</param>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingManagementService.GetSchedules(System.Guid,System.String)">
+            <summary>
+            Gets the schedules within the group, or all if no group specified.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="group">The group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingManagementService.GetSchedule(System.Guid,System.Guid)">
+            <summary>
+            Gets the specified schedule.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingManagementService.GetSchedule(System.Guid,System.String,System.String)">
+            <summary>
+            Gets the specified schedule.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="name">The task's required name.</param>
+            <param name="group">The task's optional grouping name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingManagementService.AddScheduledTask(System.Guid,XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Adds the scheduled task.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="scheduledTask">The scheduled task.</param>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingManagementService.DeleteScheduledTask(System.Guid,System.Guid)">
+            <summary>
+            Deletes the scheduled task.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="id">The identifier.</param>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingManagementService.DeleteScheduledTask(System.Guid,System.String,System.String)">
+            <summary>
+            Deletes the scheduled task.
+            </summary>
+            <param name="applicationTennantId">The application tennant identifier.</param>
+            <param name="name">The task's required name.</param>
+            <param name="group">The task's optional grouping name.</param>
+        </member>
+        <member name="P:XAct.Scheduling.Implementations.SchedulingManagementService.ApplicationTennantId">
+            <summary>
+            Gets the application tennant identifier.
+            </summary>
+            <value>
+            The application tennant identifier.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.Implementations.SchedulingManagementService.Scheduler">
+            <summary>
+            Gets the singleton scheduler that this service manages.
+            </summary>
+            <value>
+            The scheduler.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.Implementations.SchedulingManagementService.Initialized">
+            <summary>
+            Gets a value indicating whether the object is initialized
+            using <see cref="T:XAct.IHasInitialize"/>.
+            </summary>
+            <value>
+              <c>true</c> if [is initialized]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.Implementations.SchedulingManagementService.Configuration">
+            <summary>
+            Gets the singleton configuration for this service.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:XAct.Scheduling.Implementations.SchedulingManagementServiceConfiguration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:XAct.Scheduling.ISchedulingManagementServiceConfiguration">
+            <summary>
+            Configuration for the configuration element
+            injected into an instance of
+            <see cref="T:XAct.Scheduling.ISchedulingService"/>
+            </summary>
+        </member>
+        <member name="T:XAct.Scheduling.Implementations.SchedulingService">
+            <summary>
+            An implementation of the 
+            <see cref="T:XAct.Scheduling.ISchedulingService"/>
+            to manage <see cref="T:XAct.Scheduling.ScheduledTask"/>s
+            using <c>.NET</c>
+            </summary>
+        </member>
+        <member name="T:XAct.Scheduling.ISchedulingService">
+            <summary>
+            Contract for a service to manage <see cref="T:XAct.Scheduling.ScheduledTask"/>s.
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingService.GetSchedules(System.String)">
+            <summary>
+            Gets the schedules within the group, or all if no group specified.
+            </summary>
+            <param name="group">The group.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingService.GetSchedule(System.Guid)">
+            <summary>
+            Gets the specified schedule.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingService.GetSchedule(System.String,System.String)">
+            <summary>
+            Gets the specified schedule.
+            </summary>
+            <param name="name">The task's required name.</param>
+            <param name="group">The task's optional grouping name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingService.AddScheduledTask(XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Adds the scheduled task.
+            </summary>
+            <param name="scheduledTask">The scheduled task.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingService.DeleteScheduledTask(System.Guid)">
+            <summary>
+            Deletes the scheduled task.
+            </summary>
+            <param name="id">The identifier.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulingService.DeleteScheduledTask(System.String,System.String)">
+            <summary>
+            Deletes the scheduled task.
+            </summary>
+            <param name="name">The task's required name.</param>
+            <param name="group">The task's optional grouping name.</param>
+        </member>
+        <member name="P:XAct.Scheduling.ISchedulingService.Configuration">
+            <summary>
+            Gets the singleton configuration for this service.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingService.#ctor(XAct.Environment.IEnvironmentService,XAct.Environment.IApplicationTennantService,XAct.Scheduling.ISchedulingServiceConfiguration,XAct.Scheduling.ISchedulingManagementService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:XAct.Scheduling.Implementations.SchedulingService"/> class.
+            </summary>
+            <param name="environmentService">The environment service.</param>
+            <param name="applicationTennantService">The application tennant service.</param>
+            <param name="quartzSchedulingServiceConfiguration">The quartz scheduling service configuration.</param>
+            <param name="schedulingManagementService">The quartz scheduling management service.</param>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingService.Initialize">
+            <summary>
+            Initializes this instance.
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingService.AddScheduledTask(XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Adds the scheduled task.
+            </summary>
+            <param name="scheduledTask">The scheduled task.</param>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingService.GetSchedule(System.Guid)">
+            <summary>
+            Gets the specified schedule.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingService.GetSchedule(System.String,System.String)">
+            <summary>
+            Gets the specified schedule.
+            </summary>
+            <param name="name">The task's required name.</param>
+            <param name="group">The task's optional grouping name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingService.GetSchedules(System.String)">
+            <summary>
+            Gets the schedules within the group, or all if no group specified.
+            </summary>
+            <param name="group">The group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingService.DeleteScheduledTask(System.Guid)">
+            <summary>
+            Deletes the scheduled task.
+            </summary>
+            <param name="id">The identifier.</param>
+        </member>
+        <member name="M:XAct.Scheduling.Implementations.SchedulingService.DeleteScheduledTask(System.String,System.String)">
+            <summary>
+            Deletes the scheduled task.
+            </summary>
+            <param name="name">The task's required name.</param>
+            <param name="group">The task's optional grouping name.</param>
+        </member>
+        <member name="P:XAct.Scheduling.Implementations.SchedulingService.Initialized">
+            <summary>
+            Gets a value indicating whether the object is initialized
+            using <see cref="T:XAct.IHasInitialize"/>.
+            </summary>
+            <value>
+              <c>true</c> if [is initialized]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.Implementations.SchedulingService.Configuration">
+            <summary>
+            Gets the singleton configuration for this service.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:XAct.Scheduling.Implementations.SchedulingServiceConfiguration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:XAct.Scheduling.ISchedulingServiceConfiguration">
+            <summary>
+            Configuration for the configuration element
+            injected into an instance of
+            <see cref="T:XAct.Scheduling.ISchedulingService"/>
+            </summary>
+        </member>
+        <member name="T:XAct.Scheduling.ISchedulerController">
+            <summary>
+            Contract for an abstract schedule engine controller.
+            <para>
+            The contract the scheduler does not concern itself
+            with how the scheduler does the work.
+            </para>
+            <para>
+            See also:IQuartzSChedulerController.
+            </para>
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.Start">
+            <summary>
+            Start the scheduler.
+            <para>
+            If the first time, will initialize the scheduler with a list of task definitions.
+            </para>
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.Standby">
+            <summary>
+            Pause the scheduler, and therefore the triggering
+            of all <see cref="T:XAct.Scheduling.ScheduledTask"/>s.
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.Resume">
+            <summary>
+            Resumes the scheduler, and therefore the triggering
+            of all <see cref="T:XAct.Scheduling.ScheduledTask"/>.
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.Stop(System.Boolean)">
+            <summary>
+            Stop the scheduler, and therefore the triggering
+            of all <see cref="T:XAct.Scheduling.ScheduledTask"/>s.
+            </summary>
+            <param name="waitForJobsToComplete">if set to <c>true</c> [wait for jobs to complete].</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.RegisterTask(XAct.Scheduling.ScheduledTask[])">
+            <summary>
+            Registers new <see cref="T:XAct.Scheduling.ScheduledTask"/>s
+            into the current internal
+             <c>Scheduler</c>.
+            <para>
+            Ensure that <see cref="M:XAct.Scheduling.ISchedulerController.Start"/>
+            is invoked at some point as just 
+            Registering the <see cref="T:XAct.Scheduling.ScheduledTask"/>
+            does not automatically mean that they are being
+            triggered, yet.
+            </para>
+            </summary>
+            <param name="scheduledTasks">The scheduled tasks.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.PauseTask(XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Pauses a registered task if it is found.
+            <para>
+            No exception is raised if not found (it's up to the invokee to get it right).
+            </para>
+            </summary>
+            <param name="scheduledTask">The scheduled task.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.ResumeTask(XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Resumes a paused task if it is found.
+            <para>
+            No exception is raised if not found (it's up to the invokee to get it right).
+            </para>
+            </summary>
+            <param name="scheduledTask">The scheduled task.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.RemoveTask(XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Removes the task if it is found.
+            <para>
+            No exception is raised if not found (it's up to the invokee to get it right).
+            </para>
+            </summary>
+            <param name="scheduledTask">The scheduled task.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.RemoveTask(System.Guid)">
+            <summary>
+            Removes the task if it is found.
+            <para>
+            No exception is raised if not found (it's up to the invokee to get it right).
+            </para>
+            </summary>
+            <param name="scheduledTaskId">The scheduled task identifier.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.RemoveTask(System.String,System.String)">
+            <summary>
+            Removes the task if it is found.
+            <para>
+            No exception is raised if not found (it's up to the invokee to get it right).
+            </para>
+            </summary>
+            <param name="name">The name.</param>
+            <param name="group">The group.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.CheckExists(XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Checks whether a task has been registered.
+            </summary>
+            <param name="scheduledTask">The scheduled task.</param>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.GetJobDetails(XAct.Scheduling.ScheduledTask)">
+            <summary>
+            Gets a current snapshot of the 
+            metadata passed between scheduler and job instances.
+            <para>
+            CAUTION:
+            Scalar variables (eg: counters) will be fixed and at
+            time of retrieval, and therefore safe to work with, 
+            but reference types may continue to be updated.
+            </para>
+            </summary>
+            <param name="scheduledTask">The scheduled task.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.GetJobMetadata(System.Guid)">
+            <summary>
+            Gets a current snapshot of the 
+            metadata passed between scheduler and job instances.
+            <para>
+            CAUTION:
+            Scalar variables (eg: counters) will be fixed at
+            time of retrieval, and therefore safe to work with, 
+            but reference types may continue to be updated 
+            while they are being looked at (caution...)
+            </para>
+            </summary>
+            <param name="scheduledTaskId">The scheduled task's Id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XAct.Scheduling.ISchedulerController.GetJobDetails(System.String,System.String)">
+            <summary>
+            Gets a current snapshot of the
+            metadata passed between scheduler and job instances.
+            <para>
+            CAUTION:
+            Scalar variables (eg: counters) will be fixed at
+            time of retrieval, and therefore safe to work with,
+            but reference types may continue to be updated 
+            while they are being looked at (caution...)
+            </para>
+            </summary>
+            <param name="name">The name.</param>
+            <param name="group">The group.</param>
+            <returns></returns>
+        </member>
+        <member name="T:XAct.Scheduling.IScheduledTask">
+            <summary>
+            A task that can be executed by the <see cref="T:XAct.Scheduling.ISchedulingManagementService"/>.
+            </summary>
+        </member>
+        <member name="T:XAct.Scheduling.ScheduledTask">
+            <summary>
+            Entity to describe a Task
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ScheduledTask.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:XAct.Scheduling.ScheduledTask"/> class.
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.ScheduledTask.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            </returns>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.ApplicationTennantId">
+            <summary>
+            Gets or sets the organisation id of the record
+            within a multi-tenant application.
+            <para>
+            Design tip: it is preferable to allow users to register only online,
+            but if the app has to allow the creation of new users/tenants offline,
+            investigate <see cref="T:XAct.IDistributedIdService"/>
+            </para>
+            </summary>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.Timestamp">
+            <summary>
+            Gets or sets the Concurrency timestamp.
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.Enabled">
+            <summary>
+            Gets or sets a value indicating whether this object is enabled.
+            <para>Member defined in<see cref="T:XAct.IHasEnabled"/></para>
+            </summary>
+            <value>
+              <c>true</c> if enabled; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.GroupName">
+            <summary>
+            Gets or sets the name of the Group to which the Task belongs.
+            <para>
+            Optional.
+            </para>
+            </summary>
+            <value>
+            The name of the group.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.Name">
+            <summary>
+            Gets the name of the Task.
+            <para>
+            Required.
+            </para>
+            <para>Member defined in<see cref="T:XAct.IHasNameAndDescription"/></para>
+            </summary>
+            <value>
+            The name.
+            </value>
+            <internal>8/13/2011: Sky</internal>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.Description">
+            <summary>
+            Gets or sets the description of the task.
+            <para>Member defined in <see cref="T:XAct.IHasNameAndDescription"/></para>
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.StartDelay">
+            <summary>
+            Gets or sets the amount of time to delay the start.
+            </summary>
+            <value>
+            The start delay.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.StartDelayTicks">
+            <summary>
+            Gets or sets the start delay ticks.
+            </summary>
+            <value>
+            The start delay ticks.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.ChronSchedule">
+            <summary>
+            Gets or sets the chron schedule on which to trigger the Job.
+            </summary>
+            <value>
+            The chron schedule.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.IsExecutable">
+            <summary>
+            Gets or sets a value indicating whether the task
+            will be initializing an external executable, 
+            or internal class.
+            </summary>
+            <value>
+              <c>true</c> if [is executable]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.ExecutablePath">
+            <summary>
+            If <see cref="P:XAct.Scheduling.ScheduledTask.IsExecutable"/> is true,
+            gets or sets the executable path.
+            </summary>
+            <value>
+            The executable path.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.ExecutableArguments">
+            <summary>
+            If <see cref="P:XAct.Scheduling.ScheduledTask.IsExecutable"/> is true,
+            gets or sets the command line arguments to invoke
+            <see cref="P:XAct.Scheduling.ScheduledTask.ExecutablePath"/> with.
+            </summary>
+            <value>
+            The command line arguments.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.AssemblyName">
+            <summary>
+            Gets or sets the name of the assembly within which 
+            to find <see cref="P:XAct.Scheduling.ScheduledTask.TypeFullName"/>.
+            </summary>
+            <value>
+            The name of the assembly.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.TypeFullName">
+            <summary>
+            Gets or sets the Assembly qualified name of the Type that is serialized.
+            </summary>
+            <value>
+            The type.
+            </value>
+            <internal>8/16/2011: Sky</internal>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.MethodName">
+            <summary>
+            Gets or sets the name of the method to invoke within
+            <see cref="P:XAct.Scheduling.ScheduledTask.TypeFullName"/>.
+            </summary>
+            <value>
+            The name of the method.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.Metadata">
+            <summary>
+            Gets the optional metadata associated to this task.
+            </summary>
+            <value>
+            The metadata.
+            </value>
+        </member>
+        <member name="P:XAct.Scheduling.ScheduledTask.DeletedOnUtc">
+            <summary>
+            Gets or sets the datetime the item was deleted, expressed in UTC.
+            <para>
+            Defined in the <see cref="T:XAct.IHasDateTimeDeletedOnUtc"/> contract.
+            </para>
+            <para>
+            Note: Generally updated by a db trigger, or saved first, then deleted.
+            </para>
+            <para>
+            See also <see cref="T:XAct.IHasAuditability"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="T:XAct.Scheduling.Services.ISchedulingReportingService">
+            <summary>
+            A contract for service with which to 
+            record information about the invocation of a scheduled job.
+            <para>
+            Note: Invoked by AbstractQuartzJob.
+            </para>
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.Services.ISchedulingReportingService.Trace(System.Guid,System.TimeSpan,XAct.ResultStatus,System.String)">
+            <summary>
+            Create a message to associate to the job.
+            </summary>
+            <param name="jobIdentifier">The job identifier.</param>
+            <param name="timeSpan">The time span.</param>
+            <param name="resultStatus">The result status.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:XAct.Scheduling.Services.Implementations.SchedulingReportingService">
+            <summary>
+            An implementation of the <see cref="T:XAct.Scheduling.Services.ISchedulingReportingService"/>
+            to record information about the invocation of a scheduled job.
+            </summary>
+        </member>
+        <member name="M:XAct.Scheduling.Services.Implementations.SchedulingReportingService.#ctor(XAct.Environment.IDateTimeService,XAct.Domain.Repositories.IRepositoryService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:XAct.Scheduling.Services.Implementations.SchedulingReportingService"/> class.
+            </summary>
+            <param name="dateTimeService">The date time service.</param>
+            <param name="repositoryService">The repository service.</param>
+        </member>
+        <member name="M:XAct.Scheduling.Services.Implementations.SchedulingReportingService.Trace(System.Guid,System.TimeSpan,XAct.ResultStatus,System.String)">
+            <summary>
+            Create a message to associate to the job.
+            </summary>
+            <param name="jobIdentifier">The job identifier.</param>
+            <param name="duration">The duration.</param>
+            <param name="resultStatus">The result status.</param>
+            <param name="message">The message.</param>
+        </member>
+    </members>
+</doc>

@@ -7,6 +7,9 @@ using ManageYourSelfMVC.Help;
 using System.Data;
 using System.IO;
 using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ManageYourSelfMVC.Controllers
 {
@@ -33,6 +36,36 @@ namespace ManageYourSelfMVC.Controllers
             //}
         }
         #endregion
+        public ActionResult ExchangeRate()
+        
+        {
+            //https://json2csharp.com/
+            try
+            {
+                //https://hamyarandroid.com/api?t=currency
+
+                // using System.Net;
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ServicePointManager.ServerCertificateValidationCallback = ((sender, certificate, chain, sslPolicyErrors) => true);
+                // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+
+                WebRequest request = HttpWebRequest.Create("https://hamyarandroid.com/api?t=currency");
+                WebResponse response = request.GetResponse();
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+
+                string jsons = reader.ReadToEnd();
+                ViewModels.Root r = Newtonsoft.Json.JsonConvert.DeserializeObject<ViewModels.Root>(jsons);
+
+                return Json(r, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw ;
+            }
+           
+        }
         public ActionResult ListTaskAnjamnashode(string typeTask, List<string> MyData)
         {
 
@@ -664,7 +697,7 @@ order by DateEnd,isnull(Olaviat,0)
                 DataTable DT;
                 if (str == "")
                 {
-                     DT = U.Select(@"
+                    DT = U.Select(@"
 select 
 Task.TaskId
 ,Task.Name
@@ -695,7 +728,7 @@ order by DateEnd,isnull(Olaviat,0)
                 }
                 else
                 {
-                     DT = U.Select(@"
+                    DT = U.Select(@"
 select 
 Task.TaskId
 ,Task.Name

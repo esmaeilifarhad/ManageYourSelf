@@ -1,4 +1,5 @@
-﻿ function PostData(MyArray) {
+﻿function PostData(MyArray) {
+     
     $.ajax(
      {
          type: 'Post',

@@ -23,6 +23,7 @@ $("ul li a[href='#menuTaskFuture']").on("click", function () {
     ListTaskFutureChk();
 });
 function ListTaskFutureChkPost(MyArray) {
+
     $.ajax(
         {
             type: 'Post',
@@ -556,27 +557,24 @@ async function EditTask(TaskId) {
         service(objEditTask)
     ]);
     var ListtObjEditTask = results[0]
-    console.log(ListtObjEditTask)
-
-    var table = "<table >" +
-        "<tr><td>تاریخ شروع</td><td><input type='text' name='DateStart' class='PersianDatePickerDateStart' value=" + foramtDate(ListtObjEditTask.Task.DateStart) + " autocomplete='off'  ></td></tr>" +
-        "<tr><td>تاریخ پایان</td><td><input type='text' name='DateEnd' class='PersianDatePickerDateEnd' value=" + foramtDate(ListtObjEditTask.Task.DateEnd) + " autocomplete='off'  ></td>" +
-
-        "<tr><td>نوع</td><td><select class='MYSelect'>"
+    //console.log(ListtObjEditTask)
+    
+    var table = "<div class='form-group'>" +
+        "تاریخ شروع<input type='text' placeholde='تاریخ شروع' name='DateStart' class='PersianDatePickerDateStart' value=" + foramtDate(ListtObjEditTask.Task.DateStart) + " autocomplete='off'  >" +
+        "تاریخ پایان<input type='text' placeholde='تاریخ پایان' name='DateEnd' class='PersianDatePickerDateEnd' value=" + foramtDate(ListtObjEditTask.Task.DateEnd) + " autocomplete='off'  >" +
+        "توضیحات<textarea  name='Name' class='form-control'  rows='6'>" + ListtObjEditTask.Task.Name + "</textarea>" +
+        "نوع <br/><select class='MYSelect'>"
     for (let index = 0; index < ListtObjEditTask.ListCat.length; index++) {
-        if (ListtObjEditTask.ListCat[index].CatId == ListtObjEditTask.Task.CatId) {
-            table += " <option selected value=" + ListtObjEditTask.ListCat[index].CatId + ">" + ListtObjEditTask.ListCat[index].Title + "</option>"
-        }
-        else {
-            table += " <option value=" + ListtObjEditTask.ListCat[index].CatId + ">" + ListtObjEditTask.ListCat[index].Title + "</option>"
-        }
-
+        if(ListtObjEditTask.ListCat[index].CatId == ListtObjEditTask.Task.CatId) {
+        table += " <option selected value=" + ListtObjEditTask.ListCat[index].CatId + ">" + ListtObjEditTask.ListCat[index].Title + "</option>"
     }
+        else {
+        table += " <option value=" + ListtObjEditTask.ListCat[index].CatId + ">" + ListtObjEditTask.ListCat[index].Title + "</option>"
+    }
+}
+table += "</select>"
 
-
-
-    table += "</select>"
-    table += "<tr><td>عنوان</td><td><div class='form-group'><textarea name='Name' rows='4'  class='form-control' autocomplete='off'>" + ListtObjEditTask.Task.Name + "</textarea></div></td></tr>" +
+    table += "<table>" +
         "<tr><td>درصد پیشرفت</td><td><input type='number' name='DarsadPishraft'  value=" + ListtObjEditTask.Task.DarsadPishraft + " min='0' max='100' autocomplete='off'  ></td></tr>" +
         "<tr><td>اولویت</td><td><input type='number' name='Olaviat'   value=" + ListtObjEditTask.Task.Olaviat + " min='0' max='5' autocomplete='off'  ></td></tr>" +
         "<tr><td>Rate</td><td><input type='number' name='Rate'   value=" + ListtObjEditTask.Task.Rate + "  min='0' max='5' autocomplete='off'  ></td></tr>"
@@ -596,46 +594,49 @@ async function EditTask(TaskId) {
     }
 
 
-    table += "</table>"
+    table += "</table></div >"
 
-    var tablebutt = "<table class='table' style='font-size: 9px;'>"
-    tablebutt += "<tr>" +
-        "<td><input type='button' style='background-color:green' value='ذخیره' onclick='UpdateTask(" + ListtObjEditTask.Task.TaskId + ")'/> | " +
-        "<input type='button' value='بستن' onclick='closeModal()'/></td>" +
+//----------------
+
+
+    var tablebutt = "<table><tr>" +
+        "<td><input type='button' class='btn btn-success' value='ویرایش' onclick='UpdateTask(" + ListtObjEditTask.Task.TaskId + ")'/> | " +
+        "<input type='button'  class='btn btn-danger' value='بستن' onclick='closeModal()'/></td>" +
         "</tr>"
     tablebutt += "</table>"
 
-    //  $(".ListTaskAnjamShode table").remove()
-    // $(".ListTaskAnjamShode span").remove()  modal-footer
-    $(".BodyModal").empty();
-    $(".modal-footer").empty();
-    $(".BodyModal").append(table);
-    $(".modal-footer").append(tablebutt);
-    $("#MasterModal").modal();
 
 
-    kamaDatepicker('PersianDatePickerDateStart', {
-        nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
-        , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
-        , forceFarsiDigits: true
-        , markToday: true
-        , markHolidays: true
-        , highlightSelectedDay: true
-        , sync: true
-    });
-    kamaDatepicker('PersianDatePickerDateEnd', {
-        nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
-        , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
-        , forceFarsiDigits: true
-        , markToday: true
-        , markHolidays: true
-        , highlightSelectedDay: true
-        , sync: true
-    });
+$(".BodyModal").empty();
+$(".modal-footer").empty();
+
+$(".BodyModal").append(table);
+$(".modal-footer").append(tablebutt);
+$("#MasterModal").modal();
+
+
+kamaDatepicker('PersianDatePickerDateStart', {
+    nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+    , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+    , forceFarsiDigits: true
+    , markToday: true
+    , markHolidays: true
+    , highlightSelectedDay: true
+    , sync: true
+});
+kamaDatepicker('PersianDatePickerDateEnd', {
+    nextButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_next.png"
+    , previousButtonIcon: "../Scripts/Persian-Jalali-Calendar-Data-Picker-Plugin-With-jQuery-kamaDatepicker/demo/timeir_prev.png"
+    , forceFarsiDigits: true
+    , markToday: true
+    , markHolidays: true
+    , highlightSelectedDay: true
+    , sync: true
+});
 
 
 
-    $.LoadingOverlay("hide");
+$.LoadingOverlay("hide");
     //--------
 
 }
@@ -734,13 +735,13 @@ function CreateTask() {
 }
 function UpdateTask(TaskId) {
 
-    var CatId = $("#MasterModal table .MYSelect option:selected").val();
-    var Name = $("#MasterModal table textarea[name='Name']").val()
+    var CatId = $("#MasterModal  .MYSelect option:selected").val();
+    var Name = $("#MasterModal  textarea[name='Name']").val()
     var Olaviat = $("#MasterModal table input[name='Olaviat']").val()
     var Rate = $("#MasterModal table input[name='Rate']").val()
     var DarsadPishraft = $("#MasterModal table input[name='DarsadPishraft']").val()
-    var DateEnd = $("#MasterModal table input[name='DateEnd']").val()
-    var DateStart = $("#MasterModal table input[name='DateStart']").val()
+    var DateEnd = $("#MasterModal  input[name='DateEnd']").val()
+    var DateStart = $("#MasterModal  input[name='DateStart']").val()
     var IsActive = $("input[name='TaskIsActive']").prop('checked')
     var IsCheck = $("input[name='TaskIsCheck']").prop('checked')
     // var TaskId = $("#MasterModal table").attr("TaskId")
@@ -806,7 +807,7 @@ async function ListTask(typeTask) {
         service(objListTaskAnjamnashode)
     ]);
     var ListTaskAnjamnashode = results[0]
-       
+
     var table = "<input style='cursor:pointer' type='button' value='انجام' onclick='changeToAnjamShode()'/><input style='cursor:pointer' type = 'button' value = 'حذف' onclick = 'RemoveAllTask()' /><table  id='tblListTaskDateToDate' class='table-bordered table-responsive table-striped TblTask' " +
         " style='direction: rtl; text-align: center;font-size:11px'>" +
 
@@ -1044,10 +1045,12 @@ $(".ListTaskFutureChk").on("click", "input", function () {
         ListTask("anjamnashode")
     }
     else {
+
         ListTaskFutureChkPost(MyArray);
     }
 });
 function RefreshChk() {
+
     var MyArray = [];
     var lvl = '';
     $(".ListTaskFutureChk .Categories input:checked").each(function () {
@@ -1204,7 +1207,7 @@ async function ShowStDateEndDate() {
     ]);
     var ListObj = results[0]
     var Yesterday = foramtDate(convertDateToslashless(SelectDate(-1)))
-    
+
 
     table = "<table class='table'>" +
         "<tr>" +
@@ -1213,31 +1216,31 @@ async function ShowStDateEndDate() {
         "<th></th>" +
         "</tr > " +
         "<tr > " +
-        "<td><input type='text' name='DateS'  autocomplete='off' value='" +foramtDate(ListObj.DateEnd)+"' placeholder=''></td>" +
-        "<td><input type='text' name='DateE'  autocomplete='off' value='" + Yesterday +"' placeholder=''></td>" +
-        "<td><input type='button'  value='جستجو' class='btn btn-danger' onclick='ListTaskDateToDate({Date1:\""+Yesterday + "\",Date2:\"" + foramtDate(ListObj.DateEnd)+"\"})'></td>" +
-        "</tr > "+
-    "</table > "
+        "<td><input type='text' name='DateS'  autocomplete='off' value='" + foramtDate(ListObj.DateEnd) + "' placeholder=''></td>" +
+        "<td><input type='text' name='DateE'  autocomplete='off' value='" + Yesterday + "' placeholder=''></td>" +
+        "<td><input type='button'  value='جستجو' class='btn btn-danger' onclick='ListTaskDateToDate({Date1:\"" + Yesterday + "\",Date2:\"" + foramtDate(ListObj.DateEnd) + "\"})'></td>" +
+        "</tr > " +
+        "</table > "
     $(".ShowStDateEndDate").empty()
     $(".ShowStDateEndDate").append(table)
-   
+
 }
 async function ListTaskDateToDate(objDate) {
     var DateS = $("input[name='DateS']").val()
     var DateE = $("input[name='DateE']").val()
-    
+
     $.LoadingOverlay("show");
     var obj = {}
     obj.url = "/Task/ListTaskDateToDate"
     obj.dataType = "json"
     obj.type = "post"
-    obj.data = { Date1: convertDateToslashless(DateS), Date2: convertDateToslashless(DateE)}
+    obj.data = { Date1: convertDateToslashless(DateS), Date2: convertDateToslashless(DateE) }
     var results = await Promise.all([
         service(obj)
     ]);
     var ListObj = results[0]
-    
-    var table ="<table><tr><td><input type='button' value='حذف' onclick='RemoveAllTask()'/></td></tr></table>"
+
+    var table = "<table><tr><td><input type='button' value='حذف' onclick='RemoveAllTask()'/></td></tr></table>"
     table += "<table id='tblListTaskDateToDate' class='table-bordered table-responsive table-striped' " +
         " style='direction: rtl; text-align: center;font-size:11px'>" +
 
@@ -1251,7 +1254,7 @@ async function ListTaskDateToDate(objDate) {
         "         <th>عنوان وظیف</th>" +
         "         <th>تاریخ شروع</th>" +
         "         <th>تاریخ پایان</th>" +
-        
+
         "         <th>زمان بندی</th>" +
         "         <th>ویرایش</th>" +
         "         <th>حذف</th>" +
@@ -1264,11 +1267,11 @@ async function ListTaskDateToDate(objDate) {
             "<td >" + ListObj[index].Rate + "</td>" +
             "<td><input type='button' style='background-color:green' class='fa fa-sort-up pointer ' onclick='TaskUpLevel(" + ListObj[index].TaskId + ")' Data_id='@item.TaskId'/></td>" +
             "<td><input type='button' style='background-color:red' class='fa fa-sort-down pointer  ' onclick='TaskDownLevel(" + ListObj[index].TaskId + ")'  Data_id='@item.TaskId'/></td>" +
-      
+
             "<td style='text-align: right!important;'>" + ListObj[index].Name + "</td>" +
             "<td>" + foramtDate(ListObj[index].DateStart) + "<br/>" + calDayOfWeek(ListObj[index].DateStart) + "</td>" +
             "<td>" + foramtDate(ListObj[index].DateEnd) + "<br/>" + calDayOfWeek(ListObj[index].DateEnd) + "</td>" +
-          
+
             "<td><span class='fa fa-calendar pointer calendarTask' onclick='TimingTask(" + ListObj[index].TaskId + ")' Data_id=" + ListObj[index].TaskId + "></span>" +
             "</br>" +
             "<span class='fa fa-remove pointer' onclick='removeTimeTask(" + ListObj[index].TaskId + ")'></span></td>" +
@@ -1281,14 +1284,14 @@ async function ListTaskDateToDate(objDate) {
 
     $(".ListTask").empty();
     $(".ListTask").append(table);
-   
+
     $.LoadingOverlay("hide");
 
 }
 async function RemoveAllTask() {
-    debugger
-    var arrayTaskId=[]
-   
+
+    var arrayTaskId = []
+
     var objData = {}
     var count = $("#tblListTaskDateToDate tr td .AnjamShode").length
     var countChecked = $("#tblListTaskDateToDate tr td .AnjamShode").filter(':checked').length
@@ -1301,18 +1304,18 @@ async function RemoveAllTask() {
         i += 1;
         if ($(this).is(':checked')) {
             // checked
-          //  obj.IsCheck = true
+            //  obj.IsCheck = true
             objData.TaskId = $(this).attr("Data_id")
             arrayTaskId.push(objData.TaskId)
-            
-           // var x = await UpdateTask2(obj)
+
+            // var x = await UpdateTask2(obj)
 
         }
         else {
             // unchecked
 
         }
-        
+
         if (count == i) {
             $.LoadingOverlay("show");
 
@@ -1325,9 +1328,9 @@ async function RemoveAllTask() {
                 service(obj)
             ]);
             var ListObj = results[0]
-            alert("تعداد "+ListObj+" رکورد حذف گردید")
-            
-           // ListTaskDateToDate()
+            alert("تعداد " + ListObj + " رکورد حذف گردید")
+
+            // ListTaskDateToDate()
             ShowStDateEndDate()
             ListTask("anjamnashode");
             $.LoadingOverlay("hide");
@@ -1335,12 +1338,12 @@ async function RemoveAllTask() {
         }
 
     })
-   
+
 }
 async function selectAllchk(s) {
-    
+
     var res = $(s)[0].checked;
-   // var count=0
+    // var count=0
     if (res == true) {
         $("#tblListTaskDateToDate  tr td .AnjamShode").each(function () {
 
@@ -1350,7 +1353,7 @@ async function selectAllchk(s) {
     }
     else {
         $("#tblListTaskDateToDate  tr td .AnjamShode").each(function () {
-            this.checked =  false
+            this.checked = false
         })
     }
 
@@ -1358,6 +1361,7 @@ async function selectAllchk(s) {
 
 //انتقال به فردا
 async function transferDate(str) {
+
     $.LoadingOverlay("show");
     var obj = {}
     var count = $(".TblTask tr td .AnjamShode").length

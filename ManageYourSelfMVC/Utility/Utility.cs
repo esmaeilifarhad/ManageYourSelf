@@ -386,7 +386,7 @@ namespace ManageYourSelfMVC.Utility
         {
             try
             {
-                Utility.CreateLog("Start SendMail", "Utility");
+                //Utility.CreateLog("Start SendMail", "Utility");
                 //bool exists = System.IO.Directory.Exists(Application.StartupPath + "\\Email");
                 //if (!exists)
                 //{
@@ -415,7 +415,7 @@ namespace ManageYourSelfMVC.Utility
                 // for (int i = 0; i < emails.Length; i++)
                 //{
                
-                string Emails = "Esmaeili.Farhad@Golrang.com,esmaili.farhad67@gmail.com";
+                string Emails = "esmaili.farhad67@gmail.com";
                 string[] emails = Emails.Split(',');
 
                 for (int i = 0; i < emails.Length; i++)
@@ -451,11 +451,14 @@ namespace ManageYourSelfMVC.Utility
                 //attach ned
 
                 SmtpClient client = new SmtpClient();
-                // client.UseDefaultCredentials = true;
-                client.Port = 25;
-                client.Credentials = new System.Net.NetworkCredential("FeMyHostSender@gmail.com", "861130928");
-                client.EnableSsl = true;
                 client.Host = "smtp.gmail.com";
+                client.Port = 587;
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+               
+
+                client.Credentials = new System.Net.NetworkCredential("FeMyHostSender@gmail.com", "861130928");
+
                 client.Send(message);
                 Utility.CreateLog("Finish SendMail", "Utility");
             }
@@ -581,7 +584,7 @@ namespace ManageYourSelfMVC.Utility
             Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
             Models.DomainModels.LogTBL L = new Models.DomainModels.LogTBL();
             L.dsc = MatnKhata;
-            L.date = Utility.shamsi_date();
+            L.date =Utility.ConvertDateToSqlFormat(Utility.shamsi_date());
             L.Time = DateTime.Now.ToShortTimeString();
             L.Name = Name;
             DB.LogTBLs.Add(L);
