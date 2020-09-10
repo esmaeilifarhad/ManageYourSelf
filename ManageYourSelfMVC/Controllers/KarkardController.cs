@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -53,6 +54,19 @@ namespace ManageYourSelfMVC.Controllers
             }
             return PartialView(lstV);
         }
+
+        public async Task<ActionResult> DeleteRange(string date)
+        {
+             return await Task.Run(() => { 
+            //Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
+            var karkard = DB.KarKards.Where(q => q.DayDate.Substring(0,6) == date);
+            DB.KarKards.RemoveRange(karkard);
+            var countDelete=DB.SaveChanges();
+            return Json(countDelete, JsonRequestBehavior.AllowGet);
+             });
+
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -284,6 +298,7 @@ group by DayDate
 FETCH NEXT 20 ROWS ONLY; -- take 10 rows
  ");
 */
+            if(DT==null) return Json(lstV, JsonRequestBehavior.AllowGet);
             foreach (DataRow item in DT.Rows)
             {
                 ViewModels.Karkard.VMKarkard V = new ViewModels.Karkard.VMKarkard();
@@ -381,6 +396,8 @@ sum(SpendTimeMinute)>=(	select sum(SpendTimeMinute)
             }
             return Json(lstV, JsonRequestBehavior.AllowGet);
         }
+        }
+   
 
-    }
+
 }

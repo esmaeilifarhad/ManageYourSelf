@@ -404,6 +404,7 @@ async function SumMounthKarkard() {
         table += "<tr>"
         table += "<td>" + ListObj[i].Date + "</td>"
         table += "<td>" + ListObj[i].TimePer + "</td>"
+        table += "<td><input type='button' class='btn btn-danger' value='Delete' onclick='DeleteRangeKarkard(" + ListObj[i].Date+")'/></td>"
         table += "</tr>"
     }
     table += "</table>"
@@ -746,6 +747,30 @@ function NameOfDayWeek(dayWeek) {
             break;
     }
     return day
+}
+
+async function DeleteRangeKarkard(date) {
+
+
+    var res2 = await customConfirm({ title: "<p style='font-size:10px;font-weight:100'>" + date + "</p>", text: "آیا حذف انجام شود ؟", cancelButtonText: "خیر", confirmButtonText: "بلی" })
+    if (res2.value == true) {
+        $.LoadingOverlay("show");
+    
+    var obj = {}
+    obj.url = "/Karkard/DeleteRange"
+    obj.dataType = "json"
+    obj.type = "post"
+    obj.data = { date: date }
+    var results = await Promise.all([
+        service(obj)
+        
+    ]);
+    var ListObj = results[0]
+   // alert(ListObj)
+    showAlert("تعداد موارد حذف شده : " + ListObj)
+    $.LoadingOverlay("hide");
+        RefreshExecute()
+    }
 }
 
 

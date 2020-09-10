@@ -95,6 +95,15 @@ namespace ManageYourSelfMVC.Controllers
            
             return Json(Error, JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult ListLog() {
+           var res= DB.LogTBLs.OrderByDescending(q=>q.date).ThenByDescending(q=>q.Time).ToList();
+            return View(res);
+        }
+        public ActionResult RemoveAllLog() {
+            var res = DB.LogTBLs.ToList();
+            DB.LogTBLs.RemoveRange(res);
+            DB.SaveChanges();
+            return RedirectToAction("ListLog");
+        }
     }
 }

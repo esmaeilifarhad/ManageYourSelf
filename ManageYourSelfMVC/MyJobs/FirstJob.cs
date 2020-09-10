@@ -13,12 +13,7 @@ namespace ManageYourSelfMVC.MyJobs
         {
             Models.WebServices.Services s = new Models.WebServices.Services();
             s.ExchangeRate();
-            //string path = @"D:\Log.txt";
 
-            //using (StreamWriter sw = new StreamWriter(path, true))
-            //{
-            //    sw.WriteLine("Message from HelloJob " + DateTime.Now);
-            //}
             Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
             Models.DomainModels.LogTBL L = new Models.DomainModels.LogTBL();
             L.dsc = "RepeatJob : FirstJob";
@@ -28,7 +23,15 @@ namespace ManageYourSelfMVC.MyJobs
             DB.LogTBLs.Add(L);
             DB.SaveChanges();
 
-            Utility.Utility.SendMail();
+      
+            Utility.GMailer G = new Utility.GMailer();
+            Utility.GMailer.GmailUsername = "FeMyHostSender@gmail.com";
+            Utility.GMailer.GmailPassword = "861130928";
+            G.Body = "سلام";
+            G.Subject ="eyval";
+            G.ToEmail ="esmaili.farhad67@gmail.com";
+            
+            G.Send();
 
         }
     }

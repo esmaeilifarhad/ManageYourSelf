@@ -15,40 +15,40 @@ namespace ManageYourSelfMVC.Utility
 {
     public static class Utility
     {
-       
+
         //public static void SpeakEnglish(string str)
         //{
 
         //    SpeechSynthesizer reader; //declare the object 
         //    reader = new SpeechSynthesizer(); //create new object 
         //    reader.Dispose();
-            
+
 
         //        reader = new SpeechSynthesizer();
         //        reader.SpeakAsync(str);
         //        reader.SpeakCompleted += new EventHandler<SpeakCompletedEventArgs>(reader_SpeakCompleted);
-            
+
 
         //}
         //event handler 
-       static void reader_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
+        static void reader_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
         {
-           
+
         }
         public static void Write_ReadFile(string Message)
         {
-            string sss= HttpContext.Current.Server.MapPath("~");
+            string sss = HttpContext.Current.Server.MapPath("~");
 
             bool exists = System.IO.Directory.Exists(sss + "Log");
             if (!exists)
             {
-                System.IO.Directory.CreateDirectory(sss+ "Log");
+                System.IO.Directory.CreateDirectory(sss + "Log");
             }
-            string pathRoot = (sss+ "Log");
+            string pathRoot = (sss + "Log");
             string PathFile = "LogInfo.txt";
             string Path = System.IO.Path.Combine(pathRoot, PathFile);
 
-            File.AppendAllText(Path,shamsi_date()+" _ "+DateTime.Now.ToString() +" : "+ Message+ Environment.NewLine);
+            File.AppendAllText(Path, shamsi_date() + " _ " + DateTime.Now.ToString() + " : " + Message + Environment.NewLine);
 
             //using (StreamWriter sw = File.CreateText(Path))
             //{
@@ -121,7 +121,7 @@ namespace ManageYourSelfMVC.Utility
             }
             rd = yy + "/" + mm + "/" + dd;
             return rd;
-           // return rd.Remove(0, 2);
+            // return rd.Remove(0, 2);
         }
         public static string shamsi_dateTomarrow()
         {
@@ -169,7 +169,7 @@ namespace ManageYourSelfMVC.Utility
             string strNew = DateSlash;
             if (DateSlash.Length == 8)
             {
-                 strNew = DateSlash.Replace("/", string.Empty);
+                strNew = DateSlash.Replace("/", string.Empty);
             }
             if (DateSlash.Length == 10)
             {
@@ -189,15 +189,15 @@ namespace ManageYourSelfMVC.Utility
                 string Year = DateSlash.Substring(0, 2);
                 string Month = DateSlash.Substring(2, 2);
                 string Day = DateSlash.Substring(04, 2);
-                 strNew = Year + '/' + Month + '/' + Day;
-               
+                strNew = Year + '/' + Month + '/' + Day;
+
             }
             if (DateSlash.Length == 10)
             {
                 string Year = DateSlash.Substring(0, 4);
                 string Month = DateSlash.Substring(4, 2);
                 string Day = DateSlash.Substring(6, 2);
-                 strNew = Year + '/' + Month + '/' + Day;
+                strNew = Year + '/' + Month + '/' + Day;
             }
             return strNew;
 
@@ -207,7 +207,7 @@ namespace ManageYourSelfMVC.Utility
         {
             string Result = str;
             if (str.Length == 6)
-            {              
+            {
                 string Yaer = str.Substring(0, 2);
                 string Moth = str.Substring(2, 2);
                 string Dayy = str.Substring(4, 2);
@@ -254,8 +254,8 @@ namespace ManageYourSelfMVC.Utility
 
 
             Rial = string.Format("{0:N0}", double.Parse(str.Replace(",", "")));
-               // textbox.Select(textbox.TextLength, 0);
-            
+            // textbox.Select(textbox.TextLength, 0);
+
 
 
             /*
@@ -382,89 +382,52 @@ namespace ManageYourSelfMVC.Utility
 
             return table;
         }
-        public static void SendMail(string Messagee = "No Text", string Attachment = null,string _Subject="بدون موضوع")
+        public static void SendMail(string Messagee = "No Text", string Attachment = null, string _Subject = "بدون موضوع")
         {
             try
             {
-                //Utility.CreateLog("Start SendMail", "Utility");
-                //bool exists = System.IO.Directory.Exists(Application.StartupPath + "\\Email");
-                //if (!exists)
-                //{
-                //    System.IO.Directory.CreateDirectory(Application.StartupPath + "\\Email");
-                //}
-                //string pathRoot = Application.StartupPath + "\\Email";
-                //string PathFile = "EmailInfo.txt";
-                //string Path = System.IO.Path.Combine(pathRoot, PathFile);
-                //using (StreamWriter sw = File.CreateText(Path))
-                //{
-                //    sw.WriteLine("esmaili.farhad67@gmail.com");
-                //}
 
-                //string ss;
-                //using (StreamReader sr = File.OpenText(Path))
-                //{
-                //    ss = sr.ReadLine();
-                //}
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress("FeMyHostSender@gmail.com");
                 message.Subject = _Subject + "  " + Utility.shamsi_date();// + " - " + DateTime.Now;
                 message.Body = Messagee;
                 message.IsBodyHtml = true;
-                // string[] emails = ss.Split(';');
+                message.To.Add("esmaili.farhad67@gmail.com");
 
-                // for (int i = 0; i < emails.Length; i++)
+
+                //string Emails = "esmaili.farhad67@gmail.com";
+                //string[] emails = Emails.Split(',');
+
+                //for (int i = 0; i < emails.Length; i++)
                 //{
-               
-                string Emails = "esmaili.farhad67@gmail.com";
-                string[] emails = Emails.Split(',');
-
-                for (int i = 0; i < emails.Length; i++)
-                {
-                    message.To.Add(new MailAddress(emails[i]));
-                }
-
-
-                //message.To.Add(new MailAddress(emails));
-                // }
-                //Attach start
-                //if (Attachment != null || Attachment != "")
-                //{
-                //    System.Net.Mail.Attachment attachment;
-                //    attachment = new System.Net.Mail.Attachment(Attachment);
-                //    message.Attachments.Add(attachment);
+                //    message.To.Add(new MailAddress(emails[i]));
                 //}
 
-                /*
-                if (attachmentFilename != null)
-                {
-                    Attachment attachment = new Attachment(attachmentFilename, MediaTypeNames.Application.Octet);
-                    ContentDisposition disposition = attachment.ContentDisposition;
-                    disposition.CreationDate = File.GetCreationTime(attachmentFilename);
-                    disposition.ModificationDate = File.GetLastWriteTime(attachmentFilename);
-                    disposition.ReadDate = File.GetLastAccessTime(attachmentFilename);
-                    disposition.FileName =Path.GetFileName(attachmentFilename);
-                    disposition.Size = new FileInfo(attachmentFilename).Length;
-                    disposition.DispositionType = DispositionTypeNames.Attachment;
-                    message.Attachments.Add(attachment);
-                }
-                */
-                //attach ned
+
+
 
                 SmtpClient client = new SmtpClient();
-                client.Host = "smtp.gmail.com";
+                //client.Host = "smtp.gmail.com";
                 client.Port = 587;
-                client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
-               
+                //client.EnableSsl = true;
 
+
+                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                client.Host = "smtp.gmail.com";
+                //client.Port = 25;
+
+
+                client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("FeMyHostSender@gmail.com", "861130928");
+                client.EnableSsl = true;
 
                 client.Send(message);
-                Utility.CreateLog("Finish SendMail", "Utility");
+                Utility.CreateLog(new Exception(), "Finish SendMail", "Utility");
             }
             catch (Exception ex)
             {
-                Utility.CreateLog(ex.Message+"SendMail", "Utility");
+                Utility.CreateLog(new Exception(), ex.Message + "SendMail", "Utility");
                 throw new ArgumentException(ex.ToString());
             }
 
@@ -484,7 +447,7 @@ namespace ManageYourSelfMVC.Utility
             }
             catch (Exception ex)
             {
-                Utility.CreateLog(ex.ToString(), "public static void SendMailMethod(string _NameUser)");
+                Utility.CreateLog(new Exception(), ex.ToString(), "public static void SendMailMethod(string _NameUser)");
             }
         }
         public static void SendMail_Base(string UserName)
@@ -496,7 +459,7 @@ namespace ManageYourSelfMVC.Utility
             GMailer mailer = new GMailer();
             //mailer.ToEmail = "esmaili.farhad67@gmail.com";
             mailer.ToEmail = "Esmaeili.Farhad@Golrang.com";
-            mailer.Subject = Utility.shamsi_date()+ "   :  "+"SendMail_Base";
+            mailer.Subject = Utility.shamsi_date() + "   :  " + "SendMail_Base";
             mailer.Body = UserName + " در ساعت " + DateTime.Now.ToString("hh:mm:ss") + " وارد بخش sss شد ";
             mailer.IsHtml = true;
             mailer.Send();
@@ -579,12 +542,20 @@ namespace ManageYourSelfMVC.Utility
 
             return Rooz;
         }
-        public static void CreateLog(string MatnKhata,string Name)
+        public static void CreateLog(Exception ex, string MatnKhata, string Name)
         {
             Models.DomainModels.ManageYourSelfEntities DB = new Models.DomainModels.ManageYourSelfEntities();
             Models.DomainModels.LogTBL L = new Models.DomainModels.LogTBL();
-            L.dsc = MatnKhata;
-            L.date =Utility.ConvertDateToSqlFormat(Utility.shamsi_date());
+
+            if (MatnKhata.Length < 240)
+                L.dsc = MatnKhata;
+            L.dsc = MatnKhata.Substring(0, Math.Min(MatnKhata.Length, 200));
+
+
+
+
+            // L.dsc = MatnKhata;
+            L.date = Utility.ConvertDateToSqlFormat(Utility.shamsi_date());
             L.Time = DateTime.Now.ToShortTimeString();
             L.Name = Name;
             DB.LogTBLs.Add(L);

@@ -21,9 +21,9 @@ namespace ManageYourSelfMVC
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            /*
             DateTimeOffset startTime = DateBuilder.FutureDate(2, IntervalUnit.Second);
 
-            //IJobDetail job=JobBuilder.Create<ManageYourSelfMVC.MyJobs.FirstJob>
             IJobDetail job = JobBuilder.Create<ManageYourSelfMVC.MyJobs.FirstJob>()
                                       .WithIdentity("job1")
                                       .Build();
@@ -37,11 +37,10 @@ namespace ManageYourSelfMVC
             ISchedulerFactory sf = new StdSchedulerFactory();
             IScheduler sc = sf.GetScheduler();
             sc.ScheduleJob(job, trigger);
-
+           
             sc.Start();
+            */
 
-
-            // JobSchadular.Start();
         }
     }
 }

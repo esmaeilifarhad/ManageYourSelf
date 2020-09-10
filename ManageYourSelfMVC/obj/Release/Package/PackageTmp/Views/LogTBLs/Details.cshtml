@@ -1,0 +1,51 @@
+﻿@model ManageYourSelfMVC.Models.DomainModels.LogTBL
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutBizPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LogTBL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dsc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dsc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LogId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

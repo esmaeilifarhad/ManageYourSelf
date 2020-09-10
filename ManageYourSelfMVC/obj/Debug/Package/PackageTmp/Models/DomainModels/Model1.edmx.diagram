@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="82c76e698eed49a3962ff05502d0fe2d" Name="Diagram1">
+        <EntityTypeShape EntityType="ManageYourSelfModel.Book" Width="1.5" PointX="3" PointY="27.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Cat" Width="1.5" PointX="3.75" PointY="4.25" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.ContentTbl" Width="1.5" PointX="7.5" PointY="28.375" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.LogTBL" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.ManageTime" Width="1.5" PointX="6" PointY="31.625" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Mazaya" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Namad" Width="1.5" PointX="7.75" PointY="6" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.NamadDetail" Width="1.5" PointX="10" PointY="6" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.RoutineJob" Width="1.5" PointX="3" PointY="24.5" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.RoutineJobHa" Width="1.5" PointX="5.25" PointY="24.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Seyed" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Sport" Width="1.5" PointX="6" PointY="43.375" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.StoreHoghogh" Width="1.5" PointX="7.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.TaskImage" Width="1.5" PointX="8.25" PointY="21.25" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Timing" Width="1.5" PointX="8.25" PointY="18.5" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.TitleTbl" Width="1.5" PointX="5.25" PointY="28.25" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.BaseDaramadData" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Category" Width="1.5" PointX="3" PointY="36" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Daramad" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.DataCard" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.DaysExercise" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.dic_tbl" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.example_tbl" Width="1.5" PointX="5.25" PointY="13.875" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.HolyDay" Width="1.5" PointX="11.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.IODayly" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Job" Width="1.5" PointX="5.25" PointY="35.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.KarKard" Width="1.5" PointX="7.5" PointY="34.375" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Kharj" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.KharjType" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.MasterData" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Menu" Width="1.5" PointX="7.75" PointY="12.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Menuha" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.MojoodyBank" Width="1.5" PointX="5.75" PointY="40.5" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.MVCHomeHeaderThree" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.PercentJob" Width="1.5" PointX="7.5" PointY="37.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Player" Width="1.5" PointX="0.75" PointY="13.5" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.PlayerScore" Width="1.5" PointX="3" PointY="17.375" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Role" Width="1.5" PointX="0.75" PointY="21.625" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Setting" Width="1.5" PointX="11.75" PointY="12.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.SliderPhoto" Width="1.5" PointX="13.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.sysdiagram" Width="1.5" PointX="13.75" PointY="12.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Taghvim" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.Task" Width="1.5" PointX="6" PointY="17.375" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.TypeHazineh" Width="1.5" PointX="5.75" PointY="1.5" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.UserRole" Width="1.5" PointX="3" PointY="20.5" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.User" Width="1.5" PointX="0.75" PointY="16.625" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.back_MasterData" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.example_tbl_backup_980122" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ManageYourSelfModel.dic_tbl_LOG" Width="1.5" PointX="15.75" PointY="9.75" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Book_Users" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_TitleTbl_Book" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Sport_Cat" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Task_Cat" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_ContentTbl_TitleTbl" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Timing_ManageTime" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_NamadDetail_Namad" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_RoutineJob_Users" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_RoutineJobHa_RoutineJob" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_TaskImage_Task" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Timing_Task" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Category_Users" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Job_Category" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Daramad_MojoodyBank" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Daramad_TypeHazineh" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_DaysExercise_dic_tbl" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_dic_tbl_Users" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_example_tbl_dic_tbl" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_KarKard_Job" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_PercentJob_Job" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Kharj_KharjType" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_KharjType_Users" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_PlayerScore_Players" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_PlayerScore_Users" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_UserRole_Role" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Task_Task" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_Task_Users" />
+        <AssociationConnector Association="ManageYourSelfModel.FK_UserRole_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

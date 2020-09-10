@@ -509,7 +509,7 @@ async function DeleteTask(obj) {
     var ListtObjEditTask = results[0]
 
     $.LoadingOverlay("hide");
-    var res2 = await customConfirm({ title: "<p style='font-size:10px;font-weight:100'>" + ListtObjEditTask.Task.Name + "</p>", text: "آیا حذف انجام شود ؟", cancelButtonText: "خیر", confirmButtonText: "بلی" })
+    var res2 = await customConfirm({ title: "<p style='font-size:12px;font-weight:100'>" + ListtObjEditTask.Task.Name + "</p>", text: "آیا حذف انجام شود ؟", cancelButtonText: "خیر", confirmButtonText: "بلی" })
 
     // var result = confirm("آیا حذف انجام شود");
     if (res2.value == true) {

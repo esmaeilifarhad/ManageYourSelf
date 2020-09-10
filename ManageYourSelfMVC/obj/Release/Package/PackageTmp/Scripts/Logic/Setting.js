@@ -140,8 +140,9 @@ function ListSetting() {
     var ShowFooterAlert = localStorage.getItem("ShowFooterAlert");
     
     
-        var table = "<table class='table'>" 
-    if (ShowFooterAlert == 'true')
+    var table = "<a href='/Setting/ListLog'>نمایش لاگ </a>" +
+        "<table class='table'>" 
+        if (ShowFooterAlert == 'true')
         table += "<tr><td>نمایش فوتر</td><td>نمایش : <input type='radio' name='rdbShowFooter' value=true onclick='changeRdbFooter(true)' checked/>عدم نمایش : <input type='radio' name='rdbShowFooter' value=false onclick='changeRdbFooter(false)'/></td><tr>"
     else
         table += "<tr><td>نمایش فوتر</td><td>نمایش : <input type='radio' name='rdbShowFooter' value=true onclick='changeRdbFooter(true)'/>عدم نمایش : <input type='radio' name='rdbShowFooter' value=false checked onclick='changeRdbFooter(false)'/></td><tr>"

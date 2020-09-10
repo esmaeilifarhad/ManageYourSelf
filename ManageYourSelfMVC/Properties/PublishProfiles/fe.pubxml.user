@@ -34,10 +34,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2018 17:59:50</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.dll">
-      <publishTime>08/31/2020 11:28:37</publishTime>
+      <publishTime>09/09/2020 09:48:09</publishTime>
     </File>
     <File Include="bin/ManageYourSelfMVC.pdb">
-      <publishTime>08/31/2020 11:28:37</publishTime>
+      <publishTime>09/09/2020 09:48:09</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>02/01/2018 08:13:16</publishTime>
@@ -3070,7 +3070,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/23/2020 08:49:49</publishTime>
     </File>
     <File Include="Scripts/Logic/Category.js">
-      <publishTime>08/22/2020 16:56:08</publishTime>
+      <publishTime>09/09/2020 09:45:48</publishTime>
     </File>
     <File Include="Scripts/Logic/DakhloKharj.js">
       <publishTime>08/19/2020 08:40:35</publishTime>
@@ -3109,7 +3109,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/19/2020 08:40:35</publishTime>
     </File>
     <File Include="Scripts/Logic/Setting.js">
-      <publishTime>08/19/2020 08:40:35</publishTime>
+      <publishTime>09/02/2020 08:40:51</publishTime>
     </File>
     <File Include="Scripts/Logic/Speech.js">
       <publishTime>03/31/2019 21:51:50</publishTime>
@@ -3477,6 +3477,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Login/Login.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
+    <File Include="Views/LogTBLs/Create.cshtml">
+      <publishTime>09/02/2020 07:47:21</publishTime>
+    </File>
+    <File Include="Views/LogTBLs/Delete.cshtml">
+      <publishTime>09/02/2020 07:47:26</publishTime>
+    </File>
+    <File Include="Views/LogTBLs/Details.cshtml">
+      <publishTime>09/02/2020 07:47:30</publishTime>
+    </File>
+    <File Include="Views/LogTBLs/Edit.cshtml">
+      <publishTime>09/02/2020 07:47:37</publishTime>
+    </File>
+    <File Include="Views/LogTBLs/Index.cshtml">
+      <publishTime>09/02/2020 07:47:44</publishTime>
+    </File>
     <File Include="Views/MasterData/Create.cshtml">
       <publishTime>10/17/2019 08:30:51</publishTime>
     </File>
@@ -3546,6 +3561,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Saham/ShowMessage2.cshtml">
       <publishTime>07/03/2020 14:28:59</publishTime>
     </File>
+    <File Include="Views/Setting/ListLog.cshtml">
+      <publishTime>09/02/2020 08:31:18</publishTime>
+    </File>
     <File Include="Views/Shared/SahamMasterPage.cshtml">
       <publishTime>04/29/2020 23:14:06</publishTime>
     </File>
@@ -3556,7 +3574,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/02/2018 08:57:58</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutBizPage.cshtml">
-      <publishTime>08/26/2020 15:01:09</publishTime>
+      <publishTime>09/08/2020 07:53:37</publishTime>
     </File>
     <File Include="Views/Sport/Create.cshtml">
       <publishTime>11/25/2018 22:37:20</publishTime>
@@ -3631,7 +3649,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/01/2018 12:52:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/31/2020 11:28:37</publishTime>
+      <publishTime>09/09/2020 09:48:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

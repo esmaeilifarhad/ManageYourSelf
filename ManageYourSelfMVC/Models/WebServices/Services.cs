@@ -34,12 +34,14 @@ namespace ManageYourSelfMVC.Models.WebServices
                 string jsons = reader.ReadToEnd();
                 ViewModels.Root r = Newtonsoft.Json.JsonConvert.DeserializeObject<ViewModels.Root>(jsons);
 
+               ManageYourSelfMVC.Utility.Utility.CreateLog(new Exception { }, "ExchangeRate اجرا شد ", " public ViewModels.Root ExchangeRate()");
+
                 return r;
               //  return Json(r, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-
+                ManageYourSelfMVC.Utility.Utility.CreateLog(new Exception { }, "ExchangeRate  خطا ", ex.ToString());
                 throw;
             }
         }

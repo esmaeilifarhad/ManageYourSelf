@@ -31,30 +31,31 @@ namespace ManageYourSelfMVC.Utility
             try
             {
 
-           
-            Utility.CreateLog("1"+"قبل از ایمیل", " public class GMailer   public void Send()");
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = GmailHost;
-            smtp.Port = GmailPort;
-            smtp.EnableSsl = GmailSSL;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(GmailUsername, GmailPassword);
 
-            using (var message = new MailMessage(GmailUsername, ToEmail))
-            {
-                message.Subject = Subject;
-                message.Body = Body;
-                message.IsBodyHtml = IsHtml;
-                    Utility.CreateLog("2" + "قبل از ایمیل", " public class GMailer   public void Send()");
+               // Utility.CreateLog(new Exception { }, "1" + "قبل از ایمیل", " public class GMailer   public void Send()");
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = GmailHost;
+                smtp.Port = GmailPort;
+                smtp.EnableSsl = GmailSSL;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential(GmailUsername, GmailPassword);
+
+
+                using (var message = new MailMessage(GmailUsername, ToEmail))
+                {
+                    message.Subject = Subject;
+                    message.Body = Body;
+                    message.IsBodyHtml = IsHtml;
+                    Utility.CreateLog(new Exception { }, "2" + "قبل از ایمیل", " public class GMailer   public void Send()");
                     smtp.Send(message);
-                    Utility.CreateLog("3" + "قبل از ایمیل", " public class GMailer   public void Send()");
+                    Utility.CreateLog(new Exception { }, "3" + "بعد از ایمیل", " public class GMailer   public void Send()");
                 }
-            Utility.CreateLog("پایان", " public class GMailer   public void Send()");
+                Utility.CreateLog(new Exception { }, "پایان", " public class GMailer   public void Send()");
             }
             catch (Exception ex)
             {
-                Utility.CreateLog("خطا : "+ex.ToString(), " public class GMailer   public void Send()");
+                Utility.CreateLog(new Exception { }, "خطا : " + ex.ToString(), " public class GMailer   public void Send()");
             }
         }
     }

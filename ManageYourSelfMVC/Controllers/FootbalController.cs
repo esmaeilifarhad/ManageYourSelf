@@ -31,15 +31,15 @@ namespace ManageYourSelfMVC.Controllers
             //thread.Start();
             try
             {
-                Utility.Utility.CreateLog("قبل از ایمیل", "  public ActionResult Team()");
+                Utility.Utility.CreateLog(new Exception(),"قبل از ایمیل", "  public ActionResult Team()");
                 string _NameUser = System.Web.HttpContext.Current.Session["_NameUser"].ToString();
                 Thread thread = new Thread(() => Utility.Utility.SendMailMethod(_NameUser));
                 thread.Start();
-                Utility.Utility.CreateLog("بعد از ایمیل", "  public ActionResult Team()");
+                Utility.Utility.CreateLog(new Exception(), "بعد از ایمیل", "  public ActionResult Team()");
             }
             catch (Exception ex)
             {
-                Utility.Utility.CreateLog(ex.ToString(), "public ActionResult Team()");
+                Utility.Utility.CreateLog(new Exception(), ex.ToString(), "public ActionResult Team()");
                 Utility.Utility.Write_ReadFile(ex.ToString());
             }
         

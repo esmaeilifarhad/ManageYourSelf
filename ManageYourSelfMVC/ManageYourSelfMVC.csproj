@@ -1110,8 +1110,6 @@
     <Content Include="Scripts\JalalyDate\persian-datepicker.min.js" />
     <Content Include="Scripts\JalalyDate\persianDatepicker.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery-3.0.0.js" />
-    <Content Include="Scripts\jquery-3.0.0.min.js" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
     <Content Include="Scripts\jquery-3.0.0.slim.js" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
@@ -1199,6 +1197,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\KarkardController.cs" />
+    <Compile Include="Controllers\LogTBLsController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
     <Compile Include="Controllers\PercentJobController.cs" />
     <Compile Include="Controllers\PersonnelGsystemController.cs" />
@@ -1644,6 +1643,12 @@
     <Content Include="Views\Saham\MainSaham.cshtml" />
     <Content Include="Views\Shared\SahamMasterPage.cshtml" />
     <Content Include="Views\Saham\ShowMessage2.cshtml" />
+    <Content Include="Views\LogTBLs\Create.cshtml" />
+    <Content Include="Views\LogTBLs\Delete.cshtml" />
+    <Content Include="Views\LogTBLs\Details.cshtml" />
+    <Content Include="Views\LogTBLs\Edit.cshtml" />
+    <Content Include="Views\LogTBLs\Index.cshtml" />
+    <Content Include="Views\Setting\ListLog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1655,7 +1660,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="MyPhoto\Slider\" />
     <Folder Include="Views\Book\" />
-    <Folder Include="Views\Setting\" />
     <Folder Include="Views\ShowMessage\" />
   </ItemGroup>
   <ItemGroup>
